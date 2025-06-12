@@ -1,0 +1,362 @@
+/* CSS chung cho toàn bộ trang */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Easy-to-read font */
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+    color: #333; /* Main text color */
+    line-height: 1.6; /* Line spacing for readability */
+    padding-bottom: 80px; /* Example: adjust as needed */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* CSS cho hiệu ứng bay lên nhẹ khi di chuột */
+/* Áp dụng class 'lift-on-hover' vào các phần tử HTML bạn muốn có hiệu ứng này */
+.lift-on-hover {
+    display: inline-block; /* Quan trọng: Cần thiết để transform hoạt động đúng trên các phần tử inline */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Áp dụng transition cho cả transform và box-shadow */
+    will-change: transform, box-shadow; /* Tối ưu hóa hiệu suất cho animation */
+}
+
+/* Khi di chuột vào phần tử có class 'lift-on-hover' */
+.lift-on-hover:hover {
+    transform: translateY(-10px); /* Di chuyển phần tử lên trên 5px */
+    /* Bạn có thể điều chỉnh giá trị -5px để thay đổi độ cao bay lên */
+}
+
+.container {
+    max-width: 1200px; /* Maximum width */
+    margin: 0 auto; /* Center alignment */
+    padding: 20px; /* Inner padding */
+}
+
+/* Kiểu cho phần Header */
+header {
+    background-image:url(../img/sl_0210121_40570_23.jpg);/* Background image */
+    background-size: 100%;
+    color: #fff; /* White text color */
+    padding: 1rem 0; /* Top and bottom padding */
+    text-align: center; /* Center content */
+}
+
+header a img{
+        width: 30%; /* Adjust logo size for tablets */
+        max-width: 150px; /* Ensure max width */
+        text-align: center;
+}
+
+header p {
+    color: #fff;
+    font-size: 1rem; /* Font size for paragraphs */
+    opacity: 0.8; /* Slightly reduce opacity */
+}
+
+/* Kiểu cho thanh điều hướng (Navigation) */
+nav {
+    background-color: #444; /* Slightly darker background than header */
+    padding: 0.8rem 0; /* Top and bottom padding */
+    text-align: center; /* Center content */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add a subtle shadow */
+}
+
+nav ul {
+    list-style: none; /* Remove list bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for horizontal items */
+    justify-content: center; /* Center the items */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+nav ul li {
+    margin: 0 15px; /* Space between list items */
+}
+
+nav ul li a {
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    padding: 5px 10px; /* Padding around text */
+    transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Hover and active link styles */
+nav ul li a:hover,
+nav ul li a.active { /* You can add an 'active' class to the current page link */
+    background-color: #555; /* Change background color on hover/active */
+}
+
+/* Kiểu cho phần Nội dung Chính (Main) của trang Profile */
+main {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 20px !important; /* Giữ padding cho chữ không sát mép */
+}
+
+main section {
+    margin-bottom: 30px; /* Space below each section */
+    padding-bottom: 20px; /* Padding below each section */
+    border-bottom: 1px solid #eee; /* Separator line between sections */
+}
+
+main section:last-child {
+    border-bottom: none; /* Remove border for the last section */
+}
+
+main h2 {
+    color: #007bff; /* Color for section titles */
+    border-bottom: 2px solid #007bff; /* Underline for titles */
+    padding-bottom: 10px; /* Padding below title */
+    margin-bottom: 20px; /* Space below title */
+    position: relative; /* Required for the pseudo-element */
+}
+
+/* Animation effect for line drawing under h2 */
+main h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Position right below the border */
+    width: 0; /* Initial width is 0 */
+    height: 2px; /* Height of the line */
+    background-color: #ff007b; /* Color of the line */
+    transition: width 0.6s ease-out; /* Animation transition */
+}
+
+/* When the section containing h2 has the 'is-visible' class, the line expands */
+.fade-in-element.is-visible h2::after {
+    width: 100%; /* Expand to full width */
+}
+
+/* Specific styles for content within the Profile page */
+.Skill_on_app {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    align-items: flex-start;
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.skill-item img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.skill-item span {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.contact-icons {
+    display: flex;
+    gap: 32px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+ul li .contact-item,
+ul li {
+    list-style: none;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: row;      /* Đổi từ column sang row */
+    align-items: center;      /* Căn giữa theo chiều dọc */
+    min-width: 200px;         /* Có thể tăng nếu cần */
+    gap: 12px;                /* Khoảng cách giữa hình và chữ */
+}
+.contact-item img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    margin-bottom: 0;         /* Xóa margin-bottom vì không còn dọc */
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.contact-item a, .contact-item span, .contact-item p {
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none; /* Remove underline */
+    word-break: break-all;
+    margin: 0;
+}
+
+/* Styles for the Footer section */
+footer {
+    background-color: #333; /* Dark background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Center content */
+    padding: 1rem 0; /* Top and bottom padding */
+    margin-top: 30px; /* Space above the footer */
+}
+
+footer .social-links a {
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    margin: 0 10px; /* Space between social links */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+footer .social-links a:hover {
+    color: #007bff; /* Change color on hover */
+}
+
+/* --- Animation Styles --- */
+
+/* Fade-in on Scroll effect */
+.fade-in-element {
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Slightly move down initially */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Transition effect */
+    will-change: opacity, transform; /* Optimize performance */
+}
+
+/* When the element has the 'is-visible' class, it becomes visible and moves to its original position */
+.fade-in-element.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Gentle up and down text animation */
+@keyframes gentle-move {
+    0%, 100% {
+        transform: translateY(0); /* Initial and final position */
+    }
+    50% {
+        transform: translateY(-3px); /* Highest position */
+    }
+}
+
+.animated-text {
+    display: inline-block; /* Required to apply transform */
+    animation: gentle-move 3s ease-in-out infinite; /* Apply the animation */
+}
+
+
+/* --- Basic Responsive Design --- */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem; /* Reduce h1 font size */
+    }
+    nav ul {
+        flex-direction: column; /* Stack nav items vertically */
+    }
+    nav ul li {
+        margin: 15px 0; /* Reduce space between nav items */
+    }
+    main {
+        padding: 15px; /* Reduce main padding */
+        margin: 15px auto; /* Reduce main margin */
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem; /* Further reduce h1 font size */
+    }
+    header p {
+        font-size: 1rem; /* Reduce paragraph font size */
+    }
+    main {
+        padding: 10px; /* Reduce main padding */
+        margin: 10px auto; /* Reduce main margin */
+    }
+}
+
+/* Optional: Further adjustments for very large screens (>= 1024px) */
+@media (min-width: 1024px) {
+    .content-container {
+        max-width: 1200px; /* Ensure max-width is maintained */
+    }
+     header img{
+        width: 6%; /* Slightly smaller logo on very large screens */
+        max-width: 100px;
+    }
+}
+
+
+/* CSS for the page transition effect */
+#page-content {
+    transition: opacity 0.5s ease-in-out; /* Smooth opacity transition */
+}
+
+.fade-out {
+    opacity: 0; /* Fully transparent */
+}
+
+.fade-in {
+    opacity: 1; /* Fully visible */
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+#page-content {
+    flex: 1 0 auto;
+}
+footer {
+    flex-shrink: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-item img,
+.contact-item img {
+    transition: 
+        transform 0.8s cubic-bezier(.23,1.01,.32,1), 
+        box-shadow 1s;
+    will-change: transform, box-shadow;
+}
+.skill-item img:hover,
+.contact-item img:hover {
+    transform: scale(2);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    z-index: 2;
+}
+
+.hover-zoom {
+    transition: transform 0.4s cubic-bezier(.23,1.01,.32,1), box-shadow 0.3s;
+    will-change: transform, box-shadow;
+    cursor: pointer;
+}
+.hover-zoom:hover {
+    transform: scale(1.25);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    z-index: 2;
+}

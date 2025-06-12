@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Giới thiệu</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
+        <p>Chào mừng đến với trang web cá nhân của tôi!</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Giới thiệu</a></li>
+            <li><a href="profile.html">Profile Cá Nhân</a></li>
+            <li><a href="designer.html">Thiết Kế của tôi</a></li>
+            <li><a href="scores.html">Điểm Số</a></li>
+            <li><a href="drawings.html">Ảnh Sưu Tầm</a></li>
+        </ul>
+    </nav>
+
+    <div id="page-content">
+    <main>
+        <div class="bao-quanh">
+        <section id="gioi-thieu" class="fade-in-element">
+            <h1 style="font-size: 2em;text-align: center;">Chào tất cả mọi người đã ghé thăm Website cá nhân của tôi!</h1>
+            <p class="animated-text" style="font-size: 1.49em;text-align: center;">Đây là trang giới thiệu chung về tôi. Bạn có thể xem thêm các thông tin về tôi, mục tiêu hoặc bất cứ điều gì tôi đang và đã làm.</p>
+                <p style="font-size: 1em;text-align: center;">Tôi rất vui khi bạn ghé thăm trang web của tôi.<img src="img/happy.png" style="width: 50px;margin-bottom: -20px;margin-left: 15px;"></p>
+            <h1>Mục tiêu</h1>
+            <p class="animated-text">Chia sẻ về những mục tiêu cá nhân hoặc sự nghiệp của tôi.<br>Chia sẻ những thứ tuyệt vời mà tôi có<br>Xây dựng một nơi lưu giữ lại những gì tôi đã và đang làm<br>Chia sẻ thông tin của tôi với những ai quan tâm<br>Dựng một nơi lưu giữ kỉ niệm của tôi</p>
+        </section>
+        </div>
+    </main>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Phạm Viết Tiến. Mọi quyền được bảo lưu.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/hai.trinhthi.3110" class="lift-on-hover">Facebook</a> | <a href="https://zalo.me/0332563578" class="lift-on-hover">zalo</a> | <a href="http://tiendepzai0908@gmail.com/" class="lift-on-hover">Mail</a>
+        </div>
+    </footer>
+
+    <script src="js/index_animation.js"></script>
+    <script>
+    document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Nếu là link ngoài thì bỏ qua
+        if (this.target === '_blank' || this.href.startsWith('http')) return;
+        e.preventDefault();
+        const pageContent = document.getElementById('page-content');
+        if (pageContent) {
+            pageContent.classList.add('fade-out');
+            setTimeout(() => {
+                window.location = this.href;
+            }, 400); // Thời gian khớp với transition trong CSS
+        } else {
+            window.location = this.href;
+        }
+    });
+    });
+    window.addEventListener('DOMContentLoaded', function() {
+    const pageContent = document.getElementById('page-content');
+    if (pageContent) pageContent.classList.add('fade-in');
+    });
+</script>
+</body>
+</html>

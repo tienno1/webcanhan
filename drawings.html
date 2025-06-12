@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ảnh vẽ của tôi</title>
+    <link rel="stylesheet" href="css/drawings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS tạm thời cho highlight kết quả tìm kiếm */
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html"><img src="img/logo.png" alt="Logo" class="lift-on-hover"></a>
+        <p>Ảnh vẽ của tôi</p>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Giới thiệu</a></li>
+            <li><a href="profile.html">Profile Cá Nhân</a></li>
+            <li><a href="designer.html">Thiết Kế của tôi</a></li>
+            <li><a href="scores.html">Điểm Số</a></li>
+            <li><a href="drawings.html" class="active">Ảnh Sưu Tầm</a></li>
+        </ul>
+    </nav>
+
+    <div id="page-content" class="content-container">
+
+        <main>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Tìm kiếm trong trang này...">
+                <button id="search-button">Tìm kiếm</button>
+            </div>
+
+            <h2>Bộ sưu tập Ảnh </h2>
+            <p class="animated-text">Chào mừng đến với bộ sưu tập các bức ảnh của tôi. Click vào ảnh để xem chi tiết ở thanh bên phải.</p>
+
+            <div id="paginated-drawings">
+                <section id="drawing-1" class="fade-in-element drawing" data-page="1">
+                    <div class="drawing-content">
+                        <h3>Bức vẽ 1: yourichi tự nghĩ</h3>
+                        <img src="img/yourichi.jpg" alt="Bức vẽ 1" class="lift-on-hover">
+                        <p>ok nhen :D</p>
+                    </div>
+                </section>
+
+                <section id="drawing-7" class="fade-in-element drawing" data-page="1">
+                    <div class="drawing-content">
+                         <h3>Bức vẽ 2: chân dung nữ tự nghĩ</h3>
+                        <img src="img/whiteblacknew.jpg" alt="Bức vẽ 1" class="lift-on-hover">
+                        <p>tóc xấu quá.</p>
+                    </div>
+                </section>
+
+                <section id="drawing-8" class="fade-in-element drawing" data-page="1">
+                    <div class="drawing-content">
+                         <h3>Bức vẽ 3: chân dung nam tự nghĩ</h3>
+                        <img src="img/nam nhân.jpg" alt="Bức vẽ 1" class="lift-on-hover">
+                        <p>lệch mặt nhưng vẫn xấu :v</p>
+                    </div>
+                </section>
+
+                <section id="drawing-4" class="fade-in-element drawing" data-page="1">
+                    <div class="drawing-content">
+                         <h3>Bức vẽ 4: chân dung nữ tự nghĩ</h3>
+                        <img src="img/bừa.jpg" class="lift-on-hover">
+                        <p>Vẽ zui zui cũng xấu.</p>
+                    </div>
+                </section>
+
+                <section id="drawing-5" class="fade-in-element drawing" data-page="1">
+                    <div class="drawing-content">
+                         <h3>Bức vẽ 5: chân dung nam tự nghĩ 2</h3>
+                        <img src="img/mắt biếc.jpg" class="lift-on-hover">
+                        <p>bóng quá má</p>
+                    </div>
+                </section>
+
+                <section id="drawing-6" class="fade-in-element drawing" data-page="1">
+                    <div class="drawing-content">
+                         <h3>Bức vẽ 6: chân dung 2 nam tự nghĩ</h3>
+                        <img src="img/thấu hiểu.jpg" class="lift-on-hover">
+                        <p>Cũng cũng</p>
+                    </div>
+                </section>
+
+                <section id="drawing-2" class="fade-in-element drawing" data-page="2">
+                    <div class="drawing-content">
+                         <h3>Bức vẽ 1: tĩnh vật bát cơm tự nghĩ</h3>
+                        <img src="img/bát cơm.jpg" alt="Bức vẽ 2" class="lift-on-hover">
+                        <p>đẹp mà vẫn ko ưng :Đ</p>
+                    </div>
+                </section>
+
+                 <section id="drawing-3" class="fade-in-element drawing" data-page="2">
+                    <div class="drawing-content">
+                         <h3>Bức vẽ 2: tĩnh vật bình bông héo tự nghĩ</h3>
+                        <img src="img/BÔNG.jpg" alt="Bức vẽ 3" class="lift-on-hover">
+                        <p>ko cân lười vẽ lại xấu nhưng thích up :D</p>
+                    </div>
+                </section>
+                <section id="Story-1" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 1</h3>
+                        <img src="img/Hình ảnh sưu tầm/axi.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-2" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 2</h3>
+                        <img src="img/Hình ảnh sưu tầm/bake lab.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-3" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 3</h3>
+                        <img src="img/Hình ảnh sưu tầm/cơmhop.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-4" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 4</h3>
+                        <img src="img/Hình ảnh sưu tầm/floreal.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-5" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 5</h3>
+                        <img src="img/Hình ảnh sưu tầm/gompho.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-6" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 6</h3>
+                        <img src="img/Hình ảnh sưu tầm/hungphung.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-7" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 7</h3>
+                        <img src="img/Hình ảnh sưu tầm/lang spa.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-8" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 8</h3>
+                        <img src="img/Hình ảnh sưu tầm/limc.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-9" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 9</h3>
+                        <img src="img/Hình ảnh sưu tầm/ngamnghi.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+                <section id="Story-10" class="fade-in-element drawing" data-page="3">
+                    <div class="drawing-content">
+                         <h3>HÌnh sưu tầm 10</h3>
+                        <img src="img/Hình ảnh sưu tầm/tra sen.jpg" alt="Suu tam" class="lift-on-hover">
+                        <p></p>
+                    </div>
+                </section>
+
+            <section id="drawing-philosophy" class="fade-in-element">
+                <h2>Niềm Yêu Thích Của Tui Đơn giản Là Được Ngồi Vẽ</h2>
+                <p class="animated-text">Có cảm hứng thì vẽ không thì thôi, có nhiều thời gian và họa cụ thì gì cũng vẽ được, cố gắng là được!!!</p>
+            </section>
+            </div>
+
+        </main>
+        <aside class="toc">
+            <div class="toc-wrapper"></div>
+            <h3>Mục lục</h3>
+            <ul id="toc-list">
+                <li><a href="#drawing-2">Bát cơm</a></li>
+                <li><a href="#drawing-3">Bình bông</a></li>
+                <li><a href="#drawing-1">Yorichi</a></li>
+                <li><a href="#drawing-4">Nữ góc nghiêng</a></li>
+                <li><a href="#drawing-5">Nam góc nghiêng</a></li>
+                <li><a href="#drawing-6">2 Nam góc nghiêng</a></li>
+                <li><a href="#drawing-7">nữ tóc rối</a></li>
+                <li><a href="#drawing-8">Hình nam ngước mặt lên</a></li>
+                <li><a href="#Story-1">Sưu tầm 1</a></li>
+                <li><a href="#Story-2">Sưu tầm 2</a></li>
+                <li><a href="#Story-3">Sưu tầm 3</a></li>
+                <li><a href="#Story-4">Sưu tầm 4</a></li>
+                <li><a href="#Story-5">Sưu tầm 5</a></li>
+                <li><a href="#Story-6">Sưu tầm 6</a></li>
+                <li><a href="#Story-7">Sưu tầm 7</a></li>
+                <li><a href="#Story-8">Sưu tầm 8</a></li>
+                <li><a href="#Story-9">Sưu tầm 9</a></li>
+                <li><a href="#Story-10">Sưu tầm 10</a></li>
+            </ul>
+            <div id="toc-content-display">
+                <p>Chọn một mục từ mục lục để xem chi tiết tại đây.</p>
+            </div>
+        </aside>
+
+    </div> <footer>
+        <p>&copy; 2025 Phạm Viết Tiến. Mọi quyền được bảo lưu.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/hai.trinhthi.3110" class="lift-on-hover">Facebook</a> | <a href="https://zalo.me/0332563578" class="lift-on-hover">zalo</a> | <a href="http://tiendepzai0908@gmail.com/" class="lift-on-hover">Mail</a>
+        </div>
+    </footer>
+
+    <div class="pagination-container">
+        </div>
+
+
+    <script src="js/drawings_animation.js"></script>
+    <script>
+    document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Nếu là link ngoài thì bỏ qua
+        if (this.target === '_blank' || this.href.startsWith('http')) return;
+        e.preventDefault();
+        const pageContent = document.getElementById('page-content');
+        if (pageContent) {
+            pageContent.classList.add('fade-out');
+            setTimeout(() => {
+                window.location = this.href;
+            }, 400); // Thời gian khớp với transition trong CSS
+        } else {
+            window.location = this.href;
+        }
+    });
+    });
+    window.addEventListener('DOMContentLoaded', function() {
+    const pageContent = document.getElementById('page-content');
+    if (pageContent) pageContent.classList.add('fade-in');
+    });
+    </script>
+    <script>
+    const box = document.getElementById('box');
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      // Di chuyển div theo chiều dọc khi cuộn
+      box.style.top = 50 + scrollY * 0.5 + 'px'; // Tăng nhanh/chậm bằng hệ số
+    });
+  </script>
+<div id="image-modal" class="image-modal">
+    <span class="image-modal-close">&times;</span>
+    <button class="image-modal-fullscreen" title="Phóng to toàn màn hình">&#x26F6;</button>
+    <button class="image-modal-prev" title="Ảnh trước">&#8592;</button>
+    <img class="image-modal-content" id="image-modal-img">
+    <button class="image-modal-next" title="Ảnh sau">&#8594;</button>
+</div>
+</body>
+</html>
