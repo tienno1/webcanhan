@@ -1,48 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.getElementById('submit-answers');
-    const resetButton = document.getElementById('reset-answers'); // Get the new reset button
+    const resetButton = document.getElementById('reset-answers');
     const resultsDiv = document.getElementById('results');
 
-    // Define correct answers for all questions
+    // Define correct answers for Exam 1
     const correctAnswers = {
-        // READING PART 1 (Questions 1-6)
-        q1: 'C', // Leave shoes...
-        q2: 'B', // GUEST notice
-        q3: 'A', // The sports centre...
-        q4: 'A', // Please use stairs...
-        q5: 'C', // Visitor Notice
-        q6: 'A', // Door on this floor...
-
-        // READING PART 2 (Questions 7-13)
-        q7: 'C', // Who became interested in nature from seeing someone else's blog?
-        q8: 'B', // Who says there is something about her job that she doesn't like?
-        q9: 'A', // Whose friends thought that her hobby was unusual?
-        q10: 'B', // Who became interested in nature because of school trips?
-        q11: 'A', // Who says that the type of nature she is interested in has changed?
-        q12: 'C', // Who wants to improve her pictures of nature?
-        q13: 'B', // Who thinks that young people should learn more about nature at school?
-
-        // READING PART 3 (Questions 14-18)
-        q14: 'A', // Where did Sandy lose her camera?
-        q15: 'B', // What did Sandy do?
-        q16: 'C', // What was the first job she got?
-        q17: 'A', // What else did she do to make more money?
-        q18: 'B', // The camera she bought was
-
-        // READING PART 4 (Questions 19-24)
-        q19: 'B', // travel... to (stay) in this hotel
-        q20: 'A', // you have to (climb) up
-        q21: 'A', // It's also the (highest)
-        q22: 'B', // It even has a (shower)
-        q23: 'A', // Another room is (called) the 'Mirrorcube'
-        q24: 'C',   // good place to (go) fishing
-
-        // WRITING PART 1 (Questions 25-29, Fill-in-the-blanks)
-        q25: 'What', // 25. And (What) Is your university course like?
-        q26: 'Do',   // 26. (Do) you think you might come back for a visit soon?
-        q27: 'because', // 27. (because) I didn’t know anyone,
-        q28: 'to',   // 28. starting (to) enjoy myself.
-        q29: 'will'  // 29. I’m sure that I (will) come home
+        q1: 'C',
+        q2: 'B',
+        q3: 'A',
+        q4: 'A',
+        q5: 'C',
+        q6: 'A',
+        q7: 'C',
+        q8: 'B',
+        q9: 'A',
+        q10: 'B',
+        q11: 'A',
+        q12: 'C',
+        q13: 'B',
+        q14: 'A',
+        q15: 'B',
+        q16: 'C',
+        q17: 'A',
+        q18: 'B',
+        q19: 'B',
+        q20: 'A',
+        q21: 'A',
+        q22: 'B',
+        q23: 'A',
+        q24: 'C',
+        q25: 'what',
+        q26: 'Do',
+        q27: 'because',
+        q28: 'to',
+        q29: 'will'
     };
 
     // Function to reset the quiz to its initial state
@@ -84,8 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     submitButton.addEventListener('click', function() {
         let score = 0;
         const totalQuestions = Object.keys(correctAnswers).length;
-        const userAnswers = {};
-        const incorrectQuestions = []; // Array to store incorrect questions
+        const incorrectQuestions = [];
 
         // Reset all previous highlights and messages before re-checking
         document.querySelectorAll('.correct-answer, .wrong-answer, .text-correct, .text-incorrect').forEach(el => {
@@ -99,9 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         document.querySelectorAll('.text-answer').forEach(input => {
             input.classList.remove('text-correct', 'text-incorrect');
-            input.style.borderColor = ''; // Reset border color for text inputs
+            input.style.borderColor = '';
         });
-
 
         // Get user's answers and check them
         for (const qName in correctAnswers) {
@@ -109,41 +98,37 @@ document.addEventListener('DOMContentLoaded', function() {
             const correctAnswerValue = correctAnswers[qName];
             let selectedAnswerValue = null;
 
-            // Check if it's a text input question (WRITING PART 1)
-            const textInput = document.querySelector(`input[name="${qName}"][type="text"]`);
+            const textInput = questionBlock ? questionBlock.querySelector(`input[name="${qName}"][type="text"]`) : null;
 
-            if (textInput) { // Handle WRITING PART 1 (text inputs)
-                selectedAnswerValue = textInput.value.trim(); // Get user's input, trim whitespace
-                userAnswers[qName] = selectedAnswerValue;
+            if (textInput) {
+                selectedAnswerValue = textInput.value.trim();
 
                 const errorMessageDiv = questionBlock ? questionBlock.querySelector('.error-message') : null;
 
-                // Case-insensitive comparison for text answers
+                // For text answers, check case-insensitively
                 if (selectedAnswerValue.toLowerCase() === correctAnswerValue.toLowerCase()) {
                     score++;
                     if (questionBlock) questionBlock.classList.add('correct');
                     textInput.classList.add('text-correct');
-                    textInput.style.borderColor = '#28a745'; // Green border
+                    textInput.style.borderColor = '#28a745';
                 } else {
                     if (questionBlock) questionBlock.classList.add('incorrect');
                     textInput.classList.add('text-incorrect');
-                    textInput.style.borderColor = '#dc3545'; // Red border
+                    textInput.style.borderColor = '#dc3545';
                     if (errorMessageDiv) {
                         errorMessageDiv.textContent = `Câu trả lời sai. Đáp án đúng là: ${correctAnswerValue}`;
                     }
                     incorrectQuestions.push({
-                        question: `Câu ${qName.replace('q', '')}`, // Format as "Câu 25", "Câu 26", etc.
+                        question: `Câu ${qName.replace('q', '')}`,
                         userAnswer: selectedAnswerValue || 'Chưa trả lời',
                         correctAnswer: correctAnswerValue
                     });
                 }
-            } else { // Handle multiple choice questions
-                const selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+            } else {
+                const selectedOption = questionBlock ? questionBlock.querySelector(`input[name="${qName}"]:checked`) : null;
                 selectedAnswerValue = selectedOption ? selectedOption.value : null;
-                userAnswers[qName] = selectedAnswerValue;
 
                 if (questionBlock) {
-                    // Always highlight the correct answer for multiple choice
                     const correctOptionLabel = questionBlock.querySelector(`input[value="${correctAnswerValue}"]`).parentElement;
                     correctOptionLabel.classList.add('correct-answer');
 
@@ -163,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         let questionNumber = qName.replace('q', '');
                         incorrectQuestions.push({
-                            question: `Câu ${questionNumber}`, // Format as "Câu 1", "Câu 2", etc.
+                            question: `Câu ${questionNumber}`,
                             userAnswer: selectedAnswerValue || 'Chưa trả lời',
                             correctAnswer: correctAnswerValue
                         });
@@ -172,11 +157,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Calculate score on a scale of 10
         const scoreOnTen = (score / totalQuestions) * 10;
         const incorrectCount = totalQuestions - score;
 
-        // Display detailed results in a summary table
         let resultsHtml = `
             <h2>Kết quả của bạn</h2>
             <p>Số câu đúng: ${score} / ${totalQuestions}</p>
@@ -217,10 +200,8 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsDiv.innerHTML = resultsHtml;
         resultsDiv.style.display = 'block';
 
-        // Scroll to the results section smoothly
         resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    // Add event listener for the reset button
     resetButton.addEventListener('click', resetQuiz);
 });

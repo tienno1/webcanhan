@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Điền Đáp Án</title>
+    <title>Đề Thi Tiếng Anh - Đề 2</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container"> 
+    <div class="container">
         <div class="logo" style="width: 100%; padding: 10px;">
         <a href="../index.html"><img src="../img/logo.png" alt="Logo" class="logo"></a></div>
+        <h1 style="color: red; font-size: 2em;">Đề 2</h1>
         <h1>READING PART 1</h1>
         <p class="instructions">Questions 1 – 6</p>
         <p class="instructions">For each question, choose the correct answer.</p>
@@ -346,33 +347,12 @@
         <div class="reading-passage writing-part1-passage">
             <h3>Hi Jenni,</h3>
             <p>How are you? Is your new life (0) ........in......... Canada going well?</p>
+            <p>25. And <input type="text" name="q25" class="text-answer"> is your university course like? Have you made new friends?</p>
+            <p>26. <input type="text" name="q26" class="text-answer"> you think you might come back for a visit soon?</p>
+            <h3>Clara</h3>
+            <p>I’m fine, thanks. I’ve been here for a month now. It was quite difficult for the first few weeks 27. <input type="text" name="q27" class="text-answer"> I didn’t know anyone, but now I know more people, I’m starting 28. <input type="text" name="q28" class="text-answer"> enjoy myself. I’m sure that I 29. <input type="text" name="q29" class="text-answer"> come home for a few weeks before the end of the year, so see you in a few months.</p>
             <p>Keep writing to me!</p>
             <h3>Jenni</h3>
-        </div>
-
-        <div class="question-block" data-question="q25">
-            <p>25. And <input type="text" name="q25" class="text-answer"> Is your university course like? Have you made new friends?</p>
-            <div class="error-message"></div>
-        </div>
-
-        <div class="question-block" data-question="q26">
-            <p>26. <input type="text" name="q26" class="text-answer"> you think you might come back for a visit soon?</p>
-            <div class="error-message"></div>
-        </div>
-
-        <div class="question-block" data-question="q27">
-            <p>27. I’m fine, thanks. I’ve been here for a month now. It was quite difficult for the first few weeks <input type="text" name="q27" class="text-answer"> I didn’t know anyone, but now I know more people, I’m starting</p>
-            <div class="error-message"></div>
-        </div>
-
-        <div class="question-block" data-question="q28">
-            <p>28. <input type="text" name="q28" class="text-answer"> enjoy myself. I’m sure that I</p>
-            <div class="error-message"></div>
-        </div>
-
-        <div class="question-block" data-question="q29">
-            <p>29. <input type="text" name="q29" class="text-answer"> come home for a few weeks before the end of the year, so see you in a few months.</p>
-            <div class="error-message"></div>
         </div>
 
         <div class="button-container-fixed">
@@ -382,28 +362,7 @@
 
         <div id="results"></div>
     </div>
-    <script>
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Nếu là link ngoài thì bỏ qua
-                if (this.target === '_blank' || this.href.startsWith('http')) return;
-                e.preventDefault();
-                const pageContent = document.getElementById('page-content');
-                if (pageContent) {
-                    pageContent.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location = this.href;
-                    }, 400); // Thời gian khớp với transition trong CSS
-                } else {
-                    window.location = this.href;
-                }
-            });
-        });
-        window.addEventListener('DOMContentLoaded', function() {
-            const pageContent = document.getElementById('page-content');
-            if (pageContent) pageContent.classList.add('fade-in');
-        });
-    </script>
+
     <script src="script.js"></script>
 </body>
 </html>
