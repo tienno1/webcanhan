@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         q25: 'is',  // Corrected for "My uncle is going to drive"
         q26: 'in', // Corrected for "You should probably bring"
         q27: 'a',   // Corrected for "The forest is beautiful in the autumn"
-        q28: 'should',    // Corrected for "we're going to visit a book there" (assuming a bookshop or similar)
+        q28: 'should', // Corrected for "we're going to visit a book there" (assuming a bookshop or similar)
         q29: 'about' // Corrected for "Don't worry about bringing food"
     };
 
