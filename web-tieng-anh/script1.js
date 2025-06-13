@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Define correct answers for Exam 1 - CORRECTED ANSWERS
     const correctAnswers = {
-        q1: 'B', // Corrected based on "You can order this meal at any time." for "all day"
+        q1: 'A', // Corrected based on "You can order this meal at any time." for "all day"
         q2: 'C', // "to help choose a gift for Tamara." based on "You always know what she likes."
         q3: 'A', // "Customers are asked to get to the hairdressers 10 minutes early." based on "Please arrive 10 minutes before your appointment time"
         q4: 'C', // "Ted's mum plans to prepare a light meal later." based on "will make us all a snack when we get back at 8 p.m."
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         q14: 'A', // five years: "His parents moved there with the whole family five years ago."
         q15: 'C', // at school: "Luckily the PE teacher is fantastic player she taught us at lunch time."
         q16: 'B', // making new friends: "The best thing is meeting lots of lovely people. We have loads of fun together."
-        q17: 'A', // comedies: "I prefer the funny stuff. If it doesn't make me laugh, I'm not interested"
+        q17: 'C', // comedies: "I prefer the funny stuff. If it doesn't make me laugh, I'm not interested"
         q18: 'C', // He wants to keep playing Go.: "The one thing he knows for sure is that he'll never stop enjoying the game."
         q19: 'A', // good: "but not good for the world around us." (common collocation)
         q20: 'B', // share: "One possibility is to share car journeys." (common collocation for carpooling)
@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
         q23: 'C', // especially: "especially in a town or city." (indicates a particular emphasis)
         q24: 'A', // save: "You'll get fit and save money too!" (common collocation)
         q25: 'is',  // Corrected for "My uncle is going to drive"
-        q26: 'should', // Corrected for "You should probably bring"
-        q27: 'in',   // Corrected for "The forest is beautiful in the autumn"
-        q28: 'a',    // Corrected for "we're going to visit a book there" (assuming a bookshop or similar)
+        q26: 'in', // Corrected for "You should probably bring"
+        q27: 'a',   // Corrected for "The forest is beautiful in the autumn"
+        q28: 'should',    // Corrected for "we're going to visit a book there" (assuming a bookshop or similar)
         q29: 'about' // Corrected for "Don't worry about bringing food"
     };
 
