@@ -1,7 +1,5 @@
 /* Reset some default browser styles */
 html, body {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box; /* Crucial for preventing overflow */
 }
 
@@ -14,10 +12,31 @@ body {
     justify-content: center;
     align-items: flex-start; /* Align content to the top */
     padding: 20px; /* Default padding for desktop */
+        margin: 0;
     padding-bottom: 80px; /* Space for fixed buttons */
     overflow-x: hidden; /* Prevent horizontal scrolling at the body level */
 }
 
+div .logo {
+    margin-right: -20px;
+    background-size: 100% 100%;
+    background-color: #555555;
+    display: block;
+    margin: 0 auto 20px;
+    width: 30%;
+    width: 150px;
+    height: auto;
+}
+
+img {
+    background-color: #555555;
+    width: 80px; /* Fixed width for the logo image */
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; /* Ensure images are responsive */
+}
 .container {
     background-color: #fff;
     padding: 30px 40px; /* Default padding for larger screens */
@@ -29,20 +48,7 @@ body {
     /* Remove any fixed widths or max-widths here that might cause overflow */
 }
 
-/* Logo Styling */
-.logo-container {
-    width: 100%; /* Ensure container takes full width */
-    text-align: center; /* Center the image within its container */
-    margin-bottom: 20px;
-    padding: 10px 0;
-    box-sizing: border-box;
-}
 
-.logo-container img {
-    max-width: 80px; /* Max width for the image */
-    height: auto; /* Maintain aspect ratio */
-    display: inline-block;
-}
 
 /* Headings */
 h1 {
