@@ -1,0 +1,351 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0;
+    padding-bottom: 80px;
+}
+
+div .logo {
+    background-color: #555555;
+    display: block;
+    margin: 0 auto 20px; /* Center the logo and add space below */
+    width: 150px; /* Set a fixed width for the logo */
+    height: auto; /* Maintain aspect ratio */
+}
+
+img {
+    background-color: #555555;
+    width: 20%;
+    width: 80px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px 40px; /* Default padding for larger screens */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.instructions {
+    text-align: center;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.question-block {
+    display: flex;
+    margin-top: 30px;
+    align-items: flex-start;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    border-left: 5px solid transparent; /* Default transparent border */
+    transition: border-left 0.3s ease; /* Smooth transition for border color */
+    padding: 15px; /* Added padding inside the block to move content away from border */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+    border: 1px solid #ddd; /* Add a default border for all question blocks */
+    border-radius: 8px; /* Slightly rounded corners for the frame */
+    margin-bottom: 20px; /* Space between question blocks */
+    flex-direction: column; /* Changed to column for better stacking on mobile */
+    align-items: stretch; /* Stretch items to fill container width */
+}
+
+
+.question-block:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+}
+
+.notice-box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    flex: 1;
+    margin-right: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.notice-box h2 {
+    margin-top: 0;
+    color: #555;
+    font-size: 18px;
+}
+
+.notice-box p {
+    margin-bottom: 0;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Specific notice box colors */
+.guest-notice { background-color: #fefee0; border-color: #e0e0b0; }
+.sports-notice { background-color: #e6f7ff; border-color: #b3e0ff; }
+.visitor-notice { background-color: #d7ffcb; border-color: #b3e0ff; }
+.exit-notice { background-color: #ffe5c4; border-color: #b3e0ff; }
+.lift-notice { background-color: #fdcdff; border-color: #b3e0ff; margin-bottom: 20px; }
+
+/* Adjust h2 color for specific notice boxes if needed, otherwise inherit */
+.guest-notice h2, .sports-notice h2, .visitor-notice h2, .exit-notice h2, .lift-notice h2 {
+    color: #333; /* Default dark color for headings in these boxes */
+}
+
+.options {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.options label {
+    display: block;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.options label input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* Styles for text input answers */
+.text-answer {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 150px; /* Adjust width as needed */
+    margin: 0 5px;
+}
+
+.text-correct {
+    border-color: #28a745 !important;
+    background-color: #e6ffe6;
+}
+
+.text-incorrect {
+    border-color: #dc3545 !important;
+    background-color: #ffe6e6;
+}
+
+/* Container for fixed buttons */
+.button-container-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%; /* Take full width on screen */
+    max-width: 400px; /* Limit width of the button group */
+    display: flex; /* Use flexbox to align buttons */
+    justify-content: space-around; /* Space out buttons evenly */
+    padding: 10px 20px; /* Padding inside the container */
+    background-color: #fff; /* Background behind buttons */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-sizing: border-box;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+#submit-answers, #reset-answers {
+    flex: 1; /* Both buttons take equal space */
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px; /* Slightly smaller font for two buttons */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 5px; /* Space between buttons */
+}
+
+#submit-answers {
+    background-color: #007bff;
+    color: white;
+}
+
+#submit-answers:hover {
+    background-color: #0056b3;
+}
+
+#reset-answers {
+    background-color: #6c757d; /* Grey color for reset button */
+    color: white;
+}
+
+#reset-answers:hover {
+    background-color: #5a6268;
+}
+
+
+#results {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    display: none;
+}
+
+/* Updated correctness styles for question-block */
+.correct {
+    background-color: #dff0d8; /* Light green background */
+    border-left: 5px solid #28a745; /* Green border */
+}
+
+.incorrect {
+    background-color: #f2dede; /* Light red background */
+    border-left: 5px solid #dc3545; /* Red border */
+}
+
+/* Styles for labels within options */
+.correct-answer {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.wrong-answer {
+    color: #dc3545;
+    text-decoration: line-through;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Reduced padding for smaller screens */
+    }
+
+    .question-block {
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 20px; /* Slightly reduce top margin */
+        padding: 10px; /* Further reduce padding inside the block for small screens */
+    }
+    .notice-box {
+        margin-right: 0;
+        margin-bottom: 10px;
+        padding: 10px; /* Adjust padding for notice box on small screens */
+    }
+    .options label {
+        margin-bottom: 10px; /* Reduce space between options */
+    }
+    .text-answer {
+        width: 100%; /* Make text inputs full width on small screens */
+        box-sizing: border-box; /* Ensure padding/border don't make it overflow */
+    }
+    /* Specific adjustment for text inputs within the writing part passage if they are standalone */
+    .writing-part1-passage .text-answer {
+        width: auto; /* Allow input to size naturally within the flow of text */
+        max-width: 80px; /* Reduce the max-width for text input fields */
+        padding: 3px 5px; /* Adjust padding */
+        vertical-align: middle; /* Align with surrounding text */
+    }
+
+    .reading-passage {
+        margin-top: 15px;
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+
+    /* Adjust WRITING PART 1 passage specific styling for better mobile view */
+    .writing-part1-passage {
+        line-height: 1.8; /* Slightly reduce line height for compactness */
+    }
+
+    /* Adjust padding of body for fixed button on mobile */
+    body {
+        padding-bottom: 80px; /* Ensure enough space for the fixed button on smaller screens */
+    }
+
+    /* Adjust button container for full width on mobile */
+    .button-container-fixed {
+        width: 100%;
+        max-width: none;
+        border-radius: 0; /* No border-radius on mobile for sharp corners */
+    }
+    #submit-answers, #reset-answers {
+        font-size: 15px; /* Smaller font on mobile */
+        padding: 10px 12px;
+    }
+}
+
+.reading-passage {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+/* Specific styling for WRITING PART 1 passage to control layout */
+.writing-part1-passage {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    line-height: 2.0; /* Increase line height for better readability with inputs */
+}
+
+.reading-passage h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.reading-passage p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Styles for results table */
+#results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#results th, #results td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#results th {
+    background-color: #e2e6ea;
+    color: #333;
+}

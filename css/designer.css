@@ -31,6 +31,7 @@ body {
 header {
     background-image:url(../img/sl_0210121_40570_23.jpg); /* Background image */
     background-size: 100%;
+    color: #fff; /* White text color */
     padding: 1rem 0; /* Top and bottom padding */
     text-align: center; /* Center content */
 }

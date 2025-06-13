@@ -16,33 +16,25 @@
 </head>
 <body>
 
-<div id="password-protection">
-    <div id="password-form">
-        <a href="index.html" class="back-button">Back to Home</a> <!-- Nút Back to Home ở trên cùng -->
-        <h3>Nhập mật khẩu để xem điểm</h3>
-        <div style="position: relative;">
-            <form id="passwordForm" onsubmit="checkPassword(); return false;">
-            <input type="password" id="password" placeholder="Mật khẩu">
-            <i class="far fa-eye" id="togglePassword"></i>
-            <button type="submit">Xác nhận</button>
-            </form>
+    <div id="password-protection">
+        <div id="password-form">
+            <a href="index.html" class="back-button">Back to Home</a> <h3>Nhập mật khẩu để xem điểm</h3>
+            <div style="position: relative;">
+                <form id="passwordForm" onsubmit="checkPassword(); return false;">
+                    <input type="password" id="password" placeholder="Mật khẩu">
+                    <i class="far fa-eye" id="togglePassword"></i>
+                    <button type="submit">Xác nhận</button>
+                </form>
+            </div>
+            <p id="incorrect-password" style="color: red; display: none;">Mật khẩu không đúng!</p>
         </div>
-        <p id="incorrect-password" style="color: red; display: none;">Mật khẩu không đúng!</p>
-
     </div>
-</div>
 
-<div id="mobile-warning">
-    Trang Điểm số này được tối ưu hóa cho máy tính. Vui lòng truy cập trên máy tính để có trải nghiệm tốt nhất.
-    <br>
-    <a href="index.html" class="back-button">Back to Home</a>
-</div>
-
-<div id="mobile-warning">
-    Trang Điểm số này được tối ưu hóa cho máy tính. Vui lòng truy cập trên máy tính để có trải nghiệm tốt nhất.
-    <br>
-    <a href="index.html" class="back-button">Back to Home</a>
-</div>
+    <div id="mobile-warning">
+        Trang Điểm số này được tối ưu hóa cho máy tính. Vui lòng truy cập trên máy tính để có trải nghiệm tốt nhất.
+        <br>
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
 
     <header>
         <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
@@ -52,25 +44,27 @@
     <nav class="main-nav">
         <ul>
             <li><a href="index.html">Giới thiệu</a></li>
-            <li><a href="profile.html">Profile Cá Nhân</a></li>
-            <li><a href="designer.html">Thiết Kế của tôi</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="designer.html">Design</a></li>
             <li><a href="scores.html" class="active">Điểm Số</a></li>
             <li><a href="drawings.html">Ảnh Sưu Tầm</a></li>
+            <li><a href="../jalan/View.html">View</a></li>
         </ul>
     </nav>
 
     <div id="page-content" class="content-container">
         <div class="hidden-on-lock">
-        <aside class="toc">
-            <h3>Mục lục Điểm Số</h3>
-            <ul id="toc-list">
-                <li><a href="#bang-diem-ren-luyen">Điểm rèn luyện</a></li>
-                <li><a href="#bang-ket-qua-hoc-tap">Điểm kết quả học tập</a></li>
+            <aside class="toc">
+                <h3>Mục lục Điểm Số</h3>
+                <ul id="toc-list">
+                    <li><a href="#bang-diem-ren-luyen">Điểm rèn luyện</a></li>
+                    <li><a href="#bang-ket-qua-hoc-tap">Điểm kết quả học tập</a></li>
                 </ul>
-            <div id="toc-content-display">
-                <p>Chọn một mục từ mục lục để cuộn đến nội dung.</p>
-            </div>
-        </aside></div>
+                <div id="toc-content-display">
+                    <p>Chọn một mục từ mục lục để cuộn đến nội dung.</p>
+                </div>
+            </aside>
+        </div>
 
         <main class="hidden-on-lock">
             <h2>Tổng quan Điểm Số</h2>
@@ -78,151 +72,143 @@
 
             <div id="paginated-scores">
                 <section id="bang-diem-ren-luyen" class="fade-in-element score-section" data-page="2">
-
-    <div class="header_CHINH">
-        <div class="header_CHINH" style="display: flex; justify-content: space-between; align-items: flex-start;">
-        <div class="left" style="width: 50%; text-align: center; color: #0000cc;">
-                <div style="font-size: 1.1em;"><b>UBND TỈNH BÀ RỊA - VŨNG TÀU</b></div>
-            <div style="font-size: 1.1em;">
-            <b class="animated-text"><u>TRƯỜNG CĐ KTCN BÀ RỊA VŨNG TÀU</u></b>
-            </div>
-        </div>
-        <div class="right" style="width: 50%; text-align: center; color: #0000cc;">
-        <div style="font-size: 1.1em;" ><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></div>
-            <div style="font-size: 1.1em;">
-            <u class="animated-text"><b>Độc lập - Tự do - Hạnh phúc</b></u>
-            </div>
-        </div>
-        </div>
-    </div>
-    <h1>BẢNG ĐIỂM RÈN LUYỆN</h1>
-        <div class="info-grid">
-        <div><strong>Mã Sinh Viên:</strong></div><div>235216067</div>
-        <div><strong>Lớp học:</strong></div><div>T23TKDH3</div>
-        <div><strong>Họ tên SV:</strong></div><div>Phạm Viết Tiến</div>
-        <div><strong>Loại đào tạo:</strong></div><div>Chính quy</div>
-        <div><strong>Ngày sinh:</strong></div><div>21/7/2008</div>
-        <div><strong>Nơi sinh:</strong></div><div>BR-VT</div>
-        <div><strong>Bậc đào tạo:</strong></div><div>Trung cấp</div>
-        <div><strong>Chuyên ngành:</strong></div><div>Thiết kế đồ họa</div>
-        </div>
+                    <div class="header_CHINH">
+                        <div class="header_CHINH" style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div class="left" style="width: 50%; text-align: center; color: #0000cc;">
+                                <div style="font-size: 1.1em;"><b>UBND TỈNH BÀ RỊA - VŨNG TÀU</b></div>
+                                <div style="font-size: 1.1em;">
+                                    <b class="animated-text"><u>TRƯỜNG CĐ KTCN BÀ RỊA VŨNG TÀU</u></b>
+                                </div>
+                            </div>
+                            <div class="right" style="width: 50%; text-align: center; color: #0000cc;">
+                                <div style="font-size: 1.1em;"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></div>
+                                <div style="font-size: 1.1em;">
+                                    <u class="animated-text"><b>Độc lập - Tự do - Hạnh phúc</b></u>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h1>BẢNG ĐIỂM RÈN LUYỆN</h1>
+                    <div class="info-grid">
+                        <div><strong>Mã Sinh Viên:</strong></div><div>235216067</div>
+                        <div><strong>Lớp học:</strong></div><div>T23TKDH3</div>
+                        <div><strong>Họ tên SV:</strong></div><div>Phạm Viết Tiến</div>
+                        <div><strong>Loại đào tạo:</strong></div><div>Chính quy</div>
+                        <div><strong>Ngày sinh:</strong></div><div>21/7/2008</div>
+                        <div><strong>Nơi sinh:</strong></div><div>BR-VT</div>
+                        <div><strong>Bậc đào tạo:</strong></div><div>Trung cấp</div>
+                        <div><strong>Chuyên ngành:</strong></div><div>Thiết kế đồ họa</div>
+                    </div>
 
                     <table class="bang-ren-luyen" style="width:100%; border-collapse:collapse; margin-bottom:24px;">
-    <tr>
-        <th style="border:1px solid #1a4c8b; padding:6px;">STT</th>
-        <th style="border:1px solid #1a4c8b; padding:6px;">Năm học</th>
-        <th style="border:1px solid #1a4c8b; padding:6px;">Học kỳ</th>
-        <th style="border:1px solid #1a4c8b; padding:6px;">Điểm</th>
-        <th style="border:1px solid #1a4c8b; padding:6px;">Xếp loại</th>
-    </tr>
-    <tr>
-        <td style="border:1px solid #1a4c8b; text-align:center;">1</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Năm học: 2023 - 2024</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Học kỳ: 1</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">84</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Tốt</td>
-    </tr>
-    <tr>
-        <td style="border:1px solid #1a4c8b; text-align:center;">2</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Năm học: 2023 - 2024</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Học kỳ: 2</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">86</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Tốt</td>
-    </tr>
-    <tr>
-        <td style="border:1px solid #1a4c8b; text-align:center;">3</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Năm học: 2024 - 2025</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Học kỳ: 1</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">90</td>
-        <td style="border:1px solid #1a4c8b; text-align:center;">Xuất sắc</td>
-    </tr>
-</table>
+                        <tr>
+                            <th style="border:1px solid #1a4c8b; padding:6px;">STT</th>
+                            <th style="border:1px solid #1a4c8b; padding:6px;">Năm học</th>
+                            <th style="border:1px solid #1a4c8b; padding:6px;">Học kỳ</th>
+                            <th style="border:1px solid #1a4c8b; padding:6px;">Điểm</th>
+                            <th style="border:1px solid #1a4c8b; padding:6px;">Xếp loại</th>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">1</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Năm học: 2023 - 2024</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Học kỳ: 1</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">84</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Tốt</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">2</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Năm học: 2023 - 2024</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Học kỳ: 2</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">86</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Tốt</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">3</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Năm học: 2024 - 2025</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Học kỳ: 1</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">90</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Xuất sắc</td>
+                        </tr>
+                    </table>
                 </section>
 
-                <!-- BẢNG KẾT QUẢ HỌC TẬP THEO MẪU ẢNH -->
-    <section id="bang-ket-qua-hoc-tap" class="fade-in-element score-section" data-page="1">
-    <div class="header_CHINH">
-    <div class="header_CHINH" style="display: flex; justify-content: space-between; align-items: flex-start;">
-    <div class="left" style="width: 50%; text-align: center; color: #0000cc;">
-                <div style="font-size: 1.1em;"><b>UBND TỈNH BÀ RỊA - VŨNG TÀU</b></div>
-            <div style="font-size: 1.1em;">
-            <b class="animated-text"><u>TRƯỜNG CĐ KTCN BÀ RỊA VŨNG TÀU</u></b>
+                <section id="bang-ket-qua-hoc-tap" class="fade-in-element score-section" data-page="1">
+                    <div class="header_CHINH">
+                        <div class="header_CHINH" style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div class="left" style="width: 50%; text-align: center; color: #0000cc;">
+                                <div style="font-size: 1.1em;"><b>UBND TỈNH BÀ RỊA - VŨNG TÀU</b></div>
+                                <div style="font-size: 1.1em;">
+                                    <b class="animated-text"><u>TRƯỜNG CĐ KTCN BÀ RỊA VŨNG TÀU</u></b>
+                                </div>
+                            </div>
+                            <div class="right" style="width: 50%; text-align: center; color: #0000cc;">
+                                <div style="font-size: 1.1em;"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></div>
+                                <div style="font-size: 1.1em;">
+                                    <u class="animated-text"><b>Độc lập - Tự do - Hạnh phúc</b></u>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1>BẢNG KẾT QUẢ HỌC TẬP</h1>
+
+                    <div class="info-grid">
+                        <div><strong>Mã Sinh Viên:</strong></div><div>235216067</div>
+                        <div><strong>Lớp học:</strong></div><div>T23TKDH3</div>
+                        <div><strong>Họ tên SV:</strong></div><div>Phạm Viết Tiến</div>
+                        <div><strong>Loại đào tạo:</strong></div><div>Chính quy</div>
+                        <div><strong>Ngày sinh:</strong></div><div>21/7/2008</div>
+                        <div><strong>Nơi sinh:</strong></div><div>BR-VT</div>
+                        <div><strong>Bậc đào tạo:</strong></div><div>Trung cấp</div>
+                        <div><strong>Chuyên ngành:</strong></div><div>Thiết kế đồ họa</div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="bang-ket-qua">
+                            <tr style="color: blue;">
+                                <th rowspan="2">STT</th>
+                                <th rowspan="2">Tên học phần</th>
+                                <th rowspan="2">TC</th>
+                                <th colspan="4">Điểm quá trình</th>
+                                <th rowspan="2">Thi1</th>
+                                <th rowspan="2">Thi2</th>
+                                <th rowspan="2">HP</th>
+                                <th rowspan="2">Điểm Chữ</th>
+                                <th rowspan="2">Điểm QĐ</th>
+                            </tr>
+                            <tr>
+                                <th>KTTX 01</th><th>KTTX 02</th><th>KTĐK</th><th>TBKT</th>
+                            </tr>
+
+                            <tr><td colspan="12" style="text-align:center;color: #ff2b2b;font-size: 1.1em;"><strong>Năm học: 2023 - 2024 &nbsp;&nbsp;&nbsp; Học kỳ: 1 &nbsp;&nbsp;&nbsp; TBC Học kỳ: 3.67</strong></td></tr>
+                            <tr><td>1</td><td>Đồ họa ứng dụng Photoshop</td><td>4</td><td>7.0</td><td>7.5</td><td>7.0</td><td>7.4</td><td>8.5</td><td></td><td>8.0</td><td>B+</td><td>3.5</td></tr>
+                            <tr><td>2</td><td>Giáo dục Chính trị</td><td>2</td><td>6.0</td><td>6.5</td><td>7.0</td><td>6.5</td><td>6.0</td><td></td><td>6.2</td><td>C+</td><td>2.5</td></tr>
+                            <tr><td>3</td><td>Giáo dục thể chất</td><td>1</td><td>7.0</td><td>7.0</td><td>7.0</td><td>7.0</td><td>7.0</td><td></td><td>7.0</td><td>B</td><td>3.0</td></tr>
+                            <tr><td>4</td><td>Lắp ráp và cài đặt máy tính</td><td>3</td><td>6.0</td><td>7.0</td><td>7.0</td><td>6.7</td><td>7.5</td><td></td><td>7.2</td><td>B</td><td>3.0</td></tr>
+                            <tr><td>5</td><td>Mỹ thuật căn bản</td><td>4</td><td>7.5</td><td>8.0</td><td>8.5</td><td>8.0</td><td>8.5</td><td></td><td>8.3</td><td>A</td><td>4.0</td></tr>
+                            <tr><td>6</td><td>Pháp luật</td><td>2</td><td>8.0</td><td>8.5</td><td>9.0</td><td>8.5</td><td>8.5</td><td></td><td>8.5</td><td>A</td><td>4.0</td></tr>
+                            <tr><td>7</td><td>Tin học</td><td>2</td><td>8.5</td><td>8.5</td><td>9.0</td><td>8.7</td><td>9.0</td><td></td><td>8.8</td><td>A</td><td>4.0</td></tr>
+
+                            <tr><td colspan="12" style="text-align:center;color: #ff2b2b;font-size: 1.1em;"><strong>Năm học: 2024 - 2025&nbsp;&nbsp;&nbsp;Học kỳ: 2 &nbsp;&nbsp;&nbsp; TBC Học kỳ: 3.75</strong></td></tr>
+                            <tr><td>8</td><td>Đồ họa vector với Adobe Illustrator</td><td>4</td><td>7.0</td><td>7.0</td><td>7.0</td><td>7.0</td><td>8.0</td><td></td><td>7.7</td><td>B</td><td>3.0</td></tr>
+                            <tr><td>9</td><td>Lập trình cơ bản</td><td>4</td><td>7.0</td><td>7.0</td><td>7.0</td><td>7.0</td><td>8.0</td><td></td><td>7.7</td><td>B</td><td>3.0</td></tr>
+                            <tr><td>10</td><td>Thiết kế web</td><td>4</td><td>8.0</td><td>8.0</td><td>8.5</td><td>8.2</td><td>9.0</td><td></td><td>8.6</td><td>A</td><td>4.0</td></tr>
+                            <tr><td>11</td><td>Tiếng anh</td><td>3</td><td>8.0</td><td>8.0</td><td>8.5</td><td>8.2</td><td>8.5</td><td></td><td>8.4</td><td>A</td><td>4.0</td></tr>
+
+                            <tr><td colspan="12" style="text-align:center;color: #ff2b2b; font-size: 1.1em;"><strong>Năm học: 2024 - 2025 &nbsp;&nbsp;&nbsp; Học kỳ: 1 &nbsp;&nbsp;&nbsp; TBC Học kỳ: 3.92</strong></td></tr>
+                            <tr><td>12</td><td>Anh văn nâng cao</td><td>3</td><td>8.0</td><td>8.5</td><td>9.2</td><td>8.6</td><td>9.5</td><td></td><td>9.0</td><td>A</td><td>4.0</td></tr>
+                            <tr><td>13</td><td>Hiệu ứng âm thanh với Adobe Audition</td><td>4</td><td>8.0</td><td>8.5</td><td>9.0</td><td>8.5</td><td>9.0</td><td></td><td>8.8</td><td>A</td><td>4.0</td></tr>
+                            <tr><td>14</td><td>Kỹ năng mềm</td><td>1</td><td>8.5</td><td>9.0</td><td>9.5</td><td>9.0</td><td>9.5</td><td></td><td>9.3</td><td>A</td><td>4.0</td></tr>
+                            <tr><td>15</td><td>Thiết kế hoạt hình Adobe Animation</td><td>3</td><td>9.0</td><td>9.5</td><td>9.5</td><td>9.3</td><td>9.5</td><td></td><td>9.4</td><td>A</td><td>4.0</td></tr>
+                            <tr><td>16</td><td>Thực tế tại trung tâm in ấn quảng cáo</td><td>2</td><td>9.2</td><td>10.0</td><td>8.8</td><td>9.3</td><td>9.0</td><td></td><td>9.2</td><td>A</td><td>4.0</td></tr>
+                            <tr><td>17</td><td>Tiếng Anh chuyên ngành</td><td>1</td><td>9.2</td><td>10.0</td><td>8.8</td><td>9.3</td><td>9.0</td><td></td><td>9.2</td><td>A</td><td>4.0</td></tr>
+                        </table>
+                    </table>
+                    <p class="note">
+                        <strong class="animated-text">Ghi chú:</strong> TC: Số tín chỉ, KTTX: Kiểm tra thường xuyên, KTĐK: Kiểm tra định kỳ, TBKT: Trung bình kiểm tra, HP: Học phần, QĐ: Quy đổi
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="right" style="width: 50%; text-align: center; color: #0000cc;">
-        <div style="font-size: 1.1em;" ><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></div>
-            <div style="font-size: 1.1em;">
-            <u class="animated-text"><b>Độc lập - Tự do - Hạnh phúc</b></u>
-            </div>
-        </div>
-        </div>
-    </div>
-
-  <h1>BẢNG KẾT QUẢ HỌC TẬP</h1>
-
-  <div class="info-grid">
-    <div><strong>Mã Sinh Viên:</strong></div><div>235216067</div>
-    <div><strong>Lớp học:</strong></div><div>T23TKDH3</div>
-    <div><strong>Họ tên SV:</strong></div><div>Phạm Viết Tiến</div>
-        <div><strong>Loại đào tạo:</strong></div><div>Chính quy</div>
-        <div><strong>Ngày sinh:</strong></div><div>21/7/2008</div>
-        <div><strong>Nơi sinh:</strong></div><div>BR-VT</div>
-        <div><strong>Bậc đào tạo:</strong></div><div>Trung cấp</div>
-        <div><strong>Chuyên ngành:</strong></div><div>Thiết kế đồ họa</div>
-        </div>
-    <div class="table-responsive">
-        <table class="bang-ket-qua">
-    <tr style="color: blue;">
-      <th rowspan="2">STT</th>
-      <th rowspan="2">Tên học phần</th>
-      <th rowspan="2">TC</th>
-      <th colspan="4">Điểm quá trình</th>
-      <th rowspan="2">Thi1</th>
-      <th rowspan="2">Thi2</th>
-      <th rowspan="2">HP</th>
-      <th rowspan="2">Điểm Chữ</th>
-      <th rowspan="2">Điểm QĐ</th>
-    </tr>
-    <tr>
-      <th>KTTX 01</th><th>KTTX 02</th><th>KTĐK</th><th>TBKT</th>
-    </tr>
-
-    <!-- Dữ liệu Học kỳ 1 - 2023 -->
-    <tr><td colspan="12" style="text-align:center;color: #ff2b2b;font-size: 1.1em;"><strong>Năm học: 2023 - 2024 &nbsp;&nbsp;&nbsp; Học kỳ: 1 &nbsp;&nbsp;&nbsp; TBC Học kỳ: 3.67</strong></td></tr>
-    <tr><td>1</td><td>Đồ họa ứng dụng Photoshop</td><td>4</td><td>7.0</td><td>7.5</td><td>7.0</td><td>7.4</td><td>8.5</td><td></td><td>8.0</td><td>B+</td><td>3.5</td></tr>
-    <tr><td>2</td><td>Giáo dục Chính trị</td><td>2</td><td>6.0</td><td>6.5</td><td>7.0</td><td>6.5</td><td>6.0</td><td></td><td>6.2</td><td>C+</td><td>2.5</td></tr>
-    <tr><td>3</td><td>Giáo dục thể chất</td><td>1</td><td>7.0</td><td>7.0</td><td>7.0</td><td>7.0</td><td>7.0</td><td></td><td>7.0</td><td>B</td><td>3.0</td></tr>
-    <tr><td>4</td><td>Lắp ráp và cài đặt máy tính</td><td>3</td><td>6.0</td><td>7.0</td><td>7.0</td><td>6.7</td><td>7.5</td><td></td><td>7.2</td><td>B</td><td>3.0</td></tr>
-    <tr><td>5</td><td>Mỹ thuật căn bản</td><td>4</td><td>7.5</td><td>8.0</td><td>8.5</td><td>8.0</td><td>8.5</td><td></td><td>8.3</td><td>A</td><td>4.0</td></tr>
-    <tr><td>6</td><td>Pháp luật</td><td>2</td><td>8.0</td><td>8.5</td><td>9.0</td><td>8.5</td><td>8.5</td><td></td><td>8.5</td><td>A</td><td>4.0</td></tr>
-    <tr><td>7</td><td>Tin học</td><td>2</td><td>8.5</td><td>8.5</td><td>9.0</td><td>8.7</td><td>9.0</td><td></td><td>8.8</td><td>A</td><td>4.0</td></tr>
-
-    <!-- Dữ liệu Học kỳ 2 - 2023 -->
-    <tr><td colspan="12" style="text-align:center;color: #ff2b2b;font-size: 1.1em;"><strong>Năm học: 2024 - 2025&nbsp;&nbsp;&nbsp;Học kỳ: 2 &nbsp;&nbsp;&nbsp; TBC Học kỳ: 3.75</strong></td></tr>
-    <tr><td>8</td><td>Đồ họa vector với Adobe Illustrator</td><td>4</td><td>7.0</td><td>7.0</td><td>7.0</td><td>7.0</td><td>8.0</td><td></td><td>7.7</td><td>B</td><td>3.0</td></tr>
-    <tr><td>9</td><td>Lập trình cơ bản</td><td>4</td><td>7.0</td><td>7.0</td><td>7.0</td><td>7.0</td><td>8.0</td><td></td><td>7.7</td><td>B</td><td>3.0</td></tr>
-    <tr><td>10</td><td>Thiết kế web</td><td>4</td><td>8.0</td><td>8.0</td><td>8.5</td><td>8.2</td><td>9.0</td><td></td><td>8.6</td><td>A</td><td>4.0</td></tr>
-    <tr><td>11</td><td>Tiếng anh</td><td>3</td><td>8.0</td><td>8.0</td><td>8.5</td><td>8.2</td><td>8.5</td><td></td><td>8.4</td><td>A</td><td>4.0</td></tr>
-
-    <!-- Dữ liệu Học kỳ 1 - 2024 -->
-    <tr><td colspan="12" style="text-align:center;color: #ff2b2b; font-size: 1.1em;"><strong>Năm học: 2024 - 2025 &nbsp;&nbsp;&nbsp; Học kỳ: 1 &nbsp;&nbsp;&nbsp; TBC Học kỳ: 3.92</strong></td></tr>
-    <tr><td>12</td><td>Anh văn nâng cao</td><td>3</td><td>8.0</td><td>8.5</td><td>9.2</td><td>8.6</td><td>9.5</td><td></td><td>9.0</td><td>A</td><td>4.0</td></tr>
-    <tr><td>13</td><td>Hiệu ứng âm thanh với Adobe Audition</td><td>4</td><td>8.0</td><td>8.5</td><td>9.0</td><td>8.5</td><td>9.0</td><td></td><td>8.8</td><td>A</td><td>4.0</td></tr>
-    <tr><td>14</td><td>Kỹ năng mềm</td><td>1</td><td>8.5</td><td>9.0</td><td>9.5</td><td>9.0</td><td>9.5</td><td></td><td>9.3</td><td>A</td><td>4.0</td></tr>
-    <tr><td>15</td><td>Thiết kế hoạt hình Adobe Animation</td><td>3</td><td>9.0</td><td>9.5</td><td>9.5</td><td>9.3</td><td>9.5</td><td></td><td>9.4</td><td>A</td><td>4.0</td></tr>
-    <tr><td>16</td><td>Thực tế tại trung tâm in ấn quảng cáo</td><td>2</td><td>9.2</td><td>10.0</td><td>8.8</td><td>9.3</td><td>9.0</td><td></td><td>9.2</td><td>A</td><td>4.0</td></tr>
-    <tr><td>17</td><td>Tiếng Anh chuyên ngành</td><td>1</td><td>9.2</td><td>10.0</td><td>8.8</td><td>9.3</td><td>9.0</td><td></td><td>9.2</td><td>A</td><td>4.0</td></tr>
-    </table>
-    </table>
-        <p class="note">
-            <strong class="animated-text">Ghi chú:</strong> TC: Số tín chỉ, KTTX: Kiểm tra thường xuyên, KTĐK: Kiểm tra định kỳ, TBKT: Trung bình kiểm tra, HP: Học phần, QĐ: Quy đổi
-        </p>
-    </div>
-    </div>
-</div>
-</section>
-                 </div> 
-                </main>
+        </main>
     </div>
 
     <footer class="hidden-on-lock">
@@ -233,60 +219,59 @@
     </footer>
 
     <div class="pagination-container">
-        </div>
+    </div>
 
-        <script src="js/scores_animation.js"></script>
-    <!-- filepath: d:\dow\website\html\scores.html -->
-<script>
-    const correctPassword = "032924"; // Thay đổi mật khẩu này
-    const passwordProtection = document.getElementById("password-protection");
-    const elementsToHide = document.querySelectorAll(".hidden-on-lock");
+    <script src="js/scores_animation.js"></script>
+    <script>
+        const correctPassword = "032924"; // Thay đổi mật khẩu này
+        const passwordProtection = document.getElementById("password-protection");
+        const elementsToHide = document.querySelectorAll(".hidden-on-lock");
 
-    function checkPassword() {
-    event.preventDefault(); // Ngăn chặn submit form mặc định
-    const password = document.getElementById("password").value;
-    if (password === correctPassword) {
-        document.getElementById("password-protection").style.display = "none";
-        elementsToHide.forEach(element => element.classList.remove("hidden-on-lock"));
-    } else {
-        document.getElementById("incorrect-password").style.display = "block";
-    }
-}
-
-    // Thêm class khi trang tải
-    elementsToHide.forEach(element => element.classList.add("hidden-on-lock"));
-
-    const togglePassword = document.querySelector('#togglePassword');
-    const passwordInput = document.querySelector('#password');
-
-    togglePassword.addEventListener('click', function (e) {
-        // toggle the type attribute
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        // toggle the eye slash icon
-        this.classList.toggle('fa-eye-slash');
-        this.classList.toggle('fa-eye');
-    });
-    document.querySelectorAll('nav ul li a').forEach(link => {
-    link.addEventListener('click', function(e) {
-        // Nếu là link ngoài thì bỏ qua
-        if (this.target === '_blank' || this.href.startsWith('http')) return;
-        e.preventDefault();
-        const pageContent = document.getElementById('page-content');
-        if (pageContent) {
-            pageContent.classList.add('fade-out');
-            setTimeout(() => {
-                window.location = this.href;
-            }, 400); // Thời gian khớp với transition trong CSS
-        } else {
-            window.location = this.href;
+        function checkPassword() {
+            event.preventDefault(); // Ngăn chặn submit form mặc định
+            const password = document.getElementById("password").value;
+            if (password === correctPassword) {
+                document.getElementById("password-protection").style.display = "none";
+                elementsToHide.forEach(element => element.classList.remove("hidden-on-lock"));
+            } else {
+                document.getElementById("incorrect-password").style.display = "block";
+            }
         }
-    });
-    });
-    window.addEventListener('DOMContentLoaded', function() {
-    const pageContent = document.getElementById('page-content');
-    if (pageContent) pageContent.classList.add('fade-in');
-    });
-</script>
+
+        // Thêm class khi trang tải
+        elementsToHide.forEach(element => element.classList.add("hidden-on-lock"));
+
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+        });
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Nếu là link ngoài thì bỏ qua
+                if (this.target === '_blank' || this.href.startsWith('http')) return;
+                e.preventDefault();
+                const pageContent = document.getElementById('page-content');
+                if (pageContent) {
+                    pageContent.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location = this.href;
+                    }, 400); // Thời gian khớp với transition trong CSS
+                } else {
+                    window.location = this.href;
+                }
+            });
+        });
+        window.addEventListener('DOMContentLoaded', function() {
+            const pageContent = document.getElementById('page-content');
+            if (pageContent) pageContent.classList.add('fade-in');
+        });
+    </script>
 </body>
 </html>
