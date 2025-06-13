@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
             radio.checked = false;
         });
 
-        // Clear all text input fields
+        // Clear all text input fields and their styles
         document.querySelectorAll('input[type="text"]').forEach(input => {
             input.value = '';
             input.classList.remove('text-correct', 'text-incorrect');
-            input.style.borderColor = ''; // Reset border color for text inputs
+            input.style.borderColor = ''; // Ensures direct style is also reset
         });
 
         // Remove correctness highlighting from question blocks and labels
@@ -87,10 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.question-block').forEach(el => {
             el.classList.remove('correct', 'incorrect');
         });
+        // Ensure direct border-color is also reset for text inputs
         document.querySelectorAll('.text-answer').forEach(input => {
             input.classList.remove('text-correct', 'text-incorrect');
             input.style.borderColor = '';
         });
+
 
         // Get user's answers and check them
         for (const qName in correctAnswers) {
@@ -98,23 +100,28 @@ document.addEventListener('DOMContentLoaded', function() {
             const correctAnswerValue = correctAnswers[qName];
             let selectedAnswerValue = null;
 
-            const textInput = questionBlock ? questionBlock.querySelector(`input[name="${qName}"][type="text"]`) : null;
+            // Only proceed if questionBlock exists, ensuring the HTML structure is correct
+            if (!questionBlock) {
+                console.warn(`Question block not found for ${qName}. Skipping.`);
+                continue; // Skip this question if its block is not found
+            }
+
+            const textInput = questionBlock.querySelector(`input[name="${qName}"][type="text"]`);
+            const errorMessageDiv = questionBlock.querySelector('.error-message'); // Error message is now always inside questionBlock
 
             if (textInput) {
                 selectedAnswerValue = textInput.value.trim();
 
-                const errorMessageDiv = questionBlock ? questionBlock.querySelector('.error-message') : null;
-
                 // For text answers, check case-insensitively
                 if (selectedAnswerValue.toLowerCase() === correctAnswerValue.toLowerCase()) {
                     score++;
-                    if (questionBlock) questionBlock.classList.add('correct');
+                    questionBlock.classList.add('correct');
                     textInput.classList.add('text-correct');
-                    textInput.style.borderColor = '#28a745';
+                    textInput.style.borderColor = '#28a745'; // Apply direct style for immediate visual feedback
                 } else {
-                    if (questionBlock) questionBlock.classList.add('incorrect');
+                    questionBlock.classList.add('incorrect');
                     textInput.classList.add('text-incorrect');
-                    textInput.style.borderColor = '#dc3545';
+                    textInput.style.borderColor = '#dc3545'; // Apply direct style for immediate visual feedback
                     if (errorMessageDiv) {
                         errorMessageDiv.textContent = `Câu trả lời sai. Đáp án đúng là: ${correctAnswerValue}`;
                     }
@@ -124,35 +131,35 @@ document.addEventListener('DOMContentLoaded', function() {
                         correctAnswer: correctAnswerValue
                     });
                 }
-            } else {
-                const selectedOption = questionBlock ? questionBlock.querySelector(`input[name="${qName}"]:checked`) : null;
+            } else { // Handle radio button questions
+                const selectedOption = questionBlock.querySelector(`input[name="${qName}"]:checked`);
                 selectedAnswerValue = selectedOption ? selectedOption.value : null;
 
-                if (questionBlock) {
-                    const correctOptionLabel = questionBlock.querySelector(`input[value="${correctAnswerValue}"]`).parentElement;
-                    correctOptionLabel.classList.add('correct-answer');
+                // Always highlight the correct answer for radio buttons
+                const correctOptionInput = questionBlock.querySelector(`input[value="${correctAnswerValue}"]`);
+                if (correctOptionInput) {
+                    correctOptionInput.parentElement.classList.add('correct-answer');
+                }
 
-                    if (selectedAnswerValue === correctAnswerValue) {
-                        score++;
-                        questionBlock.classList.add('correct');
-                    } else {
-                        questionBlock.classList.add('incorrect');
-                        if (selectedAnswerValue) {
-                            const selectedOptionLabel = questionBlock.querySelector(`input[value="${selectedAnswerValue}"]`).parentElement;
-                            selectedOptionLabel.classList.add('wrong-answer');
-                        }
-                        const errorMessageDiv = questionBlock.querySelector('.error-message');
-                        if (errorMessageDiv) {
-                            errorMessageDiv.textContent = `Câu trả lời sai. Đáp án đúng là: ${correctAnswerValue}`;
-                        }
-
-                        let questionNumber = qName.replace('q', '');
-                        incorrectQuestions.push({
-                            question: `Câu ${questionNumber}`,
-                            userAnswer: selectedAnswerValue || 'Chưa trả lời',
-                            correctAnswer: correctAnswerValue
-                        });
+                if (selectedAnswerValue === correctAnswerValue) {
+                    score++;
+                    questionBlock.classList.add('correct');
+                } else {
+                    questionBlock.classList.add('incorrect');
+                    if (selectedAnswerValue) {
+                        const selectedOptionLabel = questionBlock.querySelector(`input[value="${selectedAnswerValue}"]`).parentElement;
+                        selectedOptionLabel.classList.add('wrong-answer');
                     }
+                    if (errorMessageDiv) {
+                        errorMessageDiv.textContent = `Câu trả lời sai. Đáp án đúng là: ${correctAnswerValue}`;
+                    }
+
+                    let questionNumber = qName.replace('q', '');
+                    incorrectQuestions.push({
+                        question: `Câu ${questionNumber}`,
+                        userAnswer: selectedAnswerValue || 'Chưa trả lời',
+                        correctAnswer: correctAnswerValue
+                    });
                 }
             }
         }

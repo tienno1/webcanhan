@@ -1,3 +1,11 @@
+/* Universal box-sizing for easier layout management */
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
 body {
     width: 100%;
     min-height: 100vh;
@@ -5,27 +13,28 @@ body {
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 20px; /* Default padding for larger screens */
     margin: 0;
-    padding-bottom: 80px;
+    padding-bottom: 80px; /* Space for fixed button container */
+    overflow-x: hidden; /* Prevent horizontal scrollbar on body */
 }
 
 div .logo {
     background-color: #555555;
     display: block;
-    margin: 0 auto 20px; /* Center the logo and add space below */
-    width: 150px; /* Set a fixed width for the logo */
-    height: auto; /* Maintain aspect ratio */
+    margin: 0 auto 20px;
+    width: 150px;
+    height: auto;
 }
 
 img {
     background-color: #555555;
-    width: 20%;
-    width: 80px;
+    width: 80px; /* Fixed width for the logo image */
     height: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    max-width: 100%; /* Ensure images are responsive */
 }
 
 .container {
@@ -33,8 +42,9 @@ img {
     padding: 30px 40px; /* Default padding for larger screens */
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 1000px;
+    width: 100%; /* Take full available width */
+    max-width: 1000px; /* Limit max width on large screens */
+    /* box-sizing: border-box; đã được đặt ở html, *::before, *::after */
 }
 
 h1 {
@@ -42,35 +52,30 @@ h1 {
     color: #333;
     margin-bottom: 20px;
     font-size: 24px;
+    word-break: break-word; /* Ensure long words break */
 }
 
 .instructions {
     text-align: center;
     color: #666;
     margin-bottom: 5px;
+    word-break: break-word; /* Ensure long words break */
 }
 
 .question-block {
     display: flex;
-    margin-top: 30px;
-    align-items: flex-start;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
-    border-left: 5px solid transparent; /* Default transparent border */
-    transition: border-left 0.3s ease; /* Smooth transition for border color */
-    padding: 15px; /* Added padding inside the block to move content away from border */
-    box-sizing: border-box; /* Include padding in the element's total width and height */
-    border: 1px solid #ddd; /* Add a default border for all question blocks */
-    border-radius: 8px; /* Slightly rounded corners for the frame */
-    margin-bottom: 20px; /* Space between question blocks */
-    flex-direction: column; /* Changed to column for better stacking on mobile */
-    align-items: stretch; /* Stretch items to fill container width */
+    flex-direction: column; /* Stack items vertically by default */
+    align-items: stretch; /* Make items fill the width */
+    margin-top: 25px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 5px solid transparent;
+    transition: border-left 0.3s ease, background-color 0.3s ease;
 }
 
-
 .question-block:last-of-type {
-    border-bottom: none;
-    padding-bottom: 0;
     margin-bottom: 20px;
 }
 
@@ -79,21 +84,23 @@ h1 {
     padding: 15px;
     border-radius: 5px;
     background-color: #f9f9f9;
-    flex: 1;
-    margin-right: 30px;
+    margin-bottom: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    word-break: break-word; /* Ensure text breaks within notice box */
 }
 
 .notice-box h2 {
     margin-top: 0;
     color: #555;
     font-size: 18px;
+    word-break: break-word;
 }
 
 .notice-box p {
     margin-bottom: 0;
     font-size: 15px;
     line-height: 1.5;
+    word-break: break-word;
 }
 
 /* Specific notice box colors */
@@ -101,15 +108,9 @@ h1 {
 .sports-notice { background-color: #e6f7ff; border-color: #b3e0ff; }
 .visitor-notice { background-color: #d7ffcb; border-color: #b3e0ff; }
 .exit-notice { background-color: #ffe5c4; border-color: #b3e0ff; }
-.lift-notice { background-color: #fdcdff; border-color: #b3e0ff; margin-bottom: 20px; }
-
-/* Adjust h2 color for specific notice boxes if needed, otherwise inherit */
-.guest-notice h2, .sports-notice h2, .visitor-notice h2, .exit-notice h2, .lift-notice h2 {
-    color: #333; /* Default dark color for headings in these boxes */
-}
+.lift-notice { background-color: #fdcdff; border-color: #b3e0ff; }
 
 .options {
-    flex: 1.5;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -117,11 +118,12 @@ h1 {
 
 .options label {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     cursor: pointer;
     font-size: 16px;
     color: #333;
     line-height: 1.4;
+    word-break: break-word; /* Ensure label text breaks */
 }
 
 .options label input[type="radio"] {
@@ -135,8 +137,11 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    width: 150px; /* Adjust width as needed */
+    width: auto; /* Allow content to dictate width, but use max-width */
+    max-width: 150px; /* Set a reasonable max-width */
     margin: 0 5px;
+    display: inline-block; /* Essential for aligning with text and breaking */
+    vertical-align: middle; /* Align with surrounding text */
 }
 
 .text-correct {
@@ -153,30 +158,28 @@ h1 {
 .button-container-fixed {
     position: fixed;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%; /* Take full width on screen */
-    max-width: 400px; /* Limit width of the button group */
-    display: flex; /* Use flexbox to align buttons */
-    justify-content: space-around; /* Space out buttons evenly */
-    padding: 10px 20px; /* Padding inside the container */
-    background-color: #fff; /* Background behind buttons */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 15px;
+    background-color: #fff;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    box-sizing: border-box;
+    /* box-sizing: border-box; đã được đặt ở html, *::before, *::after */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
 
 #submit-answers, #reset-answers {
-    flex: 1; /* Both buttons take equal space */
+    flex: 1;
     padding: 12px 15px;
     border: none;
     border-radius: 5px;
-    font-size: 16px; /* Slightly smaller font for two buttons */
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 0 5px; /* Space between buttons */
+    margin: 0 5px;
 }
 
 #submit-answers {
@@ -189,14 +192,13 @@ h1 {
 }
 
 #reset-answers {
-    background-color: #6c757d; /* Grey color for reset button */
+    background-color: #6c757d;
     color: white;
 }
 
 #reset-answers:hover {
     background-color: #5a6268;
 }
-
 
 #results {
     margin-top: 20px;
@@ -208,17 +210,18 @@ h1 {
     font-weight: bold;
     color: #333;
     display: none;
+    word-break: break-word; /* Ensure results text breaks */
 }
 
-/* Updated correctness styles for question-block */
+/* Correctness styles for question-block */
 .correct {
-    background-color: #dff0d8; /* Light green background */
-    border-left: 5px solid #28a745; /* Green border */
+    background-color: #dff0d8;
+    border-left-color: #28a745;
 }
 
 .incorrect {
-    background-color: #f2dede; /* Light red background */
-    border-left: 5px solid #dc3545; /* Red border */
+    background-color: #f2dede;
+    border-left-color: #dc3545;
 }
 
 /* Styles for labels within options */
@@ -234,70 +237,13 @@ h1 {
 
 .error-message {
     color: #dc3545;
-    margin-top: 5px;
+    margin-top: 8px;
     font-style: italic;
+    font-size: 0.95em;
+    word-break: break-word; /* Ensure error messages break */
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px; /* Reduced padding for smaller screens */
-    }
-
-    .question-block {
-        flex-direction: column;
-        align-items: stretch;
-        margin-top: 20px; /* Slightly reduce top margin */
-        padding: 10px; /* Further reduce padding inside the block for small screens */
-    }
-    .notice-box {
-        margin-right: 0;
-        margin-bottom: 10px;
-        padding: 10px; /* Adjust padding for notice box on small screens */
-    }
-    .options label {
-        margin-bottom: 10px; /* Reduce space between options */
-    }
-    .text-answer {
-        width: 100%; /* Make text inputs full width on small screens */
-        box-sizing: border-box; /* Ensure padding/border don't make it overflow */
-    }
-    /* Specific adjustment for text inputs within the writing part passage if they are standalone */
-    .writing-part1-passage .text-answer {
-        width: auto; /* Allow input to size naturally within the flow of text */
-        max-width: 80px; /* Reduce the max-width for text input fields */
-        padding: 3px 5px; /* Adjust padding */
-        vertical-align: middle; /* Align with surrounding text */
-    }
-
-    .reading-passage {
-        margin-top: 15px;
-        margin-bottom: 20px;
-        padding: 15px;
-    }
-
-    /* Adjust WRITING PART 1 passage specific styling for better mobile view */
-    .writing-part1-passage {
-        line-height: 1.8; /* Slightly reduce line height for compactness */
-    }
-
-    /* Adjust padding of body for fixed button on mobile */
-    body {
-        padding-bottom: 80px; /* Ensure enough space for the fixed button on smaller screens */
-    }
-
-    /* Adjust button container for full width on mobile */
-    .button-container-fixed {
-        width: 100%;
-        max-width: none;
-        border-radius: 0; /* No border-radius on mobile for sharp corners */
-    }
-    #submit-answers, #reset-answers {
-        font-size: 15px; /* Smaller font on mobile */
-        padding: 10px 12px;
-    }
-}
-
+/* Reading passages */
 .reading-passage {
     margin-top: 20px;
     margin-bottom: 30px;
@@ -305,18 +251,7 @@ h1 {
     background-color: #f9f9f9;
     border: 1px solid #eee;
     border-radius: 5px;
-}
-
-/* Specific styling for WRITING PART 1 passage to control layout */
-.writing-part1-passage {
-    text-align: left;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    line-height: 2.0; /* Increase line height for better readability with inputs */
+    word-break: break-word; /* Ensure passage text breaks */
 }
 
 .reading-passage h3 {
@@ -332,20 +267,162 @@ h1 {
     margin-bottom: 10px;
 }
 
+/* Specific styling for WRITING PART 1 passage to control layout */
+.writing-part1-passage {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    line-height: 2.0;
+}
+
+.writing-part1-passage p {
+    margin-bottom: 8px;
+}
+
 /* Styles for results table */
 #results table {
-    width: 100%;
+    width: 100%; /* Ensure table doesn't overflow */
     border-collapse: collapse;
     margin-top: 20px;
+    font-size: 0.95em;
+    table-layout: fixed; /* Helps in preventing overflow for table cells */
 }
 
 #results th, #results td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    word-break: break-word; /* Ensure content within cells breaks */
 }
 
 #results th {
     background-color: #e2e6ea;
     color: #333;
+}
+
+/* ==========================================================================
+   Responsive adjustments for Mobile Devices (max-width: 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        padding-bottom: 70px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .instructions {
+        font-size: 14px;
+    }
+
+    .question-block {
+        margin-top: 15px;
+        padding: 10px;
+    }
+
+    .notice-box {
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .notice-box h2 {
+        font-size: 16px;
+    }
+
+    .notice-box p {
+        font-size: 14px;
+    }
+
+    .options label {
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    .text-answer {
+        max-width: 100%; /* Allow full width, but still respect surrounding text */
+        width: 120px; /* Keep a base width for consistency */
+        font-size: 15px;
+        padding: 6px 8px;
+    }
+    
+    /* Specific adjustment for text inputs within the writing part passage for better wrapping */
+    .writing-part1-passage .text-answer {
+        width: auto; /* Let content dictate width as needed */
+        min-width: 60px; /* Ensure it's not too small */
+        max-width: 100%; /* Important to prevent overflow */
+        padding: 3px 5px;
+        vertical-align: middle;
+    }
+
+    .writing-part1-passage p {
+        /* Ensure input and text wrap nicely without overflow */
+        display: flex;
+        flex-wrap: wrap; /* Allow content to wrap */
+        align-items: baseline; /* Align text and input vertically */
+        margin-bottom: 8px;
+        font-size: 15px;
+    }
+    .writing-part1-passage p .text-answer {
+        margin-left: 5px; /* Add some space after question number/text */
+        margin-right: 5px; /* Add some space before next text */
+    }
+
+
+    .reading-passage {
+        padding: 15px;
+        line-height: 1.6;
+        font-size: 15px;
+    }
+
+    .button-container-fixed {
+        padding: 8px 10px;
+        border-radius: 0;
+    }
+    #submit-answers, #reset-answers {
+        font-size: 14px;
+        padding: 10px 10px;
+        margin: 0 3px;
+    }
+
+    #results h2, #results p, #results h3 {
+        font-size: 15px;
+    }
+
+    #results table {
+        font-size: 0.9em;
+        /* table-layout: auto; or remove for better column resizing on small screens if fixed causes squishing */
+    }
+    #results table th, #results table td {
+        padding: 6px;
+        font-size: 0.9em;
+    }
+}
+
+/* Optional: Further refinement for very small screens (e.g., iPhone 5/SE) */
+@media (max-width: 375px) {
+    .container {
+        padding: 10px;
+    }
+    .text-answer {
+        max-width: 100%; /* Ensure it doesn't cause overflow */
+        width: 90px; /* A base width */
+    }
+    .writing-part1-passage p .text-answer {
+        width: 80px; /* Adjust for very small screens */
+        min-width: 60px; /* Prevent it from becoming too small */
+    }
+    #submit-answers, #reset-answers {
+        font-size: 13px;
+        padding: 8px 8px;
+    }
 }
