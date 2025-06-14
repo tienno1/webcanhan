@@ -5,11 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultsContentDiv = document.getElementById('results-content');
     const closeButton = document.querySelector('.close-button');
 
-    // Define correct answers for all parts
     const correctAnswers = {
-        // READING PART 1 (Questions 1-6)
-        // Short notices and messages
-        q1: 'A', // Notice 1: "You can order this meal at any time." 
+q1: 'A', // Notice 1: "You can order this meal at any time." 
         q2: 'C', // Notice 2: "to help choose a gift for Tamara."
         q3: 'A', // Notice 3: "Customers are asked to get to the hairdressers 10 minutes early."
         q4: 'C', // Notice 4: "Ted's mum plans to prepare a light meal later."
@@ -24,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         q10: 'A', // Max: Cheap holiday
         q11: 'B', // Felipe: Friendly staff
         q12: 'A', // Max: Hot weather at night
-        q13: 'C', // Felipe: Restaurant food quality
+        q13: 'B', // Felipe: Restaurant food quality
 
         // READING PART 3 (Questions 14-18)
         // Interview with a Go player
@@ -84,37 +81,24 @@ document.addEventListener('DOMContentLoaded', function() {
         lq20: 'C'  // C. flowers
     };
 
-    // Store references to question blocks for easier access
-    const questionBlocks = document.querySelectorAll('.question-block');
-
     submitButton.addEventListener('click', function() {
         const userAnswers = {};
         let score = 0;
         const incorrectQuestions = [];
 
-        // Collect answers for READING PART 1 and PART 2 (radio buttons)
-        document.querySelectorAll('.question-block[data-question^="q"]').forEach(block => {
+        document.querySelectorAll('[data-question]').forEach(block => {
             const questionId = block.dataset.question;
-            const selectedOption = block.querySelector(`input[name="${questionId}"]:checked`);
-            if (selectedOption) {
-                userAnswers[questionId] = selectedOption.value;
-            } else {
-                userAnswers[questionId] = ''; // No answer selected
-            }
-        });
-
-        // Collect answers for READING PART 3 (text inputs)
-        document.querySelectorAll('.question-item[data-question^="lq"]').forEach(item => {
-            const questionId = item.dataset.question;
-            const textInput = item.querySelector('.text-answer');
-            if (textInput) {
-                userAnswers[questionId] = textInput.value.trim().toUpperCase(); // Convert to uppercase for case-insensitive comparison
+            const radioInput = block.querySelector(`input[type="radio"]:checked`);
+            const textInput = block.querySelector(`input[type="text"]`);
+            if (radioInput) {
+                userAnswers[questionId] = radioInput.value;
+            } else if (textInput) {
+                userAnswers[questionId] = textInput.value.trim().toUpperCase();
             } else {
                 userAnswers[questionId] = '';
             }
         });
 
-        // Reset previous feedback
         document.querySelectorAll('.show-answer').forEach(span => {
             span.textContent = '';
             span.style.color = '';
@@ -126,37 +110,32 @@ document.addEventListener('DOMContentLoaded', function() {
             el.classList.remove('correct', 'incorrect');
         });
 
-        // Check answers and calculate score
         for (const questionId in correctAnswers) {
             const block = document.querySelector(`[data-question="${questionId}"]`);
             const showAnswerSpan = block ? block.querySelector('.show-answer') : null;
             const errorMessageDiv = block ? block.querySelector('.error-message') : null;
 
-            if (userAnswers[questionId] === correctAnswers[questionId]) {
-                score++;
-                if (block) {
-                    block.classList.add('correct');
-                }
-            } else {
-                if (block) {
-                    block.classList.add('incorrect');
-                }
-                const questionTextElement = block.querySelector('p'); // For reading parts 1&2
-                const questionItemTextElement = block.querySelector('p'); // For matching part
-                const questionText = questionTextElement ? questionTextElement.textContent.trim() : (questionItemTextElement ? questionItemTextElement.textContent.trim() : `Question ${questionId}`);
+            const userAnswer = userAnswers[questionId] || '';
+            const correctAnswer = correctAnswers[questionId];
 
+            if (userAnswer.toUpperCase() === correctAnswer.toUpperCase()) {
+                score++;
+                if (block) block.classList.add('correct');
+            } else {
+                if (block) block.classList.add('incorrect');
+                const questionText = block.querySelector('p')?.textContent.trim() || `Câu ${questionId}`;
                 incorrectQuestions.push({
                     question: questionText,
-                    userAnswer: userAnswers[questionId] || 'Không trả lời',
-                    correctAnswer: correctAnswers[questionId]
+                    userAnswer: userAnswer || 'Không trả lời',
+                    correctAnswer: correctAnswer
                 });
 
                 if (showAnswerSpan) {
-                    showAnswerSpan.textContent = `Đáp án đúng: ${correctAnswers[questionId]}`;
+                    showAnswerSpan.textContent = `Đáp án đúng: ${correctAnswer}`;
                     showAnswerSpan.style.color = 'green';
                 }
                 if (errorMessageDiv) {
-                    errorMessageDiv.textContent = `Sai. Đáp án đúng: ${correctAnswers[questionId]}`;
+                    errorMessageDiv.textContent = `Sai. Đáp án đúng: ${correctAnswer}`;
                     errorMessageDiv.style.color = 'red';
                 }
             }
@@ -165,13 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let resultsHtml = `<h2>Kết quả của bạn: ${score} / ${Object.keys(correctAnswers).length}</h2>`;
 
         if (incorrectQuestions.length > 0) {
-            // Sort incorrect questions by their number before displaying
-            incorrectQuestions.sort((a, b) => {
-                const numA = parseInt(a.question.replace('Câu ', ''), 10);
-                const numB = parseInt(b.question.replace('Câu ', ''), 10);
-                return numA - numB;
-            });
-
+            incorrectQuestions.sort((a, b) => a.question.localeCompare(b.question));
             resultsHtml += `
                 <h3>Các câu trả lời sai:</h3>
                 <table>
@@ -193,56 +166,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     </tr>
                 `;
             });
-            resultsHtml += `
-                    </tbody>
-                </table>
-            `;
+            resultsHtml += `</tbody></table>`;
         } else {
             resultsHtml += `<p>Chúc mừng! Bạn đã trả lời đúng tất cả các câu hỏi.</p>`;
         }
 
         resultsContentDiv.innerHTML = resultsHtml;
-        resultsModal.style.display = 'flex'; // Display modal as flex
-
-        // Scroll to top of the modal
+        resultsModal.style.display = 'flex';
         resultsModal.scrollTop = 0;
     });
 
-    // Gắn sự kiện click cho nút đóng modal
-    // Thêm console.log để kiểm tra sự tồn tại của closeButton
-    console.log('closeButton element:', closeButton);
     if (closeButton) {
         closeButton.addEventListener('click', function() {
-            console.log('Close button clicked!'); // Log khi nút X được nhấn
             resultsModal.style.display = 'none';
         });
-    } else {
-        console.error('Error: Close button not found in the DOM.');
     }
 
-
-    // Đóng modal khi click ra bên ngoài
     window.addEventListener('click', function(event) {
         if (event.target == resultsModal) {
             resultsModal.style.display = 'none';
         }
     });
 
-    // Reset button functionality
     resetButton.addEventListener('click', resetQuiz);
 
     function resetQuiz() {
-        // Reset radio buttons
         document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
             radio.checked = false;
         });
-
-        // Reset text inputs
         document.querySelectorAll('.text-answer').forEach(input => {
             input.value = '';
         });
-
-        // Clear feedback messages and classes
         document.querySelectorAll('.show-answer').forEach(span => {
             span.textContent = '';
             span.style.color = '';
@@ -253,16 +207,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.question-block, .question-item').forEach(el => {
             el.classList.remove('correct', 'incorrect');
         });
-
-        resultsContentDiv.innerHTML = ''; // Clear results content
-        resultsModal.style.display = 'none'; // Hide modal
+        resultsContentDiv.innerHTML = '';
+        resultsModal.style.display = 'none';
     }
 
-    // Audio player functionality (as provided in your original script)
     const audioPlayers = document.querySelectorAll('audio');
     audioPlayers.forEach(player => {
         player.addEventListener('play', (event) => {
-            // Pause other players when one starts playing
             audioPlayers.forEach(otherPlayer => {
                 if (otherPlayer !== event.target) {
                     otherPlayer.pause();
