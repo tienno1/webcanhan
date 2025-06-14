@@ -703,20 +703,19 @@ audio::-webkit-media-controls {
 /* Styling for Listening Part 4 Matching Section */
 .matching-section {
     display: flex;
-    justify-content: space-between; /* Đẩy các cột ra hai bên */
-    gap: 30px; /* Khoảng cách giữa hai cột */
+    gap: 0px; /* Khoảng cách giữa hai cột */
     margin-top: 20px;
     flex-wrap: wrap; /* Cho phép wrap trên màn hình nhỏ */
 }
 
 .matching-questions {
     flex: 2; /* Cột câu hỏi chiếm nhiều không gian hơn */
-    min-width: 280px; /* Đảm bảo không quá nhỏ */
+    min-width: 180px; /* Đảm bảo không quá nhỏ */
 }
 
 .matching-options {
+    width: 97%; /* Chiếm toàn bộ chiều rộng */
     flex: 1; /* Cột tùy chọn */
-    min-width: 150px; /* Đảm bảo không quá nhỏ */
     background-color: #f0f8ff; /* Màu nền nhẹ */
     border: 1px solid #cceeff;
     border-radius: 8px;
@@ -785,8 +784,8 @@ audio::-webkit-media-controls {
 
     .matching-questions,
     .matching-options {
-        flex: auto; /* Tự động điều chỉnh kích thước */
-        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        margin: 0 auto; /* Center the elements */
+        width: 95%; /* Chiếm toàn bộ chiều rộng */
         min-width: unset; /* Bỏ giới hạn min-width */
     }
 
@@ -819,7 +818,7 @@ audio::-webkit-media-controls {
 
 @media (max-width: 480px) {
     .matching-options {
-        padding: 10px;
+        padding: 0px;
     }
 
     .matching-options h3 {
