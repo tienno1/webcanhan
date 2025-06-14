@@ -9,9 +9,12 @@
 <body>
     <div class="container">
         <div class="logo" style="width: 95%; padding: 10px;">
-        <a href="../index.html"><img src="../img/logo.png" alt="Logo" class="logo"></a></div>
+            <a href="../index.html"><img src="../img/logo.png" alt="Logo" class="logo"></a>
+            <span id="user-count" style="margin-left: 10px; font-weight: bold; color: #555;"></span>
+        </div>
         <h1 class="main-title">Đề 1</h1>
         <a href="de2.html"><h3 class="main-title">(nhấn để qua đề 2)</h3></a>
+
         <h1>READING PART 1</h1>
         <p class="instructions">Questions 1 – 6</p>
         <p class="instructions">For each question, choose the correct answer.</p>
@@ -354,19 +357,341 @@ Of course, cars are not the only way to travel. It's usually possible to travel 
         <p class="instructions">For each question, write ONE word for each gap.</p>
 
         <div class="reading-passage writing-part1-passage">
-            <h3>Hi Abigail,</h3>
-            <p>We're going to Rainbow Forest (0) <span>on</span> Saturday. Would you like to come?</p>
-            <p>My uncle (1) <input type="text" name="q25" class="text-answer"> going to drive, so why don't we pick you up at 9 am?</p>
-            <p>the forest is beautiful (2) <input type="text" name="q26" class="text-answer"> the autumn. My aunt wants to walk to the lake and we're going to rent</p>(3) <input type="text" name="q27" class="text-answer">boat there, I think it's a great idea. We can have lunch on the island.</p>
-            <p>you (4) <input type="text" name="q28" class="text-answer">probably bring warm clothes and walking boots because it's often cold there.</p>
-            <p>Don't worry (5) <input type="text" name="q29" class="text-answer"> bringing food or money.</p>
-            <p>Call me if you can come  !</p>
-            <h3>Izobel</h3>
+    <h3>Hi Abigail,</h3>
+    <p>We're going to Rainbow Forest (0) <span>on</span> Saturday. Would you like to come?</p>
+    
+    <p>My uncle (1) 
+        <div class="question-block" data-question="q25">
+            <input type="text" name="q25" class="text-answer">
+            <div class="error-message"></div>
+        </div> 
+        going to drive, so why don't we pick you up at 9 am?
+    </p>
+    
+    <p>the forest is beautiful (2) 
+        <div class="question-block" data-question="q26">
+            <input type="text" name="q26" class="text-answer">
+            <div class="error-message"></div>
+        </div> 
+        the autumn. My aunt wants to walk to the lake and we're going to rent
+    </p>
+    
+    <p>(3) 
+        <div class="question-block" data-question="q27">
+            <input type="text" name="q27" class="text-answer">
+            <div class="error-message"></div>
+        </div>
+        boat there, I think it's a great idea. We can have lunch on the island.
+    </p>
+    
+    <p>you (4) 
+        <div class="question-block" data-question="q28">
+            <input type="text" name="q28" class="text-answer">
+            <div class="error-message"></div>
+        </div>
+        probably bring warm clothes and walking boots because it's often cold there.
+    </p>
+    
+    <p>Don't worry (5) 
+        <div class="question-block" data-question="q29">
+            <input type="text" name="q29" class="text-answer">
+            <div class="error-message"></div>
+        </div> 
+        bringing food or money.
+    </p>
+    
+    <p>Call me if you can come!</p>
+    <h3>Izobel</h3>
+</div>
+
+        <h1>LISTENING PART 1</h1>
+        <p class="instructions">Questions 1 – 5</p>
+        <p class="instructions">For each question, choose the correct answer.</p>
+
+        <div class="audio-player">
+            <audio controls>
+                <source src="../video/listening.mp3" type="audio/mpeg">
+                <source src="../video/listening.ogg" type="audio/ogg">
+                <source src="../video/listening.wav" type="audio/wav">
+                Trình duyệt của bạn không hỗ trợ thẻ audio.
+            </audio>
         </div>
 
-        <div id="results"></div>
+        <div class="question-block" data-question="lq1">
+            <p>1. Where is the post office?</p>
+            <div class="options-with-images">
+                <label>
+                    <input type="radio" name="lq1" value="A"> A.
+                    <img src="../img/EN/1.png" alt="Post Office A" class="listening-image image-option-a">
+                </label>
+                <label>
+                    <input type="radio" name="lq1" value="B"> B.
+                    <img src="../img/EN/2.png" alt="Post Office B" class="listening-image image-option-b">
+                </label>
+                <label>
+                    <input type="radio" name="lq1" value="C"> C.
+                    <img src="../img/EN/3.png" alt="Post Office C" class="listening-image image-option-c">
+                </label>
+                <div class="error-message"></div>
+            </div>
+        </div>
 
-    </div> <div class="button-container-fixed">
+        <div class="question-block" data-question="lq2">
+            <p>2. What does the man order?</p>
+            <div class="options-with-images">
+                <label>
+                    <input type="radio" name="lq2" value="A"> A.
+                    <img src="../img/EN/4.png" alt="Order A" class="listening-image image-option-a">
+                </label>
+                <label>
+                    <input type="radio" name="lq2" value="B"> B.
+                    <img src="../img/EN/5.png" alt="Order B" class="listening-image image-option-b">
+                </label>
+                <label>
+                    <input type="radio" name="lq2" value="C"> C.
+                    <img src="../img/EN/6.png" alt="Order C" class="listening-image image-option-c">
+                </label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq3">
+            <p>3. How much does the man spend?</p>
+            <div class="options-with-images">
+                <label>
+                    <input type="radio" name="lq3" value="A"> A.
+                    <img src="../img/EN/7.png" alt="Spend A" class="listening-image image-option-a">
+                </label>
+                <label>
+                    <input type="radio" name="lq3" value="B"> B.
+                    <img src="../img/EN/8.png" alt="Spend B" class="listening-image image-option-b">
+                </label>
+                <label>
+                    <input type="radio" name="lq3" value="C"> C.
+                    <img src="../img/EN/9.png" alt="Spend C" class="listening-image image-option-c">
+                </label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq4">
+            <p>4. Where are the girls going today?</p>
+            <div class="options-with-images">
+                <label>
+                    <input type="radio" name="lq4" value="A"> A.
+                    <img src="../img/EN/10.png" alt="Girls Going A" class="listening-image image-option-a">
+                </label>
+                <label>
+                    <input type="radio" name="lq4" value="B"> B.
+                    <img src="../img/EN/11.png" alt="Girls Going B" class="listening-image image-option-b">
+                </label>
+                <label>
+                    <input type="radio" name="lq4" value="C"> C.
+                    <img src="../img/EN/12.png" alt="Girls Going C" class="listening-image image-option-c">
+                </label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq5">
+            <p>5. When is the woman going to the dentist?</p>
+            <div class="options-with-images">
+                <label>
+                    <input type="radio" name="lq5" value="A"> A.
+                    <img src="../img/EN/13.png" alt="Dentist A" class="listening-image image-option-a">
+                </label>
+                <label>
+                    <input type="radio" name="lq5" value="B"> B.
+                    <img src="../img/EN/14.png" alt="Dentist B" class="listening-image image-option-b">
+                </label>
+                <label>
+                    <input type="radio" name="lq5" value="C"> C.
+                    <img src="../img/EN/15.png" alt="Dentist C" class="listening-image image-option-c">
+                </label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <h1>LISTENING PART 2</h1>
+        <p class="instructions">Questions 6 – 10</p>
+        <p class="instructions">For each question, choose the correct answer.</p>
+
+        <div class="question-block" data-question="lq6">
+            <p>6. What is the name of Martin's music teacher?</p>
+            <div class="options">
+                <label><input type="radio" name="lq6" value="A"> A. Harry</label>
+                <label><input type="radio" name="lq6" value="B"> B. Peter</label>
+                <label><input type="radio" name="lq6" value="C"> C. Steve</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq7">
+            <p>7. Martin has music lessons on</p>
+            <div class="options">
+                <label><input type="radio" name="lq7" value="A"> A. Tuesdays.</label>
+                <label><input type="radio" name="lq7" value="B"> B. Thursdays.</label>
+                <label><input type="radio" name="lq7" value="C"> C. Saturdays.</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq8">
+            <p>8. How long does Martin practise at the weekend?</p>
+            <div class="options">
+                <label><input type="radio" name="lq8" value="A"> A. 1 hour</label>
+                <label><input type="radio" name="lq8" value="B"> B. 2 hours</label>
+                <label><input type="radio" name="lq8" value="C"> C. 3 hours</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq9">
+            <p>9. Martin likes the music festival because</p>
+            <div class="options">
+                <label><input type="radio" name="lq9" value="A"> A. tickets are free.</label>
+                <label><input type="radio" name="lq9" value="B"> B. the bands are local.</label>
+                <label><input type="radio" name="lq9" value="C"> C. there are lots of people there.</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq10">
+            <p>10. Jack will arrive at the music festival</p>
+            <div class="options">
+                <label><input type="radio" name="lq10" value="A"> A. at 6:15.</label>
+                <label><input type="radio" name="lq10" value="B"> B. at 7:00.</label>
+                <label><input type="radio" name="lq10" value="C"> C. at 7:45.</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <h1>LISTENING PART 3</h1>
+        <p class="instructions">Questions 11 – 15</p>
+        <p class="instructions">For each question, choose the correct answer.</p>
+
+        <div class="question-block" data-question="lq11">
+            <p>11. You will hear two friends talking about the man's new apartment. What did he buy for his new apartment?</p>
+            <div class="options">
+                <label><input type="radio" name="lq11" value="A"> A. bookshelves</label>
+                <label><input type="radio" name="lq11" value="B"> B. an armchair</label>
+                <label><input type="radio" name="lq11" value="C"> C. curtains</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq12">
+            <p>12. You will hear a boy leaving a message for his mother. Where is the cake?</p>
+            <div class="options">
+                <label><input type="radio" name="lq12" value="A"> A. on the table</label>
+                <label><input type="radio" name="lq12" value="B"> B. in the fridge</label>
+                <label><input type="radio" name="lq12" value="C"> C. on the cooker</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq13">
+            <p>13. You will hear a woman talking to her daughter Jodie. Where is Jodie's grandfather now?</p>
+            <div class="options">
+                <label><input type="radio" name="lq13" value="A"> A. in the garden</label>
+                <label><input type="radio" name="lq13" value="B"> B. in the living room</label>
+                <label><input type="radio" name="lq13" value="C"> C. in the garage</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq14">
+            <p>14. You will hear a woman talking about her office at home. What will the woman move?</p>
+            <div class="options">
+                <label><input type="radio" name="lq14" value="A"> A. a lamp</label>
+                <label><input type="radio" name="lq14" value="B"> B. a desk</label>
+                <label><input type="radio" name="lq14" value="C"> C. a cupboard</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="question-block" data-question="lq15">
+            <p>15. You will hear a man and a woman talking at home. What is broken?</p>
+            <div class="options">
+                <label><input type="radio" name="lq15" value="A"> A. a clock</label>
+                <label><input type="radio" name="lq15" value="B"> B. a radio</label>
+                <label><input type="radio" name="lq15" value="C"> C. a television</label>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <h1>LISTENING PART 4</h1>
+        <p class="instructions">Questions 15 – 20</p>
+        <p class="instructions">For each question, choose the correct answer by writing the letter in the box.</p>
+
+        <div class="matching-section">
+            <div class="matching-questions">
+                <div class="question-item" data-question="lq15">
+                    <p>15. In this place, you can buy some medicine.</p>
+                    <input type="text" name="lq15" class="text-answer match-input" maxlength="1">
+                    <span class="show-answer"></span>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="question-item" data-question="lq16">
+                    <p>16. bakery</p>
+                    <input type="text" name="lq16" class="text-answer match-input" maxlength="1">
+                    <span class="show-answer"></span>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="question-item" data-question="lq17">
+                    <p>17. clothes shop</p>
+                    <input type="text" name="lq17" class="text-answer match-input" maxlength="1">
+                    <span class="show-answer"></span>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="question-item" data-question="lq18">
+                    <p>18. supermarket</p>
+                    <input type="text" name="lq18" class="text-answer match-input" maxlength="1">
+                    <span class="show-answer"></span>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="question-item" data-question="lq19">
+                    <p>19. sports shop</p>
+                    <input type="text" name="lq19" class="text-answer match-input" maxlength="1">
+                    <span class="show-answer"></span>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="question-item" data-question="lq20">
+                    <p>20. market</p>
+                    <input type="text" name="lq20" class="text-answer match-input" maxlength="1">
+                    <span class="show-answer"></span>
+                    <div class="error-message"></div>
+                </div>
+            </div>
+
+            <div class="matching-options">
+                <h3>Options:</h3>
+                <ul>
+                    <li>A. post office</li>
+                    <li>B. cake</li>
+                    <li>C. flowers</li>
+                    <li>D. book shop</li>
+                    <li>E. socks</li>
+                    <li>F. towel</li>
+                    <li>G. trainers</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="results-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span> <div id="results-content"></div>
+    </div>
+    </div>
+
+    <div class="button-container-fixed">
         <button id="submit-answers">Kiểm tra Đáp án</button>
         <button id="reset-answers">Làm lại</button>
     </div>

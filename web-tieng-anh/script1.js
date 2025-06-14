@@ -1,190 +1,177 @@
 document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.getElementById('submit-answers');
     const resetButton = document.getElementById('reset-answers');
-    const resultsDiv = document.getElementById('results');
+    const resultsModal = document.getElementById('results-modal');
+    const resultsContentDiv = document.getElementById('results-content');
+    const closeButton = document.querySelector('.close-button');
 
-    // Define correct answers for Exam 1 - CORRECTED ANSWERS
+    // Define correct answers for all parts
     const correctAnswers = {
-        q1: 'A', // Corrected based on "You can order this meal at any time." for "all day"
-        q2: 'C', // "to help choose a gift for Tamara." based on "You always know what she likes."
-        q3: 'A', // "Customers are asked to get to the hairdressers 10 minutes early." based on "Please arrive 10 minutes before your appointment time"
-        q4: 'C', // "Ted's mum plans to prepare a light meal later." based on "will make us all a snack when we get back at 8 p.m."
-        q5: 'A', // "Let the assistant know if you think there's a mistake on your receipt." based on "tell the assistant if there is a problem."
-        q6: 'A', // "The shop will be open as usual from Tuesday." based on "Open again normal times (9 a.m.-6 p.m.) tomorrow (Tuesday)."
-        q7: 'C', // Nikhil: "I couldn't believe the differences in what people ate from place to place."
-        q8: 'A', // Max: "it took two hours by bus to get to the hotel - I didn't enjoy that!"
-        q9: 'C', // Nikhil: "It was good to be with the family, because there was always someone to talk to, or to do things with"
-        q10: 'A',// Max: "the best thing was, we spent almost nothing once we arrived!"
-        q11: 'B',// Felipe: "The people who worked there were wonderful"
-        q12: 'A',// Max: "It was hard to sleep with such high temperatures"
-        q13: 'B',// Felipe: "I wasn't so sure about the hotel restaurant the desserts were fine, but the main courses weren't very good."
-        q14: 'A', // five years: "His parents moved there with the whole family five years ago."
-        q15: 'C', // at school: "Luckily the PE teacher is fantastic player she taught us at lunch time."
-        q16: 'B', // making new friends: "The best thing is meeting lots of lovely people. We have loads of fun together."
-        q17: 'C', // comedies: "I prefer the funny stuff. If it doesn't make me laugh, I'm not interested"
-        q18: 'C', // He wants to keep playing Go.: "The one thing he knows for sure is that he'll never stop enjoying the game."
-        q19: 'A', // good: "but not good for the world around us." (common collocation)
-        q20: 'B', // share: "One possibility is to share car journeys." (common collocation for carpooling)
-        q21: 'C', // place: "who need to travel to the same place as you" (referring to destination)
-        q22: 'B', // making: "two or three cars making the same journey" (common collocation)
-        q23: 'C', // especially: "especially in a town or city." (indicates a particular emphasis)
-        q24: 'A', // save: "You'll get fit and save money too!" (common collocation)
-        q25: 'is',  // Corrected for "My uncle is going to drive"
-        q26: 'in', // Corrected for "You should probably bring"
-        q27: 'a',   // Corrected for "The forest is beautiful in the autumn"
-        q28: 'should', // Corrected for "we're going to visit a book there" (assuming a bookshop or similar)
-        q29: 'about' // Corrected for "Don't worry about bringing food"
+        // READING PART 1 (Questions 1-6)
+        // Short notices and messages
+        q1: 'A', // Notice 1: "You can order this meal at any time." 
+        q2: 'C', // Notice 2: "to help choose a gift for Tamara."
+        q3: 'A', // Notice 3: "Customers are asked to get to the hairdressers 10 minutes early."
+        q4: 'C', // Notice 4: "Ted's mum plans to prepare a light meal later."
+        q5: 'A', // Notice 5: "Let the assistant know if you think there's a mistake on your receipt."
+        q6: 'A', // Notice 6: "The shop will be open as usual from Tuesday."
+
+        // READING PART 2 (Questions 7-13)
+        // Three people talking about their holidays
+        q7: 'C',  // Nikhil: Different foods in different places
+        q8: 'A',  // Max: Long bus journey to hotel
+        q9: 'C',  // Nikhil: Family activities
+        q10: 'A', // Max: Cheap holiday
+        q11: 'B', // Felipe: Friendly staff
+        q12: 'A', // Max: Hot weather at night
+        q13: 'C', // Felipe: Restaurant food quality
+
+        // READING PART 3 (Questions 14-18)
+        // Interview with a Go player
+        q14: 'A', // When did he move: "five years ago"
+        q15: 'C', // Where learned Go: "at school"
+        q16: 'B', // Best thing about Go club: "making new friends"
+        q17: 'C', // Film preferences: "comedies"
+        q18: 'C', // Future plans: "keep playing Go"
+
+        // READING PART 4 (Questions 19-24)
+        // Gap fill text about travel
+        q19: 'A', // good
+        q20: 'B', // share
+        q21: 'C', // place
+        q22: 'B', // making
+        q23: 'C', // especially
+        q24: 'A', // save
+
+        // WRITING PART 1 (Questions 25-29)
+        // Email gap fill
+        q25: 'is',     // My uncle ___ going to drive
+        q26: 'in',     // beautiful ___ the autumn
+        q27: 'a',      // rent ___ boat there
+        q28: 'should', // you ___ probably bring
+        q29: 'about',  // Don't worry ___ bringing
+
+        // LISTENING PART 1 (Questions 1-5)
+        // Pictures with multiple choice
+        lq1: 'B', 
+        lq2: 'B',
+        lq3: 'C',
+        lq4: 'B',
+        lq5: 'A',
+
+        // LISTENING PART 2 (Questions 6-10)
+        // Conversations with multiple choice
+        lq6: 'C',
+        lq7: 'A',
+        lq8: 'B',
+        lq9: 'B',
+        lq10: 'A',
+
+        // LISTENING PART 3 (Questions 11-15)
+        // Long conversation with multiple choice
+        lq11: 'B',
+        lq12: 'B',
+        lq13: 'C',
+        lq14: 'B',
+        lq15: 'A',
+
+        // LISTENING PART 4 (Questions 16-20)
+        // Matching items to letters
+        lq16: 'H', // H. cake
+        lq17: 'B', // B. socks
+        lq18: 'F', // F. towel
+        lq19: 'G', // G. trainers
+        lq20: 'C'  // C. flowers
     };
 
-    // Function to reset the quiz to its initial state
-    function resetQuiz() {
-        // Uncheck all radio buttons
-        document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
-            radio.checked = false;
-        });
-
-        // Clear all text input fields
-        document.querySelectorAll('input[type="text"]').forEach(input => {
-            input.value = '';
-            input.classList.remove('text-correct', 'text-incorrect');
-            input.style.borderColor = ''; // Reset border color for text inputs
-        });
-
-        // Remove correctness highlighting from question blocks and labels
-        document.querySelectorAll('.question-block').forEach(block => {
-            block.classList.remove('correct', 'incorrect');
-        });
-
-        document.querySelectorAll('.options label').forEach(label => {
-            label.classList.remove('correct-answer', 'wrong-answer');
-        });
-
-        // Clear all error messages and correct answer displays for text inputs
-        document.querySelectorAll('.error-message').forEach(msg => {
-            msg.textContent = '';
-        });
-        document.querySelectorAll('.show-answer').forEach(span => {
-            span.remove(); // Remove dynamically added correct answer spans
-        });
-
-
-        // Hide the results div
-        resultsDiv.innerHTML = '';
-        resultsDiv.style.display = 'none';
-
-        // Scroll to top of the page smoothly if desired
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // Store references to question blocks for easier access
+    const questionBlocks = document.querySelectorAll('.question-block');
 
     submitButton.addEventListener('click', function() {
+        const userAnswers = {};
         let score = 0;
-        const totalQuestions = Object.keys(correctAnswers).length;
         const incorrectQuestions = [];
 
-        // Reset all previous highlights and messages before re-checking
-        document.querySelectorAll('.correct-answer, .wrong-answer, .text-correct, .text-incorrect').forEach(el => {
-            el.classList.remove('correct-answer', 'wrong-answer', 'text-correct', 'text-incorrect');
+        // Collect answers for READING PART 1 and PART 2 (radio buttons)
+        document.querySelectorAll('.question-block[data-question^="q"]').forEach(block => {
+            const questionId = block.dataset.question;
+            const selectedOption = block.querySelector(`input[name="${questionId}"]:checked`);
+            if (selectedOption) {
+                userAnswers[questionId] = selectedOption.value;
+            } else {
+                userAnswers[questionId] = ''; // No answer selected
+            }
         });
-        document.querySelectorAll('.error-message').forEach(el => {
-            el.textContent = '';
+
+        // Collect answers for READING PART 3 (text inputs)
+        document.querySelectorAll('.question-item[data-question^="lq"]').forEach(item => {
+            const questionId = item.dataset.question;
+            const textInput = item.querySelector('.text-answer');
+            if (textInput) {
+                userAnswers[questionId] = textInput.value.trim().toUpperCase(); // Convert to uppercase for case-insensitive comparison
+            } else {
+                userAnswers[questionId] = '';
+            }
         });
-        document.querySelectorAll('.question-block').forEach(el => {
+
+        // Reset previous feedback
+        document.querySelectorAll('.show-answer').forEach(span => {
+            span.textContent = '';
+            span.style.color = '';
+        });
+        document.querySelectorAll('.error-message').forEach(div => {
+            div.textContent = '';
+        });
+        document.querySelectorAll('.question-block, .question-item').forEach(el => {
             el.classList.remove('correct', 'incorrect');
         });
-        document.querySelectorAll('.text-answer').forEach(input => {
-            input.classList.remove('text-correct', 'text-incorrect');
-            input.style.borderColor = '';
-        });
-        // Remove existing correct answer hints for text inputs
-        document.querySelectorAll('.show-answer').forEach(span => {
-            span.remove();
-        });
 
+        // Check answers and calculate score
+        for (const questionId in correctAnswers) {
+            const block = document.querySelector(`[data-question="${questionId}"]`);
+            const showAnswerSpan = block ? block.querySelector('.show-answer') : null;
+            const errorMessageDiv = block ? block.querySelector('.error-message') : null;
 
-        // Get user's answers and check them
-        for (const qName in correctAnswers) {
-            const questionBlock = document.querySelector(`.question-block[data-question="${qName}"]`);
-            const correctAnswerValue = correctAnswers[qName];
-            let selectedAnswerValue = null;
-
-            // Check if it's a text input question
-            const textInput = document.querySelector(`input[name="${qName}"][type="text"]`); // Directly select text input
-
-            if (textInput) {
-                selectedAnswerValue = textInput.value.trim();
-
-                if (selectedAnswerValue.toLowerCase() === correctAnswerValue.toLowerCase()) {
-                    score++;
-                    if (questionBlock) questionBlock.classList.add('correct');
-                    textInput.classList.add('text-correct');
-                    textInput.style.borderColor = '#28a745';
-                } else {
-                    if (questionBlock) questionBlock.classList.add('incorrect');
-                    textInput.classList.add('text-incorrect');
-                    textInput.style.borderColor = '#dc3545';
-
-                    // Display correct answer next to the text input
-                    const answerSpan = document.createElement('span');
-                    answerSpan.classList.add('show-answer');
-                    answerSpan.textContent = ` (Đáp án đúng: ${correctAnswerValue})`;
-                    // Ensure the span is added only once
-                    if (!textInput.nextElementSibling || !textInput.nextElementSibling.classList.contains('show-answer')) {
-                        textInput.parentNode.insertBefore(answerSpan, textInput.nextSibling);
-                    }
-
-
-                    incorrectQuestions.push({
-                        question: `Câu ${qName.replace('q', '')}`,
-                        userAnswer: selectedAnswerValue || 'Chưa trả lời',
-                        correctAnswer: correctAnswerValue
-                    });
+            if (userAnswers[questionId] === correctAnswers[questionId]) {
+                score++;
+                if (block) {
+                    block.classList.add('correct');
                 }
-            } else { // It's a radio button question
-                const selectedOption = questionBlock ? questionBlock.querySelector(`input[name="${qName}"]:checked`) : null;
-                selectedAnswerValue = selectedOption ? selectedOption.value : null;
+            } else {
+                if (block) {
+                    block.classList.add('incorrect');
+                }
+                const questionTextElement = block.querySelector('p'); // For reading parts 1&2
+                const questionItemTextElement = block.querySelector('p'); // For matching part
+                const questionText = questionTextElement ? questionTextElement.textContent.trim() : (questionItemTextElement ? questionItemTextElement.textContent.trim() : `Question ${questionId}`);
 
-                if (questionBlock) {
-                    const correctOptionLabel = questionBlock.querySelector(`input[value="${correctAnswerValue}"]`).parentElement;
+                incorrectQuestions.push({
+                    question: questionText,
+                    userAnswer: userAnswers[questionId] || 'Không trả lời',
+                    correctAnswer: correctAnswers[questionId]
+                });
 
-
-                    if (selectedAnswerValue === correctAnswerValue) {
-                        score++;
-                        questionBlock.classList.add('correct');
-                        correctOptionLabel.classList.add('correct-answer');
-                    } else {
-                        questionBlock.classList.add('incorrect');
-                        if (selectedAnswerValue) {
-                            const selectedOptionLabel = questionBlock.querySelector(`input[value="${selectedAnswerValue}"]`).parentElement;
-                            selectedOptionLabel.classList.add('wrong-answer');
-                        }
-                         correctOptionLabel.classList.add('correct-answer');
-                        const errorMessageDiv = questionBlock.querySelector('.error-message');
-                        if (errorMessageDiv) {
-                            errorMessageDiv.textContent = `Câu trả lời sai. Đáp án đúng là: ${correctAnswerValue}`;
-                        }
-
-                        let questionNumber = qName.replace('q', '');
-                        incorrectQuestions.push({
-                            question: `Câu ${questionNumber}`,
-                            userAnswer: selectedAnswerValue || 'Chưa trả lời',
-                            correctAnswer: correctAnswerValue
-                        });
-                    }
+                if (showAnswerSpan) {
+                    showAnswerSpan.textContent = `Đáp án đúng: ${correctAnswers[questionId]}`;
+                    showAnswerSpan.style.color = 'green';
+                }
+                if (errorMessageDiv) {
+                    errorMessageDiv.textContent = `Sai. Đáp án đúng: ${correctAnswers[questionId]}`;
+                    errorMessageDiv.style.color = 'red';
                 }
             }
         }
 
-        const scoreOnTen = (score / totalQuestions) * 10;
-        const incorrectCount = totalQuestions - score;
-
-        let resultsHtml = `
-            <h2>Kết quả của bạn</h2>
-            <p>Số câu đúng: ${score} / ${totalQuestions}</p>
-            <p>Số câu sai: ${incorrectCount} / ${totalQuestions}</p>
-            <p>Điểm của bạn (thang điểm 10): ${scoreOnTen.toFixed(2)}</p>
-        `;
+        let resultsHtml = `<h2>Kết quả của bạn: ${score} / ${Object.keys(correctAnswers).length}</h2>`;
 
         if (incorrectQuestions.length > 0) {
+            // Sort incorrect questions by their number before displaying
+            incorrectQuestions.sort((a, b) => {
+                const numA = parseInt(a.question.replace('Câu ', ''), 10);
+                const numB = parseInt(b.question.replace('Câu ', ''), 10);
+                return numA - numB;
+            });
+
             resultsHtml += `
                 <h3>Các câu trả lời sai:</h3>
                 <table>
@@ -214,16 +201,73 @@ document.addEventListener('DOMContentLoaded', function() {
             resultsHtml += `<p>Chúc mừng! Bạn đã trả lời đúng tất cả các câu hỏi.</p>`;
         }
 
-        resultsDiv.innerHTML = resultsHtml;
-        resultsDiv.style.display = 'block';
+        resultsContentDiv.innerHTML = resultsHtml;
+        resultsModal.style.display = 'flex'; // Display modal as flex
 
-        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll to top of the modal
+        resultsModal.scrollTop = 0;
     });
 
-    resetButton.addEventListener('click', resetQuiz);
-});
+    // Gắn sự kiện click cho nút đóng modal
+    // Thêm console.log để kiểm tra sự tồn tại của closeButton
+    console.log('closeButton element:', closeButton);
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            console.log('Close button clicked!'); // Log khi nút X được nhấn
+            resultsModal.style.display = 'none';
+        });
+    } else {
+        console.error('Error: Close button not found in the DOM.');
+    }
 
-// The checkTextAnswer function is now integrated directly into the submit logic
-// function checkTextAnswer(input, correctAnswer) {
-//     // This function is no longer needed as its logic is in the main submit handler
-// }
+
+    // Đóng modal khi click ra bên ngoài
+    window.addEventListener('click', function(event) {
+        if (event.target == resultsModal) {
+            resultsModal.style.display = 'none';
+        }
+    });
+
+    // Reset button functionality
+    resetButton.addEventListener('click', resetQuiz);
+
+    function resetQuiz() {
+        // Reset radio buttons
+        document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+            radio.checked = false;
+        });
+
+        // Reset text inputs
+        document.querySelectorAll('.text-answer').forEach(input => {
+            input.value = '';
+        });
+
+        // Clear feedback messages and classes
+        document.querySelectorAll('.show-answer').forEach(span => {
+            span.textContent = '';
+            span.style.color = '';
+        });
+        document.querySelectorAll('.error-message').forEach(div => {
+            div.textContent = '';
+        });
+        document.querySelectorAll('.question-block, .question-item').forEach(el => {
+            el.classList.remove('correct', 'incorrect');
+        });
+
+        resultsContentDiv.innerHTML = ''; // Clear results content
+        resultsModal.style.display = 'none'; // Hide modal
+    }
+
+    // Audio player functionality (as provided in your original script)
+    const audioPlayers = document.querySelectorAll('audio');
+    audioPlayers.forEach(player => {
+        player.addEventListener('play', (event) => {
+            // Pause other players when one starts playing
+            audioPlayers.forEach(otherPlayer => {
+                if (otherPlayer !== event.target) {
+                    otherPlayer.pause();
+                }
+            });
+        });
+    });
+});
