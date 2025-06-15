@@ -51,7 +51,7 @@ q1: 'A', // Notice 1: "You can order this meal at any time."
         // LISTENING PART 1 (Questions 1-5)
         // Pictures with multiple choice
         lq1: 'B', 
-        lq2: 'B',
+        lq2: 'A',
         lq3: 'C',
         lq4: 'B',
         lq5: 'A',
