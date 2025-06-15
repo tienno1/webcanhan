@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const correctAnswers = {
         q1: 'C',
         q2: 'B',
-        q3: 'A',
+        q3: 'C',
         q4: 'B',
         q5: 'C',
         q6: 'A',
