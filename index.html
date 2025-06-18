@@ -8,26 +8,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/code_navbar.css">
 </head>
 <body>
-
+<div class="background">
     <header>
         <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
-        <p>Chào mừng đến với trang web cá nhân của tôi!</p>
+            <p>Thiết Kế của tôi</p>
+        <button aria-label="Menu" class="menu-toggle">
+            <i class="fa-solid fa-bars fa-beat-fade fa-2xl" style="color: #ffffff;"></i>
+        </button>
     </header>
 
-    <nav>
+    <nav class="main-nav">
         <ul>
             <li><a href="index.html" class="active">Giới thiệu</a></li>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="designer.html">Design</a></li>
             <li><a href="scores.html">Điểm Số</a></li>
             <li><a href="drawings.html">Ảnh Sưu Tầm</a></li>
-            <li><a href="jalan/View.html">View</a></li>
-            <li><a href="web-tieng-anh/de1.html">Đề 1</a></li>
-            <li><a href="web-tieng-anh/de2.html">Đề 2</a></li>
+            <li>
+            <div class="dropdown">
+                <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-menu">
+                    <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
+                    <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>    
+                    </ul>
+            </div>
+            </li>
+            <li>
+            <div class="dropdown">
+                <button class="dropdown-toggle">Code Website <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="jalan/View.html">View</a></li>
+                        <li><a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html">web học tại lớp</a></li>
+                        <li><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html">web kết thúc môn học</a></li>
+                    </ul>
+            </div>
+            </li>   
         </ul>
     </nav>
+            
 
     <div id="page-content">
         <main>
@@ -45,6 +66,7 @@
             </div>
         </main>
     </div>
+</div>
     <div class="layout2">
         <div class="layout-item">
             <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1393&q=80" alt="" class="layout-image" />
@@ -235,6 +257,7 @@
         });
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="js/js-code-navbar.js"></script>
+    <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
 </body>
 </html>

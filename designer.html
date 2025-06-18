@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiết Kế & Bố Cục</title>
     <link rel="stylesheet" href="css/designer.css">
+    <link rel="stylesheet" href="css/code_navbar.css">
     <style>
         /* CSS tạm thời cho highlight kết quả tìm kiếm */
         .highlight {
@@ -14,10 +15,12 @@
     </style>
 </head>
 <body>
-
     <header>
         <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
-        <p>Thiết Kế của tôi</p>
+            <p>Thiết Kế của tôi</p>
+        <button aria-label="Menu" class="menu-toggle">
+            <i class="fa-solid fa-bars fa-beat-fade fa-2xl" style="color: #ffffff;"></i>
+        </button>
     </header>
 
     <nav class="main-nav">
@@ -27,7 +30,25 @@
             <li><a href="designer.html" class="active">Design</a></li>
             <li><a href="scores.html">Điểm Số</a></li>
             <li><a href="drawings.html">Ảnh Sưu Tầm</a></li>
-            <li><a href="jalan/View.html">View</a></li>
+            <li>
+            <div class="dropdown">
+                <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-menu">
+                    <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
+                    <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>    
+                    </ul>
+            </div>
+            </li>
+            <li>
+            <div class="dropdown">
+                <button class="dropdown-toggle">Code Website <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="jalan/View.html">View</a></li>
+                        <li><a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html">web học tại lớp</a></li>
+                        <li><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html">web kết thúc môn học</a></li>
+                    </ul>
+            </div>
+            </li> 
         </ul>
     </nav>
 
@@ -65,6 +86,8 @@
                 <li><a href="#design-background12" style="text-align:center">Background Cô gái</a></li>
                 <li><a href="#design-Website1" style="text-align:center">Thiết kế Web 1</a></li>
                 <li><a href="#design-Website2" style="text-align:center">Thiết kế Web 2</a></li>
+                <li><a href="#design-Website3" style="text-align:center">Thiết kế Web học trong lớp</a></li>
+                <li><a href="#design-Website4" style="text-align:center">Thiết kế Web kết thúc môn học</a></li>
                 <li><a href="#design-philosophy" style="text-align:center">Triết lý Thiết Kế</a></li>
             </ul>
             <div id="toc-content-display">
@@ -412,6 +435,26 @@
                     </div>
                 </section>
 
+                <section id="design-Website3" class="fade-in-element project" data-page="6">
+                    <div class="mask">
+                        <div class="project-content">
+                            <h3>Website học Trong lớp</h3>
+                            <img src="img/web3.png" with="100%" alt="mask">
+                            <button class="lift-on-hover" style="margin-top: 10px; padding: 10px;border-radius: 10px; background-color: rgb(0, 140, 255);margin-left: 330px;"><a href="web-old/Bai-tap-ket-thuc-mon/chu.html" style="color: aliceblue;">Xem chi tiết Website</a></button>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="design-Website4" class="fade-in-element project" data-page="6">
+                    <div class="mask">
+                        <div class="project-content">
+                            <h3>Website Bài tập kết thúc môn</h3>
+                            <img src="img/web2.png" with="100%" alt="mask">
+                            <button class="lift-on-hover" style="margin-top: 10px; padding: 10px;border-radius: 10px; background-color: rgb(0, 140, 255);margin-left: 330px;"><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html" style="color: aliceblue;">Xem chi tiết Website</a></button>
+                        </div>
+                    </div>
+                </section>
+
                 <section id="design-philosophy" class="fade-in-element">
                     <h2>Phong cách thiết kế</h2>
                     <p class="animated-text">Đơn giản dễ dàng không màu mè</p>
@@ -452,7 +495,11 @@
             const pageContent = document.getElementById('page-content');
             if (pageContent) pageContent.classList.add('fade-in');
         });
+    
     </script>
+
+    <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
+    <script src="js/js-code-navbar.js"></script>
     <div id="image-modal" class="image-modal">
         <span class="image-modal-close">&times;</span>
         <button class="image-modal-fullscreen" title="Phóng to toàn màn hình">&#x26F6;</button>

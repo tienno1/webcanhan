@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="style/trang chu.css"/>
+    <script>
+        document.getElementById('openButton').addEventListener('click', function() {
+            window.location.href = "trang dm sp.html#hiddenDiv"; // Chuyển hướng tới Trang 2 với hash #hiddenDiv
+        });
+        
+        
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        
+        function showContent(contentId) {
+    // Lấy tất cả các phần tử có class 'content'
+    const contents = document.querySelectorAll('.content');
+    
+    // Ẩn tất cả các phần tử
+    contents.forEach(content => {
+        content.style.display = 'none';
+    });
+
+    // Hiển thị phần tử được chỉ định bởi contentId
+    const contentToShow = document.getElementById(contentId);
+    if (contentToShow) {
+        contentToShow.style.display = 'block';
+    }
+
+    // Hiển thị thông báo và tải lại trang cho các mục khuyến mãi
+    if (contentId === 'content4') {
+        alert('--!hiện tại đã hết hàng quý khách vui lòng chờ thêm và check lại tại danh mục sp!--');
+        window.location.reload();
+    } else if (contentId === 'content1') {
+        alert('--!không có sự kiện nào mới!--');
+        window.location.reload();
+    } else if (contentId === 'content2') {
+        alert('--!không có mã giảm giá!--');
+        window.location.reload();
+    } else if (contentId === 'content3') {
+        alert('--!Đã có hàng mới vui lòng check tại danh mục sản phẩm!--');
+        window.location.reload();
+    }
+}
+    </script>
+</head>
+<body>
+    <div id="all">
+        <header id="header_home">
+            <div class="logo_searh">
+                <img src="image/741dbb182980637.Y3JvcCwxOTIwLDE1MDEsMCw5.jpg" alt="logo" class="logo">
+                <input type="text" id="searh" name="searh" placeholder="Tìm Kiếm">
+                <img src="image/kinh lup.webp" id="kinhlup">
+                <button  onclick="navigateTo('trang dk.html#login')" id="login">Đăng Kí</button>
+                <button  onclick="navigateTo('trang dk.html#register')" id="register">Đăng Nhập</button>
+            </div>
+            <nav id="nav_bar">
+                <ul>
+                    <li><a href="trang chu.html">TRANG CHỦ</a></li>
+                    <li><a href="trang gt,lh.html"> GIỚI THIỆU LH</a></li>
+                    <li><a href="trang dk.html">ĐĂNG KÍ</a></li>
+                    <li><a href="trang dm sp.html"> DANH MỤC SP</a></li>
+                    <li><a href="trang chi tiet sp.html"> CHI TIẾT SẢN PHẨM</a></li>
+                    <li><a href="trang gio hang.html"> GIỎ HÀNG</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main id="chu_de">
+            <div class="image-container" >
+                <div class="image-carousel">
+                    <img src="image/Screenshot 2024-05-30 171234.png" alt="Image 1" >
+                </div>
+                <div class="nut">
+                    <button type="button" id="all_in"><a href="trang dm sp.html">Tất Cả</a></button>
+                    <button onclick="showContent('content3')" id="new_product">Hàng Mới</button>
+                    <button onclick="showContent('content1')" id="event">Sự Kiện</button>
+                    <button onclick="showContent('content2')" id="sale">Giảm Giá</button>
+                </div>
+                <div class="content" id="content1" style="color: red"><h3>-- Không có sự kiện nào !!!--</h3></div>
+                <div class="content" id="content2" style="color: red"><h3>-- Không có thẻ giảm giá !!!--</h3></div>
+                <div class="content" id="content3" style="color: red"><h3>-- Đã có hàng mới vui lòng check tại danh mục sản phẩm !!!--</h3></div>
+            </div>
+            <div class="line">
+                <h2>DANH MỤC NỔI BẬT</h2>
+                <hr>
+                <img src="image/kmfk.webp" alt="Image 2">
+                <h3>Đồ chơi mầm non</h3>
+                <button onclick="showContent('content4')" id="toys">Xem Thêm</button>
+            </div>
+            <div class="content" id="content4" style="color: red"><h3>-- hiện tại đã hết hàng vui lòng check tại danh mục sản phẩm khi có hàng mới !!!--</h3></div>
+            <div class="dobble">
+            <div class="img_3">
+                <img src="image/D_ch_i_l_p_ghep.webp" alt="Image 3" >
+            </div>
+                
+            <div class="img_4">
+                <img src="image/D_ch_i_mo_hinh_nhan_v_t.webp" alt="Image 4" >
+            </div>  
+                
+            <div class="toys_st">
+                <span>Đồ Chơi Sưu Tập</span>
+                <button onclick="navigateTo('trang dm sp.html')">Xem Thêm</button>
+            </div>
+                
+            <div class="toys_lg">
+                <span>Đồ Chơi Lắp Ghép</span>
+                <button id="openButton">Xem Thêm</button>
+            </div>
+                <div id="bupbe_toys">
+                <img src="image/Bup_be.webp" >
+                <h3>Búp Bê</h3>
+                </div>
+            </div>
+        </main>
+        <footer id="foot">
+            <div class="f_bground"></div>
+            <div class="end_lf">
+                
+                <h3 style="color: red">Liên Hệ</h3>
+                <p>Zalo : </p>
+                <p>email : tiendepzai0908@gmail.com</p>
+                <p>Giờ làm việc : full t2-cn</p>
+                <p>Địa chỉ : 123xyz 3/2</p>
+            </div>
+            <div class="end_select">
+            <select >
+                <option>--ĐIỀU KHOẢN & CHÍNH SÁCH--</option>
+                <option>Chính sách giao hàng</option>
+                <option>Chính sách tích lũy điểm</option>
+                <option>Điều khoản điều kiện</option>
+            </select>
+            </div>
+            <div class="end_select_01">
+                <select>
+                    <option>--hỗ trợ khách hàng--</option>
+                    <option>Chính sách bảo mật</option>
+                    <option>Chính sách bảo hành đổi trả hàng hóa</option>
+                    <option>Chính sách thanh toán</option>
+                    <option>Những câu hỏi thường gặp</option>
+                </select>
+            </div>
+            <div class="logo_02">
+            <img src="image/741dbb182980637.Y3JvcCwxOTIwLDE1MDEsMCw5.jpg" >
+            </div> 
+            <div class="f_bground"></div>
+        </footer>
+    </div> 
+</body>
+</html>

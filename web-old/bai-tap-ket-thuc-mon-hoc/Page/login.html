@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký & Đăng nhập</title>
+    <link rel="stylesheet" href="/web-old/bai-tap-ket-thuc-mon-hoc/Css/login.css"/>
+    <script>
+        function toggleForm(form) {
+            var loginForm = document.getElementById('login-form');
+            var registerForm = document.getElementById('register-form');
+            
+            if (form === 'login') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else if (form === 'register') {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                var username = document.getElementById('login-username').value;
+                var password = document.getElementById('login-password').value;
+                var loginMessage = document.getElementById('login-message');
+                
+                if (username === 'phạm viết tiến' && password === '123456') {
+                    loginMessage.textContent = 'Bạn đã đăng nhập thành công!';
+                    loginMessage.style.color = 'green';
+                } else {
+                    loginMessage.textContent = 'Bạn đã đăng nhập thất bại!';
+                    loginMessage.style.color = 'red';
+                }
+            });
+
+            document.getElementById('registerForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                var registerMessage = document.getElementById('register-message');
+                registerMessage.textContent = 'Bạn đã đăng ký thành công!';
+                registerMessage.style.color = 'green';
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="all">
+    <div class="container">
+        <div class="form-container" id="register-form">
+            <h2>Đăng Ký</h2>
+            <form id="registerForm">
+              <label for="register-username">Tên đăng nhập:</label>
+                <input type="text" id="register-username" name="username" required>
+                
+                <label for="register-password">Mật khẩu:</label>
+                <input type="password" id="register-password" name="password" required>
+                
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" name="email" required>
+                
+                <button type="submit">Đăng ký</button>
+                <p>Đã có tài khoản? <a href="#" onclick="toggleForm('login')">Đăng Nhập</a></p>
+                <p id="register-message"></p>
+            </form>
+        </div>
+        
+        <div class="form-container" id="login-form" style="display: none;">
+            <h2>Đăng Nhập</h2>
+            <form id="loginForm">
+                <label for="login-username">Tên đăng nhập:</label>
+                <input type="text" id="login-username" name="username" required>
+                
+                <label for="login-password">Mật khẩu:</label>
+                <input type="password" id="login-password" name="password" required>
+                
+                <button type="submit">Đăng nhập</button>
+                <p>Chưa có tài khoản? <a href="#" onclick="toggleForm('register')">Đăng Ký Ngay</a></p>
+                <p id="login-message"></p>
+            </form>
+        </div>
+    </div>
+</div>
+    
+</body>
+</html>

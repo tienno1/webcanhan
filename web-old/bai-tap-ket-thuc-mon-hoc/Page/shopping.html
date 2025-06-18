@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+    <Link href="../Css/main.css" rel="stylesheet">
+    <link href="../Css/main-moblie.css" rel="stylesheet">
+    <link href="../Css/shopping.css" rel="stylesheet">
+<title>trang mua sắm</title>
+    
+</head>
+
+<body>
+    <div class="header">
+        <div class="content">
+            <div class="box-menu-mobile">
+                <button>
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <nav class="box-menu">
+                <ul class="all-list-menu">
+                    <li>
+                        <a href="../Home.html" class="hover-a">Trang Chủ</a>
+                        <!-- <a href="">
+                            <i class="fa-solid fa-angle-down angle-down"></i>
+                        </a> -->
+                    </li>
+                    <li class="padding-list-menu">
+                        <a href="Shop.html" class="hover-a">Sản Phẩm</a>
+                        <!-- <a href="">
+                            <i class="fa-solid fa-angle-down angle-down"></i>
+                        </a> -->
+                    </li>
+                    <li class="padding-list-menu">
+                        <a href="about.html" class="hover-a">Giới Thiệu</a>
+                        <!-- <a href="">
+                            <i class="fa-solid fa-angle-down angle-down"></i>
+                        </a> -->
+                    </li>
+                    <li class="padding-list-menu">
+                        <a href="blog.html" class="hover-a">Thời Trang</a>
+                        <!-- <a href="">
+                            <i class="fa-solid fa-angle-down angle-down"></i>
+                        </a> -->
+                    </li>
+                    <li class="padding-list-menu">
+                        <a href="login.html" class="hover-a">Đăng Kí</a>
+                        <a href="">
+                            <i class="fa-solid fa-angle-down angle-down"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="box-logo">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../Picture/logo.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="box-icon">
+                <a href="blog.html" class="box-search">
+                    <i class="fa-solid fa-magnifying-glass search"></i>
+                </a>
+                <a href="Page/login.html" class="box-user">
+                    <i class="fa-regular fa-user user"></i>
+                </a>
+                <a href="" class="box-heart">
+                    <i class="fa-regular fa-heart heart"></i>
+                </a>
+                <a href="shopping.html" class="box-cart">
+                    <i class="fa-solid fa-cart-shopping cart"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="all">
+    <div class="content_giohang">
+        <h1>Giỏ Hàng</h1>
+        <div id="cart">
+            <div id="cart-items">
+                <!-- Các mục giỏ hàng sẽ được thêm vào đây -->
+            </div>
+            <div id="totalPrice">Tổng Tiền: $0.00</div>
+        </div>
+        <div id="addProduct">
+            <input type="text" id="productName" placeholder="Tên Sản Phẩm" class="sp" readonly>
+            <input type="number" id="productPrice" placeholder="Giá Sản Phẩm" class="money" readonly>
+            <input type="number" id="productQuantity" placeholder="Số Lượng" class="many" value="1">
+            <button onclick="addProduct()" class="bt">Thêm Vào Giỏ Hàng</button>
+            <button onclick="checkout()" class="co">Thanh Toán</button>
+        </div>
+    </div>
+        <div class="product-selection">
+        <h2>Chọn Sản Phẩm</h2>
+        <div id="productList">
+            <ul class="kim">
+                <div class="hinh_01">
+                         <img class="Pic-product-1" src="../Picture/Shop/products-10-1-600x600.jpg " alt="Sản Phẩm 1" onclick="selectProduct('Sản Phẩm 1', 250)">
+                     
+                        <img class="Pic-product-2" src="../Picture/Shop/products-15-6-600x600.jpg" alt="Sản Phẩm 2" onclick="selectProduct('Sản Phẩm 2', 310)">
+                    
+                        <img class="Pic-product-2" src="../Picture/categories-6.jpg" alt="Sản Phẩm 3" onclick="selectProduct('Sản Phẩm 3', 259)">
+                    
+                        <img class="Pic-product-2" src="../Picture/Shop/categories-18.jpg" alt="Sản Phẩm 4" onclick="selectProduct('Sản Phẩm 4', 126)">
+                </div>
+                <div class="kim_01">
+                        <img class="Pic-product-1" src="../Picture/Shop/products-10-4-600x600.jpg" alt="Sản Phẩm 5" onclick="selectProduct('Sản Phẩm 5', 245)">
+                
+                        <img class="Pic-product-2" src="../Picture/Shop/products-13-600x600.jpg" alt="Sản Phẩm 6" onclick="selectProduct('Sản Phẩm 6', 310)">
+                
+                        <img class="Pic-product-2" src="../Picture/Shop/categories-10.jpg" alt="Sản Phẩm 7" onclick="selectProduct('Sản Phẩm 7', 261)">
+                
+                        <img class="Pic-product-2" src="../Picture/Shop/categories-19.jpg" alt="Sản Phẩm 8" onclick="selectProduct('Sản Phẩm 8', 74)">
+                </div>
+                <div class="kim_01">
+                        <img class="Pic-product-1" src="../Picture/Shop/products-15-6-600x600.jpg" alt="Sản Phẩm 9" onclick="selectProduct('Sản Phẩm 9', 234)">
+                
+                        <img class="Pic-product-2" src="../Picture/Shop/products-17-6-600x600.jpg" alt="Sản Phẩm 10" onclick="selectProduct('Sản Phẩm 10', 230)">
+                
+                        <img class="Pic-product-2" src="../Picture/Shop/products-4.jpg" alt="Sản Phẩm 10" onclick="selectProduct('Sản Phẩm 10', 44)">
+                
+                        <img class="Pic-product-2" src="../Picture/Shop/products-10-7.jpg" alt="Sản Phẩm 11" onclick="selectProduct('Sản Phẩm 11', 666)">
+                </div>
+            </ul>
+        </div>
+    </div>
+        </div>
+    <div class="box-percent">
+                    
+        <!-- Phần footer -->
+    <div class="box-first-footer">
+        <div class="contact">
+            <h2>LIÊN HỆ VỚI CHÚNG TÔI</h2>
+            <div class="in">
+                <div>Thêm vào : BCTECH 3/2 TP:VŨNG TÀU</div>
+                <div>SĐT : 84+..033.453.4748</div>
+                <div>SỐ CÔNG TY: 810.222.5439</div>
+                <div>tiendepzai0908@gmail.com</div>
+            </div>
+        </div>
+        <div class="contact">
+            <h2>PHÂN LOẠI</h2>
+            <div class="in">
+                <a href="">
+                    <div>Ghế</div>
+                </a>
+                <a href="">
+                    <div>Bàn</div>
+                </a>
+                <a href="">
+                    <div>Tủ quần áo</div>
+                </a>
+                <a href="">
+                    <div>Đồ gỗ </div>
+                </a>
+                <a href="">
+                    <div>Đèn ngủ</div>
+                </a>
+                <a href="">
+                    <div>Bồn tắm</div>
+                </a>
+            </div>
+        </div>
+        <div class="contact">
+            <h2>DỊCH VỤ</h2>
+            <div class="in">
+                <a href="">
+                    <div>Giảm giá sốc</div>
+                </a>
+                <a href="">
+                    <div>Giao hàng nhanh</div>
+                </a>
+                <a href="">
+                    <div>Thiết kế luôn đổi mới</div>
+                </a>
+                <a href="">
+                    <div>Nhiều sự lựa chọn</div>
+                </a>
+                <a href="">
+                    <div>Chất lượng đúng giá thành </div>
+                </a>
+                <a href="">
+                    <div>Nhiều ưu đãi</div>
+                </a>
+            </div>
+        </div>
+        <div class="contact">
+            <h2>GIA NHẬP VỚI CHÚNG TÔI</h2>
+            <div class="in">
+                <div style="margin-bottom: 25px;">điền email cho chúng tôi hiểu thêm về bạn
+                    <br>
+                   Những sản phẩm tốt tới từ công ty FUNORI
+                </div>
+                <div class="box-email">
+                    <input type="text" placeholder="Email adress...">
+                    <button type="submit">
+                        <i class="fa-solid fa-envelope"></i>
+                    </button>
+                </div>
+                <div class="icon-contact">
+                    <ul>
+                        <li>
+                            <a href="">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa-brands fa-dribbble"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa-brands fa-behance"></i>
+                            </a>
+                        </li>                     
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-second-footer">
+        <div class="first-box">
+            <div class="title">
+                Copyright © 2024. All Right Reserved
+            </div>
+        </div>
+        <div class="second-box">
+            <div class="box-bank">
+                <img src="Picture/payments-1.png" alt="">
+            </div>
+        </div>
+    </div>
+        </div>
+    <!-- <div style="margin-bottom: 600px;"></div> -->
+        
+</body>
+</html>
+</body>
+</html>
+<script src="https://kit.fontawesome.com/eda05fcf5c.js" crossorigin="anonymous"></script>
+<script src="../js/giohang.js"></script>

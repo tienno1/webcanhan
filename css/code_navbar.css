@@ -1,0 +1,200 @@
+.menu-toggle {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1001;
+}
+
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: flex;
+    position: fixed;
+    /* top, right, z-index... (giữ nguyên) */
+  }
+
+  nav.main-nav {
+    border-radius: 10px 0;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 80vh;
+    background-color: #333;
+    padding-top: 50px;
+    padding-bottom: 50px; /* THÊM DÒNG NÀY: Thêm khoảng đệm dưới cùng */
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: -20px;
+  }
+
+  nav.main-nav.open {
+    right: 0;
+  }
+
+  nav.main-nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px;
+  }
+
+  nav.main-nav ul li {
+    margin: 10px 0;
+    width: calc(100% - 20px);
+  }
+
+  /* --- Các quy tắc cho Dropdown bên dưới giữ nguyên như lần trước --- */
+  nav.main-nav ul li .dropdown {
+    border-radius: 10px;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  nav.main-nav ul li .dropdown-toggle {
+    width: 100%;
+    text-align: center;
+    background: #444;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 0;
+  }
+
+  nav.main-nav ul li .dropdown-toggle:hover {
+    background-color: #555;
+  }
+
+  nav.main-nav ul li .dropdown .dropdown-menu {
+    display: none;
+    position: static;
+    width: 100%;
+    background-color: #555;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 10px 0;
+  }
+
+  nav.main-nav ul li .dropdown.open .dropdown-menu {
+    display: block;
+  }
+
+  nav.main-nav ul li .dropdown-menu li {
+    padding: 8px 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  nav.main-nav ul li .dropdown-menu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+  }
+
+  nav.main-nav ul li .dropdown-menu li:hover {
+    background-color: #777;
+  }
+
+  /* Điều chỉnh mũi tên dropdown */
+  nav.main-nav ul li .dropdown-toggle .arrow {
+    margin-left: 10px;
+    transition: transform 0.3s ease; /* Thêm animation cho mũi tên */
+  }
+
+  /* Xoay mũi tên khi dropdown mở */
+  nav.main-nav ul li .dropdown.open .dropdown-toggle .arrow {
+    transform: rotate(180deg);
+  }
+
+  nav.main-nav ul li .dropdown.open .dropdown-toggle .arrow {
+    transform: rotate(180deg);
+  }
+}
+
+/* Luôn hiển thị nav trên desktop */
+@media (min-width: 768px) {
+  .main-nav {
+    display: block;
+  }
+
+  .menu-toggle {
+    display: none; /* Ẩn nút menu trên desktop */
+  }
+}
+
+/* Giữ nguyên các quy tắc dropdown chung bên ngoài media query cho desktop */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  margin: 10px;
+}
+
+.dropdown-toggle {
+  padding: 10px;
+  width: 250px; /* Giữ nguyên kích thước */
+  background: #f5f5f5;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.dropdown-toggle:hover {
+  background: #ffffff;
+}
+
+.dropdown-menu {
+  display: none; /* Ẩn mặc định */
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  min-width: 140px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  z-index: 1000;
+  margin-top: 5px;
+}
+
+.dropdown.open .dropdown-menu {
+  display: block; /* Hiện khi có class .open */
+}
+
+.dropdown-menu li {
+  list-style: none;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #ffffff;
+}
+
+.dropdown-menu li a{
+  color: black;
+}
+
+.arrow {
+  margin-left: 5px;
+  /* --- Kết thúc phần thêm/sửa đổi cho Dropdown trên Mobile --- */
+}
+
+/* Luôn hiển thị nav trên desktop */
+@media (min-width: 768px) {
+  .main-nav {
+    display: block;
+  }
+
+  .menu-toggle {
+    display: none; /* Ẩn nút menu trên desktop */
+  }
+}

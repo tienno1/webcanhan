@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="style/trang gio hang.css"/>
+    <script>
+    let cartItems = [];
+
+function updateCart() {
+    const cartItemsDiv = document.getElementById('cart-items');
+    cartItemsDiv.innerHTML = '';
+
+    let total = 0;
+
+    cartItems.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.innerHTML = `
+            <span>${item.name}</span>
+            <span>${item.price}đ</span>
+            <span>${item.quantity}</span>
+            <span>${item.price * item.quantity}đ</span>
+            <button onclick="removeItem('${item.name}')">Xóa</button>
+        `;
+        cartItemsDiv.appendChild(itemDiv);
+
+        total += item.price * item.quantity;
+    });
+
+    document.getElementById('totalPrice').innerText = (cartItems.length > 1) ? `Tổng Tiền: ${total}đ` : '';
+}
+
+function addProduct() {
+    const productName = document.getElementById('productName').value;
+    const productPrice = parseFloat(document.getElementById('productPrice').value);
+    const productQuantity = parseInt(document.getElementById('productQuantity').value);
+
+    if (!productName || isNaN(productPrice) || isNaN(productQuantity)) {
+        alert('Vui lòng nhập đầy đủ thông tin sản phẩm.');
+        return;
+    }
+
+    const newItem = {
+        name: productName,
+        price: productPrice,
+        quantity: productQuantity
+    };
+
+    cartItems.push(newItem);
+    updateCart();
+}
+
+function removeItem(name) {
+    cartItems = cartItems.filter(item => item.name !== name);
+    updateCart();
+}
+
+function checkout() {
+    if (cartItems.length === 0) {
+        alert('Giỏ hàng của bạn đang trống!');
+    } else {
+        alert('Thanh toán thành công!');
+        cartItems = [];
+        updateCart();
+    }
+}
+
+// Cập nhật giỏ hàng lần đầu khi trang được tải
+updateCart();
+
+    </script>
+</head>
+    
+<body>
+                
+               <h1>Giỏ Hàng</h1>
+    <div id="cart">
+        <div id="cart-items">
+          <!-- Các mục giỏ hàng sẽ được thêm vào đây -->
+ </div>
+        <div id="totalPrice">Tổng Tiền: 0đ</div>
+        
+    </div>
+    <div id="addProduct">
+        <input type="text" id="productName" placeholder="Tên Sản Phẩm" class="sp">
+        <input type="number" id="productPrice" placeholder="Giá Sản Phẩm" class="money">
+        <input type="number" id="productQuantity" placeholder="Số Lượng" class="many">
+        <button onclick="addProduct()" class="bt">Thêm Vào Giỏ Hàng</button>
+        <button onclick="checkout()" class="co">Thanh Toán</button>
+    </div>
+</body>
+</html>

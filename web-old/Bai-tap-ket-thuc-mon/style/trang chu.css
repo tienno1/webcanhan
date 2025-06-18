@@ -1,0 +1,285 @@
+*{
+    margin: auto;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+#all{
+    width: 960px;
+    height: auto;
+}
+ 
+.content button{
+    cursor: pointer; /* Con trỏ chuột sẽ thành hình con trỏ */
+}
+
+.content {
+    display: none;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.logo_searh{
+    display: flex;
+    align-items: center;
+}
+
+
+.logo{ 
+    display: flex;
+    align-items: flex-start;
+    width: 8%;
+}
+
+#searh{
+    padding: 10px;
+    width: 200px;
+    border-radius: 15px 0px 0px 15px;
+    border: 1px solid ;
+    font-size: 16px;
+}
+
+#kinhlup{
+    border-radius: 0px 15px 15px 0px;
+    background: pink;
+    border: 1px solid;
+    width: 38.5px;
+    margin-left: -65px;
+}
+
+#login{
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 14px;
+    border:2px solid#FF0004;
+    background: none;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#register{
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 14px;
+    border:2px solid#FF0004;
+    background: none;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#register a{
+    text-decoration: none;
+}
+
+#login a{
+    text-decoration: none;
+}
+
+
+#nav_bar{
+    background: url("../image/9e0f54cc0aa2d05bc54bc7a28159e3b9.png");
+    padding: 20px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    color: #FF0000;
+}
+
+.image-container {
+    width: 100%;
+    position: relative;
+}
+
+.image-carousel img {
+        margin-top: 20px;
+        width: 100%;
+        border-radius: 20px;
+}
+
+.nut {
+    margin-right: 150px;
+    margin-left: 150px;
+    padding: 20px;
+    display: flex;
+}
+
+.nut button{
+    border-radius: 14px;
+    border:2px solid#FF0004;
+    background: none;
+    padding: 8px;
+    width: 120px;
+}
+
+.nut a{
+    text-decoration: none;
+    font-size: 17px;
+    color: black;
+}
+
+.line h2{
+    color: #FF0054;
+    text-align: center;
+}
+
+.line hr{
+    color: #FF0054;
+    border: 3px solid;
+}
+
+.line img{
+    border-radius: 20px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.line h3{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.line button{
+    font-size: 16px;
+    border-radius: 14px;
+    border:2px solid#FF0004;
+    background: none;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.line button a{
+    padding: 8px;
+    text-decoration: none;
+    color: black;
+}
+
+.img_3 img{
+    border-radius: 15px;
+    float: left;
+    width: 48%;
+}
+
+.img_4 img{
+    border-radius: 15px;
+    float: right;
+    width: 48%;
+}
+
+.dobble{
+    margin-top: 30px;
+}
+
+#toys{
+    padding: 10px;
+}
+
+.toys_st{
+    float: left;
+    padding: 20px;
+    margin-left: 150px;
+    clear: both;
+}
+
+.toys_lg{
+    margin-right: 150px;
+    padding: 20px;
+    float: right;
+}
+
+.toys_lg button{
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 14px;
+    border:2px solid#FF0004;
+    background: none;
+    width: 110px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.toys_st button{
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 14px;
+    border:2px solid#FF0004;
+    background: none;
+    width: 110px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#bupbe_toys img{
+    margin-top: 30px;
+    border-radius: 20px;
+    width: 100%;
+}
+
+#bupbe_toys h3{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#foot img{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.f_bground{
+    margin-top: 20px;
+    width: 100%;
+    height: 30px;
+    background: #BB3335;
+}
+
+.end_lf{
+    float: left;
+    padding: 20px;
+    font-size: 17px;
+}
+
+.end_select{
+    margin-bottom: -38px;
+    padding: 20px;
+}
+
+.end_select_01{
+    float: right
+}
+
+.logo_02{
+    margin-left: 10px;
+    width: 10%;
+}
+
+

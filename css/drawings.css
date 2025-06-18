@@ -110,7 +110,6 @@ nav.main-nav ul li a.active {
     overflow: hidden;
     position: relative;
 }
-
 /* TOC sidebar */
 .toc {
     width: 200px;
@@ -454,12 +453,7 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     footer .social-links a { margin: 0 8px; }
     body { padding-bottom: 100px; }
 }
-@media (max-width: 480px) {
-    header h1 { font-size: 1.8rem; }
-    header p { font-size: 1rem; }
-    main { padding: 10px; }
-    body { padding-bottom: 120px; }
-}
+
 @media (min-width: 768px) {
     .content-container {
         flex-direction: row-reverse;
@@ -582,6 +576,19 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     header img { width: 6%; max-width: 100px; }
 }
 
+@media (min-width: 768px) {
+    
+    nav.main-nav ul li a {
+        display: block;       /* ✅ Fix: block để dễ click */
+        padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+}
 /* Page transition effect */
 #page-content {
     transition: opacity 0.5s ease-in-out;
@@ -666,3 +673,29 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         display: none !important;
     }
 }
+
+
+.menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1001;
+}
+
+.fa-solid{
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+  color: #ffffff;
+}
+
+.fa-bars {
+  width: 20px;
+}
+

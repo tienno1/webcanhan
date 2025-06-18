@@ -6,6 +6,7 @@
     <title>Ảnh vẽ của tôi</title>
     <link rel="stylesheet" href="css/drawings.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <link rel="stylesheet" href="css/code_navbar.css">
     <style>
         /* CSS tạm thời cho highlight kết quả tìm kiếm */
         .highlight {
@@ -17,18 +18,40 @@
 <body>
 
     <header>
-        <a href="index.html"><img src="img/logo.png" alt="Logo" class="lift-on-hover"></a>
-        <p>Ảnh vẽ của tôi</p>
+        <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
+            <p>Thiết Kế của tôi</p>
+        <button aria-label="Menu" class="menu-toggle">
+            <i class="fa-solid fa-bars fa-beat-fade fa-2xl" style="color: #ffffff;"></i>
+        </button>
     </header>
 
     <nav class="main-nav">
         <ul>
             <li><a href="index.html">Giới thiệu</a></li>
             <li><a href="profile.html">Profile</a></li>
-            <li><a href="designer.html">Design</a></li>
+            <li><a href="designer.html" >Design</a></li>
             <li><a href="scores.html">Điểm Số</a></li>
             <li><a href="drawings.html" class="active">Ảnh Sưu Tầm</a></li>
-            <li><a href="jalan/View.html">View</a></li>
+            
+            <li>
+            <div class="dropdown">
+                <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-menu">
+                    <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
+                    <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>    
+                    </ul>
+            </div>
+            </li>
+            <li>
+            <div class="dropdown">
+                <button class="dropdown-toggle">Code Website <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="jalan/View.html">View</a></li>
+                        <li><a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html">web học tại lớp</a></li>
+                        <li><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html">web kết thúc môn học</a></li>
+                    </ul>
+            </div>
+            </li> 
         </ul>
     </nav>
 
@@ -256,6 +279,9 @@
       box.style.top = 50 + scrollY * 0.5 + 'px'; // Tăng nhanh/chậm bằng hệ số
     });
   </script>
+
+  <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
+  <script src="js/js-code-navbar.js"></script>
 <div id="image-modal" class="image-modal">
     <span class="image-modal-close">&times;</span>
     <button class="image-modal-fullscreen" title="Phóng to toàn màn hình">&#x26F6;</button>

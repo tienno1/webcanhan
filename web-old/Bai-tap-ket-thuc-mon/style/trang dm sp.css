@@ -1,0 +1,303 @@
+*{
+    margin: auto;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#nav_bar li{
+    cursor: pointer; /* Con trỏ chuột sẽ thành hình con trỏ */
+
+}
+
+.nav_left li {
+    cursor: pointer; /* Con trỏ chuột sẽ thành hình con trỏ */
+}
+
+#all{
+    width: 960px;
+    height: 2000px;
+}
+
+.logo_searh{
+    display: flex;
+    align-items: center;
+}
+
+
+.logo{ 
+    display: flex;
+    align-items: flex-start;
+    width: 8%;
+
+}
+
+#searh{
+    padding: 10px;
+    width: 200px;
+    border-radius: 15px 0px 0px 15px;
+    border: 1px solid ;
+    font-size: 16px;
+}
+
+#kinhlup{
+    border-radius: 0px 15px 15px 0px;
+    background: pink;
+    border: 1px solid;
+    width: 38.5px;
+    margin-left: -65px;
+}
+
+#login{
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 14px;
+    border:2px solid#FF0004;
+    background: none;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#register{
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 14px;
+    border:2px solid#FF0004;
+    background: none;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#register a{
+    text-decoration: none;
+}
+
+#login a{
+    text-decoration: none;
+}
+
+#nav_bar{
+    background: url("../image/9e0f54cc0aa2d05bc54bc7a28159e3b9.png");
+    padding: 20px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    color: #FF0000;
+}
+.nav_left{
+    padding: 10px;
+    width: 97.7%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.nav_left ul li{
+    display: inline;
+    margin: 0 25px;
+}
+
+.nav_left ul li a{
+    text-decoration: none;
+    color: black;
+    
+}
+.nav_left ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+main{
+    flex: 1;
+    width: 100%;
+    height: 800px;
+}
+
+#content-select{
+    text-align: center;
+    margin-left: -10px;
+    border: none;
+    width: 20px;
+}
+
+.content {
+    display: none;
+}
+
+.content.active {
+    display: block; 
+}
+
+.c_tent_2 li{
+    width: 32%;
+}
+
+.c_tent_2 p{
+    margin-left: 30px;
+}
+
+.c_tent_2 ul li{
+    display: inline;
+    float: left;
+}
+
+.Optimus{
+    margin-top: 20px; 
+    margin-left: 30px;
+    border: 2px dashed ;
+    width: 75%;
+    height: 300px;
+}
+
+.Jett{
+    margin-top: 20px; 
+    margin-left: 40px;
+    border: 2px dashed ;
+    width: 80%;
+    height: 300px;
+}
+
+.Paul{
+    margin-top: 20px;
+    margin-left: 40px;
+    border: 2px dashed ;
+    height: 300px;
+    width: 70%;
+}
+
+.c_tent_1{
+    padding: 20px;
+}
+
+.c_tent_1 p{
+    margin-left: 30px;
+}
+
+.c_tent_1 ul li{
+    display: inline;
+    float: left;
+}
+
+.c_tent_1 li{
+    width: 32%;
+}
+
+.batman
+
+.batman{
+    margin-top: 20px; 
+    margin-left: 20px;
+    border: 2px dashed ;
+    height: 330px;
+    width: 75%;
+}
+
+.ngnhen{
+    margin-top: 20px; 
+    margin-left: 40px;
+    border: 2px dashed ;
+    width: 75%;
+    height: 330px;
+}
+
+.iron{
+    margin-top: 20px; 
+    margin-left: 60px;
+    border: 2px dashed ;
+    height: 330px;
+    width: 70%;
+}
+
+#content5 img{
+    margin-left: 100px;
+    margin-top: 20px;
+    width: 20%;
+}
+
+.nam_nu_unisex ul li{
+    display: inline;
+    padding: 123px;
+}
+
+.nam_nu_unisex ul{
+    padding: 10px;
+    display: inline;
+    background: #FF0004;
+}
+
+.nam_nu_unisex{
+    margin-top: 20px;
+}
+
+#content6 img{
+    margin-top: 20px;
+    margin-left: 12px;
+    width: 18%;
+}
+
+
+#content6 span{
+    margin-left: 93px;
+}
+
+#foot img{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.f_bground{
+    width: 100%;
+    height: 30px;
+    background: #BB3335;
+}
+
+.end_lf{
+    width: 98%;
+    float: left;
+    padding: 20px;
+    font-size: 17px;
+}
+
+.end_select{
+    
+    margin-bottom: -38px;
+    padding: 10px;
+}
+
+.end_select_01{
+    float: right
+}
+
+.logo_02{
+    margin-left: 10px;
+    width: 10%;
+}
+
+

@@ -9,6 +9,13 @@ body {
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
+.background {
+    background-image: url('../img/nền.jpg'); /* Background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed; /* Fixed background for parallax effect */
+}
+
 /* CSS cho hiệu ứng bay lên nhẹ khi di chuột */
 /* Áp dụng class 'lift-on-hover' vào các phần tử HTML bạn muốn có hiệu ứng này */
 .lift-on-hover {
@@ -31,7 +38,6 @@ body {
 
 /* Kiểu cho phần Header */
 header {
-    background-image:url('../img/nền.jpg'); /* Background image */
     color: #fff; /* White text color */
     padding: 1rem 0; /* Top and bottom padding */
     text-align: center; /* Center content */
@@ -86,8 +92,6 @@ nav ul li a.active { /* You can add an 'active' class to the current page link *
 
 /* Kiểu cho phần Nội dung Chính (Main) của trang Giới thiệu */
 main {
-    background-image:url('../img/nền.jpg'); /* Background image */
-    background-position: 0px -260px;
     box-shadow: none !important;
     border-radius: 0 !important;
     max-width: none !important;
@@ -186,37 +190,37 @@ footer .social-links a:hover {
 
 /* --- Basic Responsive Design --- */
 @media (max-width: 768px) {
+    /* Đảm bảo nav ul luôn căn giữa trên màn hình nhỏ */
+    nav ul {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: center; /* Căn giữa các mục theo chiều ngang khi chúng xếp chồng */
+        padding: 0 10px; /* Thêm padding nếu cần */
+    }
+    nav ul li {
+        margin: 5px 0; /* Điều chỉnh khoảng cách giữa các mục nav */
+    }
+    nav ul li a {
+        display: block; /* Làm cho các liên kết thành khối để dễ chạm hơn */
+        padding: 10px; /* Tăng padding cho vùng chạm */
+    }
+
     main section {
         padding: 10px; /* Giảm padding cho section */
         margin: 1%; /* Giảm margin cho section */
-    }
-    nav ul {
-        flex-direction: column; /* Stack nav items vertically */
-    }
-    nav ul li {
-        margin: 15px 0; /* Reduce space between nav items */
     }
     main {
         padding: 15px; /* Reduce main padding */
         margin: 15px auto; /* Reduce main margin */
     }
-    desktop-only {
+    .desktop-only { /* Đổi từ 'desktop-only' sang '.desktop-only' để là class selector */
         display: none; /* Ẩn các phần tử chỉ dành cho desktop */
     }
 }
 
-@media (max-width: 768px) {
-    body {
-        font-size: 16px; /* Điều chỉnh kích thước font chữ cơ bản */
-    }
-    h1 {
-        font-size: 1rem; /* Điều chỉnh kích thước font chữ cho h1 */
-    }
-    h2 {
-        font-size: 1.8rem; /* Điều chỉnh kích thước font chữ cho h2 */
-    }
-    p {
-        font-size: 1.1rem; /* Điều chỉnh kích thước font chữ cho p */
+@media (min-width: 768px) {
+    nav ul li a {
+        display: block; /* Làm cho các liên kết thành khối để dễ chạm hơn */
+        padding: 20px; /* Tăng padding cho vùng chạm */
     }
 }
 
@@ -229,6 +233,7 @@ footer .social-links a:hover {
         width: 8%; /* Slightly smaller logo on very large screens */
         max-width: 100px;
     }
+    
 }
 
 /* CSS for the page transition effect */
@@ -244,16 +249,6 @@ footer .social-links a:hover {
     opacity: 1; /* Fully visible */
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
 #page-content {
     flex: 1 0 auto;
 }
@@ -271,18 +266,6 @@ main section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-html {
-  box-sizing: border-box;
-}
-* {
-  margin: 0;
-  padding: 0;
-}
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
 input,
 textarea,
 select,
@@ -578,4 +561,3 @@ grid-area: dùng cho phần tử con
   display: flex;
   flex-direction: column;
 }
-

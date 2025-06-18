@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="style/trang dm sp.css"/>
+    <script>
+        function showContent(contentId) {
+    const contentToShow = document.getElementById(contentId);
+
+    // Kiểm tra xem nội dung đã được hiển thị hay không
+    if (contentToShow.style.display === 'block') {
+        contentToShow.style.display = 'none'; // Nếu đã hiển thị, ẩn đi
+    } else {
+        const contents = document.querySelectorAll('.content');
+        contents.forEach(content => {
+            content.style.display = 'none'; // Ẩn tất cả các nội dung khác
+        });
+
+        contentToShow.style.display = 'block'; // Hiển thị nội dung được chọn
+    }
+            if (contentId === 'content9') {
+        alert('--!có những hàng hãng có sale vào lúc 6h-9h các bạn hãy vào săn nhé!--');
+        window.location.reload();
+    } else if (contentId === 'content7') {
+        alert('--!thương hiệu KITTY RESUGUE hãng đồ chơi nội địa!--');
+        window.location.reload();
+    } else if (contentId === 'content8') {
+        alert('--!hiện tại bạn chưa có khuyến mãi nào!--');
+        window.location.reload();
+    } 
+}
+
+
+    </script>
+</head>
+    
+<body>
+    <div id="all">
+<header id="header_home">
+    <div class="logo_searh">
+        
+        <img src="image/741dbb182980637.Y3JvcCwxOTIwLDE1MDEsMCw5.jpg" alt="logo" class="logo" >
+        <input type="text" id="searh" name="searh" placeholder="Tìm Kiếm">
+        <img src="image/kinh lup.webp" id="kinhlup">
+        <button  onclick="navigateTo('trang dk.html#login')" id="login">Đăng Kí</button>
+                <button  onclick="navigateTo('trang dk.html#register')" id="register">Đăng Nhập</button>
+            
+        </div>
+    <nav id="nav_bar">
+        <ul>
+                    <li><a href="trang chu.html">TRANG CHỦ</a></li>
+                    <li><a href="trang gt,lh.html"> GIỚI THIỆU LH</a></li>
+                    <li><a href="trang dk.html">ĐĂNG KÍ</a></li>
+                    <li><a href="trang dm sp.html"> DANH MỤC SP</a></li>
+                    <li><a href="trang chi tiet sp.html"> CHI TIẾT SẢN PHẨM</a></li>
+                    <li><a href="trang gio hang.html"> GIỎ HÀNG</a></li>
+                </ul>
+    </nav>
+    
+</header>
+        <main>
+            <div>
+            <div class="nav_left">
+        <ul class="expandable-list">
+            <li>
+                <label for="content-select">Chọn Đồ Chơi:</label>
+              <select id="content-select" onchange="showContent(this.value)"> 
+                <option value="content1">Siêu Anh Hùng</option> 
+                <option value="content2">Siêu Robot</option>
+                <option value="content3">Siêu Thú</option>
+                <option value="content4">Siêu Anh Hùng Robot</option>
+                </select> 
+            </li>
+        
+            <li onclick="showContent('content5')">Giới Tính</li>
+            <li onclick="showContent('content6')">Độ Tuổi</li>
+            <li onclick="showContent('content7')">Thương Hiệu</li>
+            <li onclick="showContent('content8')">Kuyến Mãi</li>
+            <li onclick="showContent('content9')">Flash Sale</li>
+        </ul>
+                <div class="content" id="content8" style="color: red"><b>--Không có khuyến mãi nào mới--</b></div>
+                <div class="content" id="content7" style="color: red"><b>--thương hiệu Kitty rescue đồ chơi nội địa--</b></div>
+                <div class="content" id="content9" style="color: red"><b>--Không có flash sale nào mới--</b></div>
+        </div>
+                <div class="f_bground"></div>
+                <div class="content" id="content6">
+                <img src="image/Screenshot 2024-06-01 175629.png" alt="12th">
+                <img src="image/Screenshot 2024-06-01 175640.png" alt="1-3t">
+                <img src="image/Screenshot 2024-06-01 175648.png" alt="3-6t">
+                <img src="image/Screenshot 2024-06-01 175711.png" alt="6-12t">
+                <img src="image/Screenshot 2024-06-01 175721.png" alt="hon12">
+                <span> 0-12 tháng </span>
+                <span>1 tới 3 tuổi</span>
+                <span>3 tới 6tuổi</span>
+                <span>6 tới 12 tuổi</span>
+                <span>hơn 12 tuổi</span>
+                <div class="f_bground"></div>
+            </div>
+                
+                <div class="content" id="content5">
+                <img src="image/Screenshot 2024-06-01 172944.png" alt="benam">
+                <img src="image/Screenshot 2024-06-01 173024.png" alt="benu">
+                <img src="image/Screenshot 2024-06-01 173035.png" alt="unisex">
+                <div class="nam_nu_unisex">
+                    <ul>
+                        <li><b>&nbsp; &nbsp; BÉ NAM</b></li>
+                        <li><b>BÉ NỮ </b></li>
+                        <li><b>UNISEX</b></li>
+                    </ul>
+                    
+                </div>
+            </div>
+        <div id="content1" class="content">
+            <div class="c_tent_1">
+                <ul>
+                    <li><img src="image/Screenshot 2024-06-01 184104.png" alt="#" class="batman">
+                    <p>&nbsp; &nbsp; &nbsp; &nbsp; Mô Hình Người Dơi</p>
+                    </li>
+                    <li><img src="image/Screenshot 2024-06-01 184655.png" alt="#" class="ngnhen">
+                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Mô Hình Người nhện</p>
+                    </li>
+                    <li><img src="image/Screenshot 2024-06-01 184602.png" alt="#" class="iron">
+                    <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mô Hình iroman</p>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+            
+        <div id="content2" class="content">
+            <div class="c_tent_2">
+                <ul>
+                    <li><img src="image/Screenshot 2024-06-01 184707.png" alt="#" class="Optimus">
+                    <p>&nbsp; &nbsp; &nbsp; Mô Hình Optimus Prime</p>
+                    </li>
+                    <li><img src="image/Screenshot 2024-06-01 184111.png" alt="#" class="Jett">
+                    <p>&nbsp; &nbsp; &nbsp;Jett Siêu Cấp SUPERWINGS</p>
+                    </li>
+                    <li><img src="image/Screenshot 2024-06-01 184120.png" alt="#" class="Paul">
+                    <p> Paul Siêu Cấp SUPERWINGS </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+               
+            <div class="c_tent_1">
+                <ul>
+                    <li><img src="image/Screenshot 2024-06-01 154026.png" class="batman">
+                    <p>&nbsp; &nbsp; &nbsp; &nbsp; Mô Hình Người Dơi</p>
+                    </li>
+                    <li><img src="image/Screenshot 2024-06-01 160448.png" alt="#" class="ngnhen">
+                    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Mô Hình Người nhện</p>
+                    </li>
+                    <li><img src="image/Screenshot 2024-06-01 160809.png" alt="#" class="iron">
+                    <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mô Hình iroman</p>
+                    </li>
+                </ul>
+            </div>
+            <div id="hiddenDiv">    
+            <div class="c_tent_2">
+                <ul>
+                    <li><img src="image/Screenshot 2024-06-01 164617.png" alt="#" class="Optimus">
+                    <p>&nbsp; &nbsp; &nbsp;Mô Hình Optimus Prime</p>
+                    </li>
+                    <li><img src="image/Screenshot 2024-06-01 165707.png" alt="#" class="Jett">
+                    <p>&nbsp; &nbsp; &nbsp;Jett Siêu Cấp SUPERWINGS</p>
+                    </li>
+                    <li><img src="image/Screenshot 2024-06-01 165726.png" alt="#" class="Paul">
+                    <p> &nbsp; &nbsp; Paul Siêu Cấp SUPERWINGS</p>
+                    </li>
+                </ul>
+            </div>
+                </div>
+                    </div>            
+    </main>
+        <footer id="foot">
+            <div class="end_lf">
+              <div class="f_bground"></div>  
+              <h3 style="color: red">Liên Hệ</h3>
+                <p>Zalo : pvtien </p>
+                <p>Đang làm việc và học tập tại trường<a href="https://www.bctech.edu.vn/"> bctech</a></p>
+                <p>Email : tiendepzai0908@gmail.com</p>
+                <p>Giờ làm việc : full t2-cn</p>
+                <p>Địa chỉ : 123xyz 3/2</p>
+            
+            
+            </div>
+            <div class="end_select_01">
+                <select >
+                <option>--ĐIỀU KHOẢN & CHÍNH SÁCH--</option>
+                <option>Chính sách giao hàng</option>
+                <option>Chính sách tích lũy điểm</option>
+                <option>Điều khoản điều kiện</option>
+            </select>
+                <select>
+                    <option>--hỗ trợ khách hàng--</option>
+                    <option>Chính sách bảo mật</option>
+                    <option>Chính sách bảo hành đổi trả hàng hóa</option>
+                    <option>Chính sách thanh toán</option>
+                    <option>Những câu hỏi thường gặp</option>
+                </select>
+            </div>
+            <div class="logo_02">
+            <img src="image/741dbb182980637.Y3JvcCwxOTIwLDE1MDEsMCw5.jpg" >
+            </div> 
+          <div class="f_bground"></div>
+        </footer>
+    </div>
+</body>
+</html>

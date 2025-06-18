@@ -254,6 +254,18 @@ footer .social-links a:hover {
 
 /* --- Basic Responsive Design --- */
 @media (max-width: 768px) {
+
+    nav.main-nav ul {
+    flex-direction: column; /* Stack nav items vertically */
+    padding: 0 10px; /* Add some padding */
+}
+nav.main-nav ul li {
+    margin: 5px 0; /* Adjust space between nav items */
+}
+nav.main-nav ul li a {
+    display: block; /* Make links block for easier tapping */
+    padding: 10px; /* Increase padding for touch targets */
+}
     header h1 {
         font-size: 2rem; /* Reduce h1 font size */
     }
@@ -359,4 +371,11 @@ footer {
     transform: scale(1.25);
     box-shadow: 0 8px 24px rgba(0,0,0,0.18);
     z-index: 2;
+}
+
+@media (min-width: 768px) {
+    nav ul li a {
+        display: block; /* Làm cho các liên kết thành khối để dễ chạm hơn */
+        padding: 20px; /* Tăng padding cho vùng chạm */
+    }
 }

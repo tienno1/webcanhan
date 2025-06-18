@@ -1,0 +1,88 @@
+body {
+    background-image: url("../Picture/Login/slider-3.jpg");
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.all h1{
+    margin-top:  20px;
+    color: white;
+}
+
+.container {
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.form-container {
+    display: none;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    transition: 1s;
+}
+
+h2:hover {
+    color: var(--Hover-icon);
+    transform: translateY(-6px);
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container form label {
+    margin-bottom: 5px;
+}
+
+.form-container form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-container form button:hover {
+    background-color: #004FA6;
+    transition: 1s;
+}
+
+.form-container p {
+    text-align: center;
+}
+
+.form-container p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-container p a:hover {
+    transition: 0.5s;
+    color: #FF0041;
+    text-decoration: underline;
+}
+
+/* Show the register form by default */
+#register-form {
+    display: block;
+}

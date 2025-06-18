@@ -38,6 +38,20 @@ header {
     position: relative; /* Needed for absolute positioning of the toggle button */
 }
 
+@media (min-width: 768px) {
+    
+    nav.main-nav ul li a {
+        display: block;       /* ✅ Fix: block để dễ click */
+        padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+}
+
 header h1 {
     margin: 0; /* Remove default h1 margin */
     font-size: 2.5rem; /* Large font size */
