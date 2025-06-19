@@ -200,6 +200,7 @@ footer .social-links a:hover {
         margin: 5px 0; /* Điều chỉnh khoảng cách giữa các mục nav */
     }
     nav ul li a {
+      color: black;
         display: block; /* Làm cho các liên kết thành khối để dễ chạm hơn */
         padding: 10px; /* Tăng padding cho vùng chạm */
     }

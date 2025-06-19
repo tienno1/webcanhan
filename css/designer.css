@@ -570,7 +570,6 @@ footer .social-links a {
         display: block;       /* ✅ Fix: block để dễ click */
         padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
         text-align: center;
-        color: #fff;
         text-decoration: none;
         font-weight: bold;
         border-radius: 5px;

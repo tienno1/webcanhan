@@ -582,7 +582,6 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         display: block;       /* ✅ Fix: block để dễ click */
         padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
         text-align: center;
-        color: #fff;
         text-decoration: none;
         font-weight: bold;
         border-radius: 5px;
