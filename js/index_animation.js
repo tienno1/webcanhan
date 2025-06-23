@@ -27,6 +27,38 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
+   // Back to Top & Go to Bottom Buttons
+    const backToTopBtn = document.getElementById('back-to-top');
+    const goToBottomBtn = document.getElementById('go-to-bottom');
+
+    window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.body.scrollHeight;
+
+    // Hiện nút lên đầu khi cuộn xuống
+    if (scrollY > 300) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+        }
+
+    // Ẩn nút xuống nếu gần cuối trang
+    if (scrollY + windowHeight >= docHeight - 100) {
+        goToBottomBtn.style.display = 'none';
+        } else {
+        goToBottomBtn.style.display = 'block';
+    }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    goToBottomBtn.addEventListener('click', () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+});
+
     // Note: The gentle text movement effect (.animated-text) is handled entirely by CSS animation (@keyframes)
     // and does not require JavaScript to be triggered based on scrolling in this example.
 });

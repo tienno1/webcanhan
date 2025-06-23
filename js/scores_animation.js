@@ -337,9 +337,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   updateTocListForPage(targetPage); // Call the new function
 
                    // Optional: Scroll main content to top after changing page
-                  if (mainContent) {
-                      mainContent.scrollTop = 0;
-                  }
+                  const nav = document.querySelector('nav');
+                    const navHeight = nav ? nav.offsetHeight : 0;
+                    window.scrollTo({ top: navHeight, behavior: 'smooth' });
+
              });
 
              paginationContainer.appendChild(nextButton);
@@ -373,7 +374,37 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update the TOC list for the historical page
         updateTocListForPage(pageFromState); // Call the new function
     });
+    // Back to Top & Go to Bottom Buttons
+    const backToTopBtn = document.getElementById('back-to-top');
+    const goToBottomBtn = document.getElementById('go-to-bottom');
 
+    window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.body.scrollHeight;
+
+    // Hiện nút lên đầu khi cuộn xuống
+    if (scrollY > 300) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+        }
+
+    // Ẩn nút xuống nếu gần cuối trang
+    if (scrollY + windowHeight >= docHeight - 100) {
+        goToBottomBtn.style.display = 'none';
+        } else {
+        goToBottomBtn.style.display = 'block';
+    }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    goToBottomBtn.addEventListener('click', () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+});
 
 }); // End of DOMContentLoaded listener
 

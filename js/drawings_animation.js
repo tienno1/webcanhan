@@ -288,59 +288,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderPagination(currentPage, totalPages) {
-        if (!paginationContainer) return;
-        paginationContainer.innerHTML = '';
-        const startButton = 1;
-        const endButton = totalPages;
-        for (let i = startButton; i <= endButton; i++) {
-            const button = document.createElement('a');
-            button.href = `drawings.html?page=${i}`;
-            button.classList.add('pagination-button');
-            if (i === currentPage) {
-                button.classList.add('active');
-            }
-            button.textContent = i;
-            button.addEventListener('click', function(event) {
-                event.preventDefault();
-                const targetPage = parseInt(this.textContent);
-                if (targetPage !== currentPage) {
-                    history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
-                    displayContentForPage(targetPage);
-                    renderPagination(targetPage, totalPages);
-                    setTimeout(() => {
-                        displayFirstContentOfCurrentPageInSidebar(targetPage);
-                    }, 50);
-                    updateTocListForPage(targetPage);
-                    if (mainContent) {
-                        mainContent.scrollTop = 0;
-                    }
-                }
-            });
-            paginationContainer.appendChild(button);
+    if (!paginationContainer) return;
+    paginationContainer.innerHTML = '';
+
+    const maxVisibleButtons = 3;
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+    if (endPage - startPage < maxVisibleButtons - 1) {
+        startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+    }
+
+    // Back button
+    if (currentPage > 1) {
+        const backButton = document.createElement('a');
+        backButton.href = `drawings.html?page=${currentPage - 1}`;
+        backButton.classList.add('pagination-button', 'prev');
+        backButton.innerHTML = '&lt; Back';
+        backButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetPage = currentPage - 1;
+            history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+            displayContentForPage(targetPage);
+            renderPagination(targetPage, totalPages);
+            displayFirstContentOfCurrentPageInSidebar(targetPage);
+            updateTocListForPage(targetPage);
+            const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                    window.scrollTo({ top: navHeight, behavior: 'auto' });
+        });
+        paginationContainer.appendChild(backButton);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        const button = document.createElement('a');
+        button.href = `drawings.html?page=${i}`;
+        button.classList.add('pagination-button');
+        if (i === currentPage) {
+            button.classList.add('active');
         }
-        if (currentPage < totalPages) {
-            const nextButton = document.createElement('a');
-            nextButton.href = `drawings.html?page=${currentPage + 1}`;
-            nextButton.classList.add('pagination-button', 'next');
-            nextButton.innerHTML = 'Next &gt;';
-            nextButton.addEventListener('click', function(event) {
-                event.preventDefault();
-                const targetPage = currentPage + 1;
+        button.textContent = i;
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetPage = parseInt(this.textContent);
+            if (targetPage !== currentPage) {
                 history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
                 displayContentForPage(targetPage);
                 renderPagination(targetPage, totalPages);
-                setTimeout(() => {
-                    displayFirstContentOfCurrentPageInSidebar(targetPage);
-                }, 50);
+                displayFirstContentOfCurrentPageInSidebar(targetPage);
                 updateTocListForPage(targetPage);
-                if (mainContent) {
-                    mainContent.scrollTop = 0;
-                }
-            });
-            paginationContainer.appendChild(nextButton);
-        }
+                const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                    window.scrollTo({ top: navHeight, behavior: 'auto' });
+            }
+        });
+        paginationContainer.appendChild(button);
     }
 
+    if (currentPage < totalPages) {
+        const nextButton = document.createElement('a');
+        nextButton.href = `drawings.html?page=${currentPage + 1}`;
+        nextButton.classList.add('pagination-button', 'next');
+        nextButton.innerHTML = 'Next &gt;';
+        nextButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetPage = currentPage + 1;
+            history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+            displayContentForPage(targetPage);
+            renderPagination(targetPage, totalPages);
+            displayFirstContentOfCurrentPageInSidebar(targetPage);
+            updateTocListForPage(targetPage);
+            const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                    window.scrollTo({ top: navHeight, behavior: 'auto' });
+        });
+        paginationContainer.appendChild(nextButton);
+    }
+}
     window.addEventListener('popstate', (event) => {
         const state = event.state;
         const pageFromState = state && state.page ? state.page : getCurrentPage();
@@ -506,4 +527,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Back to Top & Go to Bottom Buttons
+    const backToTopBtn = document.getElementById('back-to-top');
+    const goToBottomBtn = document.getElementById('go-to-bottom');
+
+    window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.body.scrollHeight;
+
+    // Hiện nút lên đầu khi cuộn xuống
+    if (scrollY > 300) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+        }
+
+    // Ẩn nút xuống nếu gần cuối trang
+    if (scrollY + windowHeight >= docHeight - 100) {
+        goToBottomBtn.style.display = 'none';
+        } else {
+        goToBottomBtn.style.display = 'block';
+    }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    goToBottomBtn.addEventListener('click', () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+});
 });

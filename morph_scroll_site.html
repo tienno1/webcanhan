@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iDesign Morph Scroll</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 220px;
+      padding: 40px 20px;
+      z-index: 10;
+      transition: background 0.8s ease, color 0.8s ease;
+    }
+
+    nav.light {
+      background: white;
+      color: black;
+    }
+
+    nav.dark {
+      background: #111;
+      color: white;
+    }
+
+    nav h2 {
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      margin-top: 60px;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 20px 0;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav.light ul li {
+      color: black;
+    }
+
+    nav.dark ul li {
+      color: white;
+    }
+
+    nav ul li.active {
+      color: orange;
+    }
+
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px;
+      height: 100vh;
+      transition: background 1s;
+    }
+
+    .text-block {
+      max-width: 600px;
+    }
+
+    .img-block img {
+      max-width: 400px;
+    }
+
+    #section1 {
+      background: #fff;
+    }
+
+    #section2 {
+      background: #2e5d48;
+      color: white;
+    }
+
+    .highlight {
+      font-size: 2.5em;
+      color: #ffc400;
+      font-weight: bold;
+    }
+
+    .content-left {
+      margin-left: 220px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="sideNav" class="light">
+    <img src="img/logo.png" alt="iDesign Logo" style="width: 100px; margin-bottom: 20px;" />
+    <ul>
+      <li class="active">TRANG CHỦ</li>
+      <li>DỊCH VỤ</li>
+      <li>DỰ ÁN</li>
+      <li>KHÁCH HÀNG</li>
+      <li>LIÊN HỆ</li>
+    </ul>
+  </nav>
+
+  <div id="fullpage" class="content-left">
+    <div class="section" data-nav-theme="light" id="section1">
+      <div class="text-block">
+        <h1>iDesign / Service</h1>
+        <p>Bệ phóng cho thương hiệu của bạn.</p>
+        <p>Chúng tôi tự tin là bệ phóng cho ý tưởng của bạn được \"tung hoành\".</p>
+      </div>
+      <div class="img-block">
+        <img src="your_image1.png" alt="Rocket teamwork" />
+      </div>
+    </div>
+
+    <div class="section" data-nav-theme="dark" id="section2">
+      <div class="text-block">
+        <p class="highlight">Đặt sản xuất<br/>Tặng<br/>Thiết kế</p>
+      </div>
+      <div class="img-block">
+        <img src="your_image2.png" alt="Gift Box" />
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
+  <script>
+    new fullpage('#fullpage', {
+      autoScrolling: true,
+      navigation: true,
+      anchors: ['trang-chu', 'dich-vu'],
+      onLeave: function(origin, destination, direction) {
+        const nav = document.getElementById('sideNav');
+        const theme = destination.item.dataset.navTheme;
+
+        // đổi màu nền thanh nav
+        if (theme === 'dark') {
+          nav.classList.remove('light');
+          nav.classList.add('dark');
+        } else {
+          nav.classList.remove('dark');
+          nav.classList.add('light');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

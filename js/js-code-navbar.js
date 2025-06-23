@@ -26,4 +26,36 @@ document.addEventListener('DOMContentLoaded', function () {
       nav.classList.toggle('open');
     });
   }
+
+  // Back to Top & Go to Bottom Buttons
+    const backToTopBtn = document.getElementById('back-to-top');
+    const goToBottomBtn = document.getElementById('go-to-bottom');
+
+    window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.body.scrollHeight;
+
+    // Hiện nút lên đầu khi cuộn xuống
+    if (scrollY > 300) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+        }
+
+    // Ẩn nút xuống nếu gần cuối trang
+    if (scrollY + windowHeight >= docHeight - 100) {
+        goToBottomBtn.style.display = 'none';
+        } else {
+        goToBottomBtn.style.display = 'block';
+    }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    goToBottomBtn.addEventListener('click', () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+});
 });

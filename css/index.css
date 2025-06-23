@@ -76,19 +76,43 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff; /* White text color */
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Bold text */
-    padding: 5px 10px; /* Padding around text */
-    transition: background-color 0.3s ease; /* Smooth background color transition on hover */
-    border-radius: 5px; /* Rounded corners */
+    position: relative;
+    color: #fff; /* Mặc định màu chữ */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow: hidden;
 }
 
-/* Hover and active link styles */
-nav ul li a:hover,
-nav ul li a.active { /* You can add an 'active' class to the current page link */
-    background-color: #555; /* Change background color on hover/active */
+/* Viền chạy hiệu ứng dưới chữ */
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff6f00;
+    transform-origin: bottom right;
+    transition: transform 0.8s ease-out;
 }
+
+/* Hover + Active: nền sáng hơn nav, chữ vẫn trắng */
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #666; /* Màu sáng hơn nav */
+    color: #ffbb87;          /* Màu chữ sáng nhẹ, không quá trắng */
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
 
 /* Kiểu cho phần Nội dung Chính (Main) của trang Giới thiệu */
 main {
@@ -200,7 +224,7 @@ footer .social-links a:hover {
         margin: 5px 0; /* Điều chỉnh khoảng cách giữa các mục nav */
     }
     nav ul li a {
-      color: black;
+      color: rgb(255, 255, 255);
         display: block; /* Làm cho các liên kết thành khối để dễ chạm hơn */
         padding: 10px; /* Tăng padding cho vùng chạm */
     }
@@ -220,6 +244,7 @@ footer .social-links a:hover {
 
 @media (min-width: 768px) {
     nav ul li a {
+      color: white;
         display: block; /* Làm cho các liên kết thành khối để dễ chạm hơn */
         padding: 20px; /* Tăng padding cho vùng chạm */
     }
@@ -409,7 +434,7 @@ grid-area: dùng cho phần tử con
   border-radius: 12px;
   width: 100%;
   object-fit: cover;
-  height: 200px;
+  height: 230px;
   flex-shrink: 0;
 }
 .post-content {
@@ -561,4 +586,43 @@ grid-area: dùng cho phần tử con
 .card {
   display: flex;
   flex-direction: column;
+}
+
+#back-to-top,
+#go-to-bottom {
+  
+  position: fixed;
+  z-index: 999;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#back-to-top {
+  bottom: 140px;
+  right: 10px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#go-to-bottom {
+  bottom: 80px;
+  right: 10px;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#back-to-top:hover,
+#go-to-bottom:hover {
+  background-color: #666;
 }

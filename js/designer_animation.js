@@ -275,9 +275,38 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderPagination(currentPage, totalPages) {
         if (!paginationContainer) return;
         paginationContainer.innerHTML = '';
-        const startButton = 1;
-        const endButton = totalPages;
-        for (let i = startButton; i <= endButton; i++) {
+
+        const maxVisibleButtons = 3;
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+        if (endPage - startPage < maxVisibleButtons - 1) {
+            startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+        }
+
+        // Nút Back
+        if (currentPage > 1) {
+            const backButton = document.createElement('a');
+            backButton.href = `designer.html?page=${currentPage - 1}`;
+            backButton.classList.add('pagination-button', 'prev');
+            backButton.innerHTML = '&lt; Back';
+            backButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetPage = currentPage - 1;
+                history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+                displayProjectsForPage(targetPage);
+                renderPagination(targetPage, totalPages);
+                displayFirstProjectOfCurrentPageInSidebar(targetPage);
+                updateTocListForPage(targetPage);
+                const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                window.scrollTo({ top: navHeight, behavior: 'auto' });
+                if (mainContent) mainContent.scrollTop = 0;
+            });
+            paginationContainer.appendChild(backButton);
+        }
+
+        // Các nút số trang (giới hạn 3 số gần currentPage)
+        for (let i = startPage; i <= endPage; i++) {
             const button = document.createElement('a');
             button.href = `designer.html?page=${i}`;
             button.classList.add('pagination-button');
@@ -285,42 +314,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 button.classList.add('active');
             }
             button.textContent = i;
-            button.addEventListener('click', function(event) {
+            button.addEventListener('click', function (event) {
                 event.preventDefault();
                 const targetPage = parseInt(this.textContent);
                 if (targetPage !== currentPage) {
                     history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
                     displayProjectsForPage(targetPage);
                     renderPagination(targetPage, totalPages);
-                    setTimeout(() => {
-                        displayFirstProjectOfCurrentPageInSidebar(targetPage);
-                    }, 50);
+                    displayFirstProjectOfCurrentPageInSidebar(targetPage);
                     updateTocListForPage(targetPage);
-                    if (mainContent) {
-                        mainContent.scrollTop = 0;
-                    }
+                    const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                    window.scrollTo({ top: navHeight, behavior: 'auto' });
+                    if (mainContent) mainContent.scrollTop = 0;
                 }
             });
             paginationContainer.appendChild(button);
         }
+
+        // Nút Next
         if (currentPage < totalPages) {
             const nextButton = document.createElement('a');
             nextButton.href = `designer.html?page=${currentPage + 1}`;
             nextButton.classList.add('pagination-button', 'next');
             nextButton.innerHTML = 'Next &gt;';
-            nextButton.addEventListener('click', function(event) {
+            nextButton.addEventListener('click', function (event) {
                 event.preventDefault();
                 const targetPage = currentPage + 1;
                 history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
                 displayProjectsForPage(targetPage);
                 renderPagination(targetPage, totalPages);
-                setTimeout(() => {
-                    displayFirstProjectOfCurrentPageInSidebar(targetPage);
-                }, 50);
+                displayFirstProjectOfCurrentPageInSidebar(targetPage);
                 updateTocListForPage(targetPage);
-                if (mainContent) {
-                    mainContent.scrollTop = 0;
-                }
+                const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                    window.scrollTo({ top: navHeight, behavior: 'auto' });
+                if (mainContent) mainContent.scrollTop = 0;
             });
             paginationContainer.appendChild(nextButton);
         }
@@ -541,4 +568,6 @@ flipCard.addEventListener('mouseleave', function() { // Thêm sự kiện mousel
             this.classList.remove('hold');
         });
     });
+
+    
 });

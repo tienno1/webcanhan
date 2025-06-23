@@ -81,21 +81,44 @@ nav ul {
     flex-wrap: wrap;
 }
 nav ul li {
-    margin: 0 10px;
+    margin: 0 15px;
 }
 nav ul li a {
-    color: #fff;
+    position: relative;
+    color: #fff; /* Mặc định màu chữ */
     text-decoration: none;
     font-weight: bold;
     padding: 5px 10px;
-    transition: background-color 0.3s ease;
     border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow: hidden;
 }
+
+/* Viền chạy hiệu ứng dưới chữ */
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff6f00;
+    transform-origin: bottom right;
+    transition: transform 0.8s ease-out;
+}
+
+/* Hover + Active: nền sáng hơn nav, chữ vẫn trắng */
 nav ul li a:hover,
-nav ul li a.active,
-nav.main-nav ul li a:hover,
-nav.main-nav ul li a.active {
-    background-color: #555;
+nav ul li a.active {
+    background-color: #666; /* Màu sáng hơn nav */
+    color: #ffbb87;          /* Màu chữ sáng nhẹ, không quá trắng */
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 /* Main content & TOC container */
@@ -154,35 +177,43 @@ nav.main-nav ul li a.active {
 /* TOC content display */
 #toc-content-display {
     margin-top: 20px;
-    text-align: center;
     padding-top: 20px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #ddd; /* Separator line */
+    /* Ensure this area is visible to display content */
     display: block;
+    /* Add some padding and styling for the displayed content */
     padding: 15px;
-    background-color: #fff;
+    background-color: #fff; /* White background for displayed content */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    /* Add flexbox to the container to arrange images horizontally */
+    display: flex;
+    flex-wrap: wrap; /* Allow images to wrap to the next line if needed */
+    gap: px; /* Adjusted gap for better spacing with 24.5% width */
+    justify-content: center; /* Center images if they don't fill the line */
 }
+
+#toc-content-display img {
+    /* Set width to 24.5% to allow approximately 4 images per row with gap */
+    width: 100%;
+    max-width: 100%; /* Ensure images don't exceed container width */
+    display: inline-block; /* Arrange images horizontally */
+    margin: 0; /* Remove margin from individual images if using gap on container */
+    border-radius: 5px; /* Rounded corners for images */
+    object-fit: cover; /* Use cover to ensure images fill their allocated space */
+}
+
 #toc-content-display h3 {
-    color: #555;
+    color: #333; /* Darker color for content titles */
     margin-top: 0;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-#toc-content-display img,
-#toc-content-display video {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 10px auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    width: 100%; /* Ensure heading takes full width above images */
 }
 #toc-content-display p {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Smaller font size for sidebar text */
     color: #555;
     margin-bottom: 10px;
+    width: 100%; /* Ensure paragraphs take full width above images */
 }
 
 /* Main content area */
@@ -334,53 +365,74 @@ footer .social-links a:hover {
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
-/* Pagination Styles */
+/* --- Pagination Styles --- */
 .pagination-container {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #fff;
-    border-top: 1px solid #ddd;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    text-align: center; /* Center the pagination buttons */
+    padding: 10px 0; /* Add padding */
+    background-color: #fff; /* White background */
+    border-top: 1px solid #ddd; /* Top border */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Shadow above */
+
+    /* Make the pagination bar fixed at the bottom */
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1000; /* Ensure it's above other content */
 }
+
+
 .pagination-button {
     display: inline-block;
     padding: 10px 15px;
     margin: 0 5px;
     border: 1px solid #ccc;
-    border-radius: 44px;
+    border-radius: 4px;
     text-decoration: none;
     color: #333;
     background-color: #fff;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
-    min-width: 40px;
-    text-align: center;
 }
+
 .pagination-button:hover {
     background-color: #f0f0f0;
     border-color: #bbb;
 }
+
 .pagination-button.active {
     background-color: #007bff;
     color: white;
     border-color: #007bff;
     font-weight: bold;
 }
+
 .pagination-button.next {
     font-weight: bold;
     color: #007bff;
-    border: none;
-    background-color: transparent;
+    border: none; /* Remove border for next button */
+    background-color: transparent; /* Transparent background for next button */
 }
+
 .pagination-button.next:hover {
     text-decoration: underline;
     background-color: transparent;
 }
+
+.pagination-button.prev {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.pagination-button.prev:hover {
+    text-decoration: underline;
+}
+
 
 /* Responsive Design (Mobile First) */
 header h1 { font-size: 1.8rem; }
@@ -463,15 +515,7 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         overflow: visible;
     }
     .toc-toggle-button { display: none; }
-    .toc-wrapper {
-        position: static;
-        top: auto; left: auto; width: auto; height: auto;
-        background-color: transparent;
-        z-index: auto;
-        display: block;
-        opacity: 1;
-        transition: none;
-    }
+
     .toc {
         width: 350px;
         padding: 20px;
@@ -698,3 +742,41 @@ nav.main-nav ul li a { display: block; padding: 10px; }
   width: 20px;
 }
 
+#back-to-top,
+#go-to-bottom {
+  
+  position: fixed;
+  z-index: 999;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#back-to-top {
+  bottom: 140px;
+  right: 10px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#go-to-bottom {
+  bottom: 80px;
+  right: 10px;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#back-to-top:hover,
+#go-to-bottom:hover {
+  background-color: #666;
+}
