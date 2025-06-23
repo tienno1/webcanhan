@@ -1,0 +1,280 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ================= NAVIGATION ================== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  padding: 40px 20px;
+  z-index: 10;
+  transition: background 0.8s ease, color 0.8s ease;
+}
+
+nav.light {
+  background: white;
+  color: black;
+}
+nav.dark {
+  background: rgb(0, 0, 0);
+  color: white;
+}
+
+nav.green {
+  background: rgb(72, 255, 0);
+  color: rgb(0, 0, 0);
+}
+
+nav ul {
+  list-style: none;
+  margin-top: 60px;
+  padding: 0;
+}
+nav ul li {
+  margin: 20px 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+nav.light ul li {
+  color: black;
+}
+nav.dark ul li {
+  color: white;
+}
+nav ul li.active {
+  color: #ff6600;
+}
+
+/* =================== PAGE SECTIONS =================== */
+#fullpage {
+  margin-left: 220px; /* trừ phần nav bên trái */
+}
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  transition: background 1s;
+}
+.section-content {
+  display: flex;
+  flex-direction: row;
+  width: calc(100vw - 220px);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ================= SECTION 1 & 2: Layout chung ================= */
+.profile-left {
+  flex: 3;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-left img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-right {
+  flex: 2;
+  max-width: 700px;
+  padding: 80px 60px 80px 100px;
+  background: #2d2f33;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+.profile-right h1 {
+  font-size: 3.5em;
+  line-height: 1.2;
+  margin: 0 0 20px;
+}
+.profile-right h1 strong {
+  display: block;
+  font-weight: bold;
+}
+.roles p {
+  margin: 2px 0;
+  color: #00ffc8;
+  font-weight: bold;
+}
+.bio {
+  margin-top: 20px;
+  font-size: 1em;
+  line-height: 1.6;
+  color: #ccc;
+}
+.buttons {
+  margin-top: 30px;
+}
+.buttons button {
+  margin: 5px 10px 5px 0;
+  padding: 10px 14px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  background: #444;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.buttons button:hover {
+  background: #666;
+}
+
+/* ================= SECTION 3: Ziczac Skill Block ================= */
+.skill-section {
+  padding: 0;
+  background: none;
+  color: black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.skill-title {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 40px;
+  color: black;
+}
+.skill-row {
+  display: flex;
+  justify-content: center; /* Căn giữa các cặp kỹ năng */
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  width: 90%; /* Chiều rộng cho toàn bộ hàng chứa 2 cặp */
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+  gap: 60px; /* Khoảng cách giữa 2 cặp skill-pair trong cùng một hàng */
+}
+
+.skill-pair {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Khoảng cách giữa văn bản và hình ảnh trong cùng một cặp */
+  flex: 1 1 auto; /* Cho phép mỗi cặp co giãn */
+  min-width: 450px; /* Đảm bảo mỗi cặp không quá nhỏ */
+  justify-content: center; /* Căn giữa nội dung trong mỗi cặp */
+}
+
+.skill-pair.reverse {
+  flex-direction: row-reverse;
+}
+
+.skill-text {
+  background: white;
+  color: black;
+  padding: 30px 40px;
+  flex: 1; /* Cho phép văn bản co giãn trong skill-pair */
+  font-size: 1.3em;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  width: 1200px;
+  min-width: 200px; /* Đảm bảo text không quá nhỏ */
+}
+.skill-text:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.skill-image {
+  flex: none; /* Giữ kích thước cố định cho hình ảnh */
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skill-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 15%; /* Bo tròn hình ảnh */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* =================== RESPONSIVE =================== */
+@media screen and (max-width: 1024px) { /* Điều chỉnh breakpoint cho màn hình lớn hơn */
+  .skill-row {
+    flex-direction: column; /* Xếp chồng các cặp trên màn hình nhỏ hơn */
+    gap: 30px; /* Khoảng cách giữa các cặp khi xếp chồng */
+  }
+  .skill-pair {
+    width: 90%; /* Làm cho mỗi cặp rộng hơn khi xếp chồng */
+    min-width: unset;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+  #fullpage {
+    margin-left: 0;
+  }
+  .section-content {
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+  }
+  .profile-left,
+  .profile-right,
+  .skill-text,
+  .skill-image {
+    width: 100%;
+    flex: unset;
+  }
+  .profile-right {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .skill-title {
+    text-align: center;
+  }
+  .skill-row {
+    flex-direction: column; /* Vẫn giữ xếp chồng */
+  }
+  .skill-pair {
+    flex-direction: column; /* Xếp chồng hình ảnh và văn bản trong mỗi cặp */
+    text-align: center;
+    width: 100%;
+  }
+  .skill-pair.reverse {
+    flex-direction: column; /* Đảm bảo vẫn xếp chồng */
+  }
+  .skill-text, .skill-image {
+    margin: 10px 0; /* Điều chỉnh khoảng cách dọc cho các phần tử được xếp chồng */
+    width: auto; /* Cho phép tự động điều chỉnh chiều rộng */
+  }
+  .skill-text {
+      min-width: unset; /* Bỏ min-width để linh hoạt hơn */
+  }
+}
