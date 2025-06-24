@@ -56,16 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBackgroundBtn = document.getElementById('next-background');
 
     const backgroundImages = [
-        '../img/nền.jpg',
-        '../img/hồng.jpg',
-        '../img/hồng x2.jpg',
-        '../img/hinh nen chi trinh.jpg',
-        '../img/hinh nen chi trinh 2.jpg',
-        '../img/tím.png',
-        '../img/thiên thần ác ma.jpg',
-        '../img/phong cách.jpg',
-        '../img/cổ trang.jpg',
-        '../img/biển.jpg'
+        'img/nền.jpg',
+        'img/hồng.jpg',
+        'img/hồng x2.jpg',
+        'img/hinh nen chi trinh.jpg',
+        'img/hinh nen chi trinh 2.jpg',
+        'img/tím.png',
+        'img/thiên thần ác ma.jpg',
+        'img/phong cách.jpg',
+        'img/cổ trang.jpg',
+        'img/biển.jpg'
     ];
 
     let currentImageIndex = 0;
