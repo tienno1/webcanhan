@@ -26,6 +26,7 @@
     <nav class="main-nav">
         <ul>
             <li><a href="index.html">Giới thiệu</a></li>
+            <li><a href="portfolio.html">About Me</a></li>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="designer.html" class="active">Design</a></li>
             <li><a href="scores.html">Điểm Số</a></li>
@@ -59,7 +60,7 @@
             <h3>Mục lục</h3>
             <ul id="toc-list">
                 <li><a href="#design-Lookbook" style="text-align:center">Look Book Tết ở làng địa ngục</a></li>
-                <li><a href="#design-catalog" style="text-align:center">catalog thiết kế cẩm nang</a></li>
+                <li><a href="#design-catalog" style="text-align:center">Catalog thiết kế cẩm nang</a></li>
                 <li><a href="#design-Animation" style="text-align:center">Phim hoạt hình Rùa và thỏ</a></li>
                 <li><a href="#design-Baocao" style="text-align:center">Cuốn báo cáo thực hành in ấn</a></li>
                 <li style="text-align: justify;"><a href="#design-poster1">Poster kỉ niệm 50 năm Ngày Giải phóng miền Nam, thống nhất đất nước</a></li>
@@ -125,7 +126,7 @@
 
                 <section id="design-catalog" class="fade-in-element project" data-page="1">
                     <div class="project-content">
-                        <h3>Design catalog cho Bài đồ án tốt nghiệp</h3>
+                        <h3>Design Catalog cho Bài đồ án tốt nghiệp</h3>
                         <div class="animated-text" style="text-align: center;">
                             <img src="img/hình new final/file FINAL_trang bìa .jpg" alt="1" width="24.5%">
                             <img src="img/hình new final/file FINAL_trang 1.jpg" alt="2" width="24.5%">
@@ -430,7 +431,7 @@
                     <div class="mask">
                         <div class="project-content">
                             <h3>Website 2</h3>
-                            <img src="img/web1.jpg" with="100%" alt="mask">
+                            <img src="img/web1.jpg" width="100%" alt="mask">
                         </div>
                     </div>
                 </section>
@@ -439,7 +440,7 @@
                     <div class="mask">
                         <div class="project-content">
                             <h3>Website học Trong lớp</h3>
-                            <img src="img/web3.png" with="100%" alt="mask">
+                            <img src="img/web3.png" width="100%" alt="mask">
                         </div>
                     </div>
                     <button class="lift-on-hover" style="margin-top: 10px;margin-bottom: 30px; padding: 10px;border-radius: 10px; background-color: rgb(0, 140, 255);margin-left: 330px;"><a href="web-old/Bai-tap-ket-thuc-mon/chu.html" style="color: aliceblue;">Xem chi tiết Website</a></button>
@@ -449,7 +450,7 @@
                     <div class="mask">
                         <div class="project-content">
                             <h3>Website Bài tập kết thúc môn</h3>
-                            <img src="img/web2.png" with="100%" alt="mask">
+                            <img src="img/web2.png" width="100%" alt="mask">
                         </div>
                     </div>
                     <button class="lift-on-hover" style="margin-top: 10px; margin-bottom: 30px; padding: 10px;border-radius: 10px; background-color: rgb(0, 140, 255);margin-left: 330px;"><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html" style="color: aliceblue;">Xem chi tiết Website</a></button>
@@ -475,30 +476,6 @@
 
 
     <script src="js/designer_animation.js"></script>
-    <script>
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Nếu là link ngoài thì bỏ qua
-                if (this.target === '_blank' || this.href.startsWith('http')) return;
-                e.preventDefault();
-                const pageContent = document.getElementById('page-content');
-                if (pageContent) {
-                    pageContent.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location = this.href;
-                    }, 400); // Thời gian khớp với transition trong CSS
-                } else {
-                    window.location = this.href;
-                }
-            });
-        });
-        window.addEventListener('DOMContentLoaded', function() {
-            const pageContent = document.getElementById('page-content');
-            if (pageContent) pageContent.classList.add('fade-in');
-        });
-    
-    </script>
-
     <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
     <script src="js/js-code-navbar.js"></script>
     <div id="image-modal" class="image-modal">
@@ -514,5 +491,6 @@
     <!-- Nút đi xuống -->
     <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
     <script src="js/next_tab.js"></script>
+    <script src="js/link_page.js"></script>
 </body>
 </html>

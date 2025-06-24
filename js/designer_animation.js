@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pageContent.classList.remove('fade-out');
         setTimeout(() => {
             pageContent.classList.add('fade-in');
-        }, 50);
+        }, 500);
     }
 
     // --- Search Functionality ---

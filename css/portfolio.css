@@ -1,0 +1,663 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Điều chỉnh theo chiều cao của header cố định */
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ================= NAVIGATION ================== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  padding: 40px 20px;
+  z-index: 10;
+  transition: background 0.8s ease, color 0.8s ease; /* transition cho màu nền và màu chữ của nav */
+}
+
+/* Các theme cho nav */
+nav.light {
+  background: white;
+  color: black; /* Màu chữ mặc định cho theme light */
+}
+nav.dark {
+  background: rgb(0, 0, 0);
+  color: white; /* Màu chữ mặc định cho theme dark */
+}
+nav.green {
+  background: rgb(22, 101, 22); /* Màu xanh lá */
+  color: rgb(255, 255, 255); /* Màu chữ trắng để tương phản với nền xanh */
+}
+nav.blue {
+  background: rgb(126, 218, 255); /* Màu xanh lá */
+  color: rgb(0, 0, 0); /* Màu chữ trắng để tương phản với nền xanh */
+}
+
+nav ul {
+  list-style: none;
+  margin-top: 60px;
+  padding: 0;
+}
+nav ul li {
+  margin: 20px 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease; /* Transition cho màu chữ của li */
+}
+
+/* Quan trọng: Điều chỉnh thẻ <a> bên trong li */
+nav ul li a {
+  text-decoration: none; /* Xóa gạch chân */
+  color: inherit; /* Kế thừa màu từ thẻ li cha (và từ nav cha nữa) */
+  display: block; /* Để toàn bộ vùng li có thể click được */
+  padding: 5px 0; /* Thêm padding nếu muốn khu vực click lớn hơn */
+}
+
+/* Màu cam cho mục active - NÊN ĐẶT SAU CÁC QUY TẮC MÀU KHÁC để đảm bảo ghi đè */
+nav ul li.active {
+  color: #ff6600; /* Màu cam luôn nổi bật */
+}
+
+
+/* =================== PAGE SECTIONS =================== */
+#fullpage {
+  margin-left: 220px; /* trừ phần nav bên trái */
+}
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  transition: background 1s;
+}
+.section-content {
+  display: flex;
+  flex-direction: row;
+  width: calc(100vw - 220px);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ================= SECTION 1 & 2: Layout chung ================= */
+.profile-left {
+  flex: 3;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-left img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-right {
+  flex: 2;
+  max-width: 700px;
+  padding: 80px 60px 80px 100px;
+  background: #2d2f33;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+.profile-right h1 {
+  font-size: 3.5em;
+  line-height: 1.2;
+  margin: 0 0 20px;
+}
+.profile-right h1 strong {
+  display: block;
+  font-weight: bold;
+}
+.roles p {
+  margin: 2px 0;
+  color: #00ffc8;
+  font-weight: bold;
+}
+.bio {
+  margin-top: 20px;
+  font-size: 1em;
+  line-height: 1.6;
+  color: #ccc;
+}
+.buttons {
+  margin-top: 30px;
+}
+
+.buttons_1 {
+  margin-top: -30px;
+  margin-bottom: 10px;
+}
+
+.buttons button {
+  margin: 5px 10px 5px 0;
+  padding: 10px 14px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  background: #444;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.buttons button:hover {
+  background: #666;
+}
+
+.buttons_1 button {
+  margin: 5px 10px 5px 0;
+  padding: 10px 14px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  background: #a1a1a1;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: background 0.8s;
+}
+
+.buttons_1 button:hover {
+  color: white;
+  background: #444;
+  transition: background 0.8s;
+}
+
+/* ================= SECTION 3: Ziczac Skill Block ================= */
+.skill-section {
+  padding: 0;
+  background: none;
+  color: black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.skill-title {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 40px;
+  color: black;
+}
+.skill-row {
+  display: flex;
+  justify-content: center; /* Căn giữa các cặp kỹ năng */
+  align-items: center;
+  margin-bottom: 30px; /* Khoảng cách giữa các hàng */
+  flex-wrap: wrap; /* Cho phép các cặp xuống dòng */
+  width: 100%; /* Chiếm hết chiều rộng có thể */
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+  gap: 40px; /* Khoảng cách giữa các skill-pair trong cùng một hàng */
+}
+
+.skill-pair {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Khoảng cách giữa văn bản và hình ảnh trong cùng một cặp */
+  flex: 0 0 auto; /* Không co giãn, kích thước tự động */
+  width: calc(50% - 20px); /* Đảm bảo mỗi cặp chiếm khoảng 50% với gap */
+  min-width: 400px; /* Giới hạn chiều rộng tối thiểu cho mỗi cặp */
+  justify-content: center; /* Căn giữa nội dung trong mỗi cặp */
+}
+
+.skill-pair.reverse {
+  flex-direction: row-reverse;
+}
+
+.skill-text {
+  background: white;
+  color: black;
+  padding: 25px 35px; /* Điều chỉnh padding */
+  flex: 1; /* Cho phép văn bản co giãn trong skill-pair */
+  font-size: 1.2em; /* Điều chỉnh cỡ chữ */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  min-width: 200px; /* Đảm bảo text không quá nhỏ */
+  height: 100%; /* Đảm bảo chiều cao phù hợp */
+  display: flex; /* Dùng flex để căn giữa nội dung bên trong */
+  align-items: center;
+  justify-content: center;
+}
+.skill-text:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.skill-image {
+  flex: none; /* Giữ kích thước cố định cho hình ảnh */
+  width: 120px; /* Điều chỉnh kích thước hình ảnh */
+  height: 120px; /* Điều chỉnh kích thước hình ảnh */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skill-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 20%; /* Bo tròn hình ảnh */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ================= SECTION 4: Products Grid ================= */
+.products-section {
+  flex-direction: column;
+  padding: 0px 40px;
+  background: #333;
+  color: white;
+  justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+  align-items: center;
+  height: 100vh; /* Đảm bảo section chiếm toàn bộ chiều cao khung nhìn */
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao */
+}
+
+.products-title {
+  font-size: 2em; /* Tăng kích thước tiêu đề */
+  margin-bottom: 30px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Tăng min-width của mỗi cột */
+  gap: 40px; /* Tăng khoảng cách giữa các sản phẩm */
+  width: 100%;
+  max-width: 1300px; /* Tăng chiều rộng tối đa của lưới */
+  justify-content: center; /* Căn giữa các item trong grid container */
+  align-items: center;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: black;
+  width: 100%; /* Đảm bảo card chiếm hết chiều rộng cột */
+  max-width: 400px; /* Đặt max-width cho từng card để không quá lớn */
+  margin: auto; /* Căn giữa từng card trong cột của nó nếu có không gian thừa */
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.product-image-wrapper {
+  width: 100%;
+  height: 220px; /* Tăng chiều cao cố định cho ảnh */
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.product-details {
+  padding: 25px; /* Tăng padding */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 1.6em; /* Tăng kích thước tiêu đề sản phẩm */
+  margin-bottom: -30px;
+  margin-top: -10px;
+  line-height: 1.3;
+  font-weight: bold;
+}
+
+.product-description {
+  font-size: 1em; /* Tăng kích thước mô tả */
+  color: #666;
+  margin-bottom: 18px;
+  line-height: 1.6;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Tăng lên 3 dòng nếu muốn hiển thị nhiều hơn */
+  -webkit-box-orient: vertical;
+}
+
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid #eee;
+}
+
+.author {
+  font-size: 0.9em; /* Tăng kích thước tác giả */
+}
+
+.author-avatar {
+  width: 28px; /* Tăng kích thước avatar */
+  height: 28px;
+  margin-right: 10px;
+}
+
+.category {
+  font-size: 0.9em; /* Tăng kích thước category */
+  padding: 5px 10px;
+}
+
+.product-footer {
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.live-button {
+  padding: 10px 15px; /* Tăng padding nút */
+  font-size: 1em; /* Tăng kích thước chữ nút */
+}
+
+.views {
+  font-size: 1em; /* Tăng kích thước chữ views */
+}
+
+/* Responsive cho phần sản phẩm */
+@media screen and (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Điều chỉnh min-width cho màn hình tablet */
+    max-width: 900px; /* Giới hạn chiều rộng tối đa */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .products-section {
+    padding: 40px 20px; /* Giảm padding tổng thể */
+  }
+  .products-title {
+    font-size: 2.5em; /* Giảm kích thước tiêu đề */
+    margin-bottom: 30px;
+  }
+  .products-grid {
+    grid-template-columns: 1fr; /* 1 cột trên màn hình nhỏ */
+    gap: 25px; /* Giảm khoảng cách */
+    padding: 0 15px;
+  }
+  .product-card {
+    max-width: unset; /* Bỏ giới hạn max-width để card chiếm hết chiều rộng */
+  }
+  .product-image-wrapper {
+    height: 180px; /* Giảm chiều cao ảnh trên mobile */
+  }
+  .product-name {
+    font-size: 1.4em;
+  }
+  .product-description {
+    font-size: 0.9em;
+    -webkit-line-clamp: 4; /* Thêm dòng nếu cần */
+  }
+}
+
+/* ... (giữ nguyên các CSS hiện có cho các section khác) ... */
+
+/* ================= SECTION 4: Product Carousel ================= */
+.products-carousel-section-content {
+  flex-direction: column;
+  padding: 0px 20px; /* Điều chỉnh padding */
+  background: #333;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden; /* Quan trọng: ẩn nội dung tràn ra ngoài */
+  position: relative; /* Cho phép định vị tương đối cho các nút */
+}
+
+.products-carousel-title {
+  margin-top: 0px;
+  font-size: 2em; /* Tăng kích thước tiêu đề */
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
+}
+
+.products-carousel-container {
+  width: 95%; /* Chiều rộng của container carousel */
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+  position: relative;
+  overflow: hidden; /* Quan trọng để chỉ hiển thị 3 thẻ sản phẩm */
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+}
+
+.products-wrapper {
+  display: flex; /* Hiển thị các thẻ cạnh nhau */
+  transition: transform 0.5s ease-in-out; /* Hiệu ứng trượt mượt mà */
+  /* Thêm khoảng cách giữa các thẻ bằng gap hoặc margin */
+  gap: 30px; /* Khoảng cách giữa các thẻ */
+}
+
+/* Các thẻ sản phẩm bên trong wrapper */
+.product-card {
+  min-width: calc((100% / 3) - (2 / 3)); /* Chiếm 1/3 chiều rộng trừ đi gap */
+  /* (100% / số thẻ hiển thị) - ( (số thẻ hiển thị - 1) * gap ) / số thẻ hiển thị ) */
+  /* Hoặc đơn giản hơn: calc(100% / 3) - 20px nếu gap là 30px và muốn mỗi thẻ nhỏ hơn một chút*/
+  flex-shrink: 0; /* Không cho thẻ co lại */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.8s ease, box-shadow 0.8s ease;
+  color: black;
+  max-width: 370px;
+  /* Không cần margin: auto ở đây vì flexbox sẽ tự động sắp xếp */
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.product-image-wrapper {
+  width: 100%;
+  height: 370px; /* Chiều cao cố định cho ảnh */
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.product-details {
+  padding: 20px; /* Padding nội dung thẻ */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 1.5em; /* Kích thước tiêu đề sản phẩm */
+  line-height: 1.3;
+  font-weight: bold;
+}
+
+.product-description {
+  font-size: 0.95em; /* Kích thước mô tả */
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Giới hạn 3 dòng */
+  -webkit-box-orient: vertical;
+}
+
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Đẩy xuống cuối */
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.author {
+  font-size: 0.85em;
+}
+
+.author-avatar {
+  width: 25%;
+  height: 25%;
+  margin-right: 8px;
+}
+
+.category {
+  font-size: 0.85em;
+  padding: 4px 8px;
+}
+
+.product-footer {
+  margin-top: 15px;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+}
+
+.live-button {
+  padding: 8px 12px;
+  font-size: 0.9em;
+  border-radius: 6px;
+  background-color: #ff6600; /* Màu cam */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.live-button:hover {
+  background-color: #e65c00;
+}
+
+.views {
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+/* Các nút điều hướng carousel */
+.carousel-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  font-size: 1.8em;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 10%;
+  transition: background 0.3s ease, opacity 0.3s ease;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-nav-button:hover {
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 1;
+}
+
+.carousel-nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.prev-button {
+  left: 0px; /* Điều chỉnh vị trí từ trái */
+}
+
+.next-button {
+  right: 0px; /* Điều chỉnh vị trí từ phải */
+}
+
+/* Responsive cho Product Carousel */
+@media screen and (max-width: 1024px) {
+  .products-carousel-container {
+    max-width: 900px;
+  }
+  .product-card {
+    min-width: calc((100% / 2) - (1 * 30px / 2)); /* 2 thẻ trên màn hình tablet */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .products-carousel-section-content {
+    padding: 40px 10px;
+  }
+  .products-carousel-title {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+  }
+  .products-carousel-container {
+    width: 95%;
+    padding: 10px;
+  }
+  .product-card {
+    min-width: 100%; /* 1 thẻ trên màn hình di động */
+  }
+  .product-image-wrapper {
+    height: 160px;
+  }
+  .carousel-nav-button {
+    padding: 10px 14px;
+    font-size: 1.4em;
+    left: 5px;
+    right: 5px;
+  }
+}
+
+.nhan_vo a{
+  text-decoration: none;
+}
+
+.btn {
+  padding: 5px;
+  margin-left: 178px;
+  background-color: rgb(105, 185, 255);
+  border-radius: 10px;
+  height: 30px;
+}

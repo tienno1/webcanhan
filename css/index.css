@@ -161,11 +161,11 @@ main h1::after {
 
 
 /* Styles for the Footer section */
-footer {
+footer {margin-bottom: -80px;
     background-color: #333; /* Dark background color */
     color: #fff; /* White text color */
     text-align: center; /* Center content */
-    padding: 1rem 0; /* Top and bottom padding */
+    padding: 20px 0; /* Top and bottom padding */
     margin-top: 30px; /* Space above the footer */
 }
 
@@ -277,9 +277,6 @@ footer .social-links a:hover {
 
 #page-content {
     flex: 1 0 auto;
-}
-footer {
-    flex-shrink: 0;
 }
 
 main section {
