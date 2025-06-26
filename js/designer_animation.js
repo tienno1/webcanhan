@@ -59,23 +59,55 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         removeHighlights();
-        const elementsToSearch = mainContent.querySelectorAll('p, h2, h3, li');
-        let foundElements = [];
+        const elementsToSearch = mainContent.querySelectorAll('.project[style*="display: block"] p, .project[style*="display: block"] h3, #design-philosophy[style*="display: block"] p, #design-philosophy[style*="display: block"] h2');
+        let firstFoundElement = null;
+        let firstFoundPage = null;
         elementsToSearch.forEach(element => {
             const originalText = element.innerHTML;
             const lowerCaseText = originalText.toLowerCase();
             if (lowerCaseText.includes(searchTerm)) {
-                foundElements.push(element);
+                if (!firstFoundElement) {
+                    firstFoundElement = element;
+                    const parentSection = element.closest('section[data-page]');
+                    if (parentSection) {
+                        firstFoundPage = parseInt(parentSection.getAttribute('data-page'));
+                    } else {
+                        firstFoundPage = 1;
+                    }
+                }
                 const regex = new RegExp(searchTerm, 'gi');
                 const highlightedText = originalText.replace(regex, match => `<span class="highlight">${match}</span>`);
                 element.innerHTML = highlightedText;
             }
         });
-        if (foundElements.length > 0) {
-            foundElements[0].scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        if (firstFoundElement) {
+            const currentPage = getCurrentPage();
+            const totalPages = getTotalPages();
+            if (firstFoundPage && firstFoundPage !== currentPage) {
+                history.pushState({ page: firstFoundPage }, `Page ${firstFoundPage}`, `?page=${firstFoundPage}`);
+                displayProjectsForPage(firstFoundPage);
+                renderPagination(firstFoundPage, totalPages);
+                updateTocListForPage(firstFoundPage);
+                setTimeout(() => {
+                    const elementOnNewPage = document.querySelector(`main #${firstFoundElement.id}`);
+                    if (elementOnNewPage) {
+                        elementOnNewPage.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        displayContentInSidebar(`#${elementOnNewPage.id}`);
+                    }
+                }, 150);
+            } else {
+                firstFoundElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                const parentSection = firstFoundElement.closest('section[data-page]');
+                if (parentSection) {
+                    displayContentInSidebar(`#${parentSection.id}`);
+                }
+            }
         }
     }
 
@@ -107,6 +139,81 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
+
+    // --- Global state for visible images per section ---
+    // Map để lưu trữ số lượng hình ảnh hiển thị hiện tại cho mỗi section (key: sectionId, value: số lượng hình ảnh)
+    let visibleImageCounts = new Map();
+
+    // --- Function to manage image display and "Load More" button ---
+    // Hàm này kiểm soát việc hiển thị hình ảnh và nút "Xem thêm" trong một container cụ thể.
+    // imageContainerElement: Phần tử chứa các hình ảnh (ví dụ: .project-content)
+    // sectionId: ID của section cha (để theo dõi trạng thái hiển thị)
+    function manageImageDisplay(imageContainerElement, sectionId) {
+        if (!imageContainerElement) return;
+
+        // Lấy tất cả image-wrapper bên trong container
+        const allImageWrappers = Array.from(imageContainerElement.querySelectorAll('.image-wrapper'));
+        const totalImages = allImageWrappers.length; // Đếm số lượng wrappers để biết tổng số hình ảnh
+
+        let currentVisibleCount = visibleImageCounts.get(sectionId);
+
+        // Khởi tạo số lượng hình ảnh hiển thị ban đầu là 5 nếu chưa được đặt
+        // hoặc nếu nó bị reset về 0 (để tránh hiển thị quá nhiều khi tải lại trang hoặc chuyển trang)
+        if (currentVisibleCount === undefined) {
+            visibleImageCounts.set(sectionId, 5); // Mặc định hiển thị 5 hình ảnh đầu tiên
+            currentVisibleCount = 5;
+        }
+
+        // Ẩn tất cả image-wrapper ban đầu
+        allImageWrappers.forEach(wrapper => {
+            wrapper.style.display = 'none';
+        });
+
+        // Hiển thị các image-wrapper lên đến số lượng hiện tại được phép
+        for (let i = 0; i < currentVisibleCount; i++) {
+            if (allImageWrappers[i]) {
+                allImageWrappers[i].style.display = 'inline-block'; // Set to inline-block for horizontal
+            }
+        }
+
+        // Quản lý nút "Xem thêm"
+        // Nút "Xem thêm" chỉ xuất hiện ở khu vực nội dung chính, không phải trong mục lục sidebar
+        const parentSection = imageContainerElement.closest('.project'); // Kiểm tra xem đây có phải là nội dung chính của một project không
+
+        // Tìm nút "Xem thêm" hiện có trong section cha (để tránh tạo nhiều nút)
+        let loadMoreButton = parentSection ? parentSection.querySelector('.load-more-btn') : null;
+
+        if (totalImages > currentVisibleCount) { // Nếu còn hình ảnh để tải
+            if (!loadMoreButton) {
+                // Tạo nút "Xem thêm" nếu chưa có
+                loadMoreButton = document.createElement('button');
+                loadMoreButton.textContent = 'Xem thêm';
+                loadMoreButton.classList.add('load-more-btn');
+                // Chèn nút vào sau project-content nhưng vẫn trong section
+                parentSection.appendChild(loadMoreButton);
+            }
+            loadMoreButton.style.display = 'block'; // Đảm bảo nút hiển thị
+
+            // Gán lại sự kiện click (để tránh nhiều listener nếu hàm được gọi lại)
+            loadMoreButton.onclick = null; // Xóa listener cũ
+            loadMoreButton.onclick = () => {
+                const currentVis = visibleImageCounts.get(sectionId);
+                let newVisible = currentVis + 5; // Tải thêm 5 hình
+                if (newVisible > totalImages) {
+                    newVisible = totalImages; // Đảm bảo không vượt quá tổng số hình ảnh
+                }
+                visibleImageCounts.set(sectionId, newVisible); // Cập nhật số lượng hình ảnh hiển thị
+                manageImageDisplay(imageContainerElement, sectionId); // Gọi lại hàm để cập nhật hiển thị
+                // No need to call setupImageModalTriggers here, it's handled by modal-img.js
+            };
+        } else { // Nếu đã hiển thị tất cả hình ảnh
+            if (loadMoreButton) {
+                loadMoreButton.style.display = 'none'; // Ẩn nút "Xem thêm"
+            }
+        }
+    }
+
+
     // --- Table of Contents - Display Content in Sidebar and Scroll to Image ---
     const tocLinks = document.querySelectorAll('.toc ul li a');
     const tocContentDisplay = document.getElementById('toc-content-display');
@@ -114,28 +221,74 @@ document.addEventListener('DOMContentLoaded', () => {
     const originalTocListItems = Array.from(tocList ? tocList.querySelectorAll('li') : []);
 
     function displayContentInSidebar(targetId) {
-        const targetElement = document.querySelector(targetId);
+        const targetElement = document.querySelector(targetId); // Đây là section gốc (ví dụ: #design-Lookbook)
         if (targetElement && tocContentDisplay) {
-            tocContentDisplay.innerHTML = '';
+            tocContentDisplay.innerHTML = ''; // Xóa nội dung cũ
+
             const contentToClone = targetElement.classList.contains('project') ?
                 targetElement.querySelector('.project-content') :
-                targetElement;
+                targetElement; // Lấy phần nội dung cụ thể để clone
+
             if (contentToClone) {
-                const clonedContent = contentToClone.cloneNode(true);
-                if (clonedContent.classList) {
-                    clonedContent.classList.remove('fade-in-element', 'is-visible', 'project');
-                }
-                clonedContent.querySelectorAll('.fade-in-element, .is-visible, .project').forEach(el => {
+                const clonedContent = contentToClone.cloneNode(true); // Clone tất cả các phần tử con
+
+                // Loại bỏ bất kỳ class fade-in/project nào từ các phần tử được clone để tránh xung đột
+                clonedContent.classList.remove('fade-in-element', 'is-visible', 'project');
+                clonedContent.querySelectorAll('.fade-in-element, .is-visible', '.project').forEach(el => {
                     el.classList.remove('fade-in-element', 'is-visible', 'project');
                 });
+
+                // Đảm bảo các hình ảnh trong nội dung được clone phản ánh trạng thái `visibleImageCounts`
+                // Mục đích là sidebar sẽ hiển thị *số lượng hình ảnh hiện tại* mà người dùng đã tải trong nội dung chính,
+                // không hiển thị nút "Xem thêm" riêng.
+                const allClonedImageWrappers = Array.from(clonedContent.querySelectorAll('.image-wrapper'));
+                const sectionId = targetId.substring(1); // Lấy ID section sạch (không có '#')
+                // Lấy số lượng hình ảnh đang hiển thị trong nội dung chính, hoặc hiển thị tất cả nếu chưa có trạng thái
+                const currentVisibleForMainContent = visibleImageCounts.get(sectionId) || allClonedImageWrappers.length; // Sidebar hiển thị tất cả ảnh theo mặc định
+
+
+                allClonedImageWrappers.forEach((wrapper, index) => {
+                    if (index < currentVisibleForMainContent) {
+                        wrapper.style.display = 'block'; // Display block for sidebar for vertical stacking
+                    } else {
+                        wrapper.style.display = 'none';
+                    }
+                });
+
+                // Xóa bất kỳ nút "Xem thêm" nào có thể đã được clone (vì sidebar không nên có nút này)
+                let clonedLoadMoreButton = clonedContent.querySelector('.load-more-btn');
+                if (clonedLoadMoreButton) {
+                    clonedLoadMoreButton.remove();
+                }
+
                 tocContentDisplay.appendChild(clonedContent);
-                const sidebarImages = tocContentDisplay.querySelectorAll('img');
+
+                // Gắn lại sự kiện click cho các hình ảnh trong khu vực hiển thị của sidebar
+                const sidebarImages = tocContentDisplay.querySelectorAll('img:not(.image-logo-small)');
                 sidebarImages.forEach(img => {
                     img.style.cursor = 'pointer';
                     img.addEventListener('click', function() {
                         const imageUrl = this.getAttribute('src');
-                        const mainContentImage = mainContent.querySelector(`img[src="${imageUrl}"]`);
+                        // Scroll to the corresponding image in main content
+                        const mainContentImage = mainContent.querySelector(`img[src="${imageUrl}"]:not(.image-logo-small)`);
                         if (mainContentImage) {
+                            // First, ensure the correct page is displayed if the image is on a different page
+                            const parentSectionOfMainImage = mainContentImage.closest('section[data-page]');
+                            if (parentSectionOfMainImage) {
+                                const targetPage = parseInt(parentSectionOfMainImage.getAttribute('data-page'));
+                                const currentPage = getCurrentPage();
+                                if (!isNaN(targetPage) && targetPage !== currentPage) {
+                                    history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+                                    displayProjectsForPage(targetPage);
+                                    renderPagination(targetPage, getTotalPages());
+                                    updateTocListForPage(targetPage);
+                                    setTimeout(() => {
+                                        mainContentImage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    }, 150); // Small delay to allow page transition
+                                    return; // Exit as page change will re-trigger
+                                }
+                            }
+                            // If on the same page or after page change, scroll to image
                             mainContentImage.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         }
                     });
@@ -195,6 +348,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 project.classList.remove('is-visible');
                 setTimeout(() => {
                     project.classList.add('is-visible');
+                    const projectContent = project.querySelector('.project-content');
+                    if (projectContent) {
+                        // Gọi manageImageDisplay cho nội dung chính của project
+                        // Chỉ gọi manageImageDisplay nếu project có .image-wrapper (như page 1, 2)
+                        if (projectContent.querySelector('.image-wrapper')) {
+                            manageImageDisplay(projectContent, project.id);
+                        }
+                    }
                 }, 10);
             } else {
                 project.style.display = 'none';
@@ -236,10 +397,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (targetElement) {
                     const targetPage = parseInt(targetElement.getAttribute('data-page'));
                     const currentPage = getCurrentPage();
+                    const totalPages = getTotalPages();
                     if (!isNaN(targetPage) && targetPage !== currentPage) {
                         history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
                         displayProjectsForPage(targetPage);
-                        renderPagination(targetPage, getTotalPages());
+                        renderPagination(targetPage, totalPages);
                         updateTocListForPage(targetPage);
                         setTimeout(() => {
                             displayContentInSidebar(targetId);
@@ -355,7 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('popstate', (event) => {
         const state = event.state;
-        const pageFromState = state && state.page ? state.page : getCurrentPage();
+        const pageFromState = state && state.page ? pageFromState : getCurrentPage();
         displayProjectsForPage(pageFromState);
         renderPagination(pageFromState, getTotalPages());
         setTimeout(() => {
@@ -374,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (clonedContent.classList) {
                     clonedContent.classList.remove('fade-in-element', 'is-visible', 'project');
                 }
-                clonedContent.querySelectorAll('.fade-in-element, .is-visible, .project').forEach(el => {
+                clonedContent.querySelectorAll('.fade-in-element, .is-visible', '.project').forEach(el => {
                     el.classList.remove('fade-in-element', 'is-visible', 'project');
                 });
                 tocContentDisplay.appendChild(clonedContent);
@@ -391,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (clonedContent.classList) {
                 clonedContent.classList.remove('fade-in-element', 'is-visible', 'project');
             }
-            clonedContent.querySelectorAll('.fade-in-element, .is-visible, .project').forEach(el => {
+            clonedContent.querySelectorAll('.fade-in-element, .is-visible', '.project').forEach(el => {
                 el.classList.remove('fade-in-element', 'is-visible', 'project');
             });
             tocContentDisplay.appendChild(clonedContent);
@@ -400,145 +562,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const currentPage = getCurrentPage();
     const totalPages = getTotalPages();
-    displayProjectsForPage(currentPage);
+    displayProjectsForPage(currentPage); // Hàm này bây giờ sẽ gọi manageImageDisplay cho các project hiển thị
     renderPagination(currentPage, totalPages);
     updateTocListForPage(currentPage); // setupTocHighlight sẽ được gọi trong đây
 
-    // --- Modal Image Viewer NÂNG CAO ---
-    const images = Array.from(document.querySelectorAll('main img'));
-    let currentImgIndex = 0;
-    const modal = document.getElementById('image-modal');
-    const modalImg = document.getElementById('image-modal-img');
-    const btnClose = document.querySelector('.image-modal-close');
-    const btnFullscreen = document.querySelector('.image-modal-fullscreen');
-    const btnPrev = document.querySelector('.image-modal-prev');
-    const btnNext = document.querySelector('.image-modal-next');
-
-    // Mở modal khi click ảnh
-    images.forEach((img, idx) => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', function () {
-            currentImgIndex = idx;
-            showModalWithImage(images[currentImgIndex].src);
-        });
-    });
-
-    function showModalWithImage(src) {
-        if (modal && modalImg) {
-            modalImg.src = src;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    // Khởi tạo hiển thị hình ảnh cho tất cả các project trên trang ban đầu.
+    // Điều này đảm bảo rằng khi trang tải lần đầu, các hình ảnh được ẩn/hiện đúng cách
+    // trước khi bất kỳ thao tác phân trang hoặc click mục lục nào xảy ra.
+    projectElements.forEach(project => {
+        // Khởi tạo visibleImageCounts cho từng project nếu chưa được đặt
+        if (visibleImageCounts.get(project.id) === undefined) {
+             visibleImageCounts.set(project.id, 5); // Mặc định hiển thị 5 hình ảnh đầu tiên cho mỗi section
         }
-    }
-
-    // Đóng modal
-    function closeModal() {
-        modal.classList.remove('active', 'fullscreen');
-        document.body.style.overflow = '';
-    }
-    btnClose && btnClose.addEventListener('click', closeModal);
-    modal && modal.addEventListener('click', function (e) {
-        if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (!modal.classList.contains('active')) return;
-        if (e.key === 'Escape') closeModal();
-        if (e.key === 'ArrowLeft') showPrevImg();
-        if (e.key === 'ArrowRight') showNextImg();
+        // Sau đó, áp dụng logic hiển thị cho các project đang hiển thị trên trang hiện tại
+        const projectPage = parseInt(project.getAttribute('data-page'));
+        if (!isNaN(projectPage) && projectPage === currentPage) {
+            const projectContent = project.querySelector('.project-content');
+            if (projectContent && projectContent.querySelector('.image-wrapper')) {
+                manageImageDisplay(projectContent, project.id);
+            }
+        }
     });
 
-    // Fullscreen toggle
-    btnFullscreen && btnFullscreen.addEventListener('click', function(e) {
-        e.stopPropagation();
-        modal.classList.toggle('fullscreen');
-    });
+    // Highlight TOC link when scrolling
+    function setupTocHighlight() {
+        const tocLinks = document.querySelectorAll('.toc ul#toc-list a');
+        const sections = Array.from(tocLinks)
+            .map(link => document.querySelector(link.getAttribute('href')))
+            .filter(Boolean);
 
-    // Next/Prev
-    function showPrevImg() {
-        if (images.length < 2) return;
-        currentImgIndex = (currentImgIndex - 1 + images.length) % images.length;
-        showModalWithImage(images[currentImgIndex].src);
-    }
-    function showNextImg() {
-        if (images.length < 2) return;
-        currentImgIndex = (currentImgIndex + 1) % images.length;
-        showModalWithImage(images[currentImgIndex].src);
-    }
-    btnPrev && btnPrev.addEventListener('click', function(e) {
-        e.stopPropagation();
-        showPrevImg();
-    });
-    btnNext && btnNext.addEventListener('click', function(e) {
-        e.stopPropagation();
-        showNextImg();
-    });
+        function onScroll() {
+            let scrollPos = window.scrollY || window.pageYOffset;
+            let currentIndex = -1; // Khởi tạo với -1, nghĩa là không có section nào đang hoạt động
 
-    // Kéo modal (drag)
-    let isDragging = false, startX = 0, startY = 0, imgX = 0, imgY = 0;
-    if (modalImg) {
-        modalImg.addEventListener('mousedown', function(e) {
-            if (!modal.classList.contains('active') || modal.classList.contains('fullscreen')) return;
-            isDragging = true;
-            startX = e.clientX - imgX;
-            startY = e.clientY - imgY;
-            modalImg.style.cursor = 'grabbing';
-            e.preventDefault();
-        });
-        document.addEventListener('mousemove', function(e) {
-            if (!isDragging) return;
-            imgX = e.clientX - startX;
-            imgY = e.clientY - startY;
-            modalImg.style.transform = `translate(${imgX}px, ${imgY}px)`;
-        });
-        document.addEventListener('mouseup', function() {
-            if (!isDragging) return;
-            isDragging = false;
-            modalImg.style.cursor = 'grab';
-        });
-        // Reset vị trí khi đổi ảnh hoặc đóng modal
-        modalImg.addEventListener('load', function() {
-            imgX = 0; imgY = 0;
-            modalImg.style.transform = '';
-        });
-        modal.addEventListener('transitionend', function() {
-            if (!modal.classList.contains('active')) {
-                imgX = 0; imgY = 0;
-                modalImg.style.transform = '';
+            // Lặp ngược để tìm section thấp nhất hiện đang hiển thị
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                if (section && section.offsetTop - 120 <= scrollPos) {
+                    currentIndex = i;
+                    break; // Đã tìm thấy section hoạt động, thoát vòng lặp
+                }
+            }
+
+            tocLinks.forEach((link, idx) => {
+                if (idx === currentIndex) {
+                    link.classList.add('active-toc');
+                } else {
+                    link.classList.remove('active-toc'); // Đảm bảo các liên kết không hoạt động loại bỏ class
+                }
+            });
+        }
+
+        window.removeEventListener('scroll', window._tocScrollHandler);
+        window._tocScrollHandler = onScroll;
+        window.addEventListener('scroll', onScroll);
+        onScroll(); // Call once on load to set initial highlight
+    }
+
+    // Hàm gắn trình xử lý sự kiện click để mở modal cho tất cả các hình ảnh liên quan
+    function setupImageModalTriggers() {
+        // Lấy tất cả các hình ảnh trong .project-content mà không phải là logo nhỏ
+        const imagesToMakeClickable = document.querySelectorAll('main .project-content img:not(.image-logo-small)');
+
+        imagesToMakeClickable.forEach(img => {
+            // Kiểm tra xem đã có sự kiện click được gắn vào chưa để tránh trùng lặp
+            if (!img.dataset.hasModalListener) {
+                img.style.cursor = 'pointer'; // Hiển thị con trỏ là dạng bàn tay để người dùng biết có thể nhấp
+                img.addEventListener('click', function() {
+                    // Gọi hàm showImageModal từ modal-img.js
+                    if (typeof showImageModal === 'function') {
+                        showImageModal(this);
+                    }
+                });
+                img.dataset.hasModalListener = 'true'; // Đánh dấu đã gắn listener
             }
         });
     }
 
-// Highlight TOC link when scrolling
-function setupTocHighlight() {
-    const tocLinks = document.querySelectorAll('.toc ul#toc-list a');
-    const sections = Array.from(tocLinks)
-        .map(link => document.querySelector(link.getAttribute('href')))
-        .filter(Boolean);
-
-    function onScroll() {
-        let scrollPos = window.scrollY || window.pageYOffset;
-        let currentIndex = 0;
-        sections.forEach((section, idx) => {
-            if (section && section.offsetTop - 120 <= scrollPos) {
-                currentIndex = idx;
-            }
-        });
-        tocLinks.forEach((link, idx) => {
-            if (idx === currentIndex) {
-                link.classList.add('active-toc');
-            } else {
-                link.classList.remove('active-toc');
-            }
-        });
-    }
-
-    window.removeEventListener('scroll', window._tocScrollHandler);
-    window._tocScrollHandler = onScroll;
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-}
-
- // --- Flip Card Functionality ---
+    // --- Flip Card Functionality ---
     const flipCards = document.querySelectorAll('.flip-card');
 
     flipCards.forEach(flipCard => {
@@ -563,11 +664,14 @@ function setupTocHighlight() {
             clearTimeout(timer);
             this.classList.remove('hold');
         });
-flipCard.addEventListener('mouseleave', function() { // Thêm sự kiện mouseleave
+        flipCard.addEventListener('mouseleave', function() { // Thêm sự kiện mouseleave
             clearTimeout(timer);
             this.classList.remove('hold');
         });
     });
 
-    
+    // Khởi tạo trình kích hoạt modal sau khi trang tải xong và nội dung được hiển thị
+    // Chắc chắn rằng modal-img.js đã được tải trước đó
+    setTimeout(setupImageModalTriggers, 0);
+
 });

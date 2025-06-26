@@ -138,6 +138,77 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
+    // --- Global state for visible images per section ---
+    // Map to store the current number of images displayed for each section (key: sectionId, value: number of images)
+    let visibleImageCounts = new Map();
+
+    // --- Function to manage image display and "Load More" button ---
+    // This function controls the display of images and the "Load More" button within a specific container.
+    // imageContainerElement: The element containing the images (e.g., .drawing-content)
+    // sectionId: The ID of the parent section (to track display status)
+    function manageImageDisplay(imageContainerElement, sectionId) {
+        if (!imageContainerElement) return;
+
+        // Get all image-wrappers inside the container
+        const allImageWrappers = Array.from(imageContainerElement.querySelectorAll('.image-wrapper'));
+        const totalImages = allImageWrappers.length; // Count the number of wrappers to know the total number of images
+
+        let currentVisibleCount = visibleImageCounts.get(sectionId);
+
+        // Initialize the initial number of displayed images to 5 if not set
+        if (currentVisibleCount === undefined) {
+            visibleImageCounts.set(sectionId, 5); // Default to displaying the first 5 images
+            currentVisibleCount = 5;
+        }
+
+        // Hide all image-wrappers initially
+        allImageWrappers.forEach(wrapper => {
+            wrapper.style.display = 'none';
+        });
+
+        // Display image-wrappers up to the current allowed number
+        for (let i = 0; i < currentVisibleCount; i++) {
+            if (allImageWrappers[i]) {
+                allImageWrappers[i].style.display = 'inline-block'; // Set to inline-block for horizontal
+            }
+        }
+
+        // Manage the "Load More" button
+        // The "Load More" button only appears in the main content area, not in the sidebar table of contents
+        const parentSection = imageContainerElement.closest('.drawing'); // Check if this is the main content of a drawing
+
+        // Find an existing "Load More" button in the parent section (to avoid creating multiple buttons)
+        let loadMoreButton = parentSection ? parentSection.querySelector('.load-more-btn') : null;
+
+        if (totalImages > currentVisibleCount) { // If there are more images to load
+            if (!loadMoreButton) {
+                // Create "Load More" button if it doesn't exist
+                loadMoreButton = document.createElement('button');
+                loadMoreButton.textContent = 'Xem thêm';
+                loadMoreButton.classList.add('load-more-btn');
+                // Insert the button after drawing-content but still within the section
+                parentSection.appendChild(loadMoreButton);
+            }
+            loadMoreButton.style.display = 'block'; // Ensure the button is visible
+
+            // Reassign the click event (to avoid multiple listeners if the function is called again)
+            loadMoreButton.onclick = null; // Clear old listener
+            loadMoreButton.onclick = () => {
+                const currentVis = visibleImageCounts.get(sectionId);
+                let newVisible = currentVis + 5; // Load 5 more images
+                if (newVisible > totalImages) {
+                    newVisible = totalImages; // Ensure it does not exceed the total number of images
+                }
+                visibleImageCounts.set(sectionId, newVisible); // Update the number of displayed images
+                manageImageDisplay(imageContainerElement, sectionId); // Call the function again to update the display
+            };
+        } else { // If all images have been displayed
+            if (loadMoreButton) {
+                loadMoreButton.style.display = 'none'; // Hide the "Load More" button
+            }
+        }
+    }
+
     // --- Table of Contents - Display Content in Sidebar and Scroll to Image ---
     const tocLinks = document.querySelectorAll('.toc ul li a');
     const tocContentDisplay = document.getElementById('toc-content-display');
@@ -145,18 +216,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const originalTocListItems = Array.from(tocList ? tocList.querySelectorAll('li') : []);
 
     function displayContentInSidebar(targetId) {
-        const targetElement = document.querySelector(`main ${targetId}`);
+        const targetElement = document.querySelector(`main ${targetId}`); // This is the original section (e.g., #drawing-1)
         if (targetElement && tocContentDisplay) {
-            tocContentDisplay.innerHTML = '';
+            tocContentDisplay.innerHTML = ''; // Clear old content
+
             const contentToClone = targetElement.classList.contains('drawing') ?
                 targetElement.querySelector('.drawing-content') :
-                targetElement;
+                targetElement; // Get the specific content part to clone
+
             if (contentToClone) {
-                const clonedContent = contentToClone.cloneNode(true);
-                if (clonedContent.classList) {
-                    clonedContent.classList.remove('fade-in-element', 'is-visible', 'drawing');
-                }
-                clonedContent.querySelectorAll('.fade-in-element, .is-visible, .drawing').forEach(el => {
+                const clonedContent = contentToClone.cloneNode(true); // Clone all child elements
+
+                // Remove any fade-in/drawing classes from cloned elements to avoid conflicts
+                clonedContent.classList.remove('fade-in-element', 'is-visible', 'drawing');
+                clonedContent.querySelectorAll('.fade-in-element, .is-visible', '.drawing').forEach(el => {
                     el.classList.remove('fade-in-element', 'is-visible', 'drawing');
                 });
                 clonedContent.querySelectorAll('.highlight').forEach(span => {
@@ -166,21 +239,47 @@ document.addEventListener('DOMContentLoaded', () => {
                         parent.normalize();
                     }
                 });
-                tocContentDisplay.appendChild(clonedContent);
-                const sidebarImages = tocContentDisplay.querySelectorAll('img');
-                sidebarImages.forEach(img => {
-                    img.style.cursor = 'pointer';
-                    img.addEventListener('click', function() {
-                        const imageUrl = this.getAttribute('src');
-                        const mainContentImage = mainContent.querySelector(`main img[src="${imageUrl}"]`);
-                        if (mainContentImage) {
-                            mainContentImage.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'center'
-                            });
-                        }
-                    });
+
+                // Ensure image-wrappers in cloned content reflect `visibleImageCounts` status
+                const allClonedImageWrappers = Array.from(clonedContent.querySelectorAll('.image-wrapper'));
+                const sectionId = targetId.substring(1); // Get clean section ID (without '#')
+                // Get the number of images currently displayed in the main content, or display all if no status
+                const currentVisibleForMainContent = visibleImageCounts.get(sectionId) || allClonedImageWrappers.length; // Sidebar displays all images by default
+
+                allClonedImageWrappers.forEach((wrapper, index) => {
+                    if (index < currentVisibleForMainContent) {
+                        wrapper.style.display = 'block'; // Display block for sidebar for vertical stacking
+                    } else {
+                        wrapper.style.display = 'none';
+                    }
                 });
+
+                // Remove any "Load More" buttons that might have been cloned (because sidebar shouldn't have this button)
+                let clonedLoadMoreButton = clonedContent.querySelector('.load-more-btn');
+                if (clonedLoadMoreButton) {
+                    clonedLoadMoreButton.remove();
+                }
+
+                tocContentDisplay.appendChild(clonedContent);
+
+                // --- OLD CODE: Removed click event for images to open image modal ---
+                // Removed the previous image click listener here:
+                // const sidebarImages = tocContentDisplay.querySelectorAll('img:not(.image-logo-small)'); // Only main images
+                // sidebarImages.forEach(img => {
+                //     img.style.cursor = 'pointer';
+                //     img.addEventListener('click', function() {
+                //         const imageUrl = this.getAttribute('src');
+                //         const mainContentImage = mainContent.querySelector(`main img[src="${imageUrl}"]:not(.image-logo-small)`); // Only main images
+                //         if (mainContentImage) {
+                //             mainContentImage.scrollIntoView({
+                //                 behavior: 'smooth',
+                //                 block: 'center'
+                //             });
+                //         }
+                //     });
+                // });
+                // --- END OLD CODE ---
+
                 const tocAside = document.querySelector('.toc');
                 if (tocAside) {
                     tocAside.scrollTop = 0;
@@ -201,9 +300,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(`main ${targetId}`);
+            if (targetElement) {
+                const targetPage = parseInt(targetElement.getAttribute('data-page'));
+                const currentPage = getCurrentPage();
+                const totalPages = getTotalPages();
+                if (!isNaN(targetPage) && targetPage !== currentPage) {
+                    history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+                    displayContentForPage(targetPage);
+                    renderPagination(targetPage, totalPages);
+                    updateTocListForPage(targetPage);
+                    setTimeout(() => {
+                        displayContentInSidebar(targetId);
+                        const elementOnNewPage = document.querySelector(`main ${targetId}`);
+                        if (elementOnNewPage && mainContent) {
+                            elementOnNewPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }, 100);
+                } else {
+                    displayContentInSidebar(targetId);
+                    if (mainContent) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }
+        });
+    });
+
     // --- Dynamic Pagination ---
     const paginationContainer = document.querySelector('.pagination-container');
-    const itemsPerPage = 2;
+    const drawingElements = document.querySelectorAll('.drawing, #drawing-philosophy'); // All sections that represent content
+    const itemsPerPage = 2; // This variable seems unused now with data-page
 
     function getCurrentPage() {
         const params = new URLSearchParams(window.location.search);
@@ -211,15 +342,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayContentForPage(pageNumber) {
-        const allContentSections = document.querySelectorAll('main section[data-page]');
-        allContentSections.forEach((section) => {
+        drawingElements.forEach((section) => {
             const sectionPage = parseInt(section.getAttribute('data-page'));
             if (!isNaN(sectionPage) && sectionPage === pageNumber) {
                 section.style.display = 'block';
                 section.classList.remove('is-visible');
                 setTimeout(() => {
                     section.classList.add('is-visible');
-                }, 50);
+                    const drawingContent = section.querySelector('.drawing-content');
+                    if (drawingContent) {
+                        // Call manageImageDisplay for the main content of the drawing section
+                        manageImageDisplay(drawingContent, section.id);
+                    }
+                }, 10);
             } else {
                 section.style.display = 'none';
                 section.classList.remove('is-visible');
@@ -273,6 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+        // Re-attach TOC highlight after updating TOC
+        setupTocHighlight();
     }
 
     function getTotalPages() {
@@ -388,7 +525,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentlyVisibleTocLinks.forEach(link => link.classList.remove('active-toc'));
                         tocLink.classList.add('active-toc');
                     } else {
-                        tocLink.classList.remove('active-toc');
+                        // Keep active if it's the last one scrolled past or only one active
+                        // tocLink.classList.remove('active-toc');
                     }
                 }
             }
@@ -400,9 +538,47 @@ document.addEventListener('DOMContentLoaded', () => {
         sectionObserver.observe(section);
     });
 
+    // Highlight TOC link when scrolling
+    function setupTocHighlight() {
+        const tocLinks = document.querySelectorAll('.toc ul#toc-list a');
+        const sections = Array.from(tocLinks)
+            .map(link => document.querySelector(link.getAttribute('href')))
+            .filter(Boolean);
+
+        function onScroll() {
+            let scrollPos = window.scrollY || window.pageYOffset;
+            let currentIndex = -1; // Initialize with -1, meaning no section is currently active
+
+            // Iterate backwards to find the lowest section currently in view
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                // Check if the section is currently displayed (not hidden by manageImageDisplay)
+                const isSectionDisplayed = section.style.display !== 'none';
+
+                if (isSectionDisplayed && section.offsetTop - 120 <= scrollPos) {
+                    currentIndex = i;
+                    break; // Found the active section, break the loop
+                }
+            }
+
+            tocLinks.forEach((link, idx) => {
+                if (idx === currentIndex) {
+                    link.classList.add('active-toc');
+                } else {
+                    link.classList.remove('active-toc'); // Ensure inactive links remove the class
+                }
+            });
+        }
+
+        window.removeEventListener('scroll', window._tocScrollHandler);
+        window._tocScrollHandler = onScroll;
+        window.addEventListener('scroll', onScroll);
+        onScroll(); // Call once on load to set initial highlight
+    }
+
     // --- Mobile TOC Toggle ---
-    const tocToggleButton = document.querySelector('.toc-toggle-button');
-    const tocWrapper = document.querySelector('.toc-wrapper');
+    const tocToggleButton = document.querySelector('.menu-toggle'); // Changed selector to match the actual menu button
+    const tocWrapper = document.querySelector('.toc'); // Changed to .toc as it's the main sidebar container
     if (tocToggleButton && tocWrapper) {
         tocToggleButton.addEventListener('click', () => {
             tocWrapper.classList.toggle('is-visible');
@@ -419,6 +595,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Image Info Modal Functionality ---
+    const appInfoModal = document.querySelector('.app-info-modal');
+    const appInfoCloseBtn = document.querySelector('.app-info-close-btn');
+
+    // Function to show the app info modal
+    function showAppInfoModal() {
+        if (appInfoModal) {
+            appInfoModal.classList.add('active');
+            appInfoModal.classList.remove('closing');
+        }
+    }
+
+    // Function to hide the app info modal
+    function hideAppInfoModal() {
+        if (appInfoModal) {
+            appInfoModal.classList.add('closing');
+            appInfoModal.classList.remove('active');
+            // Remove 'closing' class after transition to ensure it can be reopened
+            appInfoModal.addEventListener('transitionend', function handler() {
+                appInfoModal.classList.remove('closing');
+                appInfoModal.removeEventListener('transitionend', handler);
+            }, { once: true });
+        }
+    }
+
+    // Event listener for the close button
+    if (appInfoCloseBtn) {
+        appInfoCloseBtn.addEventListener('click', hideAppInfoModal);
+    }
+
+    // Event listener to close modal when clicking outside content
+    if (appInfoModal) {
+        appInfoModal.addEventListener('click', (event) => {
+            if (event.target === appInfoModal) {
+                hideAppInfoModal();
+            }
+        });
+    }
+    
+    // --- NEW: Add a button to open the info modal for each image ---
+    // You will need to add a button next to each image (or where appropriate in your HTML)
+    // with a class like 'open-info-modal-btn' and a data-attribute like data-image-id="[image_id]"
+    // Example HTML for the button:
+    // <button class="open-info-modal-btn" data-image-id="image-1">Xem thông tin</button>
+
+    document.querySelectorAll('.open-info-modal-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            // Here you would fetch or populate the modal content based on the data-image-id
+            // For now, we just show the modal.
+            showAppInfoModal();
+            // You might want to update the content of the modal here based on the specific image clicked
+            // For example: populateModalContent(this.dataset.imageId);
+        });
+    });
+
+
     // --- Initial Setup ---
     const currentPageOnLoad = getCurrentPage();
     const totalPagesOnLoad = getTotalPages();
@@ -429,134 +661,53 @@ document.addEventListener('DOMContentLoaded', () => {
         displayFirstContentOfCurrentPageInSidebar(currentPageOnLoad);
     }, 100);
 
-    // --- Modal Image Viewer NÂNG CAO ---
-    const images = Array.from(document.querySelectorAll('main img'));
-    let currentImgIndex = 0;
-    const modal = document.getElementById('image-modal');
-    const modalImg = document.getElementById('image-modal-img');
-    const btnClose = document.querySelector('.image-modal-close');
-    const btnFullscreen = document.querySelector('.image-modal-fullscreen');
-    const btnPrev = document.querySelector('.image-modal-prev');
-    const btnNext = document.querySelector('.image-modal-next');
-
-    images.forEach((img, idx) => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', function () {
-            currentImgIndex = idx;
-            showModalWithImage(images[currentImgIndex].src);
-        });
-    });
-
-    function showModalWithImage(src) {
-        if (modal && modalImg) {
-            modalImg.src = src;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-    }
-
-    function closeModal() {
-        modal.classList.remove('active', 'fullscreen');
-        document.body.style.overflow = '';
-    }
-    btnClose && btnClose.addEventListener('click', closeModal);
-    modal && modal.addEventListener('click', function (e) {
-        if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (!modal.classList.contains('active')) return;
-        if (e.key === 'Escape') closeModal();
-        if (e.key === 'ArrowLeft') showPrevImg();
-        if (e.key === 'ArrowRight') showNextImg();
-    });
-
-    btnFullscreen && btnFullscreen.addEventListener('click', function(e) {
-        e.stopPropagation();
-        modal.classList.toggle('fullscreen');
-    });
-
-    function showPrevImg() {
-        if (images.length < 2) return;
-        currentImgIndex = (currentImgIndex - 1 + images.length) % images.length;
-        showModalWithImage(images[currentImgIndex].src);
-    }
-    function showNextImg() {
-        if (images.length < 2) return;
-        currentImgIndex = (currentImgIndex + 1) % images.length;
-        showModalWithImage(images[currentImgIndex].src);
-    }
-    btnPrev && btnPrev.addEventListener('click', function(e) {
-        e.stopPropagation();
-        showPrevImg();
-    });
-    btnNext && btnNext.addEventListener('click', function(e) {
-        e.stopPropagation();
-        showNextImg();
-    });
-
-    // Kéo modal (drag)
-    let isDragging = false, startX = 0, startY = 0, imgX = 0, imgY = 0;
-    if (modalImg) {
-        modalImg.addEventListener('mousedown', function(e) {
-            if (!modal.classList.contains('active') || modal.classList.contains('fullscreen')) return;
-            isDragging = true;
-            startX = e.clientX - imgX;
-            startY = e.clientY - imgY;
-            modalImg.style.cursor = 'grabbing';
-            e.preventDefault();
-        });
-        document.addEventListener('mousemove', function(e) {
-            if (!isDragging) return;
-            imgX = e.clientX - startX;
-            imgY = e.clientY - startY;
-            modalImg.style.transform = `translate(${imgX}px, ${imgY}px)`;
-        });
-        document.addEventListener('mouseup', function() {
-            if (!isDragging) return;
-            isDragging = false;
-            modalImg.style.cursor = 'grab';
-        });
-        modalImg.addEventListener('load', function() {
-            imgX = 0; imgY = 0;
-            modalImg.style.transform = '';
-        });
-        modal.addEventListener('transitionend', function() {
-            if (!modal.classList.contains('active')) {
-                imgX = 0; imgY = 0;
-                modalImg.style.transform = '';
+    // Initialize image display for all drawing sections on the initial page.
+    drawingElements.forEach(section => {
+        // Initialize visibleImageCounts for each section if not set
+        if (section.classList.contains('drawing')) { // Only for drawing sections
+            if (visibleImageCounts.get(section.id) === undefined) {
+                 visibleImageCounts.set(section.id, 5); // Default to displaying the first 5 images for each section
             }
-        });
-    }
+            // Then, apply display logic to sections currently displayed on the current page
+            const sectionPage = parseInt(section.getAttribute('data-page'));
+            if (!isNaN(sectionPage) && sectionPage === currentPageOnLoad) {
+                const drawingContent = section.querySelector('.drawing-content');
+                if (drawingContent) {
+                    manageImageDisplay(drawingContent, section.id);
+                }
+            }
+        }
+    });
 
     // Back to Top & Go to Bottom Buttons
     const backToTopBtn = document.getElementById('back-to-top');
     const goToBottomBtn = document.getElementById('go-to-bottom');
 
     window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const docHeight = document.body.scrollHeight;
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.body.scrollHeight;
 
-    // Hiện nút lên đầu khi cuộn xuống
-    if (scrollY > 300) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
+        // Show back to top button when scrolled down
+        if (scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
         }
 
-    // Ẩn nút xuống nếu gần cuối trang
-    if (scrollY + windowHeight >= docHeight - 100) {
-        goToBottomBtn.style.display = 'none';
+        // Hide go to bottom button if near the end of the page
+        if (scrollY + windowHeight >= docHeight - 100) {
+            goToBottomBtn.style.display = 'none';
         } else {
-        goToBottomBtn.style.display = 'block';
-    }
+            goToBottomBtn.style.display = 'block';
+        }
     });
 
     backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     goToBottomBtn.addEventListener('click', () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-});
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
 });

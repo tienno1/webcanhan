@@ -74,6 +74,8 @@ nav ul {
 
 nav ul li {
     margin: 0 15px ; /* Space between list items */
+    /* Đảm bảo chiều rộng nội dung tự co giãn */
+    flex-shrink: 0; /* Ngăn không cho các mục co lại */
 }
 
 nav ul li a {
@@ -85,6 +87,9 @@ nav ul li a {
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow: hidden;
+    /* Điều chỉnh padding để chiều rộng khung nhỏ lại */
+    padding: 8px 15px; /* Giảm padding ngang một chút để khung nhỏ hơn */
+    white-space: nowrap; /* Ngăn không cho chữ xuống dòng trong nav item */
 }
 
 /* Viền chạy hiệu ứng dưới chữ */
@@ -118,28 +123,26 @@ nav ul li a.active::after {
 .content-container {
     display: flex; /* Use flexbox for layout */
     max-width: 1200px; /* Limit content width */
-    margin: 20px auto; /* Top/bottom margin and center alignment */
+    margin: 20px auto; /* Top and bottom margin and center alignment */
     background-color: #fff; /* White background */
     box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Add a shadow */
     border-radius: 8px; /* Rounded corners */
-    /* === CHANGED === */
-    overflow: visible; /* Ensure content doesn't overflow, changed from 'hidden' */
+    overflow: visible; /* Ensure content doesn't overflow */
     position: relative; /* Needed for absolute positioning of main content */
 }
 
 /* Styles for the Table of Contents (aside.toc) */
 .toc {
-    width: 50px; /* Fixed width for the table of contents */
+    width: 200px; /* Adjusted width for the table of contents */
     padding: 20px;
     background-color: #f9f9f9; /* Light background */
     border-right: 1px solid #ddd; /* Separator line */
     flex-shrink: 0; /* Prevent shrinking */
     overflow-y: auto; /* Add scrollbar if TOC content is too long */
-    /* Remove fixed positioning */
-    position: static; /* Default position for aside */
-    top: auto;
-    left: auto;
-    height: auto; /* Auto height based on content */
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 20px; /* Stick to the top with some offset */
+    max-height: calc(100vh - 40px); /* Max height to fit viewport */
     z-index: auto;
     padding-top: 20px; /* Reset padding-top */
     box-shadow: none; /* Remove shadow */
@@ -197,19 +200,31 @@ nav ul li a.active::after {
     /* Add flexbox to the container to arrange images horizontally */
     display: flex;
     flex-wrap: wrap; /* Allow images to wrap to the next line if needed */
-    gap: px; /* Adjusted gap for better spacing with 24.5% width */
+    gap: 10px; /* Adjusted gap to 0 for full width images */
     justify-content: center; /* Center images if they don't fill the line */
 }
 
-#toc-content-display img {
-    /* Set width to 24.5% to allow approximately 4 images per row with gap */
-    width: 100%;
-    max-width: 100%; /* Ensure images don't exceed container width */
-    display: inline-block; /* Arrange images horizontally */
-    margin: 0; /* Remove margin from individual images if using gap on container */
-    border-radius: 5px; /* Rounded corners for images */
-    object-fit: cover; /* Use cover to ensure images fill their allocated space */
+#toc-content-display .image-wrapper {
+    width: 100%; /* In sidebar, make image wrappers take full width */
+    display: block; /* Stack them vertically in sidebar */
+    margin-bottom: 10px; /* Space between items in sidebar */
 }
+
+#toc-content-display img {
+    width: 100%; /* Tăng kích thước hình ảnh chiếm hết chiều rộng */
+    max-width: 100%; /* Ensure images don't exceed container width */
+    display: block; /* Make images block-level to stack vertically if needed */
+    margin: 0 auto; /* Center image horizontally */
+    border-radius: 5px; /* Rounded corners for images */
+    object-fit: contain; /* Use contain to ensure images are not cropped or stretched */
+    height: auto; /* Allow height to adjust proportionally */
+}
+
+/* Hide small logo in TOC content display */
+#toc-content-display .image-logo-small {
+    display: none;
+}
+
 
 #toc-content-display h3 {
     color: #333; /* Darker color for content titles */
@@ -230,24 +245,9 @@ main {
     flex-grow: 1; /* Allow main content to take remaining space */
     padding: 20px;
     overflow-y: auto; /* Add scroll if content is too long */
-    /* Add padding-bottom to main to prevent content being hidden by fixed pagination */
-    /* This is an alternative to adding padding to the body */
-    /* padding-bottom: 80px; /* Example: adjust as needed */
-
     /* Remove margin-left as sidebar is no longer fixed */
     margin-left: 0;
 }
-
-/* Note: Removed general main section styles that might conflict with .project */
-/* main section {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-}
-
-main section:last-child {
-    border-bottom: none;
-} */
 
 main h2 {
     color: #007bff; /* Color for section titles */
@@ -305,7 +305,6 @@ main h2::after {
     font-weight: bold; /* Bold text */
 }
 
-
 /* When the element has the 'is-visible' class, the line expands */
 .fade-in-element.is-visible h2::after {
     width: 100%; /* Expand to full width */
@@ -317,8 +316,6 @@ footer {
     color: #fff; /* White text color */
     text-align: center; /* Center content */
     padding: 1rem 0; /* Top and bottom padding */
-    /* Remove margin-top if pagination is fixed below it */
-    /* margin-top: 30px; */
 }
 
 footer .social-links a {
@@ -335,8 +332,6 @@ footer .social-links a:hover {
 
 /* --- Styles for Project Sections --- */
 .project {
-    /* Initially hide projects that are not on the current page */
-    /* display: none; */ /* This will be handled by pagination JS if active */
     background-color: #f9f9f9; /* Light background for each project */
     border: 1px solid #ddd; /* Light border */
     padding: 15px; /* Inner padding */
@@ -349,18 +344,45 @@ footer .social-links a:hover {
     display: block; /* Show the project */
 }
 
-.project-content img {
-    max-width: 24.5%; /* Ensure images fit within the project section */
+/* Gallery container for images */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center images if they don't fill the line */
+    gap: 10px; /* Khoảng cách giữa các hình ảnh */
+    text-align: center; /* This might be redundant if using flex justify-content */
+}
+
+/* Wrapper for image and small logo */
+.image-wrapper {
+    position: relative;
+    display: inline-block; /* Để wrapper chỉ rộng bằng nội dung */
+    width: 32.2%; /* Để ảnh vẫn xếp hàng ngang như cũ */
+    vertical-align: top; /* Căn chỉnh theo top nếu có nhiều ảnh trong một dòng */
+}
+
+.project-content .image-wrapper img:first-of-type { /* Ẩn logo nhỏ trong project-content */
+    max-width: 100%; /* Ensure images fit within the project section */
     margin: 10px auto; /* Center image and add space */
     border-radius: 5px; /* Rounded corners for images */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for images */
-    /* Ensure image attempts to fill the container width */
-    /* Use object-fit to control how the image scales within the container */
-    /* 'contain' will show the whole image, 'cover' will fill the space (may crop) */
-    width: 100%;
-    object-fit: contain; /* Or 'cover' if you prefer filling the space */
-    /* If using 'cover', you might want to set a specific height */
-    /* height: 200px; /* Example fixed height if using cover */
+    height: auto; /* Allow height to adjust proportionally */
+    object-fit: contain; /* Use contain to ensure images are not cropped or stretched */
+}
+
+/* Small logo on top-left of image */
+.image-logo-small {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px; /* Kích thước logo nhỏ cố định */
+    height: 30px; /* Kích thước logo nhỏ cố định */
+    object-fit: contain; /* Đảm bảo logo không bị dẹt */
+    border-radius: 50%; /* Bo tròn logo nếu cần */
+    background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ cho logo */
+    padding: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1; /* Đảm bảo logo nằm trên ảnh */
 }
 
 .mask img{
@@ -369,9 +391,8 @@ footer .social-links a:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for images */
     /* Ensure image attempts to fill the container width */
     max-width: 100%;
-    width: 100%;
-    /* Use object-fit to control how the image scales within the container */
-    /* 'contain' will show the whole image, 'cover' will fill the space (may crop) */
+    height: auto; /* Allow height to adjust proportionally */
+    object-fit: contain; /* Use contain to ensure images are not cropped or stretched */
 }
 
 /* --- Pagination Styles --- */
@@ -537,11 +558,16 @@ nav.main-nav ul li a {
     padding: 10px; /* Adjust padding */
     box-shadow: none; /* Remove shadow */
     border-radius: 0; /* Remove border radius */
-    gap: 3px; /* Reduce gap for smaller images */
+    gap: 0; /* Reduce gap to 0 for full width images */
+}
+
+#toc-content-display .image-wrapper {
+    width: 100%; /* In sidebar, make image wrappers take full width */
+    margin-bottom: 10px; /* Space between items in sidebar */
 }
 
 #toc-content-display img {
-    width: 24.5%; /* Adjust width slightly for mobile */
+    width: 100%; /* Adjust width slightly for mobile */
     /* Keep other image styles */
 }
 
@@ -618,7 +644,6 @@ footer .social-links a {
         margin: 20px auto; /* Restore margin */
         box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Restore shadow */
         border-radius: 8px; /* Restore border radius */
-        /* === ADDED === */
         overflow: visible; /* Allow sticky element to be visible */
     }
 
@@ -647,12 +672,15 @@ footer .social-links a {
         padding: 15px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         border-radius: 5px;
-        gap: 5px; /* Restore gap */
+        gap: 0; /* Restore gap to 0 for full width images */
     }
-
+    #toc-content-display .image-wrapper {
+        width: 100%; /* In sidebar, make image wrappers take full width */
+        margin-bottom: 10px; /* Space between items in sidebar */
+    }
     #toc-content-display img {
         text-align: center;
-        width: 50%; /* Restore width */
+        width: 100%; /* Restore width to 100% for full width */
         /* Keep other image styles */
     }
 
@@ -677,7 +705,7 @@ footer .social-links a {
         margin: 10px auto; /* Restore margin */
     }
 
-    /* Revert search container styles */
+    /* Adjust search container for mobile */
     .search-container {
         margin-bottom: 20px; /* Restore margin */
         text-align: center; /* Align left or center as preferred on desktop */
@@ -778,19 +806,17 @@ footer .social-links a {
     max-height: 80vh;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    animation: zoomInImg 0.3s;
     background: #fff;
-    cursor: grab;
+    cursor: grab; /* Set default cursor to grab */
     position: relative;
     z-index: 2;
     user-select: none;
+    object-fit: contain; /* Đảm bảo ảnh không bị dẹt */
+    transition: transform 0.2s ease-out; /* Add transition for smooth zoom/drag */
 }
-@keyframes zoomInImg {
-    from { transform: scale(0.7);}
-    to { transform: scale(1);}
-}
+
 .image-modal-close,
-.image-modal-fullscreen,
+.image-modal-fullscreen, /* Included to ensure it's styled correctly */
 .image-modal-prev,
 .image-modal-next {
     position: absolute;
@@ -809,20 +835,158 @@ footer .social-links a {
     transition: background 0.2s;
 }
 .image-modal-close { top: 24px; right: 40px; font-size: 40px; }
-.image-modal-fullscreen { top: 24px; right: 100px; font-size: 28px; }
+.image-modal-fullscreen { top: 24px; right: 100px; font-size: 28px; } /* Positioning for fullscreen button */
 .image-modal-prev { left: 10vw; top: 50%; transform: translateY(-50%); font-size: 32px; }
 .image-modal-next { right: 10vw; top: 50%; transform: translateY(-50%); font-size: 32px; }
 .image-modal-close:hover,
-.image-modal-fullscreen:hover,
+.image-modal-fullscreen:hover, /* Hover for fullscreen button */
 .image-modal-prev:hover,
 .image-modal-next:hover { background: #007bff; }
-.image-modal.fullscreen .image-modal-content {
-    max-width: 100vw;
-    max-height: 100vh;
+
+
+/* designer.css */
+
+/* Định dạng cho container thông tin ảnh */
+.image-info-container {
+    position: absolute;
+    top: 50%; /* Điều chỉnh vị trí dọc */
+    right: 5vw; /* Cách lề phải một khoảng */
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử theo cột */
+    align-items: flex-end; /* Căn phải các item bên trong */
+    z-index: 1001; /* Đảm bảo nằm trên ảnh */
+    pointer-events: none; /* Ban đầu không cho phép tương tác */
 }
-.image-modal.fullscreen {
-    align-items: stretch;
+
+/* Định dạng nút toggle thông tin */
+.toggle-info-button {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px; /* Khoảng cách với phần thông tin chi tiết */
+    pointer-events: auto; /* Cho phép tương tác với nút này */
+    transition: background 0.2s;
 }
+
+.toggle-info-button:hover {
+    background: #007bff;
+}
+
+/* Định dạng cho phần chi tiết thông tin ảnh */
+.image-details {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px); /* Hiệu ứng làm mờ nền */
+    -webkit-backdrop-filter: blur(5px); /* Hỗ trợ Safari */
+    transform: translateX(120%); /* Ẩn ra ngoài màn hình ban đầu */
+    opacity: 0;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    pointer-events: none; /* Không cho phép tương tác khi ẩn */
+}
+
+/* Khi có class 'show-info', hiển thị thông tin */
+.image-details.show-info {
+    transform: translateX(0); /* Hiện vào màn hình */
+    opacity: 1;
+    pointer-events: auto; /* Cho phép tương tác khi hiển thị */
+}
+
+.image-logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.image-logo img {
+    max-width: 80px;
+    height: 80px; /* Fixed height for image logos */
+    object-fit: contain; /* Ensure the image fits without being stretched */
+    border-radius: 5px;
+    background-color: #fff; /* White background for logo if needed */
+    padding: 5px;
+}
+
+.image-text-info h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #00bcd4; /* Màu tiêu đề */
+}
+
+.image-text-info p {
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+.image-text-info strong {
+    color: #a8dadc; /* Màu cho nhãn mạnh */
+}
+
+/* Media queries cho các kích thước màn hình nhỏ hơn */
+@media (max-width: 992px) {
+    .image-info-container {
+        right: 2vw;
+    }
+    .image-details {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-info-container {
+        top: auto;
+        bottom: 20px; /* Di chuyển xuống dưới */
+        right: 20px;
+        transform: translateY(0);
+        flex-direction: row; /* Chuyển thành hàng ngang */
+        align-items: flex-end; /* Căn dưới */
+    }
+
+    .image-details {
+        transform: translateY(120%); /* Ẩn xuống dưới */
+        max-width: calc(100vw - 40px); /* Đảm bảo vừa màn hình */
+        margin-left: 10px; /* Khoảng cách với nút */
+        margin-bottom: 0;
+    }
+
+    .image-details.show-info {
+        transform: translateY(0); /* Hiện lên */
+    }
+}
+
+@media (max-width: 480px) {
+    .image-info-container {
+        right: 10px;
+        bottom: 10px;
+    }
+    .toggle-info-button {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+    }
+    .image-details {
+        padding: 10px 15px;
+        font-size: 0.85em;
+    }
+    .image-logo img {
+        max-width: 60px;
+        height: 60px; /* Fixed height for mobile */
+    }
+}
+
+
 
 #back-to-top,
 #go-to-bottom {
@@ -862,5 +1026,74 @@ footer .social-links a {
 #go-to-bottom:hover {
   background-color: #666;
 }
+/* Message Modal (for "End of Images") */
+.message-modal {
+    display: none;
+    position: fixed;
+    z-index: 2002; /* Higher than app info modal */
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 
+.message-modal.active {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
 
+.message-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    max-width: 400px;
+    width: 90%;
+}
+
+.message-modal-content p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.message-modal-close-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.message-modal-close-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Styles for Load More button */
+.load-more-btn {
+    display: block; /* Make it a block element to center with margin auto */
+    margin: 20px auto; /* Center the button horizontally */
+    padding: 10px 20px;
+    background-color: #ff8c00; /* Màu cam */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Bo góc */
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 30%; /* Chiều rộng khoảng 30% */
+    max-width: 200px; /* Đảm bảo không quá rộng trên màn hình lớn */
+}
+
+.load-more-btn:hover {
+    background-color: #e07b00; /* Màu cam đậm hơn khi hover */
+    transform: translateY(-2px); /* Hiệu ứng nhấc nhẹ lên khi hover */
+}

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/drawings.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    <link rel="stylesheet" href="css/code_navbar.css">
+    <link rel="stylesheet" href="css/modal-drawing.css"> <!-- Thêm file modal.css -->
     <style>
         /* CSS tạm thời cho highlight kết quả tìm kiếm */
         .highlight {
@@ -19,7 +20,7 @@
 
     <header>
         <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
-            <p>Thiết Kế của tôi</p>
+            <p>Bộ sưu tập và tranh vẽ của tôi</p>
         <button aria-label="Menu" class="menu-toggle">
             <i class="fa-solid fa-bars fa-beat-fade fa-2xl" style="color: #ffffff;"></i>
         </button>
@@ -71,7 +72,20 @@
                 <section id="drawing-1" class="fade-in-element drawing" data-page="1">
                     <div class="drawing-content">
                         <h3>Bức vẽ 1: yourichi tự nghĩ</h3>
-                        <img src="img/yourichi.jpg" alt="Bức vẽ 1" class="lift-on-hover">
+                        <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/yourichi.jpg" alt="Bức vẽ 1" class="lift-on-hover"
+                                     data-name="Yourichi tự nghĩ"
+                                     data-description="Một bức vẽ Yourichi tự sáng tạo."
+                                     data-style="Phong cách cá nhân"
+                                     data-date="2023-01-15"
+                                     data-size="A4"
+                                     data-format="Digital Painting"
+                                     data-software="Clip Studio Paint"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p>ok nhen :D</p>
                     </div>
                 </section>
@@ -79,7 +93,20 @@
                 <section id="drawing-7" class="fade-in-element drawing" data-page="1">
                     <div class="drawing-content">
                          <h3>Bức vẽ 2: chân dung nữ tự nghĩ</h3>
-                        <img src="img/whiteblacknew.jpg" alt="Bức vẽ 1" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/whiteblacknew.jpg" alt="Bức vẽ 1" class="lift-on-hover"
+                                     data-name="Chân dung nữ tự nghĩ"
+                                     data-description="Một bức vẽ chân dung nữ đen trắng."
+                                     data-style="Chân dung"
+                                     data-date="2023-02-20"
+                                     data-size="A4"
+                                     data-format="Digital Painting"
+                                     data-software="Clip Studio Paint"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p>tóc xấu quá.</p>
                     </div>
                 </section>
@@ -87,7 +114,20 @@
                 <section id="drawing-8" class="fade-in-element drawing" data-page="1">
                     <div class="drawing-content">
                          <h3>Bức vẽ 3: chân dung nam tự nghĩ</h3>
-                        <img src="img/nam nhân.jpg" alt="Bức vẽ 1" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/nam nhân.jpg" alt="Bức vẽ 1" class="lift-on-hover"
+                                     data-name="Chân dung nam tự nghĩ"
+                                     data-description="Một bức vẽ chân dung nam."
+                                     data-style="Chân dung"
+                                     data-date="2023-03-10"
+                                     data-size="A4"
+                                     data-format="Digital Painting"
+                                     data-software="Clip Studio Paint"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p>lệch mặt nhưng vẫn xấu :v</p>
                     </div>
                 </section>
@@ -95,7 +135,20 @@
                 <section id="drawing-4" class="fade-in-element drawing" data-page="1">
                     <div class="drawing-content">
                          <h3>Bức vẽ 4: chân dung nữ tự nghĩ</h3>
-                        <img src="img/bừa.jpg" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/bừa.jpg" class="lift-on-hover"
+                                     data-name="Chân dung nữ (bừa)"
+                                     data-description="Vẽ vui vui, không cầu kỳ."
+                                     data-style="Phác thảo"
+                                     data-date="2023-04-01"
+                                     data-size="A5"
+                                     data-format="Chì"
+                                     data-software="None"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p>Vẽ zui zui cũng xấu.</p>
                     </div>
                 </section>
@@ -103,7 +156,20 @@
                 <section id="drawing-5" class="fade-in-element drawing" data-page="1">
                     <div class="drawing-content">
                          <h3>Bức vẽ 5: chân dung nam tự nghĩ 2</h3>
-                        <img src="img/mắt biếc.jpg" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/mắt biếc.jpg" class="lift-on-hover"
+                                     data-name="Chân dung nam mắt biếc"
+                                     data-description="Bức vẽ tập trung vào đôi mắt."
+                                     data-style="Chân dung"
+                                     data-date="2023-05-12"
+                                     data-size="A4"
+                                     data-format="Digital Painting"
+                                     data-software="Clip Studio Paint"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p>bóng quá má</p>
                     </div>
                 </section>
@@ -111,7 +177,20 @@
                 <section id="drawing-6" class="fade-in-element drawing" data-page="1">
                     <div class="drawing-content">
                          <h3>Bức vẽ 6: chân dung 2 nam tự nghĩ</h3>
-                        <img src="img/thấu hiểu.jpg" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/thấu hiểu.jpg" class="lift-on-hover"
+                                     data-name="Chân dung hai nam"
+                                     data-description="Bức vẽ về sự thấu hiểu."
+                                     data-style="Truyện tranh"
+                                     data-date="2023-06-01"
+                                     data-size="A4"
+                                     data-format="Digital Painting"
+                                     data-software="Clip Studio Paint"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p>Cũng cũng</p>
                     </div>
                 </section>
@@ -119,7 +198,20 @@
                 <section id="drawing-2" class="fade-in-element drawing" data-page="2">
                     <div class="drawing-content">
                          <h3>Bức vẽ 1: tĩnh vật bát cơm tự nghĩ</h3>
-                        <img src="img/bát cơm.jpg" alt="Bức vẽ 2" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/bát cơm.jpg" alt="Bức vẽ 2" class="lift-on-hover"
+                                     data-name="Tĩnh vật bát cơm"
+                                     data-description="Tĩnh vật đơn giản về bát cơm."
+                                     data-style="Tĩnh vật"
+                                     data-date="2023-07-05"
+                                     data-size="A4"
+                                     data-format="Chì màu"
+                                     data-software="None"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p>đẹp mà vẫn ko ưng :Đ</p>
                     </div>
                 </section>
@@ -127,77 +219,220 @@
                  <section id="drawing-3" class="fade-in-element drawing" data-page="2">
                     <div class="drawing-content">
                          <h3>Bức vẽ 2: tĩnh vật bình bông héo tự nghĩ</h3>
-                        <img src="img/BÔNG.jpg" alt="Bức vẽ 3" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/BÔNG.jpg" alt="Bức vẽ 3" class="lift-on-hover"
+                                     data-name="Tĩnh vật bình hoa"
+                                     data-description="Bức vẽ tĩnh vật bình hoa đã héo."
+                                     data-style="Tĩnh vật"
+                                     data-date="2023-08-18"
+                                     data-size="A4"
+                                     data-format="Chì màu"
+                                     data-software="None"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p>ko cân lười vẽ lại xấu nhưng thích up :D</p>
                     </div>
                 </section>
                 <section id="Story-1" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 1</h3>
-                        <img src="img/Hình ảnh sưu tầm/axi.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/axi.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 1"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Graphic Design"
+                                     data-date="2024-01-01"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-2" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 2</h3>
-                        <img src="img/Hình ảnh sưu tầm/bake lab.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/bake lab.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 2"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Graphic Design"
+                                     data-date="2024-01-02"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-3" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 3</h3>
-                        <img src="img/Hình ảnh sưu tầm/cơmhop.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/cơmhop.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 3"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Photography"
+                                     data-date="2024-01-03"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-4" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 4</h3>
-                        <img src="img/Hình ảnh sưu tầm/floreal.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/floreal.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 4"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Graphic Design"
+                                     data-date="2024-01-04"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-5" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 5</h3>
-                        <img src="img/Hình ảnh sưu tầm/gompho.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/gompho.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 5"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Illustration"
+                                     data-date="2024-01-05"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-6" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 6</h3>
-                        <img src="img/Hình ảnh sưu tầm/hungphung.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/hungphung.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 6"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Photography"
+                                     data-date="2024-01-06"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-7" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 7</h3>
-                        <img src="img/Hình ảnh sưu tầm/lang spa.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/lang spa.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 7"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Graphic Design"
+                                     data-date="2024-01-07"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-8" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 8</h3>
-                        <img src="img/Hình ảnh sưu tầm/limc.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/limc.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 8"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Graphic Design"
+                                     data-date="2024-01-08"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-9" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 9</h3>
-                        <img src="img/Hình ảnh sưu tầm/ngamnghi.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/ngamnghi.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 9"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Photography"
+                                     data-date="2024-01-09"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
                 <section id="Story-10" class="fade-in-element drawing" data-page="3">
                     <div class="drawing-content">
                          <h3>HÌnh sưu tầm 10</h3>
-                        <img src="img/Hình ảnh sưu tầm/tra sen.jpg" alt="Suu tam" class="lift-on-hover">
+                         <div class="gallery">
+                            <div class="image-wrapper">
+                                <img src="img/Hình ảnh sưu tầm/tra sen.jpg" alt="Suu tam" class="lift-on-hover"
+                                     data-name="Sưu tầm 10"
+                                     data-description="Hình ảnh sưu tầm từ internet."
+                                     data-style="Graphic Design"
+                                     data-date="2024-01-10"
+                                     data-size="Unknown"
+                                     data-format="Digital"
+                                     data-software="Unknown"
+                                     data-logos="img/logo-ps.png">
+                                <img src="img/logo-ps.png" alt="Photoshop Logo" class="image-logo-small">
+                            </div>
+                        </div>
                         <p></p>
                     </div>
                 </section>
@@ -247,8 +482,50 @@
     <div class="pagination-container">
         </div>
 
+    <!-- Modal for image display -->
+    <div id="image-modal" class="image-modal">
+        <span class="image-modal-close">&times;</span>
+        <button class="image-modal-fullscreen" title="Phóng to toàn màn hình">&#x26F6;</button>
+        <button class="image-modal-prev" title="Ảnh trước">&#8592;</button>
+        <img class="image-modal-content" id="image-modal-img">
+        <button class="image-modal-next" title="Ảnh sau">&#8594;</button>
+    </div>
+
+    <!-- Modal for messages -->
+    <div id="message-modal" class="message-modal">
+        <div class="message-modal-content">
+            <p id="message-modal-text"></p>
+            <button id="message-modal-ok-btn" class="message-modal-close-btn">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal for app info (from designer.html) -->
+    <button id="toggle-app-info" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; padding: 10px 16px; background-color: #dc3545; color: white; border: none; border-radius: 5px; display: none;">
+      Ẩn Thông Tin Hình Ảnh
+    </button>
+
+    <button id="show-app-info" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; padding: 10px 16px; background-color: #28a745; color: white; border: none; border-radius: 5px; display: none;">
+      Hiện Thông Tin Hình Ảnh
+    </button>
+
+    <div id="app-info-modal" class="app-info-modal">
+      <div class="app-info-content">
+        <h2>Thông Tin Ảnh</h2>
+        <div class="app-logos"></div>
+        <p><strong>Tên ảnh:</strong> <span id="app-name"></span></p>
+        <p><strong>Mô tả ảnh:</strong> <span id="app-desc"></span></p>
+        <p><strong>Phong cách:</strong> <span id="app-style"></span></p>
+        <p><strong>Ngày tạo:</strong> <span id="app-date"></span></p>
+        <p><strong>Kích thước:</strong> <span id="app-size"></span></p>
+        <p><strong>Định dạng:</strong> <span id="app-format"></span></p>
+        <p><strong>Phần mềm:</strong> <span id="app-soft"></span></p>
+        <button class="app-info-close-btn">Đóng</button>
+      </div>
+    </div>
+
 
     <script src="js/drawings_animation.js"></script>
+    <script src="js/modal-draw-img.js"></script> <!-- Ensure modal-img.js is loaded after drawings_animation.js -->
     <script>
     document.querySelectorAll('nav ul li a').forEach(link => {
     link.addEventListener('click', function(e) {
@@ -272,24 +549,21 @@
     });
     </script>
     <script>
-    const box = document.getElementById('box');
+    const box = document.getElementById('box'); // If 'box' is not defined in drawings.html, this will cause an error.
+                                                // Assuming 'box' element might exist in a similar context or is a leftover.
+                                                // For a cleaner approach, this block might be removed if 'box' is not used.
 
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      // Di chuyển div theo chiều dọc khi cuộn
-      box.style.top = 50 + scrollY * 0.5 + 'px'; // Tăng nhanh/chậm bằng hệ số
-    });
-  </script>
+    if (box) { // Add a check to ensure 'box' exists
+        window.addEventListener('scroll', () => {
+          const scrollY = window.scrollY;
+          // Di chuyển div theo chiều dọc khi cuộn
+          box.style.top = 50 + scrollY * 0.5 + 'px'; // Tăng nhanh/chậm bằng hệ số
+        });
+    }
+    </script>
 
   <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
   <script src="js/js-code-navbar.js"></script>
-<div id="image-modal" class="image-modal">
-    <span class="image-modal-close">&times;</span>
-    <button class="image-modal-fullscreen" title="Phóng to toàn màn hình">&#x26F6;</button>
-    <button class="image-modal-prev" title="Ảnh trước">&#8592;</button>
-    <img class="image-modal-content" id="image-modal-img">
-    <button class="image-modal-next" title="Ảnh sau">&#8594;</button>
-</div>
 <!-- Nút đi lên -->
     <button id="back-to-top" title="Lên đầu trang">&#8679;</button>
 

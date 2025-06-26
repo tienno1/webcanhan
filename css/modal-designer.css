@@ -1,0 +1,39 @@
+/* Modal info từ trên xuống khi mở, trượt sang trái khi đóng */
+.app-info-modal {
+  position: fixed;
+  top: -330px; /* bắt đầu ngoài khung trên */
+  left: 210px;
+  transform: translateY(0);
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 9999;
+  width: 300px;
+  height: 650px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.8s ease-in-out;
+}
+
+.app-info-modal.active {
+  top: 20px; /* vị trí xuống giữa khi mở */
+  opacity: 1;
+  pointer-events: all;
+}
+
+.app-info-modal.closing {
+  bottom: 330px;
+  opacity: 0;
+}
+.app-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .app-logo {
+    max-height: 60px;
+    object-fit: contain;
+  }
