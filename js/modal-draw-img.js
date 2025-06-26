@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Lấy tất cả hình ảnh chính trong main, loại trừ các logo nhỏ
   // Lựa chọn các thẻ img không có class 'image-logo-small' và không phải là con của .app-logos
-  const allImages = Array.from(document.querySelectorAll('main .image-wrapper img:first-of-type'));
+  const allImages = Array.from(document.querySelectorAll('main .image-wrapper img:first-of-type:not(.image-logo-small)'));
   // Danh sách hình ảnh chỉ thuộc data-page hiện tại của modal
   let currentPagedImages = [];
   // Index của hình ảnh hiện tại trong currentPagedImages
@@ -69,11 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const logosAttr = img.dataset.logos;
     const logos = logosAttr ? logosAttr.split(',') : [];
     setAppLogos(logos);
-
-    // Dòng này đã được loại bỏ để updateModalContent KHÔNG TỰ ĐỘNG MỞ modal
-    // if (appModal && !appModal.classList.contains('active')) {
-    //   openAppModal();
-    // }
   }
 
   function openAppModal() {
@@ -155,34 +150,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mở modal hình ảnh (chỉ modal hình ảnh) khi click ảnh
   allImages.forEach((img) => {
-    img.addEventListener('click', function() {
-      // Lấy data-page của hình ảnh được click
-      currentPageOfModal = this.closest('[data-page]') ?
-                           parseInt(this.closest('[data-page]').getAttribute('data-page')) :
-                           null;
+    // Only attach click listener to main images, not small logos
+    if (!img.classList.contains('image-logo-small')) {
+        img.addEventListener('click', function() {
+            // Lấy data-page của hình ảnh được click
+            currentPageOfModal = this.closest('[data-page]') ?
+                                parseInt(this.closest('[data-page]').getAttribute('data-page')) :
+                                null;
 
-      // Lọc ra các hình ảnh chính cùng data-page
-      if (currentPageOfModal !== null) {
-          currentPagedImages = allImages.filter(image => {
-              const imageParentSection = image.closest('[data-page]');
-              return imageParentSection && parseInt(imageParentSection.getAttribute('data-page')) === currentPageOfModal;
-          });
-      } else {
-          // Nếu không có data-page (ví dụ: ảnh không nằm trong section có data-page), hiển thị tất cả ảnh chính
-          currentPagedImages = allImages;
-      }
+            // Lọc ra các hình ảnh chính cùng data-page
+            if (currentPageOfModal !== null) {
+                currentPagedImages = allImages.filter(image => {
+                    const imageParentSection = image.closest('[data-page]');
+                    return imageParentSection && parseInt(imageParentSection.getAttribute('data-page')) === currentPageOfModal;
+                });
+            } else {
+                // Nếu không có data-page (ví dụ: ảnh không nằm trong section có data-page), hiển thị tất cả ảnh chính
+                currentPagedImages = allImages;
+            }
 
-      // Tìm index của hình ảnh được click trong danh sách đã lọc
-      currentImgIndex = currentPagedImages.findIndex(image => image.src === this.src);
+            // Tìm index của hình ảnh được click trong danh sách đã lọc
+            currentImgIndex = currentPagedImages.findIndex(image => image.src === this.src);
 
-      currentImgEl = currentPagedImages[currentImgIndex]; // Cập nhật currentImgEl
-      if (modalImg) modalImg.src = currentImgEl.src; // Cập nhật ảnh trong modal
-      if (imageModal) imageModal.classList.add('active'); // Mở modal hình ảnh
-      document.body.style.overflow = 'hidden'; // Ngăn cuộn trang chính
+            currentImgEl = currentPagedImages[currentImgIndex]; // Cập nhật currentImgEl
+            if (modalImg) modalImg.src = currentImgEl.src; // Cập nhật ảnh trong modal
+            if (imageModal) imageModal.classList.add('active'); // Mở modal hình ảnh
+            document.body.style.overflow = 'hidden'; // Ngăn cuộn trang chính
 
-      // Hiển thị nút 'showBtn' khi modal hình ảnh được mở
-      if (showBtn) showBtn.style.display = 'block';
-    });
+            // Hiển thị nút 'showBtn' khi modal hình ảnh được mở
+            if (showBtn) showBtn.style.display = 'block';
+        });
+    }
   });
 
   // Chức năng chuyển ảnh: Next

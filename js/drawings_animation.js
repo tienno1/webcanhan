@@ -262,24 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 tocContentDisplay.appendChild(clonedContent);
 
-                // --- OLD CODE: Removed click event for images to open image modal ---
-                // Removed the previous image click listener here:
-                // const sidebarImages = tocContentDisplay.querySelectorAll('img:not(.image-logo-small)'); // Only main images
-                // sidebarImages.forEach(img => {
-                //     img.style.cursor = 'pointer';
-                //     img.addEventListener('click', function() {
-                //         const imageUrl = this.getAttribute('src');
-                //         const mainContentImage = mainContent.querySelector(`main img[src="${imageUrl}"]:not(.image-logo-small)`); // Only main images
-                //         if (mainContentImage) {
-                //             mainContentImage.scrollIntoView({
-                //                 behavior: 'smooth',
-                //                 block: 'center'
-                //             });
-                //         }
-                //     });
-                // });
-                // --- END OLD CODE ---
-
                 const tocAside = document.querySelector('.toc');
                 if (tocAside) {
                     tocAside.scrollTop = 0;

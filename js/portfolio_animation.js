@@ -29,8 +29,8 @@ new fullpage('#fullpage', {
     // LOGIC THAY ĐỔI LOGO ĐÃ CẬP NHẬT
     // ===============================================
     const mainLogo = document.getElementById('logo-main'); // Lấy phần tử logo chính
-    const defaultLogoSrc = '/img/logo_black.png'; // Logo mặc định (cho section đầu tiên)
-    const scrollLogoSrc = '/img/logo.png'; // Logo khi cuộn (màu trắng, cho các section không phải đầu tiên và không có data-logo)
+    const defaultLogoSrc = 'img/logo_black.png'; // Logo mặc định (cho section đầu tiên)
+    const scrollLogoSrc = 'img/logo.png'; // Logo khi cuộn (màu trắng, cho các section không phải đầu tiên và không có data-logo)
 
     // Nếu section có data-logo, sử dụng nó
     if (currentLogo) {
@@ -55,7 +55,7 @@ new fullpage('#fullpage', {
       }
     });
 
-    // Reset carousel index khi rời khỏi section "khach-hang" (section4)
+    // Reset carousel index khi rời khỏi section "San-Pham" (section4)
     if (origin.anchor === 'San-Pham') {
         currentProductIndex = 0; // Đặt lại về thẻ đầu tiên khi rời đi
         // Không cần gọi updateProductCarousel() ở đây vì nó sẽ được gọi trong afterLoad khi quay lại
@@ -66,7 +66,7 @@ new fullpage('#fullpage', {
   // THÊM afterLoad ĐỂ XỬ LÝ KHI VÀO SECTION
   // ===============================================
   afterLoad: function(origin, destination, direction) {
-    // Kiểm tra nếu section hiện tại là section "khach-hang" (section4)
+    // Kiểm tra nếu section hiện tại là section "San-Pham" (section4)
     if (destination.anchor === 'San-Pham') {
       initializeProductCarousel(); // Khởi tạo/khởi tạo lại carousel khi section này được tải
     }
@@ -226,28 +226,63 @@ window.addEventListener('resize', () => {
 
 // Điều khiển tự động chuyển thẻ khi vào/rời section Carousel của fullPage.js
 // Thêm stopAutoSlide khi rời section và startAutoSlide khi vào section
+// fullpage.js initialization
+// Make sure this fullpage initialization is called once and correctly
 new fullpage('#fullpage', {
     autoScrolling: true,
     navigation: true,
-    anchors: ['about-me', 'so-thich', 'ky-nang', 'khach-hang', 'lien-he'],
+    anchors: ['about-me', 'so-thich', 'ky-nang', 'San-Pham', 'lien-he'], // Ensure these match your HTML data-anchor attributes
 
     onLeave: function(origin, destination, direction) {
-        // ... (Logic theme và logo không thay đổi) ...
+        const nav = document.getElementById('sideNav');
+        const navItems = nav.querySelectorAll('ul li');
+        const theme = destination.item.dataset.navTheme;
+        const currentLogo = destination.item.dataset.logo;
 
-        // Reset carousel index khi rời khỏi section "khach-hang" (section4)
-        if (origin.anchor === 'khach-hang') {
-            currentProductIndex = 0; // Đặt lại về thẻ đầu tiên khi rời đi
-            stopAutoSlide(); // Dừng tự động chuyển khi rời khỏi section
+        // Theme handling
+        nav.classList.remove('light', 'dark', 'green', 'blue');
+        if (theme) {
+            nav.classList.add(theme);
+        } else {
+            nav.classList.add('light'); // Default theme if not specified
         }
 
-        // ... (Logic cập nhật lớp 'active' cho navItems không thay đổi) ...
+        // Logo handling
+        const mainLogo = document.getElementById('logo-main');
+        const defaultLogoSrc = 'img/logo_black.png'; // Assuming a default for light theme
+        const darkLogoSrc = 'img/logo.png'; // Assuming a default for dark/colored themes
+
+        if (currentLogo) {
+            mainLogo.src = currentLogo;
+            mainLogo.style.display = 'block';
+        } else if (theme === 'dark' || theme === 'green' || theme === 'blue') {
+            mainLogo.src = darkLogoSrc;
+            mainLogo.style.display = 'block';
+        } else {
+            mainLogo.src = defaultLogoSrc;
+            mainLogo.style.display = 'block';
+        }
+        
+        // Update active navigation item
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.querySelector('a').getAttribute('href') === `#${destination.anchor}`) {
+                item.classList.add('active');
+            }
+        });
+
+        // Carousel specific logic on leaving the Products section
+        if (origin.anchor === 'San-Pham') {
+            currentProductIndex = 0;
+            stopAutoSlide(); // Stop auto-slide when leaving
+        }
     },
 
     afterLoad: function(origin, destination, direction) {
-        // Khởi tạo/khởi tạo lại carousel khi section "khach-hang" được tải
-        if (destination.anchor === 'khach-hang') {
-            initializeProductCarousel();
-            startAutoSlide(); // Bắt đầu tự động chuyển khi vào section
+        // Carousel specific logic on entering the Products section
+        if (destination.anchor === 'San-Pham') {
+            initializeProductCarousel(); // Initialize/re-initialize carousel
+            startAutoSlide(); // Start auto-slide when entering
         }
     }
 });

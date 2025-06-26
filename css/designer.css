@@ -370,11 +370,19 @@ footer .social-links a:hover {
     object-fit: contain; /* Use contain to ensure images are not cropped or stretched */
 }
 
-/* Small logo on top-left of image */
-.image-logo-small {
+/* Container for multiple small logos on the image */
+.small-logos-on-image {
     position: absolute;
     top: 5px;
     left: 5px;
+    display: flex; /* Use flexbox to arrange logos horizontally */
+    gap: 5px; /* Space between logos */
+    z-index: 1; /* Ensure logos are on top */
+}
+
+/* Small logo on top-left of image */
+.image-logo-small {
+    /* Removed position: absolute, top, left from here as they are now handled by parent .small-logos-on-image */
     width: 30px; /* Kích thước logo nhỏ cố định */
     height: 30px; /* Kích thước logo nhỏ cố định */
     object-fit: contain; /* Đảm bảo logo không bị dẹt */
@@ -382,7 +390,6 @@ footer .social-links a:hover {
     background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ cho logo */
     padding: 3px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1; /* Đảm bảo logo nằm trên ảnh */
 }
 
 .mask img{
@@ -607,6 +614,7 @@ main h2 {
     padding: 8px; /* Adjust padding */
     font-size: 0.9rem; /* Adjust font size */
     width: 65%; /* Adjust width */
+    max-width: 300px; /* Maximum width */
 }
 
 #search-button {
@@ -625,7 +633,7 @@ footer .social-links a {
 }
 
 
-/* Media Query for Tablets and larger (>= 768px) */
+/* Media queries for Tablets and larger (>= 768px) */
 @media (min-width: 768px) {
     
     nav.main-nav ul li a {

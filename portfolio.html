@@ -19,6 +19,7 @@
       <li data-menuanchor="San-Pham"><a href="#San-Pham">Sản Phẩm</a></li>
       <li data-menuanchor="lien-he"><a href="#lien-he">LIÊN HỆ</a></li>
     </ul>
+    <button id="back-to-normal-button" class="back-to-normal-button">Trở về chế độ bình thường</button>
   </nav>
 
   <div id="fullpage" class="content-left">
@@ -199,7 +200,7 @@
                 <p class="product-description">Thiết kế banner cho sự kiện mừng 50 năm giải phóng miền nam thống nhất đất nước</p>
                 <div class="product-meta">
                   <div class="author">
-                    <img src="img/logo_black.png" alt="Author" class="author-avatar">
+                    <img src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" alt="Author" class="author-avatar" style="width: 15%;">
                     <span class="verified-badge">✔</span>
                   </div>
                   <img class="category" src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" style="width: 15%;">CorelDRAW</img>
@@ -266,13 +267,30 @@
         <h1>LIÊN HỆ</h1>
         </div>
     </div>
-
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
   <script src="js/portfolio_animation.js"></script>
   <script src="js/next_tab.js"></script>
   <script src="js/come_page.js"></script>
 
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const backToNormalButton = document.getElementById('back-to-normal-button');
+
+            if (backToNormalButton) {
+                backToNormalButton.addEventListener('click', () => {
+                    console.log('Nút "Trở về chế độ bình thường" đã được click.');
+                    // Xóa trạng thái đã hiển thị modal trên trang profile
+                    sessionStorage.removeItem('hasShownWelcomeModal_profile');
+                    console.log('Đã xóa hasShownWelcomeModal_profile từ sessionStorage.');
+                    // Chuyển hướng về trang profile.html
+                    window.location.href = 'profile.html';
+                });
+            } else {
+                console.error('Lỗi: Không tìm thấy nút "back-to-normal-button".');
+            }
+        });
+    </script>
 
 </body>
 </html>

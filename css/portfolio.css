@@ -661,3 +661,91 @@ nav ul li.active {
   border-radius: 10px;
   height: 30px;
 }
+/* portfolio.css */
+
+/* Thêm keyframes cho animation */
+@keyframes pulse-background {
+  0% {
+    background-color: #e74c3c; /* Màu đỏ ban đầu */
+    color: white; /* Chữ màu trắng */
+  }
+  50% {
+    background-color: #f1c40f; /* Màu vàng tươi */
+    color: black; /* Chữ màu đen */
+  }
+  100% {
+    background-color: #e74c3c; /* Trở lại màu đỏ ban đầu */
+    color: white; /* Chữ màu trắng */
+  }
+}
+
+.back-to-normal-button {
+    position: absolute; /* Định vị tuyệt đối trong thẻ nav */
+    bottom: 20px;       /* 20px từ đáy của thanh nav */
+    left: 50%;          /* Căn giữa theo chiều ngang trong thanh nav */
+    transform: translateX(-50%); /* Dịch sang trái 50% chiều rộng của nút để căn giữa hoàn hảo */
+    padding: 15px 10px; /* Điều chỉnh padding để phù hợp với không gian nav */
+    /* Thay đổi màu nền ban đầu hoặc sử dụng màu đỏ từ animation */
+    background-color: #e74c3c; /* Màu đỏ nổi bật */
+    color: white; /* Màu chữ mặc định là trắng */
+    border: none;
+    border-radius: 30px; /* Bo tròn viền */
+    font-size: 0.9em;   /* Giảm kích thước chữ một chút nếu cần để phù hợp với nav */
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4); /* Đổ bóng mạnh để tạo hiệu ứng nổi */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 101; /* Đảm bảo nút nằm trên các phần tử khác trong nav */
+    text-align: center; /* Căn giữa văn bản trong nút */
+    width: calc(100% - 40px); /* Chiếm gần hết chiều rộng của nav trừ padding */
+    max-width: 180px; /* Giới hạn chiều rộng tối đa của nút nếu nav quá rộng */
+
+    /* Áp dụng animation */
+    animation: pulse-background 2s infinite alternate; /* Tên animation, thời gian, lặp vô hạn, đổi chiều */
+}
+
+.back-to-normal-button:hover {
+    /* Khi hover, tạm dừng animation và chuyển sang màu hover */
+    animation: none;
+    background-color: #c0392b; /* Màu đỏ sẫm hơn khi hover */
+    color: white; /* Đảm bảo màu chữ là trắng khi hover */
+    transform: translateX(-50%) translateY(-5px); /* Nâng lên một chút và vẫn căn giữa */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6); /* Đổ bóng mạnh hơn khi hover */
+}
+
+/* Bạn cũng có thể muốn thêm một số media queries để điều chỉnh nút này trên các màn hình nhỏ hơn */
+@media screen and (max-width: 768px) {
+  nav {
+    width: 100%; /* Nav có thể chiếm toàn bộ chiều rộng trên mobile */
+    height: auto;
+    bottom: 0; /* Có thể đặt nav ở dưới cùng trên mobile */
+    top: unset; /* Bỏ top nếu bạn đặt nav ở dưới */
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  nav ul {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  nav ul li {
+    margin: 5px 10px;
+  }
+
+  .back-to-normal-button {
+    position: static; /* Đặt lại vị trí tĩnh để nó chảy theo luồng bình thường */
+    margin-top: 15px; /* Tạo khoảng cách với các mục nav */
+    transform: none; /* Bỏ transform */
+    width: auto; /* Chiều rộng tự động */
+    max-width: unset; /* Bỏ giới hạn max-width */
+    padding: 10px 20px; /* Điều chỉnh padding */
+    animation: none; /* Tắt animation trên mobile nếu bạn muốn */
+    color: white; /* Đảm bảo màu chữ là trắng trên mobile */
+  }
+}

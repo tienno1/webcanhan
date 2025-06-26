@@ -12,6 +12,7 @@
     <header>
         <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
             <p>Profile của tôi</p>
+        <!-- Font Awesome for menu icon (replace with Lucide React or SVG if using React) -->
         <button aria-label="Menu" class="menu-toggle">
             <i class="fa-solid fa-bars fa-beat-fade fa-2xl" style="color: #ffffff;"></i>
         </button>
@@ -20,18 +21,17 @@
     <nav class="main-nav">
         <ul>
             <li><a href="index.html">Giới thiệu</a></li>
-            <li><a href="portfolio.html">About Me</a></li>
             <li><a href="profile.html" class="active">Profile</a></li>
             <li><a href="designer.html">Design</a></li>
             <li><a href="scores.html">Điểm Số</a></li>
             <li><a href="drawings.html">Ảnh Sưu Tầm</a></li>
-            
+
             <li>
             <div class="dropdown">
                 <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
                     <ul class="dropdown-menu">
                     <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
-                    <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>    
+                    <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>
                     </ul>
             </div>
             </li>
@@ -44,7 +44,7 @@
                         <li><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html">web kết thúc môn học</a></li>
                     </ul>
             </div>
-            </li>   
+            </li>
         </ul>
     </nav>
 
@@ -57,7 +57,7 @@
                 <p><strong>Ngày sinh:</strong> 21/7/2008</p>
                 <p><strong>Nghề nghiệp:</strong> Thiết Kế Đồ Họa(Designer)</p>
                 <p><strong>Sở thích:</strong> Thích vẽ tranh, thiết kế, tìm tòi học cái mới
-                    <img src="https://png.pngtree.com/png-vector/20220530/ourmid/pngtree-closeup-kid-hand-holding-a-paintbrush-png-image_4762838.png" class="hover-zoom" alt="Sở thích" style="width: 10%; margin: -40px 0px -30px 10px;">
+                    <img src="https://png.pngtree.com/png-vector/20220530/ourmid/pngtree-closeup-kid-hand-holding-a-paintbrush-png-image_4762838.png" alt="Sở thích" class="hover-zoom" style="width: 10%; margin: -40px 0px -30px 10px;">
                 </p>
                 <p><strong>Kỹ năng:</strong></p>
                 <ul class="Skill_on_app">
@@ -170,7 +170,6 @@
                     </div>
                 </div>
             </section>
-
         </main>
     </div>
 
@@ -181,11 +180,30 @@
         </div>
     </footer>
 
-    <script src="js/profile_animation.js"></script>
+    <!-- Nút bật chế độ xem nâng cao -->
+    <button id="enable-advanced-view-button">Chuyển chế độ xem nâng cao</button>
+
+    <!-- Modal thông báo -->
+    <div id="welcome-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Chào mừng bạn đến với Profile của tôi!</h2>
+            <p>Bạn có muốn bật chế độ xem nâng cao để khám phá Profile đầy đủ của tôi không?<br><b style="color: red;">! Lưu Ý !</b><br> xem ở điện thoại thì sẽ không được tối ưu tốt như ở máy tính</p>
+            <div class="modal-buttons">
+                <button id="enable-advanced-view">Đồng ý</button>
+                <button id="later-advanced-view">Không phải bây giờ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Các script được tải sau khi các phần tử HTML đã được định nghĩa -->
+    <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
+    <!-- Inlining custom scripts -->
     <script>
+        // Script for smooth page transitions on navigation links
         document.querySelectorAll('nav ul li a').forEach(link => {
             link.addEventListener('click', function(e) {
-                // Nếu là link ngoài thì bỏ qua
+                // If it's an external link, ignore
                 if (this.target === '_blank' || this.href.startsWith('http')) return;
                 e.preventDefault();
                 const pageContent = document.getElementById('page-content');
@@ -193,7 +211,7 @@
                     pageContent.classList.add('fade-out');
                     setTimeout(() => {
                         window.location = this.href;
-                    }, 400); // Thời gian khớp với transition trong CSS
+                    }, 400); // Match with CSS transition time
                 } else {
                     window.location = this.href;
                 }
@@ -203,14 +221,239 @@
             const pageContent = document.getElementById('page-content');
             if (pageContent) pageContent.classList.add('fade-in');
         });
+
+        // --- Inlining profile_animation.js content here ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Listen for the DOM to be fully loaded
+
+            // --- Animation on Scroll (Fade-in) ---
+
+            // Get all elements with the 'fade-in-element' class
+            const fadeInElements = document.querySelectorAll('.fade-in-element');
+
+            // Create an Intersection Observer
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // If the element is currently in the viewport
+                    if (entry.isIntersecting) {
+                        // Add the 'is-visible' class to trigger CSS animations
+                        entry.target.classList.add('is-visible');
+                        // Stop observing the element after it has become visible
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                // Observer configuration
+                threshold: 0.1 // Trigger when 10% of the element is in the viewport
+            });
+
+            // Start observing each element that needs the fade-in effect
+            fadeInElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Note: The gentle text movement effect (.animated-text) is handled entirely by CSS animation (@keyframes)
+            // and does not require JavaScript to be triggered based on scrolling in this example.
+
+
+            // Function to reveal elements on scroll for skill and contact items
+            function revealOnScroll() {
+                document.querySelectorAll('.skill-item img, .contact-item img').forEach(img => {
+                    const rect = img.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 40) {
+                        img.classList.add('visible');
+                    }
+                });
+            }
+            window.addEventListener('scroll', revealOnScroll);
+            window.addEventListener('DOMContentLoaded', revealOnScroll);
+
+            // Back to Top & Go to Bottom Buttons
+            const backToTopBtn = document.getElementById('back-to-top');
+            const goToBottomBtn = document.getElementById('go-to-bottom');
+
+            if (backToTopBtn && goToBottomBtn) { // Ensure buttons exist
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    const windowHeight = window.innerHeight;
+                    const docHeight = document.body.scrollHeight;
+
+                    // Show back to top button when scrolled down
+                    if (scrollY > 300) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+
+                    // Hide go to bottom button if near the end of the page
+                    if (scrollY + windowHeight >= docHeight - 100) {
+                        goToBottomBtn.style.display = 'none';
+                    } else {
+                        goToBottomBtn.style.display = 'block';
+                    }
+                });
+
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+
+                goToBottomBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                });
+            } else {
+                console.warn('Cảnh báo: Không tìm thấy nút "Lên đầu trang" hoặc "Xuống cuối trang".');
+            }
+
+
+            // --- Modal for advanced view on Profile page ---
+            const welcomeModal = document.getElementById('welcome-modal');
+            const closeButton = welcomeModal ? welcomeModal.querySelector('.close-button') : null;
+            const enableAdvancedViewButton = document.getElementById('enable-advanced-view');
+            const laterAdvancedViewButton = document.getElementById('later-advanced-view');
+            const toggleAdvancedViewButton = document.getElementById('enable-advanced-view-button'); // The new button
+
+            console.log('DOMContentLoaded fired in profile_animation.js (inlined)');
+            console.log('toggleAdvancedViewButton found:', !!toggleAdvancedViewButton); // Check if the button element is found
+            console.log('welcomeModal found:', !!welcomeModal); // Check if the modal element is found
+
+            // Check sessionStorage to see if the modal has been shown in this session
+            const hasShownWelcomeModal = sessionStorage.getItem('hasShownWelcomeModal_profile');
+            console.log('Trạng thái hasShownWelcomeModal_profile:', hasShownWelcomeModal);
+
+            // Initial display of the modal if not shown before (on page load)
+            // Removed automatic display on load as per original logic, only show on button click
+            if (welcomeModal && !hasShownWelcomeModal) {
+                console.log('Modal thông báo không hiển thị tự động khi tải trang.');
+            } else {
+                console.log('Modal thông báo không hiển thị (đã hiển thị trước đó hoặc không tìm thấy welcomeModal).');
+            }
+
+            // Attach event for the new toggle button
+            if (toggleAdvancedViewButton) {
+                toggleAdvancedViewButton.addEventListener('click', () => {
+                    console.log('enable-advanced-view-button clicked!'); // <-- Add this log
+                    if (welcomeModal) {
+                        welcomeModal.classList.add('active'); // Show modal when button is clicked
+                        document.body.style.overflow = 'hidden'; // Prevent main page scrolling
+                        console.log('Nút "Chuyển chế độ xem nâng cao" đã được click. Modal đã hiển thị.');
+                    } else {
+                        console.error('Lỗi: Không tìm thấy welcomeModal khi nút "Chuyển chế độ xem nâng cao" được nhấn.');
+                    }
+                });
+            } else {
+                console.error('Lỗi: Không tìm thấy nút "enable-advanced-view-button".');
+            }
+
+            // Gắn sự kiện cho nút đóng modal
+            if (closeButton) {
+                closeButton.addEventListener('click', () => {
+                    console.log('Close button clicked.');
+                    if (welcomeModal) {
+                        welcomeModal.classList.remove('active');
+                        document.body.style.overflow = ''; // Cho phép cuộn lại
+                        sessionStorage.setItem('hasShownWelcomeModal_profile', 'true'); // Đánh dấu đã hiển thị
+                        console.log('Nút đóng modal đã được click. hasShownWelcomeModal_profile set true.');
+                    }
+                });
+            } else {
+                console.warn('Cảnh báo: Không tìm thấy nút đóng modal.');
+            }
+
+            // Gắn sự kiện cho nút "Đồng ý"
+            if (enableAdvancedViewButton) {
+                enableAdvancedViewButton.addEventListener('click', () => {
+                    console.log('"Đồng ý" button clicked.');
+                    if (welcomeModal) {
+                        welcomeModal.classList.remove('active');
+                        document.body.style.overflow = ''; // Cho phép cuộn lại
+                        sessionStorage.setItem('hasShownWelcomeModal_profile', 'true'); // Đánh dấu đã hiển thị
+                        console.log('Nút "Đồng ý" đã được click. Chuyển hướng đến portfolio.html.');
+                        // Chuyển hướng đến trang portfolio.html
+                        window.location.href = 'portfolio.html';
+                    }
+                });
+            } else {
+                console.warn('Cảnh báo: Không tìm thấy nút "Đồng ý".');
+            }
+
+            // Gắn sự kiện cho nút "Không phải bây giờ"
+            if (laterAdvancedViewButton) {
+                laterAdvancedViewButton.addEventListener('click', () => {
+                    console.log('"Không phải bây giờ" button clicked.');
+                    if (welcomeModal) {
+                        welcomeModal.classList.remove('active');
+                        document.body.style.overflow = ''; // Cho phép cuộn lại
+                        sessionStorage.setItem('hasShownWelcomeModal_profile', 'true'); // Đánh dấu đã hiển thị
+                        console.log('Nút "Không phải bây giờ" đã được click. hasShownWelcomeModal_profile set true.');
+                    }
+                });
+            } else {
+                console.warn('Cảnh báo: Không tìm thấy nút "Không phải bây giờ".');
+            }
+
+            // Đóng modal khi click ra ngoài nội dung modal
+            if (welcomeModal) {
+                welcomeModal.addEventListener('click', (e) => {
+                    if (e.target === welcomeModal) {
+                        console.log('Click ngoài modal.');
+                        welcomeModal.classList.remove('active');
+                        document.body.style.overflow = ''; // Cho phép cuộn lại
+                        sessionStorage.setItem('hasShownWelcomeModal_profile', 'true'); // Đánh dấu đã hiển thị
+                        console.log('Click ngoài modal. hasShownWelcomeModal_profile set true.');
+                    }
+                });
+            }
+        });
+        // --- End of inlined profile_animation.js content ---
+
+        // Basic script for dropdown menu (if 'js-code-navbar.js' was used)
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                        // Toggle the 'open' class for dropdown sub-menus
+                        dropdownMenu.classList.toggle('open'); // Đảm bảo khớp với CSS nếu có .dropdown-menu.open
+                    }
+                });
+            });
+
+            // Close dropdowns when clicking outside
+            window.addEventListener('click', function(event) {
+                if (!event.target.matches('.dropdown-toggle')) {
+                    const dropdowns = document.querySelectorAll('.dropdown-menu');
+                    dropdowns.forEach(openDropdown => {
+                        // Close dropdowns by removing the 'open' class
+                        if (openDropdown.classList.contains('open')) { // Đã thay đổi từ 'active' thành 'open' ở đây
+                            openDropdown.classList.remove('open');
+                        }
+                    });
+                }
+            });
+
+            // Toggle for mobile menu
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', () => {
+                    // Correctly toggle the 'open' class for the main navigation
+                    mainNav.classList.toggle('open');
+                });
+            }
+        });
+
+        // Placeholder for next_tab.js (if it contains actual JS logic, it should be inlined here)
+        // For demonstration, assuming next_tab.js might handle some navigation logic.
+        // If it was empty or contained simple logic, it would be included like this.
     </script>
-    <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
-    <script src="js/js-code-navbar.js"></script>
+
     <!-- Nút đi lên -->
     <button id="back-to-top" title="Lên đầu trang">&#8679;</button>
 
     <!-- Nút đi xuống -->
     <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
-    <script src="js/next_tab.js"></script>
+
 </body>
 </html>
