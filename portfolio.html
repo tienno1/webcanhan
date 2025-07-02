@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About me</title>
+  <title>Portfolio của Phạm Viết Tiến - Thiết kế đồ họa & Nghệ sĩ</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css" />
   <link rel="stylesheet" href="css/portfolio.css"/>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts - Inter for modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -13,247 +17,433 @@
     <a href="index.html"><img id="logo-main" src="img/logo_black.png" alt="iDesign Logo" style="width: 100px; margin-bottom: 20px;" /></a>
     <a href="index.html"><img id="logo-main" src="img/logo.png" alt="iDesign Logo Alt" style="width: 100px; margin-bottom: 20px; display: none;" /></a>
     <ul>
-      <li class="active" data-menuanchor="about-me"><a href="#about-me">About me</a></li>
-      <li data-menuanchor="so-thich"><a href="#so-thich">Sở Thích</a></li>
-      <li data-menuanchor="ky-nang"><a href="#ky-nang">Kỹ năng</a></li>
-      <li data-menuanchor="San-Pham"><a href="#San-Pham">Sản Phẩm</a></li>
-      <li data-menuanchor="lien-he"><a href="#lien-he">LIÊN HỆ</a></li>
+      <li class="active" data-menuanchor="gioi-thieu"><a href="#gioi-thieu"><i class="fas fa-user-circle"></i> Giới Thiệu</a></li>
+      <li data-menuanchor="so-thich"><a href="#so-thich"><i class="fas fa-palette"></i> Sở Thích</a></li>
+      <li data-menuanchor="ky-nang"><a href="#ky-nang"><i class="fas fa-tools"></i> Kỹ Năng</a></li>
+      <li data-menuanchor="san-pham"><a href="#san-pham"><i class="fas fa-briefcase"></i> Sản Phẩm</a></li>
+      <li data-menuanchor="lien-he"><a href="#lien-he"><i class="fas fa-envelope"></i> Liên Hệ</a></li>
     </ul>
     <button id="back-to-normal-button" class="back-to-normal-button">Trở về chế độ bình thường</button>
   </nav>
 
   <div id="fullpage" class="content-left">
-    <div class="section" data-nav-theme="light" data-logo="img/logo_black.png" data-anchor="about-me" id="section1">
+    <!-- Section 1: About Me (Giới Thiệu) -->
+    <div class="section" data-nav-theme="light" data-logo="img/logo_black.png" data-anchor="gioi-thieu" id="section1">
       <div class="section-content">
         <div class="profile-left">
-          <img src="img/img-portfolio.png" alt="David Hendison" />
+          <img src="img/img-portfolio.png" alt="Phạm Viết Tiến - Graphic Designer" />
         </div>
         <div class="profile-right">
-          <h1>PHẠM VIẾT<br><strong>TIẾN</strong></h1>
+          <h2 style="font-size: 1.6em;margin-bottom: -10px;">PHẠM VIẾT</h2><br><h1><strong>TIẾN</strong></h1>
           <div class="roles">
             <p style="color: white;">I'm a </p>
-            <p>DESIGNER</p>
+            <p class="role-animate">DESIGNER</p>
             <p>& ARTIST</p>
           </div>
-          <p style="text-align: center;margin-bottom: -10px;"><b>About me:</b></p>
-          <p class="bio" style="text-align: justify;">
-            Tôi là một người thiết kế và nghệ sĩ đam mê sáng tạo. trong việc tạo ra các trang web đẹp, các ấn phẩm truyền thông, bộ nhận diện thương hiệu đẹp mắt, tôi luôn tìm kiếm những cách mới để kết hợp nghệ thuật và công nghệ. Tôi tin rằng mỗi dự án là một cơ hội để kể một câu chuyện độc đáo và mang lại giá trị cho người dùng. Tôi luôn sẵn sàng học hỏi và khám phá những xu hướng mới trong thiết kế để mang đến những sản phẩm tốt nhất cho khách hàng của mình. và tôi tin rằng sự sáng tạo không có giới hạn, và tôi luôn tìm kiếm những cách mới để thể hiện bản thân thông qua nghệ thuật và thiết kế. Tôi hy vọng sẽ có cơ hội làm việc với bạn để tạo ra những sản phẩm độc đáo và ấn tượng.
+          <p class="bio" style="text-align: justify;margin-top: -10px;">
+            Chào mừng bạn đến với thế giới sáng tạo của tôi! Tôi là một <strong>nhà thiết kế đồ họa</strong> và <strong>nghệ sĩ</strong> với niềm đam mê không ngừng nghỉ trong việc biến những ý tưởng trừu tượng thành các sản phẩm thị giác ấn tượng.
+            Tôi chuyên sâu vào việc tạo ra <strong>trang web đẹp mắt</strong>, <strong>ấn phẩm truyền thông độc đáo</strong>, và xây dựng <strong>bộ nhận diện thương hiệu mạnh mẽ</strong>. Tôi luôn tìm kiếm những cách thức mới để kết hợp <strong>nghệ thuật thủ công</strong> với <strong>công nghệ hiện đại</strong>
           </p>
-          <div class="buttons">
-            <a href="index.html"><button>My Web: 🌐</button></a>
-            <a href=""><button>📞: 0329240391</button></a>
-            <a href="mailto:tiendepzai0908@gmail.com"><button>Mail: 📩</button></a>
+          <div class="buttons" style="margin-top: 10px; display: flex; justify-content: center; flex-wrap: wrap;">
+            <a href="index.html" target="_blank"><button><i class="fas fa-globe"></i> My Web</button></a>
+            <a href="tel:+84329240391"><button><i class="fas fa-phone-alt"></i> 0329240391</button></a>
+            <a href="mailto:tiendepzai0908@gmail.com"><button><i class="fas fa-envelope"></i>Mail</button></a>
+          </div>
+          <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-behance"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-dribbble"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Section 2: Hobbies (Sở Thích) -->
     <div class="section" data-nav-theme="dark" data-logo="img/logo.png" data-anchor="so-thich" id="section2">
       <div class="section-content">
         <div class="profile-right">
           <h1>Sở<br><strong>THÍCH</strong></h1>
           <div class="roles">
-            <p style="color: white;">I LIKE</p>
-            <p>PAINTING 🎨</p>
-            <p>Playing Games 🎮</p>
-            <p>And Design</p>
+            <p style="color: white;">Tôi yêu</p>
+            <p><i class="fas fa-paint-brush"></i> VẼ TRANH</p>
+            <p><i class="fas fa-gamepad"></i> CHƠI GAME</p>
+            <p><i class="fas fa-laptop-code"></i> & THIẾT KẾ</p>
           </div>
-          <p style="text-align: center; margin-bottom: -10px;"><b>About me:</b></p>
-          <p class="bio">
-            Tôi rất thích vẽ tranh đặc biệt là tranh màu nước và tranh chì, tuy tôi vẽ không được đẹp nhưng đã là đam mê thì không có gì ngăn cản được, bên đây là 1 trong số tác phẩm đẹp nhất của tôi ==>
+          <p class="bio" style="text-align: justify;">
+            Niềm đam mê lớn nhất của tôi là <strong>vẽ tranh</strong>, đặc biệt là tranh màu nước và tranh chì. Mặc dù không phải là một họa sĩ chuyên nghiệp, nhưng tôi tin rằng nghệ thuật không có giới hạn. Vẽ giúp tôi rèn luyện tư duy màu sắc, bố cục, và khả năng quan sát chi tiết – những kỹ năng vô cùng hữu ích trong công việc thiết kế đồ họa. Đây là không gian tôi được tự do thể hiện cảm xúc và ý tưởng mà không bị ràng buộc bởi bất kỳ quy tắc nào. Một trong số những tác phẩm tâm đắc của tôi đang được trưng bày bên cạnh.
+            
           </p>
           <div class="buttons">
-            <a href="drawings.html"><button>My Web drawing: 🌐</button></a>
-            <a href=""><button>📞: 0329240391</button></a>
-            <a href="mailto:tiendepzai0908@gmail.com"><button>Mail: 📩</button></a>
+            <a href="drawings.html" target="_blank"><button><i class="fas fa-images"></i> Xem tranh của tôi</button></a>
+            <a href="mailto:tiendepzai0908@gmail.com"><button><i class="fas fa-heart"></i> Kết nối</button></a>
           </div>
         </div>
 
         <div class="profile-left">
-          <img src="img/yourichi.jpg" alt="Sở thích" />
+          <img src="img/yourichi.jpg" alt="Sở thích - Tranh vẽ của bạn" />
         </div>
       </div>
     </div>
 
-    <div class="section" data-nav-theme="green" data-logo="img/logo.png" data-anchor="ky-nang" id="section3">
+    <!-- Section 3: Skills (Kỹ Năng) -->
+    <div class="section" data-nav-theme="green" data-logo="img/logo_black.png" data-anchor="ky-nang" id="section3">
       <div class="skill-section">
-        <h2 class="skill-title">Kỹ Năng</h2><a href="profile.html"><div class="buttons_1"><button>More Skill: 🌐</button></a></div>
-
-        <div class="skill-row">
-          <div class="skill-pair reverse">
-            <div class="skill-text">CorelDRAW graphics suite (CR)</div>
-            <div class="skill-image">
-              <img src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" alt="UI/UX">
+        <h2 class="skill-title" style="margin-bottom: -10px;">Kỹ Năng<a href="profile.html" class="buttons_1"></h2><button style="margin-left: 390px; margin-top: 0px;"><i class="fas fa-plus-circle"></i> Xem thêm kỹ năng</button></a>
+        <div class="skill-carousel-container">
+            <div class="skill-grid">
+              <!-- Skill Item 1: CorelDRAW -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" alt="CorelDRAW"></div>
+                <div class="skill-info">
+                  <h3>CorelDRAW Graphics Suite (CR)</h3>
+                  <p>Công cụ vẽ vector, bố cục trang, và thiết kế in ấn sắc nét, chuyên nghiệp.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 90%;" data-level="90%"></div>
+                    <span class="skill-level-text">90%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=5#design-poster1" target="_blank">Thiết kế Banner Sự Kiện Lớn</a></li>
+                      <li><a href="designer.html?page=2#design-businesscard" target="_blank">Thiết kế Danh Thiếp</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 2: Adobe Illustrator -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png" alt="Adobe Illustrator"></div>
+                <div class="skill-info">
+                  <h3>Adobe Illustrator (AI)</h3>
+                  <p>Thiết kế logo, biểu tượng, đồ họa vector, và minh họa kỹ thuật số mạnh mẽ.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 85%;" data-level="85%"></div>
+                    <span class="skill-level-text">85%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=2#design-catalog" target="_blank">Catalog Khoa CNTT</a></li>
+                      <li><a href="designer.html?page=7#design-Website4" target="_blank">Thiết kế Website</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 3: Adobe Photoshop -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop"></div>
+                <div class="skill-info">
+                  <h3>Adobe Photoshop (PS)</h3>
+                  <p>Chỉnh sửa ảnh chuyên nghiệp, tạo hiệu ứng, thiết kế UI/UX và ấn phẩm đa dạng.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 95%;" data-level="95%"></div>
+                    <span class="skill-level-text">95%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=5#design-poster2" target="_blank">Hiệu Ứng Chữ Độc Đáo</a></li>
+                      <li><a href="designer.html?page=6#design-background12" target="_blank">Sáng Tạo Cắt Ghép Ảnh</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 4: Adobe After Effects -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/2101px-Adobe_After_Effects_CC_icon.svg.png" alt="Adobe After Effects"></div>
+                <div class="skill-info">
+                  <h3>Adobe After Effects (AE)</h3>
+                  <p>Tạo đồ họa chuyển động, hiệu ứng hình ảnh, hoạt hình cho video sống động.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 75%;" data-level="75%"></div>
+                    <span class="skill-level-text">75%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=3#design-animation" target="_blank">Video Intro Kênh YouTube</a></li>
+                      <li><a href="designer.html?page=3#design-motiongraphics" target="_blank">Motion Graphics Quảng Cáo</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 5: Adobe Premiere Pro -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="Adobe Premiere Pro"></div>
+                <div class="skill-info">
+                  <h3>Adobe Premiere Pro (PR)</h3>
+                  <p>Chỉnh sửa video chuyên nghiệp, dựng phim, xử lý âm thanh cuốn hút.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 80%;" data-level="80%"></div>
+                    <span class="skill-level-text">80%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=4#design-videoedit" target="_blank">Dựng Video Sự Kiện</a></li>
+                      <li><a href="designer.html?page=4#design-shortfilm" target="_blank">Chỉnh sửa Phim Ngắn</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 6: Adobe Animate -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Adobe_Animate_CC_icon_%282020%29.svg/2097px-Adobe_Animate_CC_icon_%282020%29.svg.png" alt="Adobe Animate"></div>
+                <div class="skill-info">
+                  <h3>Adobe Animate (AN)</h3>
+                  <p>Phát triển hoạt hình tương tác, đa phương tiện và game 2D hiệu quả.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 70%;" data-level="70%"></div>
+                    <span class="skill-level-text">70%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=3#design-webbanner" target="_blank">Banner Hoạt Hình Web</a></li>
+                      <li><a href="designer.html?page=3#design-interactive" target="_blank">Thiết kế Game Mini 2D</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 7: Adobe InDesign -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt="Adobe InDesign"></div>
+                <div class="skill-info">
+                  <h3>Adobe InDesign (ID)</h3>
+                  <p>Thiết kế dàn trang sách, tạp chí, brochure chuyên nghiệp và thẩm mỹ.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 80%;" data-level="80%"></div>
+                    <span class="skill-level-text">80%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=2#design-brochure" target="_blank">Brochure Giới Thiệu Công Ty</a></li>
+                      <li><a href="designer.html?page=2#design-magazine" target="_blank">Thiết kế Tạp Chí</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 8: Adobe Audition -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Adobe_Audition_CC_icon_%282020%29.svg/500px-Adobe_Audition_CC_icon_%282020%29.svg.png" alt="Adobe Audition"></div>
+                <div class="skill-info">
+                  <h3>Adobe Audition (Au)</h3>
+                  <p>Phần mềm chỉnh sửa, trộn và phục hồi âm thanh chuyên nghiệp.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 60%;" data-level="60%"></div>
+                    <span class="skill-level-text">60%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=4#design-podcast" target="_blank">Chỉnh sửa Podcast</a></li>
+                      <li><a href="designer.html?page=4#design-sounddesign" target="_blank">Thiết kế Âm thanh cho Video</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 9: Visual Studio Code -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1200px-Visual_Studio_Code_1.35_icon.svg.png" alt="Visual Studio Code"></div>
+                <div class="skill-info">
+                  <h3>Visual Studio Code (VSC)</h3>
+                  <p>Trình soạn thảo mã nguồn mạnh mẽ cho phát triển web và các ngôn ngữ lập trình khác.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 70%;" data-level="70%"></div>
+                    <span class="skill-level-text">70%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=7#design-Website4" target="_blank">Thiết kế & Phát Triển Website</a></li>
+                      <li><a href="index.html" target="_blank">Portfolio Cá Nhân (Trang hiện tại)</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 10: Adobe Dreamweaver -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Adobe_Dreamweaver_CC_icon.svg/1200px-Adobe_Dreamweaver_CC_icon.svg.png" alt="Adobe Dreamweaver"></div>
+                <div class="skill-info">
+                  <h3>Adobe Dreamweaver (DW)</h3>
+                  <p>Công cụ thiết kế và phát triển web, hỗ trợ cả mã nguồn và giao diện trực quan.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 50%;" data-level="50%"></div>
+                    <span class="skill-level-text">50%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="designer.html?page=7#design-Website1" target="_blank">Thiết kế Trang Landing Page</a></li>
+                      <li><a href="designer.html?page=7#design-Website2" target="_blank">Website cho Khách Hàng</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Skill Item 11: C++ Basics -->
+              <div class="skill-item">
+                <div class="skill-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png" alt="C++"></div>
+                <div class="skill-info">
+                  <h3>C++ (Cơ bản)</h3>
+                  <p>Kiến thức cơ bản về ngôn ngữ lập trình C++, phục vụ cho việc hiểu cấu trúc phần mềm.</p>
+                  <div class="skill-proficiency">
+                    <div class="skill-bar" style="width: 40%;" data-level="40%"></div>
+                    <span class="skill-level-text">40%</span>
+                  </div>
+                  <div class="skill-projects">
+                    <h4>Dự án đã sử dụng:</h4>
+                    <ul>
+                      <li><a href="developer.html?page=1#dev-consoleapp" target="_blank">Ứng dụng Console đơn giản</a></li>
+                      <li><a href="developer.html?page=1#dev-datastructure" target="_blank">Thực hành Cấu trúc dữ liệu</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="skill-pair">
-            <div class="skill-image">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png" alt="Adobe Illustrator">
-            </div>
-            <div class="skill-text">Thiết kế đồ họa với Adobe Illustrator (Ai)</div>
-          </div>
+            <button class="skill-nav-button skill-prev-button">&#10094;</button>
+            <button class="skill-nav-button skill-next-button">&#10095;</button>
         </div>
-
-        <div class="skill-row">
-          <div class="skill-pair reverse">
-            <div class="skill-text">Adobe Premiere (Pr)</div>
-            <div class="skill-image">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="UI/UX">
-            </div>
-          </div>
-          <div class="skill-pair">
-            <div class="skill-image">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/2101px-Adobe_After_Effects_CC_icon.svg.png" alt="Adobe Illustrator">
-            </div>
-            <div class="skill-text">Adobe After Effect (Ae)</div>
-          </div>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-pair reverse">
-            <div class="skill-text">Adobe Animation (An)</div>
-            <div class="skill-image">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Adobe_Animate_CC_icon_%282020%29.svg/2097px-Adobe_Animate_CC_icon_%282020%29.svg.png" alt="UI/UX">
-            </div>
-          </div>
-          <div class="skill-pair">
-            <div class="skill-image">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1200px-Visual_Studio_Code_1.35_icon.svg.png" alt="Adobe Illustrator">
-            </div>
-            <div class="skill-text">Visual Studio Code (Vsc) & Adobe Dereamweaver (Dw)</div>
-          </div>
-        </div>
-
-        <div class="skill-row">
-          <div class="skill-pair reverse">
-            <div class="skill-text">Sử dụng phần mềm thiết kế: Figma, Photoshop</div>
-            <div class="skill-image">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop">
-            </div>
-          </div>
-          <div class="skill-pair">
-            <div class="skill-image">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt="Another Skill">
-            </div>
-            <div class="skill-text">Adobe Indesign (Id)</div>
-          </div>
-        </div>
-        </div>
+      </div>
     </div>
 
-     <div class="section" data-nav-theme="blue" data-logo="img/logo_black.png" data-anchor="San-Pham" id="section4">
+    <!-- Section 4: Products (Sản Phẩm) - Carousel -->
+    <div class="section" data-nav-theme="blue" data-logo="img/logo.png" data-anchor="san-pham" id="section4">
       <div class="section-content products-carousel-section-content">
-        <h2 class="products-carousel-title">What I Design</h2>
+        <h2 class="products-carousel-title">Dự Án Nổi Bật của Tôi</h2>
         <div class="products-carousel-container">
           <div class="products-wrapper">
+            <!-- Product Card 1 -->
             <div class="product-card">
               <div class="product-image-wrapper">
-                <img src="img/mask chữ.jpg" alt="Project 1" class="product-image">
+                <img src="img/mask chữ.jpg" alt="Project 1 - Hiệu ứng chữ" class="product-image">
               </div>
               <div class="product-details">
-                <h3 class="product-name">Text Effect</h3>
-                <div class="nhan_vo"><a href="designer.html?page=5#design-poster2" class="btn">Xem chi tiết thiết kế</a></div>
-                <p class="product-description">Hiệu ứng cho người đàn ông đang chạy vào trong chữ </p>
+                <h3 class="product-name">Hiệu Ứng Chữ Độc Đáo</h3>
+                <div class="nhan_vo"><a href="designer.html?page=5#design-poster2" class="btn" target="_blank"><i class="fas fa-eye"></i> Xem chi tiết</a></div>
+                <p class="product-description">Thiết kế hiệu ứng chữ sáng tạo, nổi bật với người đàn ông đang chạy xuyên qua chữ cái</p>
                 <div class="product-meta">
                   <div class="author">
                     <img src="img/logo_black.png" alt="Author" class="author-avatar">
                     <span class="verified-badge">✔</span>
                   </div>
-                  <img class="category" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" style="width: 15%;">Photoshop</img>
+                  <div class="category-info">
+                    <img class="category-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop Icon">
+                    <span class="category-text">Photoshop</span>
+                  </div>
                 </div>
                 <div class="product-footer">
-                  <button class="live-button">Time 🔴 2/2025</button>
-                  <span class="views">Study</span>
+                  <button class="live-button"><i class="far fa-calendar-alt"></i> 02/2025</button>
+                  <span class="views"><i class="fas fa-graduation-cap"></i> Dự án học tập</span>
                 </div>
               </div>
             </div>
 
+            <!-- Product Card 2 -->
             <div class="product-card">
               <div class="product-image-wrapper">
-                <img src="img/cogai.jpg" alt="Project 2" class="product-image">
+                <img src="img/cogai.jpg" alt="Project 2 - Cắt ghép điện thoại" class="product-image">
               </div>
               <div class="product-details">
-                <h3 class="product-name">Phone</h3>
-                <div class="nhan_vo"><a href="designer.html?page=6#design-background12" class="btn">Xem chi tiết thiết kế</a></div>
-                <p class="product-description">Cắt ghép cô gái vào trong điện thoại</p>
+                <h3 class="product-name">Sáng Tạo Cắt Ghép Ảnh</h3>
+                <div class="nhan_vo"><a href="designer.html?page=6#design-background12" class="btn" target="_blank"><i class="fas fa-eye"></i> Xem chi tiết</a></div>
+                <p class="product-description">Kỹ thuật cắt ghép phức tạp, lồng ghép hình ảnh cô gái vào trong chiếc điện thoại, tạo nên một bố cục nghệ thuật</p>
                 <div class="product-meta">
                   <div class="author">
                     <img src="img/logo_black.png" alt="Author" class="author-avatar">
                     <span class="verified-badge">✔</span>
                   </div>
-                  <img class="category" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" style="width: 15%;">Photoshop</img>
+                  <div class="category-info">
+                    <img class="category-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop Icon">
+                    <span class="category-text">Photoshop</span>
+                  </div>
                 </div>
                 <div class="product-footer">
-                  <button class="live-button">Time 🔴 2023</button>
-                  <span class="views">Study</span>
+                  <button class="live-button"><i class="far fa-calendar-alt"></i> 2023</button>
+                  <span class="views"><i class="fas fa-graduation-cap"></i> Dự án học tập</span>
                 </div>
               </div>
             </div>
 
+            <!-- Product Card 3 -->
             <div class="product-card">
               <div class="product-image-wrapper">
-                <img src="img/mừng 50 năm thống nhất đát nc.jpg" alt="Project 3" class="product-image">
+                <img src="img/mừng 50 năm thống nhất đát nc.jpg" alt="Project 3 - Banner sự kiện" class="product-image">
               </div>
               <div class="product-details">
-                <h3 class="product-name">Banner</h3>
-                <div class="nhan_vo"><a href="designer.html?page=5#design-poster1" class="btn">Xem chi tiết thiết kế</a></div>
-                <p class="product-description">Thiết kế banner cho sự kiện mừng 50 năm giải phóng miền nam thống nhất đất nước</p>
+                <h3 class="product-name">Thiết Kế Banner Sự Kiện</h3>
+                <div class="nhan_vo"><a href="designer.html?page=5#design-poster1" class="btn" target="_blank"><i class="fas fa-eye"></i> Xem chi tiết</a></div>
+                <p class="product-description">Thiết kế banner kỷ niệm 50 năm Giải phóng miền Nam, thống nhất đất nước, thể hiện sự kiện lịch sử một cách trang trọng.</p>
                 <div class="product-meta">
                   <div class="author">
-                    <img src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" alt="Author" class="author-avatar" style="width: 15%;">
+                    <img src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" alt="Author" class="author-avatar">
                     <span class="verified-badge">✔</span>
                   </div>
-                  <img class="category" src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" style="width: 15%;">CorelDRAW</img>
+                  <div class="category-info">
+                    <img class="category-icon" src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" alt="CorelDRAW Icon">
+                    <span class="category-text">CorelDRAW</span>
+                  </div>
                 </div>
                 <div class="product-footer">
-                  <button class="live-button">Time 🔴 3/2025</button>
-                  <span class="views">Study</span>
+                  <button class="live-button"><i class="far fa-calendar-alt"></i> 03/2025</button>
+                  <span class="views"><i class="fas fa-graduation-cap"></i> Dự án học tập</span>
                 </div>
               </div>
             </div>
 
+            <!-- Product Card 4 -->
             <div class="product-card">
               <div class="product-image-wrapper">
-                <img src="img/hình new final/file FINAL_trang bìa .jpg" alt="Project 4" class="product-image">
+                <img src="img/hình new final/file FINAL_trang bìa .jpg" alt="Project 4 - Catalog Khoa CNTT" class="product-image">
               </div>
               <div class="product-details">
-                <h3 class="product-name">Catalog</h3>
-                <div class="nhan_vo"><a href="designer.html?page=2#design-catalog" class="btn">Xem chi tiết thiết kế</a></div>
-                <p class="product-description">Thiết kế Cuốn Cẩm Nang giới thiệu khoa Công Nghệ Thông Tin Của trường</p>
+                <h3 class="product-name">Thiết Kế Catalog </h3>
+                <div class="nhan_vo"><a href="designer.html?page=2#design-catalog" class="btn" target="_blank"><i class="fas fa-eye"></i> Xem chi tiết</a></div>
+                <p class="product-description">Thiết kế Cuốn Cẩm Nang giới thiệu khoa Công Nghệ Thông Tin của trường, với bố cục hiện đại và hình ảnh minh họa sinh động.</p>
                 <div class="product-meta">
                   <div class="author">
-                    <img src="https://cdn.haitrieu.com/wp-content/uploads/2023/02/Logo-Truong-Cao-dang-Ky-thuat-Cong-nghe-Ba-Ria-Vung-Tau.png" alt="Author" class="author-avatar" style="width: 50%;">
+                    <img src="https://cdn.haitrieu.com/wp-content/uploads/2023/02/Logo-Truong-Cao-dang-Ky-thuat-Cong-nghe-Ba-Ria-Vung-Tau.png" alt="Author" class="author-avatar">
                     <span class="verified-badge">✔</span>
                   </div>
-                  <img class="category" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" style="width: 15%;">Photoshop</img>
-                  <img class="category" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png" style="width: 15%;">Illustrator</img>
+                  <div class="category-info">
+                    <img class="category-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop Icon">
+                    <span class="category-text">PS</span>
+                    <img class="category-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png" alt="Illustrator Icon">
+                    <span class="category-text">AI</span>
+                  </div>
                 </div>
                 <div class="product-footer">
-                  <button class="live-button">🔴 2/2025 - 5/2025</button>
-                  <span class="views">Graphic design project</span>
+                  <button class="live-button"><i class="far fa-calendar-alt"></i> 02/2025 - 05/2025</button>
+                  <span class="views"><i class="fas fa-pencil-ruler"></i> Dự án đồ án</span>
                 </div>
               </div>
             </div>
 
+            <!-- Product Card 5 -->
             <div class="product-card">
               <div class="product-image-wrapper">
-                <img src="img/web2.png" alt="Project 5" class="product-image">
+                <img src="img/web2.png" alt="Project 5 - Thiết kế Website" class="product-image">
               </div>
               <div class="product-details">
-                <h3 class="product-name">Design Website</h3>
-                <div class="nhan_vo"><a href="designer.html?page=7#design-Website4" class="btn">Xem chi tiết thiết kế</a></div>
-                <p class="product-description">Thiết kế giao diện trang web và thực hiện code Html, Css, Js</p>
+                <h3 class="product-name">Thiết Kế Website</h3>
+                <div class="nhan_vo"><a href="designer.html?page=7#design-Website4" class="btn" target="_blank"><i class="fas fa-eye"></i> Xem chi tiết</a></div>
+                <p class="product-description">Thiết kế giao diện website đẹp mắt và thân thiện, sau đó triển khai thành code HTML, CSS, JavaScript đầy đủ chức năng.</p>
                 <div class="product-meta">
                   <div class="author">
-                    <img src="img/logo_black.png" alt="Author" class="author-avatar" style="width: 40%;">
+                    <img src="img/logo_black.png" alt="Author" class="author-avatar">
                     <span class="verified-badge">✔</span>
                   </div>
-                  <img class="category" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1200px-Visual_Studio_Code_1.35_icon.svg.png" style="width: 15%;">Visual</img>
-                  <img class="category" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png" style="width: 15%;">Illustrator</img>
+                  <div class="category-info">
+                    <img class="category-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1200px-Visual_Studio_Code_1.35_icon.svg.png" alt="VS Code Icon">
+                    <span class="category-text">Code</span> 
+                    <img class="category-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png" alt="Illustrator Icon">
+                    <span class="category-text">AI</span>
+                  </div>
                 </div>
                 <div class="product-footer">
-                  <button class="live-button">Time🔴 2024</button>
-                  <span class="views">Graphic design project</span>
+                  <button class="live-button"><i class="far fa-calendar-alt"></i> 2024</button>
+                  <span class="views"><i class="fas fa-pencil-ruler"></i> Dự án đồ án</span>
                 </div>
               </div>
             </div>
@@ -262,16 +452,64 @@
           <button class="carousel-nav-button prev-button">&#10094;</button> <button class="carousel-nav-button next-button">&#10095;</button> </div>
       </div>
     </div>
-    <div class="section" data-nav-theme="light" data-logo="img/logo_black.png" data-anchor="lien-he" id="section5">
-      <div class="section-content">
-        <h1>LIÊN HỆ</h1>
+
+    <!-- Section 5: Contact (Liên Hệ) -->
+    <div class="section" data-nav-theme="green-light" data-logo="img/logo_black.png" data-anchor="lien-he" id="section5">
+      <div class="section-content contact-section-content">
+        <div class="contact-info">
+          <h1>LIÊN HỆ</h1>
+          <p>Hãy kết nối với tôi để biến ý tưởng của bạn thành hiện thực!</p>
+          <div class="contact-details">
+            <p><i class="fas fa-phone-alt"></i> <strong>Điện thoại:</strong> +84 329 240 391</p>
+            <p><i class="fas fa-envelope"></i> <strong>Email:</strong> tiendepzai0908@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> <strong>Địa chỉ:</strong> Vũng Tàu, Việt Nam</p>
+            <p><i class="fas fa-globe"></i> <strong>Website:</strong> <a href="index.html" target="_blank">yourwebsite.com</a></p>
+          </div>
+          <div class="social-contact">
+            <a href="#" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fab fa-behance"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fab fa-dribbble"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+          </div>
         </div>
+        <div class="contact-form-container">
+          <h2>Gửi tin nhắn cho tôi</h2>
+          <form class="contact-form">
+            <div class="form-group">
+              <label for="name">Tên của bạn:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email của bạn:</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Tin nhắn:</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-button"><i class="fas fa-paper-plane"></i> Gửi Tin Nhắn</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Mobile Warning Overlay and Box -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-warning-box" id="mobileWarningBox">
+    <a href="index.html"><img src="img/logo_black.png" style="width: 30%;"></a>
+    <p style="color: red;font-size: 2em;"><b>Trang này không được tối ưu trên màn hình điện thoại !</b></p>
+    <p>Bạn hãy chuyển qua chế độ thường để xem thông tin cơ bản của tôi hoặc xem trên máy tính để thấy chế độ nâng cao.</p>
+    <div class="mobile-warning-buttons">
+      <a href="profile.html" style="color: white;text-decoration: none;"><button id="mobileSwitchToNormal">Chuyển về chế độ bình thường</a></button>
+      <a href="index.html"><button id="mobileBackToIntro">Quay về trang giới thiệu</button></a>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
   <script src="js/portfolio_animation.js"></script>
-  <script src="js/next_tab.js"></script>
-  <script src="js/come_page.js"></script>
+  <!-- <script src="js/next_tab.js"></script> // Consider removing if not used or integrate logic -->
+  <!-- <script src="js/come_page.js"></script> // Consider removing if not used or integrate logic -->
 
 <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -280,15 +518,70 @@
             if (backToNormalButton) {
                 backToNormalButton.addEventListener('click', () => {
                     console.log('Nút "Trở về chế độ bình thường" đã được click.');
-                    // Xóa trạng thái đã hiển thị modal trên trang profile
                     sessionStorage.removeItem('hasShownWelcomeModal_profile');
                     console.log('Đã xóa hasShownWelcomeModal_profile từ sessionStorage.');
-                    // Chuyển hướng về trang profile.html
                     window.location.href = 'profile.html';
                 });
             } else {
                 console.error('Lỗi: Không tìm thấy nút "back-to-normal-button".');
             }
+
+            // Simple form submission (for demo purposes)
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real application, you would send this data to a backend server.
+                    // For now, let's just log it and show a success message.
+                    console.log('Form Submitted!', {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        message: document.getElementById('message').value
+                    });
+                    // IMPORTANT: Replaced alert with a custom message box for better UX
+                    showCustomMessage('Cảm ơn bạn đã gửi tin nhắn! Tôi sẽ phản hồi sớm nhất có thể.', 'success');
+                    contactForm.reset();
+                });
+            }
+
+            // Function to show a custom message box (replacement for alert)
+            function showCustomMessage(message, type) {
+                const messageBox = document.createElement('div');
+                messageBox.classList.add('custom-message-box', type);
+                messageBox.innerHTML = `
+                    <p>${message}</p>
+                    <button class="close-message-box">OK</button>
+                `;
+                document.body.appendChild(messageBox);
+
+                // Center the message box
+                messageBox.style.left = '50%';
+                messageBox.style.top = '50%';
+                messageBox.style.transform = 'translate(-50%, -50%)';
+
+                const closeButton = messageBox.querySelector('.close-message-box');
+                closeButton.addEventListener('click', () => {
+                    document.body.removeChild(messageBox);
+                });
+
+                // Optional: Auto-hide after some time
+                setTimeout(() => {
+                    if (document.body.contains(messageBox)) {
+                        document.body.removeChild(messageBox);
+                    }
+                }, 5000); // Hide after 5 seconds
+            }
+
+            // Animate skill bars on scroll into view (optional, could be in JS file)
+            // This is a simple animation on load. For dynamic animation on scroll,
+            // you'd need an Intersection Observer.
+            document.querySelectorAll('.skill-bar').forEach(bar => {
+                const level = bar.dataset.level;
+                // Using setTimeout to allow CSS transition to apply
+                setTimeout(() => {
+                    bar.style.width = level;
+                }, 100);
+            });
         });
     </script>
 

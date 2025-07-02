@@ -404,8 +404,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     goToBottomBtn.addEventListener('click', () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-});
+    });
 
+    // JavaScript for sticky navigation bar
+    const nav = document.querySelector('.main-nav');
+    const header = document.querySelector('header');
+    let stickyOffset = 0; // Khởi tạo stickyOffset
+
+    // Hàm để cập nhật stickyOffset
+    const updateStickyOffset = () => {
+        // Đảm bảo header đã được render và có offsetHeight
+        if (header) {
+            stickyOffset = header.offsetHeight; // Lấy chiều cao của header
+        } else if (nav) { // Nếu không có header, lấy vị trí ban đầu của nav
+            stickyOffset = nav.offsetTop;
+        }
+    };
+
+    // Gọi lần đầu khi DOM đã tải xong
+    updateStickyOffset();
+
+    // Cập nhật stickyOffset khi cửa sổ thay đổi kích thước (ví dụ: xoay màn hình mobile)
+    window.addEventListener('resize', updateStickyOffset);
+
+    window.addEventListener('scroll', () => {
+        if (nav) { // Đảm bảo nav tồn tại
+            if (window.pageYOffset > stickyOffset) {
+                nav.classList.add('sticky-nav');
+                // Thêm padding-top vào body để nội dung không bị ẩn bởi nav cố định
+                // Chỉ thêm padding-top nếu không phải là mobile (hoặc nếu bạn muốn nó luôn có padding)
+                if (window.innerWidth >= 768) { // Ví dụ: chỉ áp dụng cho desktop
+                    document.body.style.paddingTop = nav.offsetHeight + 'px';
+                } else {
+                    // Ở chế độ mobile, không cần padding-top cho body vì nav sẽ chiếm toàn bộ chiều rộng
+                    document.body.style.paddingTop = '0';
+                }
+            } else {
+                nav.classList.remove('sticky-nav');
+                // Xóa padding-top khi nav không còn dính
+                document.body.style.paddingTop = '0';
+            }
+        }
+    });
+
+    // NEW: Close mobile nav when clicking outside
+    const menuToggle = document.querySelector('.menu-toggle'); // Nút 3 gạch
+    // nav đã được khai báo ở trên
+    if (nav && menuToggle) {
+        document.addEventListener('click', (event) => {
+            // Kiểm tra nếu nav đang mở và click không phải trên nav hoặc nút toggle
+            if (nav.classList.contains('open') && !nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                nav.classList.remove('open'); // Đóng nav
+            }
+        });
+    }
 }); // End of DOMContentLoaded listener
-
-

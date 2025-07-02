@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Thời Trang & Cuộc Sống</title>
+    <link rel="stylesheet" href="/css/code_navbar.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <!-- Font Awesome cho các icon -->
+    <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header>
+        <a href="index.html"><img src="../img/logo.png" alt="Logo" class="lift-on-hover"></a>
+        <p>Blog của tôi</p>
+        <button aria-label="Menu" class="menu-toggle">
+            <i class="fa-solid fa-bars fa-2xl"></i>
+        </button>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="/index.html">Giới thiệu</a></li>
+            <li><a href="/profile.html">Profile</a></li>
+            <li><a href="/designer.html">Design</a></li>
+            <li><a href="/scores.html">Điểm Số</a></li>
+            <li><a href="/drawings.html">Ảnh Sưu Tầm</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li> <!-- Đặt class active cho trang blog -->
+
+            <li>
+                <div class="dropdown">
+                    <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
+                        <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropdown-toggle">Code Website <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="jalan/View.html">View</a></li>
+                        <li><a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html">web học tại lớp</a></li>
+                        <li><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html">web kết thúc môn học</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="page-content">
+        <div class="box-banner-about" style="background-position: 50%;">
+            <div class="in-banner-about">
+                <div class="title-banner">Thời Trang</div>
+                <div class="box-path-about">
+                    <div>Home</div>
+                    <div class="icon">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </div>
+                    <div>Thời Trang</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container blog-container"> <!-- Thêm class blog-container để dễ style riêng -->
+            <div class="all-box-sidebar">
+                <div class="box-search section-card fade-in-element">
+                    <h3>Tìm Kiếm</h3>
+                    <div class="from-search">
+                        <input type="text" placeholder="Tìm Kiếm...">
+                        <button>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-categories section-card fade-in-element">
+                    <h3>Loại</h3>
+                    <div class="in-categories">
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a href="">
+                            <div>Ba Lô (8)</div>
+                        </a>
+                    </div>
+                    <div class="in-categories">
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a href="">
+                            <div>Thời Trang (4)</div>
+                        </a>
+                    </div>
+                    <div class="in-categories">
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a href="">
+                            <div>Kiểu Dáng (4)</div>
+                        </a>
+                    </div>
+                    <div class="in-categories">
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a href="">
+                            <div>Quần ngắn (5)</div>
+                        </a>
+                    </div>
+                    <div class="in-categories">
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a href="">
+                            <div>Đồ Bơi (4)</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="box-recent section-card fade-in-element">
+                    <h3>Những Bài Đăng Khác</h3>
+                    <div class="in-recent">
+                        <div class="in-content-recent">
+                            <img src="https://placehold.co/70x70/E0E0E0/333333?text=Blog1" alt="Bài đăng 1"> <!-- Placeholder image -->
+                            <div class="box-text-recent">
+                                <div>May 30, 2023</div>
+                                <a href="#">Phong cách pixel thật dễ dàng</a>
+                            </div>
+                        </div>
+                        <div class="in-content-recent">
+                            <img src="https://placehold.co/70x70/E0E0E0/333333?text=Blog2" alt="Bài đăng 2"> <!-- Placeholder image -->
+                            <div class="box-text-recent">
+                                <div>May 12, 2023</div>
+                                <a href="#">Làm sao để nơi ở trông sạch sẽ?</a>
+                            </div>
+                        </div>
+                        <div class="in-content-recent" style="border-bottom: none;">
+                            <img src="https://placehold.co/70x70/E0E0E0/333333?text=Blog3" alt="Bài đăng 3"> <!-- Placeholder image -->
+                            <div class="box-text-recent">
+                                <div>April 20, 2019</div>
+                                <a href="#">Thưởng thức 1 tách trà nóng vào mỗi buổi sáng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-categories section-card fade-in-element">
+                    <h3>Archives</h3>
+                    <div class="in-categories">
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a href="">
+                            <div>May 2023</div>
+                        </a>
+                    </div>
+                    <div class="in-categories">
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a href="">
+                            <div>April 2019</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="box-tags section-card fade-in-element">
+                    <h3>Tags</h3>
+                    <div class="in-tag-1">
+                        <a href="#" class="tag-1 lift-on-hover">Baber</a>
+                        <a href="#" class="tag-1 lift-on-hover">Baby Needs</a>
+                        <a href="#" class="tag-1 lift-on-hover">Beauty</a>
+                        <a href="#" class="tag-1 lift-on-hover">Cosmetic</a>
+                        <a href="#" class="tag-1 lift-on-hover">Ear Care</a>
+                        <a href="#" class="tag-1 lift-on-hover">electric</a>
+                        <a href="#" class="tag-1 lift-on-hover">Fashion</a>
+                        <a href="#" class="tag-1 lift-on-hover">Food</a>
+                        <a href="#" class="tag-1 lift-on-hover">Jwerly</a>
+                        <a href="#" class="tag-1 lift-on-hover">Medical</a>
+                        <a href="#" class="tag-1 lift-on-hover">Mimimal</a>
+                        <a href="#" class="tag-1 lift-on-hover">Organic</a>
+                        <a href="#" class="tag-1 lift-on-hover">Simple</a>
+                        <a href="#" class="tag-1 lift-on-hover">Sport</a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-content-blog">
+                <div class="blog-1 section-card fade-in-element">
+                    <a href="#">
+                        <img src="https://placehold.co/800x450/B0C4DE/333333?text=Blog+Post+1" alt="Blog Post Image 1"> <!-- Placeholder image -->
+                    </a>
+                    <div class="content-blog-1">
+                        <div class="list-link">
+                            <a href="#">Ba lô</a>
+                            <span>,</span>
+                            <a href="#">Thời trang</a>
+                            <span>,</span>
+                            <a href="#">kiểu dáng</a>
+                        </div>
+                        <div class="title">
+                            <a href="#">Dễ dàng cho thiết kế sang trọng</a>
+                        </div>
+                        <div class="box-by">
+                            <span>By : Quang</span>
+                            <span>|</span>
+                            <span>41 Comments</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-2">
+                    <div class="box-1 pading-img-1 section-card fade-in-element">
+                        <img src="https://placehold.co/400x300/ADD8E6/333333?text=Blog+Post+2" alt="Blog Post Image 2"> <!-- Placeholder image -->
+                        <div class="content-box-1">
+                            <div class="first-content">
+                                <a href="#">Ba Lô</a>
+                                <span>,</span>
+                                <a href="#">Thời Trang</a>
+                                <span>,</span>
+                                <a href="#">Kiểu Dáng</a>
+                            </div>
+                            <div class="second-content">
+                                <a href="#">Làm sao để nơi ở trông sạch sẽ?</a>
+                            </div>
+                            <div class="three-content">
+                                <span>By : Hoài Thương </span>
+                                <span> |</span>
+                                <span>145 Comment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-1 pading-img-2 section-card fade-in-element">
+                        <img src="https://placehold.co/400x300/87CEEB/333333?text=Blog+Post+3" alt="Blog Post Image 3"> <!-- Placeholder image -->
+                        <div class="content-box-1">
+                            <div class="first-content">
+                                <a href="#">Ba Lô</a>
+                                <span>,</span>
+                                <a href="#">Thời Trang</a>
+                                <span>,</span>
+                                <a href="#">Kiểu Dáng</a>
+                            </div>
+                            <div class="second-content">
+                                <a href="#">Thưởng thức 1 tách trà nóng vào mỗi buổi sáng</a>
+                            </div>
+                            <div class="three-content">
+                                <span>By : Tuyết Trinh</span>
+                                <span>|</span>
+                                <span>103 Comment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-1 section-card fade-in-element">
+                    <a href="#">
+                        <img src="https://placehold.co/800x450/B0E0E6/333333?text=Blog+Post+4" alt="Blog Post Image 4"> <!-- Placeholder image -->
+                    </a>
+                    <div class="content-blog-1">
+                        <div class="list-link">
+                            <a href="#">Ba Lô</a>
+                            <span>,</span>
+                            <a href="#">Thời Trang</a>
+                            <span>,</span>
+                            <a href="#">Kiểu Dáng</a>
+                            <span>,</span>
+                            <a href="#">Mùa Đông</a>
+                        </div>
+                        <div class="title">
+                            <a href="#">LÀM SAO ĐỂ CHỌN 1 CHIẾC SOFA ƯNG Ý</a>
+                        </div>
+                        <div class="box-by">
+                            <span>By : Trâm Anh</span>
+                            <span>|</span>
+                            <span>10 Comments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Phạm Viết Tiến. Mọi quyền được bảo lưu.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/hai.trinhthi.3110" target="_blank" class="lift-on-hover">Facebook</a> |
+            <a href="https://zalo.me/0329240391" target="_blank" class="lift-on-hover">Zalo</a> |
+            <a href="mailto:tiendepzai0908@gmail.com" class="lift-on-hover">Mail</a>
+        </div>
+    </footer>
+
+    <!-- Nút đi lên/xuống -->
+    <button id="back-to-top" title="Lên đầu trang">&#8679;</button>
+    <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
+
+    <!-- External JavaScript files -->
+    <script src="js/blog.js"></script>
+    <script src="/js/js-code-navbar.js"></script> <!-- Đảm bảo file này được liên kết -->
+</body>
+</html>

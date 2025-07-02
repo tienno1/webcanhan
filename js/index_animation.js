@@ -70,55 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentImageIndex = 0;
     const slideshowIntervalTime = 5000; // 5 giây (5000 milliseconds) cho mỗi lần chuyển đổi tự động
-    const slideAnimationDuration = 0; // Thời gian hiệu ứng trượt (0.5 giây = 500ms)
 
     let slideshowInterval; // Biến để lưu trữ ID của interval
 
-    function updateBackgroundImage(direction = 'fade') {
+    // Hàm để cập nhật ảnh nền một cách mượt mà bằng CSS transition
+    function updateBackgroundImage() {
         const nextImageUrl = backgroundImages[currentImageIndex];
-
-        // Xóa tất cả các lớp animation trước đó để tránh xung đột
-        backgroundSlideshow.classList.remove('slide-out-left', 'slide-out-right', 'fade-in-bg');
-        // Force reflow/repaint to ensure animations restart
-        void backgroundSlideshow.offsetWidth; 
-
-        if (direction === 'slide-left' || direction === 'slide-right') {
-            // Khi chuyển bằng tay, chúng ta sẽ tạo hiệu ứng trượt cho ảnh cũ,
-            // sau đó cập nhật ảnh mới sau khi animation trượt xong.
-
-            // Đầu tiên, set ảnh mới vào background-image, nhưng nó sẽ bị ẩn đi bởi opacity của animation
-            // Hoặc, giữ ảnh cũ và chỉ thay ảnh mới SAU animation
-            
-            // Cách đơn giản hóa: Ảnh cũ trượt đi, sau đó ảnh mới hiện ra (có thể là fade hoặc ngay lập tức)
-            
-            // Bước 1: Kích hoạt animation trượt cho ảnh HIỆN TẠI
-            if (direction === 'slide-left') {
-                backgroundSlideshow.classList.add('slide-out-left');
-            } else {
-                backgroundSlideshow.classList.add('slide-out-right');
-            }
-
-            // Bước 2: Sau khi animation trượt kết thúc, cập nhật ảnh mới và làm nó hiện lên
-            setTimeout(() => {
-                // Xóa lớp animation trượt
-                backgroundSlideshow.classList.remove('slide-out-left', 'slide-out-right');
-                // Cập nhật ảnh nền thành ảnh mới
-                backgroundSlideshow.style.backgroundImage = `url('${nextImageUrl}')`;
-                // Kích hoạt animation fade-in cho ảnh mới
-                backgroundSlideshow.classList.add('fade-in-bg');
-
-                // Sau khi animation fade-in kết thúc, xóa lớp fade-in-bg
-                setTimeout(() => {
-                    backgroundSlideshow.classList.remove('fade-in-bg');
-                }, 0); // Thời gian fade-in-bg là 1s
-            }, slideAnimationDuration); // Chờ animation trượt xong (0.5s)
-            
-        } else {
-            // Chế độ fade mặc định (tự động chuyển)
-            backgroundSlideshow.style.backgroundImage = `url('${nextImageUrl}')`;
-            // CSS transition mặc định trên .background sẽ xử lý fade ở đây
-            // background-image transition 2s ease-in-out trên .background là đủ cho fade tự động
-        }
+        backgroundSlideshow.style.backgroundImage = `url('${nextImageUrl}')`;
+        // CSS transition trên .background sẽ tự động xử lý hiệu ứng fade
     }
 
     // Hàm để khởi động lại interval
@@ -129,19 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }, slideshowIntervalTime);
     }
 
-    // Hàm chuyển ảnh tự động (kiểu fade)
+    // Hàm chuyển ảnh tự động
     function nextImageAuto() {
         currentImageIndex++;
         if (currentImageIndex >= backgroundImages.length) {
             currentImageIndex = 0;
         }
-        // Gọi updateBackgroundImage mà không truyền direction để nó dùng default 'fade'
-        backgroundSlideshow.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
-        // Không cần thêm class 'fade-in-bg' ở đây nữa vì đã có transition trên .background
+        updateBackgroundImage(); // Gọi hàm cập nhật ảnh nền
     }
 
-    // Initial background image (fade-in ngay từ đầu)
-    updateBackgroundImage('fade'); // Đặt ảnh đầu tiên kiểu fade
+    // Initial background image
+    updateBackgroundImage(); // Đặt ảnh đầu tiên
 
     // Khởi động slideshow lần đầu
     startSlideshow();
@@ -152,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentImageIndex < 0) {
             currentImageIndex = backgroundImages.length - 1;
         }
-        updateBackgroundImage('slide-right'); // Chuyển ảnh kiểu slide từ phải
+        updateBackgroundImage(); // Cập nhật ảnh nền
         startSlideshow(); // Bắt đầu lại slideshow sau 5 giây
     });
 
@@ -162,10 +119,61 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentImageIndex >= backgroundImages.length) {
             currentImageIndex = 0;
         }
-        updateBackgroundImage('slide-left'); // Chuyển ảnh kiểu slide từ trái
+        updateBackgroundImage(); // Cập nhật ảnh nền
         startSlideshow(); // Bắt đầu lại slideshow sau 5 giây
     });
 
     // Note: The gentle text movement effect (.animated-text) is handled entirely by CSS animation (@keyframes)
     // and does not require JavaScript to be triggered based on scrolling in this example.
+
+    // JavaScript for sticky navigation bar
+    const nav = document.querySelector('.main-nav');
+    const header = document.querySelector('header');
+    let stickyOffset = 0; // Khởi tạo stickyOffset
+
+    // Hàm để cập nhật stickyOffset
+    const updateStickyOffset = () => {
+        // Đảm bảo header đã được render và có offsetHeight
+        if (header) {
+            stickyOffset = header.offsetHeight; // Lấy chiều cao của header
+        } else if (nav) { // Nếu không có header, lấy vị trí ban đầu của nav
+            stickyOffset = nav.offsetTop;
+        }
+    };
+
+    // Gọi lần đầu khi DOM đã tải xong
+    updateStickyOffset();
+
+    // Cập nhật stickyOffset khi cửa sổ thay đổi kích thước (ví dụ: xoay màn hình mobile)
+    window.addEventListener('resize', updateStickyOffset);
+
+    window.addEventListener('scroll', () => {
+        if (nav) { // Đảm bảo nav tồn tại
+            if (window.innerWidth >= 768) { // Chỉ áp dụng sticky cho desktop (màn hình >= 768px)
+                if (window.pageYOffset > stickyOffset) {
+                    nav.classList.add('sticky-nav');
+                    // Thêm padding-top vào body để nội dung không bị ẩn bởi nav cố định
+                    document.body.style.paddingTop = nav.offsetHeight + 'px';
+                } else {
+                    nav.classList.remove('sticky-nav');
+                    // Xóa padding-top khi nav không còn dính
+                    document.body.style.paddingTop = '0';
+                }
+            } else { // Đối với mobile (màn hình < 768px)
+                nav.classList.remove('sticky-nav'); // Đảm bảo không có class sticky-nav trên mobile
+                document.body.style.paddingTop = '0'; // Đảm bảo không có padding-top
+            }
+        }
+    });
+
+    // NEW: Close mobile nav when clicking outside
+    const menuToggle = document.querySelector('.menu-toggle'); // Nút 3 gạch
+    if (nav && menuToggle) {
+        document.addEventListener('click', (event) => {
+            // Kiểm tra nếu nav đang mở và click không phải trên nav hoặc nút toggle
+            if (nav.classList.contains('open') && !nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                nav.classList.remove('open'); // Đóng nav
+            }
+        });
+    }
 });

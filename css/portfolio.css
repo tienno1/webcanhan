@@ -1,15 +1,16 @@
-/* Reset */
+/* Reset & Base Styles */
 * {
   box-sizing: border-box;
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px; /* Điều chỉnh theo chiều cao của header cố định */
+  scroll-padding-top: 100px;
 }
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', sans-serif; /* Using Inter font */
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* ================= NAVIGATION ================== */
@@ -18,331 +19,675 @@ nav {
   top: 0;
   left: 0;
   height: 100%;
-  width: 220px;
+  width: 250px; /* Slightly wider nav */
   padding: 40px 20px;
-  z-index: 10;
-  transition: background 0.8s ease, color 0.8s ease; /* transition cho màu nền và màu chữ của nav */
+  z-index: 1000; /* Ensure nav is always on top */
+  transition: background 0.8s ease, color 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Các theme cho nav */
+/* Nav Themes */
 nav.light {
   background: white;
-  color: black; /* Màu chữ mặc định cho theme light */
+  color: black;
 }
 nav.dark {
-  background: rgb(0, 0, 0);
-  color: white; /* Màu chữ mặc định cho theme dark */
+  background: rgb(24, 24, 24); /* Darker black */
+  color: white;
 }
 nav.green {
-  background: rgb(22, 101, 22); /* Màu xanh lá */
-  color: rgb(255, 255, 255); /* Màu chữ trắng để tương phản với nền xanh */
+  background: rgb(21, 255, 21);
+  color: rgb(0, 0, 0);
 }
 nav.blue {
-  background: rgb(126, 218, 255); /* Màu xanh lá */
-  color: rgb(0, 0, 0); /* Màu chữ trắng để tương phản với nền xanh */
+  background: rgb(0, 106, 173); /* A more modern blue */
+  color: white; /* Changed to white for better contrast */
+}
+nav.green-light {
+  background: rgb(104, 255, 215); /* A more modern blue */
+  color: rgb(0, 0, 0); /* Changed to white for better contrast */
 }
 
 nav ul {
   list-style: none;
   margin-top: 60px;
   padding: 0;
+  width: 100%;
 }
 nav ul li {
-  margin: 20px 0;
+  margin: 15px 0; /* Slightly reduced margin for more items */
   cursor: pointer;
-  font-weight: bold;
-  transition: color 0.3s ease; /* Transition cho màu chữ của li */
+  font-weight: 600; /* Semi-bold */
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Quan trọng: Điều chỉnh thẻ <a> bên trong li */
 nav ul li a {
-  text-decoration: none; /* Xóa gạch chân */
-  color: inherit; /* Kế thừa màu từ thẻ li cha (và từ nav cha nữa) */
-  display: block; /* Để toàn bộ vùng li có thể click được */
-  padding: 5px 0; /* Thêm padding nếu muốn khu vực click lớn hơn */
+  text-decoration: none;
+  color: inherit;
+  display: flex; /* Use flex for icon and text alignment */
+  align-items: center;
+  padding: 10px 15px; /* More padding for clickable area */
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Màu cam cho mục active - NÊN ĐẶT SAU CÁC QUY TẮC MÀU KHÁC để đảm bảo ghi đè */
+nav ul li a i {
+  margin-right: 15px; /* Space between icon and text */
+  font-size: 1.1em;
+}
+
+/* Hover effects for nav items */
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
+  transform: translateX(5px); /* Slight slide effect */
+}
+nav.light ul li a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+
+/* Active nav item */
 nav ul li.active {
-  color: #ff6600; /* Màu cam luôn nổi bật */
+  color: #FF6600; /* Orange always prominent */
+  background-color: rgba(255, 102, 0, 0.1); /* Subtle orange background for active */
+  border-left: 5px solid #FF6600; /* Highlight active with a border */
+  padding-left: 10px; /* Adjust padding due to border */
+}
+
+/* Adjust active link hover */
+nav ul li.active a:hover {
+    background-color: rgba(255, 102, 0, 0.15);
 }
 
 
 /* =================== PAGE SECTIONS =================== */
 #fullpage {
-  margin-left: 220px; /* trừ phần nav bên trái */
+  margin-left: 250px; /* Adjusted margin for wider nav */
 }
 .section {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  transition: background 1s;
+  transition: background 1s ease-in-out;
 }
 .section-content {
   display: flex;
   flex-direction: row;
-  width: calc(100vw - 220px);
+  width: calc(100vw - 250px); /* Adjusted width */
   height: 100vh;
   overflow: hidden;
+  position: relative; /* Needed for absolute positioning of background effects */
+}
+
+/* Dynamic background effects (conceptual) */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  opacity: 0.05; /* Subtle */
+  z-index: 0; /* Behind content */
+  animation: backgroundPulse 20s infinite alternate;
+}
+
+@keyframes backgroundPulse {
+    0% { transform: scale(1); opacity: 0.05; }
+    100% { transform: scale(1.05); opacity: 0.07; }
+}
+
+#section1::before {
+  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+1'); /* Placeholder */
+  animation: movePattern1 30s linear infinite;
+}
+@keyframes movePattern1 {
+  from { background-position: 0 0; }
+  to { background-position: 100% 100%; }
+}
+
+#section2::before {
+  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+2'); /* Placeholder */
+  animation: movePattern2 40s linear infinite alternate;
+}
+@keyframes movePattern2 {
+  from { background-position: 0 50%; }
+  to { background-position: 100% 50%; }
+}
+
+#section3::before {
+  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+3'); /* Placeholder */
+  animation: movePattern3 25s linear infinite;
+}
+@keyframes movePattern3 {
+  from { background-position: 50% 0; }
+  to { background-position: 50% 100%; }
 }
 
 /* ================= SECTION 1 & 2: Layout chung ================= */
 .profile-left {
   flex: 3;
-  background: black;
+  background: #1a1a1d; /* Darker background for image */
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset -5px 0 15px rgba(0,0,0,0.5); /* Inner shadow */
 }
 .profile-left img {
   width: 100%;
   height: 100vh;
   object-fit: cover;
   object-position: center;
+  transition: transform 0.5s ease;
+}
+.profile-left img:hover {
+  transform: scale(1.03); /* Subtle zoom on hover */
 }
 
 .profile-right {
   flex: 2;
-  max-width: 700px;
-  padding: 80px 60px 80px 100px;
+  max-width: 800px; /* Slightly wider text area */
+  padding: 80px 70px 80px 120px; /* Adjusted padding */
   background: #2d2f33;
   display: flex;
   flex-direction: column;
   justify-content: center;
   color: white;
+  position: relative; /* For z-index and potential overlaps */
 }
 .profile-right h1 {
-  font-size: 3.5em;
-  line-height: 1.2;
-  margin: 0 0 20px;
+  font-size: 4em; /* Larger heading */
+  line-height: 1.1;
+  margin: 0 0 25px;
+  font-weight: 800; /* Extra bold */
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
 }
 .profile-right h1 strong {
   display: block;
-  font-weight: bold;
+  font-weight: 800;
+  color: #FF6600; /* Highlight name with accent color */
+}
+.roles {
+  display: flex;
+  font-size: 1.5em; /* Larger roles text */
+  margin-bottom: 25px;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 .roles p {
-  margin: 2px 0;
-  color: #00ffc8;
-  font-weight: bold;
-}
-.bio {
-  margin-top: 20px;
-  font-size: 1em;
-  line-height: 1.6;
-  color: #ccc;
-}
-.buttons {
-  margin-top: 30px;
+  margin: 0 5px;
+  color: #00FFC8; /* Accent color for roles */
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
 }
 
-.buttons_1 {
-  margin-top: -30px;
-  margin-bottom: 10px;
+/* Typing effect for roles */
+.role-animate {
+  animation: typing 3s steps(10, end) infinite alternate, blink-caret .75s step-end infinite;
+  white-space: nowrap;
+  border-right: .15em solid orange; /* The caret */
+  width: 10ch; /* Adjust based on max chars in role */
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+
+
+.bio {
+  margin-top: 20px;
+  font-size: 1.1em; /* Slightly larger bio text */
+  line-height: 1.7;
+  color: #ddd; /* Lighter text for readability */
+  text-align: justify;
+}
+.bio strong {
+    color: #FF6600; /* Highlight strong words in bio */
+}
+
+.buttons {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Spacing between buttons */
 }
 
 .buttons button {
-  margin: 5px 10px 5px 0;
-  padding: 10px 14px;
-  font-size: 1.2em;
+  padding: 12px 20px;
+  font-size: 1.1em;
   border: none;
-  border-radius: 8px;
+  border-radius: 25px; /* More rounded buttons */
   background: #444;
   color: white;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.buttons button i {
+  margin-right: 8px;
+  font-size: 1em;
 }
 
 .buttons button:hover {
-  background: #666;
+  background: #FF6600; /* Orange on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+.social-links {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+.social-links a {
+  color: white;
+  font-size: 1.8em;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.social-links a:hover {
+  color: #FF6600;
+  transform: translateY(-3px) scale(1.1);
+}
+
+.buttons_1 { /* For "More Skill" button */
+  margin-top: -30px;
+  margin-bottom: 10px;
+  text-align: center; /* Center the button */
 }
 
 .buttons_1 button {
-  margin: 5px 10px 5px 0;
-  padding: 10px 14px;
-  font-size: 1.2em;
+  padding: 8px 15px; /* Smaller padding */
+  font-size: 0.9em; /* Smaller font size */
   border: none;
-  border-radius: 8px;
-  background: #a1a1a1;
-  color: rgb(0, 0, 0);
+  border-radius: 25px;
+  background: #FF6600; /* Orange button */
+  color: white;
   cursor: pointer;
-  transition: background 0.8s;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: inline-flex; /* Use inline-flex for button content alignment */
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons_1 button i {
+  margin-right: 8px;
 }
 
 .buttons_1 button:hover {
-  color: white;
-  background: #444;
-  transition: background 0.8s;
+  background: #e65c00; /* Darker orange on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
-/* ================= SECTION 3: Ziczac Skill Block ================= */
+
+/* ================= SECTION 3: Skill Grid (Updated to Carousel-like) ================= */
 .skill-section {
-  padding: 0;
-  background: none;
-  color: black;
+  max-width: 1280px;
+  max-height: 1600px;
+  padding: 80px 0; /* Adjusted padding for full width carousel */
+  background: #f7f7f7;
+  color: #333;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  overflow: hidden; /* Important for hiding overflowing cards */
 }
 .skill-title {
-  font-size: 2.5em;
+  font-size: 3em;
   text-align: center;
-  margin-bottom: 40px;
-  color: black;
-}
-.skill-row {
-  display: flex;
-  justify-content: center; /* Căn giữa các cặp kỹ năng */
+  margin-top: -30px;
+  margin-bottom: 10px; /* Reduced margin */
+  color: #222;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  display: flex; /* Allow button to be next to title */
   align-items: center;
-  margin-bottom: 30px; /* Khoảng cách giữa các hàng */
-  flex-wrap: wrap; /* Cho phép các cặp xuống dòng */
-  width: 100%; /* Chiếm hết chiều rộng có thể */
-  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
-  gap: 40px; /* Khoảng cách giữa các skill-pair trong cùng một hàng */
+  justify-content: center;
+}
+.skill-title a {
+  margin-left: 20px;
+  text-decoration: none;
 }
 
-.skill-pair {
+.skill-carousel-container {
+  width: 95%; /* Adjust width of carousel container */
+  max-width: 1400px; /* Max width for the carousel */
+  max-height: 600px;
+  position: relative;
+  overflow: hidden; /* Only show items within container */
+  padding: 20px 0; /* Padding for navigation buttons and shadow */
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Subtle shadow for the carousel */
+  background-color: rgba(255, 255, 255, 0.6); /* Slightly transparent white background */
+}
+
+.skill-grid { /* Renamed from .skill-grid to be a flex container for scrolling */
   display: flex;
-  align-items: center;
-  gap: 20px; /* Khoảng cách giữa văn bản và hình ảnh trong cùng một cặp */
-  flex: 0 0 auto; /* Không co giãn, kích thước tự động */
-  width: calc(50% - 20px); /* Đảm bảo mỗi cặp chiếm khoảng 50% với gap */
-  min-width: 400px; /* Giới hạn chiều rộng tối thiểu cho mỗi cặp */
-  justify-content: center; /* Căn giữa nội dung trong mỗi cặp */
+  gap: 30px; /* Gap between skill items */
+  padding: 0 20px; /* Padding for items at start/end */
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth scroll transition */
+  align-items: stretch; /* Ensure all items stretch to same height */
 }
 
-.skill-pair.reverse {
-  flex-direction: row-reverse;
-}
-
-.skill-text {
+.skill-item {
+  max-width: 373px; /* Increased min-width for each skill card */
+  flex-shrink: 0; /* Prevent cards from shrinking */
   background: white;
-  color: black;
-  padding: 25px 35px; /* Điều chỉnh padding */
-  flex: 1; /* Cho phép văn bản co giãn trong skill-pair */
-  font-size: 1.2em; /* Điều chỉnh cỡ chữ */
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  min-width: 200px; /* Đảm bảo text không quá nhỏ */
-  height: 100%; /* Đảm bảo chiều cao phù hợp */
-  display: flex; /* Dùng flex để căn giữa nội dung bên trong */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  color: #333;
+}
+
+.skill-item:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+}
+
+.skill-icon {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
 }
-.skill-text:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+.skill-icon img {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
 }
-.skill-image {
-  flex: none; /* Giữ kích thước cố định cho hình ảnh */
-  width: 120px; /* Điều chỉnh kích thước hình ảnh */
-  height: 120px; /* Điều chỉnh kích thước hình ảnh */
+
+.skill-info {
+    flex-grow: 1; /* Allow info to take up available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push description to bottom if needed */
+}
+
+.skill-info h3 {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  color: #FF6600;
+}
+.skill-info p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.6;
+  /* Removed -webkit-line-clamp to allow more text */
+  overflow: visible; /* Ensure all content is visible */
+  margin-bottom: 15px; /* Added margin for spacing */
+}
+
+/* Skill Proficiency Bar */
+.skill-proficiency {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    overflow: hidden; /* Ensure the bar stays within bounds */
+}
+
+.skill-bar {
+    height: 100%;
+    background-color: #00C853; /* Green for proficiency */
+    border-radius: 10px;
+    width: 0; /* Initial width for animation */
+    transition: width 1.5s ease-out; /* Smooth animation */
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.skill-level-text {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #333;
+    z-index: 2; /* Ensure text is above the bar */
+}
+
+/* Skill Projects Section */
+.skill-projects {
+    width: 100%;
+    text-align: left;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.skill-projects h4 {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.skill-projects ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skill-projects li {
+    font-size: 0.9em;
+    margin-bottom: 8px;
+}
+
+.skill-projects a {
+    color: #007bff; /* Blue for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.skill-projects a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Carousel navigation buttons for skills */
+.skill-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 15px;
+  transition: background 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0.8;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.skill-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border: none;
-  background: transparent;
-  padding: 0;
-  border-radius: 20%; /* Bo tròn hình ảnh */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+.skill-nav-button:hover {
+  background: rgba(0, 0, 0, 0.95);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
 }
 
-/* ================= SECTION 4: Products Grid ================= */
-.products-section {
+.skill-nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.skill-prev-button {
+  left: 0;
+}
+
+.skill-next-button {
+  right: 0;
+}
+
+
+/* ================= SECTION 4: Product Carousel ================= */
+.products-carousel-section-content {
+  max-height: 800px; /* Min height to keep cards consistent */
   flex-direction: column;
-  padding: 0px 40px;
   background: #333;
   color: white;
-  justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+  justify-content: center;
   align-items: center;
-  height: 100vh; /* Đảm bảo section chiếm toàn bộ chiều cao khung nhìn */
-  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao */
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
-.products-title {
-  font-size: 2em; /* Tăng kích thước tiêu đề */
+.products-carousel-title {
+  margin-top: 0px;
+  font-size: 2.8em; /* Slightly larger title */
   margin-bottom: 30px;
   color: white;
   text-align: center;
-  width: 100%;
+  font-weight: 700;
 }
 
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Tăng min-width của mỗi cột */
-  gap: 40px; /* Tăng khoảng cách giữa các sản phẩm */
-  width: 100%;
-  max-width: 1300px; /* Tăng chiều rộng tối đa của lưới */
-  justify-content: center; /* Căn giữa các item trong grid container */
-  align-items: center;
+.products-carousel-container {
+  padding: 20px;
+  width: 95%; /* Adjust width of carousel container */
+  max-width: 1500px; /* Max width for the carousel */
+  max-height: 600px;
+  position: relative;
+  overflow: hidden; /* Only show items within container */
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+  background-color: rgba(0,0,0,0.1); /* Subtle dark background inside carousel */
+}
+
+.products-wrapper {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother transition */
+  gap: 40px; /* Larger gap */
 }
 
 .product-card {
+  max-width: 380px; /* Increased min-width for product cards */
+  flex-shrink: 0; /* Prevent cards from shrinking */
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 18px; /* More rounded */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+  height: auto; /* Allow height to adjust to content */
+  max-height: 800px; /* Min height to keep cards consistent */
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   color: black;
-  width: 100%; /* Đảm bảo card chiếm hết chiều rộng cột */
-  max-width: 400px; /* Đặt max-width cho từng card để không quá lớn */
-  margin: auto; /* Căn giữa từng card trong cột của nó nếu có không gian thừa */
+  max-width: 368px; /* Increased max-width */
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-12px) scale(1.02); /* More pronounced hover */
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
 }
 
 .product-image-wrapper {
+  
   width: 100%;
-  height: 220px; /* Tăng chiều cao cố định cho ảnh */
+  height: 250px; /* Increased image height */
   overflow: hidden;
   border-bottom: 1px solid #eee;
 }
 
 .product-image {
-  width: 100%;
   height: 100%;
+  width: 100%;
   object-fit: cover;
   display: block;
 }
 
 .product-details {
-  padding: 25px; /* Tăng padding */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .product-name {
-  font-size: 1.6em; /* Tăng kích thước tiêu đề sản phẩm */
-  margin-bottom: -30px;
-  margin-top: -10px;
-  line-height: 1.3;
+  margin-top: 10px;
+  font-size: 1.8em; /* Larger product name */
+  margin-bottom: 10px;
+  line-height: 1.2;
   font-weight: bold;
+  color: #333;
 }
 
+.nhan_vo {
+  margin-top: 5px;
+  margin-bottom: 10px; /* Space above description */
+}
+
+.nhan_vo .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  background-color: #007bff; /* Blue for call to action */
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.95em;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+.nhan_vo .btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+.nhan_vo .btn i {
+  margin-right: 8px;
+}
+
+
 .product-description {
-  font-size: 1em; /* Tăng kích thước mô tả */
+  padding: 10px;
+  margin-top: -10px;
+  font-size: 1em;
   color: #666;
-  margin-bottom: 18px;
   line-height: 1.6;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Tăng lên 3 dòng nếu muốn hiển thị nhiều hơn */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -351,204 +696,57 @@ nav ul li.active {
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 15px;
   border-top: 1px solid #eee;
 }
 
 .author {
-  font-size: 0.9em; /* Tăng kích thước tác giả */
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  color: #555;
 }
 
 .author-avatar {
-  width: 28px; /* Tăng kích thước avatar */
-  height: 28px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
   margin-right: 10px;
 }
 
-.category {
-  font-size: 0.9em; /* Tăng kích thước category */
-  padding: 5px 10px;
+.verified-badge {
+  font-size: 0.8em;
+  color: #28a745; /* Green checkmark */
+  margin-left: 5px;
 }
 
-.product-footer {
-  margin-top: 18px;
-  padding-top: 18px;
-}
-
-.live-button {
-  padding: 10px 15px; /* Tăng padding nút */
-  font-size: 1em; /* Tăng kích thước chữ nút */
-}
-
-.views {
-  font-size: 1em; /* Tăng kích thước chữ views */
-}
-
-/* Responsive cho phần sản phẩm */
-@media screen and (max-width: 1024px) {
-  .products-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Điều chỉnh min-width cho màn hình tablet */
-    max-width: 900px; /* Giới hạn chiều rộng tối đa */
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .products-section {
-    padding: 40px 20px; /* Giảm padding tổng thể */
-  }
-  .products-title {
-    font-size: 2.5em; /* Giảm kích thước tiêu đề */
-    margin-bottom: 30px;
-  }
-  .products-grid {
-    grid-template-columns: 1fr; /* 1 cột trên màn hình nhỏ */
-    gap: 25px; /* Giảm khoảng cách */
-    padding: 0 15px;
-  }
-  .product-card {
-    max-width: unset; /* Bỏ giới hạn max-width để card chiếm hết chiều rộng */
-  }
-  .product-image-wrapper {
-    height: 180px; /* Giảm chiều cao ảnh trên mobile */
-  }
-  .product-name {
-    font-size: 1.4em;
-  }
-  .product-description {
-    font-size: 0.9em;
-    -webkit-line-clamp: 4; /* Thêm dòng nếu cần */
-  }
-}
-
-/* ... (giữ nguyên các CSS hiện có cho các section khác) ... */
-
-/* ================= SECTION 4: Product Carousel ================= */
-.products-carousel-section-content {
-  flex-direction: column;
-  padding: 0px 20px; /* Điều chỉnh padding */
-  background: #333;
-  color: white;
-  justify-content: center;
+.category-info {
+  margin-right: 10px;
+  display: flex;
   align-items: center;
-  height: 100vh;
-  overflow: hidden; /* Quan trọng: ẩn nội dung tràn ra ngoài */
-  position: relative; /* Cho phép định vị tương đối cho các nút */
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 5px 5px;
 }
 
-.products-carousel-title {
-  margin-top: 0px;
-  font-size: 2em; /* Tăng kích thước tiêu đề */
-  margin-bottom: 20px;
-  color: white;
-  text-align: center;
-}
-
-.products-carousel-container {
-  width: 95%; /* Chiều rộng của container carousel */
-  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
-  position: relative;
-  overflow: hidden; /* Quan trọng để chỉ hiển thị 3 thẻ sản phẩm */
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  padding: 15px;
-}
-
-.products-wrapper {
-  display: flex; /* Hiển thị các thẻ cạnh nhau */
-  transition: transform 0.5s ease-in-out; /* Hiệu ứng trượt mượt mà */
-  /* Thêm khoảng cách giữa các thẻ bằng gap hoặc margin */
-  gap: 30px; /* Khoảng cách giữa các thẻ */
-}
-
-/* Các thẻ sản phẩm bên trong wrapper */
-.product-card {
-  min-width: calc((100% / 3) - (2 / 3)); /* Chiếm 1/3 chiều rộng trừ đi gap */
-  /* (100% / số thẻ hiển thị) - ( (số thẻ hiển thị - 1) * gap ) / số thẻ hiển thị ) */
-  /* Hoặc đơn giản hơn: calc(100% / 3) - 20px nếu gap là 30px và muốn mỗi thẻ nhỏ hơn một chút*/
-  flex-shrink: 0; /* Không cho thẻ co lại */
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.8s ease, box-shadow 0.8s ease;
-  color: black;
-  max-width: 370px;
-  /* Không cần margin: auto ở đây vì flexbox sẽ tự động sắp xếp */
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-}
-
-.product-image-wrapper {
-  width: 100%;
-  height: 370px; /* Chiều cao cố định cho ảnh */
-  overflow: hidden;
-  border-bottom: 1px solid #eee;
-}
-
-.product-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.product-details {
-  padding: 20px; /* Padding nội dung thẻ */
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.product-name {
-  font-size: 1.5em; /* Kích thước tiêu đề sản phẩm */
-  line-height: 1.3;
-  font-weight: bold;
-}
-
-.product-description {
-  font-size: 0.95em; /* Kích thước mô tả */
-  color: #666;
-  margin-bottom: 15px;
-  line-height: 1.5;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Giới hạn 3 dòng */
-  -webkit-box-orient: vertical;
-}
-
-.product-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto; /* Đẩy xuống cuối */
-  padding-top: 15px;
-  border-top: 1px solid #eee;
-}
-
-.author {
-  font-size: 0.85em;
-}
-
-.author-avatar {
-  width: 25%;
-  height: 25%;
+.category-icon {
+  width: 25px; /* Icon size */
+  height: 25px;
+  object-fit: contain;
   margin-right: 8px;
 }
 
-.category {
-  font-size: 0.85em;
-  padding: 4px 8px;
+.category-text {
+  font-size: 0.9em;
+  color: #555;
 }
 
 .product-footer {
-  margin-top: 15px;
-  padding-top: 15px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -556,48 +754,64 @@ nav ul li.active {
 }
 
 .live-button {
-  padding: 8px 12px;
-  font-size: 0.9em;
-  border-radius: 6px;
-  background-color: #ff6600; /* Màu cam */
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 8px 8px;
+  font-size: 0.95em;
+  border-radius: 10px; /* More rounded */
+  background-color: #FF6600;
   color: white;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+.live-button i {
+  margin-right: 8px;
 }
 
 .live-button:hover {
   background-color: #e65c00;
+  transform: translateY(-2px);
 }
 
 .views {
-  font-size: 0.9em;
-  color: #aaa;
+  font-size: 0.95em;
+  color: #888;
+  display: inline-flex;
+  align-items: center;
+}
+.views i {
+  margin-right: 8px;
+  color: #FF6600;
 }
 
-/* Các nút điều hướng carousel */
+
+/* Carousel navigation buttons */
 .carousel-nav-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   color: white;
   border: none;
-  padding: 12px 16px;
-  font-size: 1.8em;
+  padding: 15px 20px;
+  font-size: 2em;
   cursor: pointer;
-  z-index: 1;
-  border-radius: 10%;
-  transition: background 0.3s ease, opacity 0.3s ease;
-  opacity: 0.7;
+  z-index: 10;
+  border-radius: 15px;
+  transition: background 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0.8;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .carousel-nav-button:hover {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.95);
   opacity: 1;
+  transform: translateY(-50%) scale(1.05);
 }
 
 .carousel-nav-button:disabled {
@@ -607,125 +821,458 @@ nav ul li.active {
 }
 
 .prev-button {
-  left: 0px; /* Điều chỉnh vị trí từ trái */
+  left: 20px; /* More space from edge */
 }
 
 .next-button {
-  right: 0px; /* Điều chỉnh vị trí từ phải */
+  right: 20px; /* More space from edge */
 }
 
-/* Responsive cho Product Carousel */
-@media screen and (max-width: 1024px) {
-  .products-carousel-container {
-    max-width: 900px;
-  }
-  .product-card {
-    min-width: calc((100% / 2) - (1 * 30px / 2)); /* 2 thẻ trên màn hình tablet */
-  }
+
+/* ================= SECTION 5: Contact ================= */
+.contact-section-content {
+  flex-direction: row; /* Ensure it's row layout */
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #2d2f33 50%, #1a1a1d 50%); /* Split background */
+  padding: 50px;
 }
 
-@media screen and (max-width: 768px) {
-  .products-carousel-section-content {
-    padding: 40px 10px;
-  }
-  .products-carousel-title {
-    font-size: 2.5em;
-    margin-bottom: 30px;
-  }
-  .products-carousel-container {
-    width: 95%;
-    padding: 10px;
-  }
-  .product-card {
-    min-width: 100%; /* 1 thẻ trên màn hình di động */
-  }
-  .product-image-wrapper {
-    height: 160px;
-  }
-  .carousel-nav-button {
-    padding: 10px 14px;
-    font-size: 1.4em;
-    left: 5px;
-    right: 5px;
-  }
+.contact-info {
+  flex: 1;
+  padding: 20px;
+  color: white;
+  text-align: left;
+  max-width: 700px;
 }
 
-.nhan_vo a{
+.contact-info h1 {
+  font-size: 3.5em;
+  color: #FF6600;
+  margin-bottom: 25px;
+  font-weight: 800;
+}
+
+.contact-info p {
+  font-size: 1.1em;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: #ddd;
+}
+.contact-info p i {
+  margin-right: 15px;
+  color: #00FFC8; /* Accent for icons */
+}
+
+.contact-info a {
+  color: #00FFC8;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+.contact-info a:hover {
+  color: #FF6600;
 }
 
-.btn {
-  padding: 5px;
-  margin-left: 178px;
-  background-color: rgb(105, 185, 255);
+.social-contact {
+  margin-top: 30px;
+  display: flex;
+  gap: 25px;
+}
+.social-contact .social-icon {
+  font-size: 2.2em;
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.social-contact .social-icon:hover {
+  color: #FF6600;
+  transform: translateY(-5px) scale(1.1);
+}
+
+.contact-form-container {
+  flex: 1;
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  max-width: 550px;
+}
+
+.contact-form-container h2 {
+  font-size: 2.2em;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.contact-form .form-group {
+  margin-bottom: 20px;
+}
+
+.contact-form label {
+  display: block;
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+  border-color: #FF6600;
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
+  outline: none;
+}
+
+.contact-form textarea {
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.contact-form .submit-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #FF6600;
+  color: white;
+  border: none;
   border-radius: 10px;
-  height: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-/* portfolio.css */
+.contact-form .submit-button i {
+  margin-right: 10px;
+}
 
-/* Thêm keyframes cho animation */
+.contact-form .submit-button:hover {
+  background-color: #e65c00;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+
+/* Custom Message Box (for alert replacement) */
+.custom-message-box {
+    position: fixed;
+    z-index: 10000;
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 350px;
+    border: 1px solid #ddd;
+}
+
+.custom-message-box p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.custom-message-box button {
+    background-color: #FF6600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.custom-message-box button:hover {
+    background-color: #e65c00;
+}
+
+/* Specific styles for message types */
+.custom-message-box.success {
+    border-color: #28a745;
+}
+.custom-message-box.error {
+    border-color: #dc3545;
+}
+
+
+/* Back to Normal Button Styling (Existing, but re-checked) */
 @keyframes pulse-background {
-  0% {
-    background-color: #e74c3c; /* Màu đỏ ban đầu */
-    color: white; /* Chữ màu trắng */
-  }
-  50% {
-    background-color: #f1c40f; /* Màu vàng tươi */
-    color: black; /* Chữ màu đen */
-  }
-  100% {
-    background-color: #e74c3c; /* Trở lại màu đỏ ban đầu */
-    color: white; /* Chữ màu trắng */
-  }
+  0% { background-color: #e74c3c; color: white; }
+  50% { background-color: #f1c40f; color: black; }
+  100% { background-color: #e74c3c; color: white; }
 }
 
 .back-to-normal-button {
-    position: absolute; /* Định vị tuyệt đối trong thẻ nav */
-    bottom: 20px;       /* 20px từ đáy của thanh nav */
-    left: 50%;          /* Căn giữa theo chiều ngang trong thanh nav */
-    transform: translateX(-50%); /* Dịch sang trái 50% chiều rộng của nút để căn giữa hoàn hảo */
-    padding: 15px 10px; /* Điều chỉnh padding để phù hợp với không gian nav */
-    /* Thay đổi màu nền ban đầu hoặc sử dụng màu đỏ từ animation */
-    background-color: #e74c3c; /* Màu đỏ nổi bật */
-    color: white; /* Màu chữ mặc định là trắng */
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 10px;
+    background-color: #e74c3c;
+    color: white;
     border: none;
-    border-radius: 30px; /* Bo tròn viền */
-    font-size: 0.9em;   /* Giảm kích thước chữ một chút nếu cần để phù hợp với nav */
+    border-radius: 30px;
+    font-size: 0.9em;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4); /* Đổ bóng mạnh để tạo hiệu ứng nổi */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 101; /* Đảm bảo nút nằm trên các phần tử khác trong nav */
-    text-align: center; /* Căn giữa văn bản trong nút */
-    width: calc(100% - 40px); /* Chiếm gần hết chiều rộng của nav trừ padding */
-    max-width: 180px; /* Giới hạn chiều rộng tối đa của nút nếu nav quá rộng */
-
-    /* Áp dụng animation */
-    animation: pulse-background 2s infinite alternate; /* Tên animation, thời gian, lặp vô hạn, đổi chiều */
+    z-index: 101;
+    text-align: center;
+    width: calc(100% - 40px);
+    max-width: 200px; /* Slightly wider max-width for button */
+    animation: pulse-background 2s infinite alternate;
 }
 
 .back-to-normal-button:hover {
-    /* Khi hover, tạm dừng animation và chuyển sang màu hover */
     animation: none;
-    background-color: #c0392b; /* Màu đỏ sẫm hơn khi hover */
-    color: white; /* Đảm bảo màu chữ là trắng khi hover */
-    transform: translateX(-50%) translateY(-5px); /* Nâng lên một chút và vẫn căn giữa */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6); /* Đổ bóng mạnh hơn khi hover */
+    background-color: #c0392b;
+    color: white;
+    transform: translateX(-50%) translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 }
 
-/* Bạn cũng có thể muốn thêm một số media queries để điều chỉnh nút này trên các màn hình nhỏ hơn */
+/* Mobile Warning Overlay and Box Styles */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0); /* Mờ đen */
+  z-index: 9998; /* Dưới hộp thông báo */
+  display: none; /* Mặc định ẩn */
+}
+
+.mobile-warning-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  color: #333;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 90%; /* Chiều rộng tối đa trên di động */
+  width: 400px; /* Chiều rộng cố định cho desktop/tablet */
+  z-index: 9999; /* Luôn ở trên cùng */
+  display: none; /* Mặc định ẩn */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-warning-box p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.mobile-warning-buttons {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically on mobile */
+  gap: 15px; /* Khoảng cách giữa các nút */
+  width: 100%;
+}
+
+.mobile-warning-buttons button {
+  padding: 12px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; /* Đảm bảo nút chiếm toàn bộ chiều rộng */
+}
+
+#mobileSwitchToNormal {
+  background-color: #FF6600;
+  color: white;
+}
+
+#mobileSwitchToNormal:hover {
+  background-color: #e65c00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#mobileBackToIntro {
+  background-color: #007bff;
+  color: white;
+}
+
+#mobileBackToIntro:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1200px) {
+  /* No skill-grid specific changes here, as it's now carousel-like */
+  .products-carousel-container {
+    max-width: 1000px;
+  }
+  .product-card {
+    min-height: 550px;
+  }
+  .skill-item {
+      min-width: 400px; /* Adjusted for larger content */
+      padding: 20px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  nav {
+    width: 200px; /* Slightly narrower nav on tablet */
+    padding: 30px 15px;
+  }
+  #fullpage {
+    margin-left: 200px;
+  }
+  .section-content {
+    width: calc(100vw - 200px);
+  }
+  .profile-right {
+    padding: 60px 40px 60px 80px;
+  }
+  .profile-right h1 {
+    font-size: 3.5em;
+  }
+  .roles {
+    font-size: 1.3em;
+  }
+  .bio {
+    font-size: 1em;
+  }
+  .buttons {
+    gap: 10px;
+  }
+  .buttons button {
+    font-size: 1em;
+    padding: 10px 15px;
+  }
+  .social-links {
+    gap: 15px;
+  }
+  .social-links a {
+    font-size: 1.5em;
+  }
+
+  .skill-title {
+    font-size: 2.5em;
+  }
+  /* No skill-grid specific changes here, as it's now carousel-like */
+  .skill-item {
+    min-width: 320px; /* Adjust min-width for tablet */
+    padding: 20px;
+  }
+  .skill-icon {
+    width: 80px;
+    height: 80px;
+  }
+  .skill-info h3 {
+    font-size: 1.3em;
+  }
+  .skill-info p {
+    font-size: 0.9em;
+  }
+  .buttons_1 {
+      margin-top: 10px; /* Adjust spacing */
+  }
+
+  .products-carousel-title {
+    font-size: 2.2em;
+  }
+  .products-carousel-container {
+    padding: 15px;
+  }
+  .products-wrapper {
+    gap: 25px;
+  }
+  .product-card {
+    min-width: calc((100% / 2) - 12.5px); /* Show 2 cards on tablet */
+    min-height: 520px;
+  }
+  .product-image-wrapper {
+    height: 200px;
+  }
+  .product-name {
+    font-size: 1.6em;
+  }
+  .product-description {
+    font-size: 0.95em;
+    -webkit-line-clamp: 4;
+  }
+  .carousel-nav-button {
+    font-size: 1.6em;
+    padding: 12px 16px;
+  }
+
+  .contact-section-content {
+    flex-direction: column; /* Stack contact info and form vertically */
+    padding: 30px;
+  }
+  .contact-info, .contact-form-container {
+    padding: 30px;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  .contact-form-container:last-child {
+      margin-bottom: 0;
+  }
+  .contact-info h1 {
+    font-size: 3em;
+    text-align: center;
+  }
+  .contact-info p, .contact-info a {
+      text-align: center;
+  }
+  .contact-details p {
+      justify-content: center;
+  }
+  .social-contact {
+      justify-content: center;
+  }
+}
+
 @media screen and (max-width: 768px) {
   nav {
-    width: 100%; /* Nav có thể chiếm toàn bộ chiều rộng trên mobile */
+    width: 100%;
     height: auto;
-    bottom: 0; /* Có thể đặt nav ở dưới cùng trên mobile */
-    top: unset; /* Bỏ top nếu bạn đặt nav ở dưới */
+    bottom: 0;
+    top: unset;
     padding: 10px;
-    display: flex;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+    /* Mobile specific: transparent background with blur */
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
   }
-
+  nav #logo-main {
+      display: none !important; /* Hide logo on mobile nav */
+  }
   nav ul {
     margin-top: 0;
     display: flex;
@@ -733,19 +1280,184 @@ nav ul li.active {
     justify-content: center;
     width: 100%;
   }
-
   nav ul li {
     margin: 5px 10px;
   }
+  nav ul li a {
+      padding: 8px 10px;
+      font-size: 0.9em;
+  }
+  nav ul li a i {
+      margin-right: 5px;
+      font-size: 0.9em;
+  }
+  nav ul li.active {
+      border-left: none; /* Remove left border on mobile */
+      border-bottom: 3px solid #FF6600; /* Use bottom border for active */
+      padding-left: 0;
+      padding-bottom: 2px;
+  }
 
+  #fullpage {
+    margin-left: 0; /* No margin on mobile */
+    padding-bottom: 60px; /* Add padding to prevent content from being hidden by nav */
+  }
+  .section-content {
+    width: 100vw; /* Full width on mobile */
+    flex-direction: column; /* Stack content vertically */
+    padding: 20px;
+  }
+  .profile-left, .profile-right {
+    flex: none;
+    width: 100%;
+    padding: 30px 20px;
+  }
+  .profile-left img {
+    height: auto; /* Allow height to adjust */
+    max-height: 250px; /* Max height for mobile image */
+    object-fit: contain; /* Contain for better fit */
+    margin-bottom: 20px; /* Space between image and text */
+  }
+  .profile-right {
+    text-align: center;
+    background: #2d2f33; /* Ensure consistent background */
+  }
+  .profile-right h1 {
+    font-size: 2.8em;
+  }
+  .roles {
+    justify-content: center;
+    font-size: 1.2em;
+  }
+  .bio {
+    font-size: 0.9em;
+  }
+  .buttons {
+    justify-content: center;
+  }
+  .social-links {
+    justify-content: center;
+  }
+
+  .skill-title {
+    font-size: 2em;
+  }
+  /* Skill carousel adjustments for mobile */
+  .skill-carousel-container {
+    width: 100%;
+    padding: 10px;
+  }
+  .skill-grid {
+    gap: 15px;
+  }
+  .skill-item {
+    min-width: 280px; /* Ensure a decent width on mobile */
+    padding: 15px;
+    /* Increase height to ensure all content fits */
+    height: auto; /* Allow height to adjust dynamically */
+    min-height: 450px; /* Ensure minimum height for consistency */
+  }
+  .skill-info p {
+    overflow: visible; /* Ensure all content is visible */
+    display: block; /* Override webkit box for full text */
+    -webkit-line-clamp: unset;
+  }
+  .skill-icon {
+    width: 70px;
+    height: 70px;
+  }
+  .skill-info h3 {
+    font-size: 1.2em;
+  }
+  .skill-info p {
+    font-size: 0.85em;
+  }
+  .buttons_1 {
+      margin-top: 10px; /* Adjust spacing */
+  }
+  .skill-nav-button {
+    font-size: 1.2em;
+    padding: 10px 14px;
+    left: 5px;
+    right: 5px;
+  }
+
+
+  .products-carousel-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  .products-carousel-container {
+    width: 100%;
+    padding: 10px;
+  }
+  .products-wrapper {
+    gap: 15px;
+  }
+  .product-card {
+    min-width: 100%; /* Single card on mobile */
+    min-height: 480px;
+    height: auto; /* Allow height to adjust */
+  }
+  .product-image-wrapper {
+    height: 180px;
+  }
+  .product-name {
+    font-size: 1.4em;
+  }
+  .product-description {
+    font-size: 0.9em;
+    -webkit-line-clamp: unset; /* Ensure full description is visible */
+    display: block;
+    overflow: visible;
+  }
+  .carousel-nav-button {
+    font-size: 1.2em;
+    padding: 10px 14px;
+    left: 5px;
+    right: 5px;
+  }
+
+  .contact-section-content {
+    padding: 20px;
+  }
+  .contact-info, .contact-form-container {
+    padding: 20px;
+  }
+  .contact-info h1 {
+    font-size: 2.5em;
+    text-align: center; /* Center contact title */
+  }
+  .contact-info p {
+      font-size: 1em;
+      text-align: center; /* Center contact details text */
+      display: flex; /* Use flex to align icon and text */
+      justify-content: center; /* Center the content within each p tag */
+      align-items: center;
+  }
+  .contact-details p i {
+      margin-right: 10px; /* Adjust space for icon */
+  }
+  .contact-info a {
+      text-align: center;
+  }
+  .social-contact {
+      justify-content: center; /* Center social icons */
+  }
+  .contact-form-container h2 {
+    font-size: 1.8em;
+  }
+  .contact-form .submit-button {
+    font-size: 1em;
+    padding: 12px;
+  }
   .back-to-normal-button {
-    position: static; /* Đặt lại vị trí tĩnh để nó chảy theo luồng bình thường */
-    margin-top: 15px; /* Tạo khoảng cách với các mục nav */
-    transform: none; /* Bỏ transform */
-    width: auto; /* Chiều rộng tự động */
-    max-width: unset; /* Bỏ giới hạn max-width */
-    padding: 10px 20px; /* Điều chỉnh padding */
-    animation: none; /* Tắt animation trên mobile nếu bạn muốn */
-    color: white; /* Đảm bảo màu chữ là trắng trên mobile */
+    position: static;
+    margin-top: 15px;
+    transform: none;
+    width: auto;
+    max-width: unset;
+    padding: 10px 20px;
+    animation: none;
   }
 }

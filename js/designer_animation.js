@@ -129,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
             }
         });
     }, {
@@ -141,74 +140,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Global state for visible images per section ---
-    // Map để lưu trữ số lượng hình ảnh hiển thị hiện tại cho mỗi section (key: sectionId, value: số lượng hình ảnh)
+    // Map to store the current number of visible images for each section (key: sectionId, value: number of images)
     let visibleImageCounts = new Map();
 
     // --- Function to manage image display and "Load More" button ---
-    // Hàm này kiểm soát việc hiển thị hình ảnh và nút "Xem thêm" trong một container cụ thể.
-    // imageContainerElement: Phần tử chứa các hình ảnh (ví dụ: .project-content)
-    // sectionId: ID của section cha (để theo dõi trạng thái hiển thị)
+    // This function controls the display of images and the "Load More" button within a specific container.
+    // imageContainerElement: The element containing the images (e.g., .project-content)
+    // sectionId: The ID of the parent section (to track display state)
     function manageImageDisplay(imageContainerElement, sectionId) {
         if (!imageContainerElement) return;
 
-        // Lấy tất cả image-wrapper bên trong container
+        // Get all image-wrappers within the container
         const allImageWrappers = Array.from(imageContainerElement.querySelectorAll('.image-wrapper'));
-        const totalImages = allImageWrappers.length; // Đếm số lượng wrappers để biết tổng số hình ảnh
+        const totalImages = allImageWrappers.length; // Count the number of wrappers to know the total number of images
 
         let currentVisibleCount = visibleImageCounts.get(sectionId);
 
-        // Khởi tạo số lượng hình ảnh hiển thị ban đầu là 5 nếu chưa được đặt
-        // hoặc nếu nó bị reset về 0 (để tránh hiển thị quá nhiều khi tải lại trang hoặc chuyển trang)
+        // Initialize the number of initially displayed images to 5 if not already set
+        // or if it's reset to 0 (to avoid displaying too many when reloading or changing pages)
         if (currentVisibleCount === undefined) {
-            visibleImageCounts.set(sectionId, 5); // Mặc định hiển thị 5 hình ảnh đầu tiên
+            visibleImageCounts.set(sectionId, 5); // Default to displaying the first 5 images
             currentVisibleCount = 5;
         }
 
-        // Ẩn tất cả image-wrapper ban đầu
+        // Hide all image-wrappers initially
         allImageWrappers.forEach(wrapper => {
             wrapper.style.display = 'none';
         });
 
-        // Hiển thị các image-wrapper lên đến số lượng hiện tại được phép
+        // Display image-wrappers up to the current allowed number
         for (let i = 0; i < currentVisibleCount; i++) {
             if (allImageWrappers[i]) {
                 allImageWrappers[i].style.display = 'inline-block'; // Set to inline-block for horizontal
             }
         }
 
-        // Quản lý nút "Xem thêm"
-        // Nút "Xem thêm" chỉ xuất hiện ở khu vực nội dung chính, không phải trong mục lục sidebar
-        const parentSection = imageContainerElement.closest('.project'); // Kiểm tra xem đây có phải là nội dung chính của một project không
+        // Manage the "Load More" button
+        // The "Load More" button only appears in the main content area, not in the sidebar TOC
+        const parentSection = imageContainerElement.closest('.project'); // Check if this is the main content of a project
 
-        // Tìm nút "Xem thêm" hiện có trong section cha (để tránh tạo nhiều nút)
+        // Find the existing "Load More" button in the parent section (to avoid creating multiple buttons)
         let loadMoreButton = parentSection ? parentSection.querySelector('.load-more-btn') : null;
 
-        if (totalImages > currentVisibleCount) { // Nếu còn hình ảnh để tải
+        if (totalImages > currentVisibleCount) { // If there are still images to load
             if (!loadMoreButton) {
-                // Tạo nút "Xem thêm" nếu chưa có
+                // Create the "Load More" button if it doesn't exist
                 loadMoreButton = document.createElement('button');
                 loadMoreButton.textContent = 'Xem thêm';
                 loadMoreButton.classList.add('load-more-btn');
-                // Chèn nút vào sau project-content nhưng vẫn trong section
+                // Insert the button after project-content but still within the section
                 parentSection.appendChild(loadMoreButton);
             }
-            loadMoreButton.style.display = 'block'; // Đảm bảo nút hiển thị
+            loadMoreButton.style.display = 'block'; // Ensure the button is visible
 
-            // Gán lại sự kiện click (để tránh nhiều listener nếu hàm được gọi lại)
-            loadMoreButton.onclick = null; // Xóa listener cũ
+            // Re-assign the click event (to avoid multiple listeners if the function is called again)
+            loadMoreButton.onclick = null; // Clear old listener
             loadMoreButton.onclick = () => {
                 const currentVis = visibleImageCounts.get(sectionId);
-                let newVisible = currentVis + 5; // Tải thêm 5 hình
+                let newVisible = currentVis + 5; // Load 5 more images
                 if (newVisible > totalImages) {
-                    newVisible = totalImages; // Đảm bảo không vượt quá tổng số hình ảnh
+                    newVisible = totalImages; // Ensure not to exceed the total number of images
                 }
-                visibleImageCounts.set(sectionId, newVisible); // Cập nhật số lượng hình ảnh hiển thị
-                manageImageDisplay(imageContainerElement, sectionId); // Gọi lại hàm để cập nhật hiển thị
+                visibleImageCounts.set(sectionId, newVisible); // Update the number of visible images
+                manageImageDisplay(imageContainerElement, sectionId); // Call the function again to update display
                 // No need to call setupImageModalTriggers here, it's handled by modal-img.js
             };
-        } else { // Nếu đã hiển thị tất cả hình ảnh
+        } else { // If all images are already displayed
             if (loadMoreButton) {
-                loadMoreButton.style.display = 'none'; // Ẩn nút "Xem thêm"
+                loadMoreButton.style.display = 'none'; // Hide the "Load More" button
             }
         }
     }
@@ -221,30 +220,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const originalTocListItems = Array.from(tocList ? tocList.querySelectorAll('li') : []);
 
     function displayContentInSidebar(targetId) {
-        const targetElement = document.querySelector(targetId); // Đây là section gốc (ví dụ: #design-Lookbook)
+        const targetElement = document.querySelector(targetId); // This is the original section (e.g., #design-Lookbook)
         if (targetElement && tocContentDisplay) {
-            tocContentDisplay.innerHTML = ''; // Xóa nội dung cũ
+            tocContentDisplay.innerHTML = ''; // Clear old content
 
             const contentToClone = targetElement.classList.contains('project') ?
                 targetElement.querySelector('.project-content') :
-                targetElement; // Lấy phần nội dung cụ thể để clone
+                targetElement; // Get the specific content part to clone
 
             if (contentToClone) {
-                const clonedContent = contentToClone.cloneNode(true); // Clone tất cả các phần tử con
+                const clonedContent = contentToClone.cloneNode(true); // Clone all child elements
 
-                // Loại bỏ bất kỳ class fade-in/project nào từ các phần tử được clone để tránh xung đột
+                // Remove any fade-in/project classes from cloned elements to avoid conflicts
                 clonedContent.classList.remove('fade-in-element', 'is-visible', 'project');
                 clonedContent.querySelectorAll('.fade-in-element, .is-visible', '.project').forEach(el => {
                     el.classList.remove('fade-in-element', 'is-visible', 'project');
                 });
 
-                // Đảm bảo các hình ảnh trong nội dung được clone phản ánh trạng thái `visibleImageCounts`
-                // Mục đích là sidebar sẽ hiển thị *số lượng hình ảnh hiện tại* mà người dùng đã tải trong nội dung chính,
-                // không hiển thị nút "Xem thêm" riêng.
+                // Ensure images in cloned content reflect the `visibleImageCounts` state
+                // The purpose is for the sidebar to display the *current number of images* that the user has loaded in the main content,
+                // without its own "Load More" button.
                 const allClonedImageWrappers = Array.from(clonedContent.querySelectorAll('.image-wrapper'));
-                const sectionId = targetId.substring(1); // Lấy ID section sạch (không có '#')
-                // Lấy số lượng hình ảnh đang hiển thị trong nội dung chính, hoặc hiển thị tất cả nếu chưa có trạng thái
-                const currentVisibleForMainContent = visibleImageCounts.get(sectionId) || allClonedImageWrappers.length; // Sidebar hiển thị tất cả ảnh theo mặc định
+                const sectionId = targetId.substring(1); // Get clean section ID (without '#')
+                // Get the number of images currently visible in the main content, or display all if no state
+                const currentVisibleForMainContent = visibleImageCounts.get(sectionId) || allClonedImageWrappers.length; // Sidebar displays all images by default
 
 
                 allClonedImageWrappers.forEach((wrapper, index) => {
@@ -255,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // Xóa bất kỳ nút "Xem thêm" nào có thể đã được clone (vì sidebar không nên có nút này)
+                // Remove any "Load More" button that might have been cloned (since the sidebar should not have this button)
                 let clonedLoadMoreButton = clonedContent.querySelector('.load-more-btn');
                 if (clonedLoadMoreButton) {
                     clonedLoadMoreButton.remove();
@@ -263,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 tocContentDisplay.appendChild(clonedContent);
 
-                // Gắn lại sự kiện click cho các hình ảnh trong khu vực hiển thị của sidebar
+                // Re-attach click events for images in the sidebar display area
                 const sidebarImages = tocContentDisplay.querySelectorAll('img:not(.image-logo-small)');
                 sidebarImages.forEach(img => {
                     img.style.cursor = 'pointer';
@@ -309,10 +308,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetElement) {
                 const targetPage = parseInt(targetElement.getAttribute('data-page'));
                 const currentPage = getCurrentPage();
+                const totalPages = getTotalPages();
                 if (!isNaN(targetPage) && targetPage !== currentPage) {
                     history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
                     displayProjectsForPage(targetPage);
-                    renderPagination(targetPage, getTotalPages());
+                    renderPagination(targetPage, totalPages);
                     updateTocListForPage(targetPage);
                     setTimeout(() => {
                         displayContentInSidebar(targetId);
@@ -350,8 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     project.classList.add('is-visible');
                     const projectContent = project.querySelector('.project-content');
                     if (projectContent) {
-                        // Gọi manageImageDisplay cho nội dung chính của project
-                        // Chỉ gọi manageImageDisplay nếu project có .image-wrapper (như page 1, 2)
+                        // Call manageImageDisplay for the main content of the project
+                        // Only call manageImageDisplay if the project has .image-wrapper (like page 1, 2)
                         if (projectContent.querySelector('.image-wrapper')) {
                             manageImageDisplay(projectContent, project.id);
                         }
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-        // Gắn lại highlight TOC sau khi cập nhật TOC
+        // Re-attach TOC highlight after updating TOC
         setupTocHighlight();
     }
 
@@ -446,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startPage = Math.max(1, endPage - maxVisibleButtons + 1);
         }
 
-        // Nút Back
+        // Back button
         if (currentPage > 1) {
             const backButton = document.createElement('a');
             backButton.href = `designer.html?page=${currentPage - 1}`;
@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
             paginationContainer.appendChild(backButton);
         }
 
-        // Các nút số trang (giới hạn 3 số gần currentPage)
+        // Page number buttons (limited to 3 numbers near currentPage)
         for (let i = startPage; i <= endPage; i++) {
             const button = document.createElement('a');
             button.href = `designer.html?page=${i}`;
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
             paginationContainer.appendChild(button);
         }
 
-        // Nút Next
+        // Next button
         if (currentPage < totalPages) {
             const nextButton = document.createElement('a');
             nextButton.href = `designer.html?page=${currentPage + 1}`;
@@ -562,19 +562,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const currentPage = getCurrentPage();
     const totalPages = getTotalPages();
-    displayProjectsForPage(currentPage); // Hàm này bây giờ sẽ gọi manageImageDisplay cho các project hiển thị
+    displayProjectsForPage(currentPage); // This function will now call manageImageDisplay for displayed projects
     renderPagination(currentPage, totalPages);
-    updateTocListForPage(currentPage); // setupTocHighlight sẽ được gọi trong đây
+    updateTocListForPage(currentPage); // setupTocHighlight will be called here
 
-    // Khởi tạo hiển thị hình ảnh cho tất cả các project trên trang ban đầu.
-    // Điều này đảm bảo rằng khi trang tải lần đầu, các hình ảnh được ẩn/hiện đúng cách
-    // trước khi bất kỳ thao tác phân trang hoặc click mục lục nào xảy ra.
+    // Initialize image display for all projects on the initial page.
+    // This ensures that when the page first loads, images are hidden/shown correctly
+    // before any pagination or TOC clicks occur.
     projectElements.forEach(project => {
-        // Khởi tạo visibleImageCounts cho từng project nếu chưa được đặt
+        // Initialize visibleImageCounts for each project if not already set
         if (visibleImageCounts.get(project.id) === undefined) {
-             visibleImageCounts.set(project.id, 5); // Mặc định hiển thị 5 hình ảnh đầu tiên cho mỗi section
+             visibleImageCounts.set(project.id, 5); // Default to displaying the first 5 images for each section
         }
-        // Sau đó, áp dụng logic hiển thị cho các project đang hiển thị trên trang hiện tại
+        // Then, apply display logic to projects currently visible on the current page
         const projectPage = parseInt(project.getAttribute('data-page'));
         if (!isNaN(projectPage) && projectPage === currentPage) {
             const projectContent = project.querySelector('.project-content');
@@ -593,14 +593,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function onScroll() {
             let scrollPos = window.scrollY || window.pageYOffset;
-            let currentIndex = -1; // Khởi tạo với -1, nghĩa là không có section nào đang hoạt động
+            let currentIndex = -1; // Initialize with -1, meaning no active section
 
-            // Lặp ngược để tìm section thấp nhất hiện đang hiển thị
+            // Loop backward to find the lowest section currently visible
             for (let i = sections.length - 1; i >= 0; i--) {
                 const section = sections[i];
                 if (section && section.offsetTop - 120 <= scrollPos) {
                     currentIndex = i;
-                    break; // Đã tìm thấy section hoạt động, thoát vòng lặp
+                    break; // Found active section, exit loop
                 }
             }
 
@@ -608,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (idx === currentIndex) {
                     link.classList.add('active-toc');
                 } else {
-                    link.classList.remove('active-toc'); // Đảm bảo các liên kết không hoạt động loại bỏ class
+                    link.classList.remove('active-toc'); // Ensure inactive links remove the class
                 }
             });
         }
@@ -619,22 +619,22 @@ document.addEventListener('DOMContentLoaded', () => {
         onScroll(); // Call once on load to set initial highlight
     }
 
-    // Hàm gắn trình xử lý sự kiện click để mở modal cho tất cả các hình ảnh liên quan
+    // Function to attach click event handlers to open the modal for all relevant images
     function setupImageModalTriggers() {
-        // Lấy tất cả các hình ảnh trong .project-content mà không phải là logo nhỏ
+        // Get all images within .project-content that are not small logos
         const imagesToMakeClickable = document.querySelectorAll('main .project-content img:not(.image-logo-small)');
 
         imagesToMakeClickable.forEach(img => {
-            // Kiểm tra xem đã có sự kiện click được gắn vào chưa để tránh trùng lặp
+            // Check if a click event has already been attached to avoid duplicates
             if (!img.dataset.hasModalListener) {
-                img.style.cursor = 'pointer'; // Hiển thị con trỏ là dạng bàn tay để người dùng biết có thể nhấp
+                img.style.cursor = 'pointer'; // Display hand cursor to indicate clickability
                 img.addEventListener('click', function() {
-                    // Gọi hàm showImageModal từ modal-img.js
+                    // Call the showImageModal function from modal-img.js
                     if (typeof showImageModal === 'function') {
                         showImageModal(this);
                     }
                 });
-                img.dataset.hasModalListener = 'true'; // Đánh dấu đã gắn listener
+                img.dataset.hasModalListener = 'true'; // Mark listener as attached
             }
         });
     }
@@ -646,32 +646,84 @@ document.addEventListener('DOMContentLoaded', () => {
         let timer;
 
         flipCard.addEventListener('touchstart', function(event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định
+            event.preventDefault(); // Prevent default behavior
             const card = this;
             timer = setTimeout(() => {
                 card.classList.add('hold');
-            }, 500); // Thời gian giữ (500ms)
+            }, 500); // Hold time (500ms)
         });
 
         flipCard.addEventListener('touchend', function(event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định
+            event.preventDefault(); // Prevent default behavior
             clearTimeout(timer);
             this.classList.remove('hold');
         });
 
         flipCard.addEventListener('touchcancel', function(event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định
+            event.preventDefault(); // Prevent default behavior
             clearTimeout(timer);
             this.classList.remove('hold');
         });
-        flipCard.addEventListener('mouseleave', function() { // Thêm sự kiện mouseleave
+        flipCard.addEventListener('mouseleave', function() { // Add mouseleave event
             clearTimeout(timer);
             this.classList.remove('hold');
         });
     });
 
-    // Khởi tạo trình kích hoạt modal sau khi trang tải xong và nội dung được hiển thị
-    // Chắc chắn rằng modal-img.js đã được tải trước đó
+    // Initialize modal triggers after page load and content display
+    // Ensure modal-img.js has been loaded beforehand
     setTimeout(setupImageModalTriggers, 0);
+
+    // JavaScript for sticky navigation bar
+    const nav = document.querySelector('.main-nav');
+    const header = document.querySelector('header');
+    let stickyOffset = 0; // Khởi tạo stickyOffset
+
+    // Hàm để cập nhật stickyOffset
+    const updateStickyOffset = () => {
+        // Đảm bảo header đã được render và có offsetHeight
+        if (header) {
+            stickyOffset = header.offsetHeight; // Lấy chiều cao của header
+        } else if (nav) { // Nếu không có header, lấy vị trí ban đầu của nav
+            stickyOffset = nav.offsetTop;
+        }
+    };
+
+    // Gọi lần đầu khi DOM đã tải xong
+    updateStickyOffset();
+
+    // Cập nhật stickyOffset khi cửa sổ thay đổi kích thước (ví dụ: xoay màn hình mobile)
+    window.addEventListener('resize', updateStickyOffset);
+
+    window.addEventListener('scroll', () => {
+        if (nav) { // Đảm bảo nav tồn tại
+            if (window.innerWidth >= 768) { // Chỉ áp dụng sticky cho desktop (màn hình >= 768px)
+                if (window.pageYOffset > stickyOffset) {
+                    nav.classList.add('sticky-nav');
+                    // Thêm padding-top vào body để nội dung không bị ẩn bởi nav cố định
+                    document.body.style.paddingTop = nav.offsetHeight + 'px';
+                } else {
+                    nav.classList.remove('sticky-nav');
+                    // Xóa padding-top khi nav không còn dính
+                    document.body.style.paddingTop = '0';
+                }
+            } else { // Đối với mobile (màn hình < 768px)
+                nav.classList.remove('sticky-nav'); // Đảm bảo không có class sticky-nav trên mobile
+                document.body.style.paddingTop = '0'; // Đảm bảo không có padding-top
+            }
+        }
+    });
+
+    // NEW: Close mobile nav when clicking outside
+    const menuToggle = document.querySelector('.menu-toggle'); // Nút 3 gạch
+    // nav đã được khai báo ở trên
+    if (nav && menuToggle) {
+        document.addEventListener('click', (event) => {
+            // Kiểm tra nếu nav đang mở và click không phải trên nav hoặc nút toggle
+            if (nav.classList.contains('open') && !nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                nav.classList.remove('open'); // Đóng nav
+            }
+        });
+    }
 
 });

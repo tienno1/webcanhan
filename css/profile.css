@@ -7,31 +7,30 @@ body {
     line-height: 1.6; /* Line spacing for readability */
     padding-bottom: 80px; /* Example: adjust as needed */
     overflow-x: hidden; /* Prevent horizontal scroll */
+    background: linear-gradient(135deg, #f0f8ff, #e6f7ff); /* Nền gradient nhẹ nhàng */
 }
 
 /* CSS cho hiệu ứng bay lên nhẹ khi di chuột */
-/* Áp dụng class 'lift-on-hover' vào các phần tử HTML bạn muốn có hiệu ứng này */
 .lift-on-hover {
-    display: inline-block; /* Quan trọng: Cần thiết để transform hoạt động đúng trên các phần tử inline */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Áp dụng transition cho cả transform và box-shadow */
-    will-change: transform, box-shadow; /* Tối ưu hóa hiệu suất cho animation */
+    display: inline-block;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    will-change: transform, box-shadow;
 }
 
-/* Khi di chuột vào phần tử có class 'lift-on-hover' */
 .lift-on-hover:hover {
-    transform: translateY(-10px); /* Di chuyển phần tử lên trên 5px */
-    /* Bạn có thể điều chỉnh giá trị -5px để thay đổi độ cao bay lên */
+    transform: translateY(-8px); /* Di chuyển nhẹ lên */
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2); /* Bóng xanh nhẹ */
 }
 
 .container {
-    max-width: 1200px; /* Maximum width */
-    margin: 0 auto; /* Center alignment */
-    padding: 20px; /* Inner padding */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 /* Kiểu cho phần Header */
 header {
-    background-image:url(../img/sl_0210121_40570_23.jpg);/* Background image */
+    background-image:url(../img/sl_0210121_40570_23.jpg); /* Background image */
     background-size: 100%;
     color: #fff; /* White text color */
     padding: 1rem 0; /* Top and bottom padding */
@@ -45,7 +44,7 @@ header a img{
 }
 
 header p {
-    color: #fff;
+    color: #ffffff;
     font-size: 1rem; /* Font size for paragraphs */
     opacity: 0.8; /* Slightly reduce opacity */
 }
@@ -56,7 +55,21 @@ nav {
     padding: 0.8rem 0; /* Top and bottom padding */
     text-align: center; /* Center content */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add a subtle shadow */
+    /* Các thuộc tính dính sẽ được thêm bằng JavaScript thông qua class .sticky-nav */
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* Thêm transition cho độ trong suốt */
 }
+
+/* Class mới cho thanh nav dính */
+.sticky-nav {
+    position: fixed; /* Giữ thanh nav ở vị trí cố định */
+    top: 0; /* Đặt thanh nav ở trên cùng */
+    width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+    z-index: 1000; /* Đảm bảo thanh nav nằm trên các nội dung khác */
+    background-color: rgba(68, 68, 68, 0.8); /* Màu nền khi dính với độ trong suốt 80% */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Đổ bóng khi dính */
+    box-sizing: border-box; /* Đảm bảo padding và border không làm tăng kích thước tổng thể */
+}
+
 
 nav ul {
     list-style: none; /* Remove list bullets */
@@ -69,6 +82,8 @@ nav ul {
 
 nav ul li {
     margin: 0 15px ; /* Space between list items */
+    /* Đảm bảo chiều rộng nội dung tự co giãn */
+    flex-shrink: 0; /* Ngăn không cho các mục co lại */
 }
 
 nav ul li a {
@@ -80,6 +95,9 @@ nav ul li a {
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow: hidden;
+    /* Điều chỉnh padding để chiều rộng khung nhỏ lại */
+    padding: 8px 15px; /* Giảm padding ngang một chút để khung nhỏ hơn */
+    white-space: nowrap; /* Ngăn không cho chữ xuống dòng trong nav item */
 }
 
 /* Viền chạy hiệu ứng dưới chữ */
@@ -99,7 +117,7 @@ nav ul li a::after {
 /* Hover + Active: nền sáng hơn nav, chữ vẫn trắng */
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: #666; /* Màu sáng hơn nav */
+    background-color: #8b8b8b82; /* Màu sáng hơn nav */
     color: #ffbb87;          /* Màu chữ sáng nhẹ, không quá trắng */
 }
 
@@ -109,126 +127,462 @@ nav ul li a.active::after {
     transform-origin: bottom left;
 }
 
+
 /* Kiểu cho phần Nội dung Chính (Main) của trang Profile */
 main {
-    background: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 20px !important; /* Giữ padding cho chữ không sát mép */
+    background: none; /* Bỏ background mặc định */
+    box-shadow: none;
+    border-radius: 0;
+    max-width: none;
+    margin: 0 auto; /* Căn giữa nội dung chính */
+    padding: 20px;
 }
 
-main section {
-    margin-bottom: 30px; /* Space below each section */
-    padding-bottom: 20px; /* Padding below each section */
-    border-bottom: 1px solid #eee; /* Separator line between sections */
+/* Section Card - Kiểu dáng chung cho các phần */
+.section-card {
+    background-color: #ffffff; /* Nền trắng cho các section */
+    border-radius: 12px; /* Góc bo tròn lớn hơn */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Bóng đổ nổi bật hơn */
+    padding: 30px; /* Tăng padding */
+    margin-bottom: 40px; /* Tăng khoảng cách giữa các section */
+    border: 1px solid #e0e0e0; /* Viền nhẹ */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng hover cho cả section */
 }
 
-main section:last-child {
-    border-bottom: none; /* Remove border for the last section */
+.section-card:hover {
+    transform: translateY(-5px); /* Nâng nhẹ section khi hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Bóng đổ sâu hơn */
 }
 
 main h2 {
-    color: #007bff; /* Color for section titles */
-    border-bottom: 2px solid #007bff; /* Underline for titles */
-    padding-bottom: 10px; /* Padding below title */
-    margin-bottom: 20px; /* Space below title */
-    position: relative; /* Required for the pseudo-element */
+    color: #2c3e50; /* Màu tiêu đề đậm */
+    font-size: 2.2rem; /* Cỡ chữ lớn hơn */
+    font-weight: 700; /* Chữ in đậm */
+    border-bottom: 3px solid #ff6f00; /* Đường kẻ dưới đậm hơn, màu cam */
+    padding-bottom: 15px; /* Tăng padding dưới */
+    margin-bottom: 30px; /* Tăng khoảng cách dưới */
+    position: relative;
+    text-align: center; /* Căn giữa tiêu đề */
+    text-transform: uppercase; /* Viết hoa chữ cái đầu */
+    letter-spacing: 1.5px; /* Tăng khoảng cách chữ */
 }
 
-/* Animation effect for line drawing under h2 */
 main h2::after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: -2px; /* Position right below the border */
-    width: 0; /* Initial width is 0 */
-    height: 2px; /* Height of the line */
-    background-color: #ff007b; /* Color of the line */
-    transition: width 0.6s ease-out; /* Animation transition */
+    left: 50%; /* Bắt đầu từ giữa */
+    transform: translateX(-50%); /* Dịch sang trái 50% để căn giữa */
+    bottom: -3px; /* Vị trí đường kẻ */
+    width: 0;
+    height: 4px; /* Dày hơn */
+    background: linear-gradient(to right, #ff007b, #007bff); /* Gradient màu */
+    transition: width 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Hiệu ứng đàn hồi */
+    border-radius: 2px;
 }
 
-/* When the section containing h2 has the 'is-visible' class, the line expands */
 .fade-in-element.is-visible h2::after {
-    width: 100%; /* Expand to full width */
+    width: 80%; /* Chiều rộng đường kẻ khi visible */
 }
 
-/* Specific styles for content within the Profile page */
-.Skill_on_app {
+.section-intro-text {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 40px; /* Khoảng cách lớn hơn cho text giới thiệu section */
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+
+/* Thông tin cá nhân */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-item {
+    background-color: #f8f8f8;
+    padding: 15px 20px;
+    border-left: 5px solid #007bff; /* Viền trái màu xanh */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    font-size: 1.05rem;
     display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+.info-item strong {
+    color: #2c3e50;
+    margin-right: 8px;
+}
+
+.hobby-icon {
+    width: 60px !important; /* Kích thước cố định cho icon sở thích */
+    height: 60px !important;
+    object-fit: contain;
+    margin-left: auto; /* Đẩy icon sang phải */
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 0; /* Bỏ bo tròn nếu không muốn */
+    box-shadow: none;
+}
+
+
+/* Kỹ năng chuyên môn */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 25px; /* Tăng khoảng cách */
     list-style: none;
     padding: 0;
-    margin: 16px 0;
+    margin: 30px 0;
+    justify-content: center;
+}
+
+.skills-grid h3 {
+    width: 100%;
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
 }
 
 .skill-item {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%; /* Đảm bảo chiều cao đồng nhất */
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
+    position: relative; /* Dành cho skill-level */
+    overflow: hidden; /* Dành cho hiệu ứng hover */
 }
+
+.skill-item::before { /* Hiệu ứng overlay khi hover */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0,123,255,0.1), rgba(255,111,0,0.1));
+    transform: scale(0);
+    opacity: 0;
+    border-radius: 12px;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.skill-item:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.skill-item:hover {
+    transform: translateY(-10px) scale(1.03); /* Nâng và phóng to nhẹ */
+    box-shadow: 0 15px 30px rgba(0,123,255,0.25); /* Bóng đổ nổi bật hơn */
+    z-index: 1; /* Đảm bảo item nổi lên trên các item khác */
+}
+
 
 .skill-item img {
-    width: 90px;
-    height: 90px;
+    width: 70px; /* Kích thước icon nhỏ hơn */
+    height: 70px;
     object-fit: contain;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease; /* Thêm transition cho img */
 }
 
-.skill-item span {
-    font-size: 1rem;
-    font-weight: 500;
+.skill-item:hover img {
+    transform: scale(1.1); /* Phóng to icon khi hover */
+}
+
+.skill-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    position: relative; /* Để nằm trên overlay */
+    z-index: 2;
+}
+
+.skill-level {
+    font-size: 0.9rem;
+    color: #666;
+    background-color: #e9ecef;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-top: auto; /* Đẩy xuống cuối item */
+    position: relative;
+    z-index: 2;
+    overflow: hidden; /* Đảm bảo thanh màu không tràn */
+}
+
+.skill-level::before { /* Thanh hiển thị mức độ */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--level, 0%); /* Sử dụng custom property */
+    background: linear-gradient(to right, #007bff, #28a745); /* Gradient màu cho thanh level */
+    z-index: -1; /* Nằm dưới text */
+    border-radius: 20px;
+    transition: width 1s ease-out; /* Animation cho thanh level */
+}
+
+.skill-item.visible .skill-level::before {
+    width: var(--level); /* Kích hoạt animation khi item visible */
+}
+
+.soft-skills-grid .skill-item {
+    background-color: #f8faff; /* Nền nhẹ hơn cho soft skills */
+    border: 1px dashed #a7d9ff; /* Viền nét đứt */
+}
+
+.soft-skills-grid .skill-item .skill-icon {
+    font-size: 48px; /* Kích thước icon lớn hơn */
+    color: #007bff; /* Màu icon */
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.soft-skills-grid .skill-item:hover .skill-icon {
+    transform: rotate(10deg) scale(1.1); /* Xoay và phóng to icon */
+}
+
+
+/* Kinh nghiệm làm việc (Timeline) */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: #ddd;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    border-radius: 2px;
+}
+
+.timeline-item {
+    padding: 10px 0;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+    opacity: 0; /* Ban đầu ẩn */
+    transform: translateY(40px); /* Di chuyển xuống */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%; /* Các item chẵn nằm bên phải */
+    padding-left: 30px;
+}
+
+.timeline-item:nth-child(odd) {
+    padding-right: 30px; /* Các item lẻ nằm bên trái */
+    text-align: right;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #ff6f00; /* Chấm màu cam */
+    border-radius: 50%;
+    top: 20px;
+    box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.3); /* Hiệu ứng phát sáng */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+    right: -8px; /* Đặt chấm ở giữa timeline */
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -8px; /* Đặt chấm ở giữa timeline */
+}
+
+.timeline-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    position: relative;
+    border-left: 4px solid #007bff; /* Viền bên trái */
+}
+.timeline-item:nth-child(odd) .timeline-content {
+    border-right: 4px solid #007bff;
+    border-left: none;
+}
+
+.timeline-content h3 {
+    color: #2c3e50;
     margin-top: 0;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
 }
 
-.contact-icons {
+.timeline-date {
+    font-size: 0.9rem;
+    color: #777;
+    font-style: italic;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.timeline-content ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.timeline-content ul li {
+    margin-bottom: 8px;
+    color: #444;
+}
+
+
+/* Giáo dục */
+.education-item {
     display: flex;
-    gap: 32px;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 16px;
-    flex-wrap: wrap;
+    align-items: flex-start; /* Căn trên cùng */
+    gap: 20px;
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    border-left: 6px solid #28a745; /* Viền xanh lá */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-ul li .contact-item,
-ul li {
-    list-style: none;
+.education-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.edu-icon {
+    font-size: 48px;
+    color: #28a745; /* Màu xanh lá */
+    flex-shrink: 0; /* Không co lại */
+    padding-top: 5px;
+}
+
+.edu-details h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.edu-date {
+    font-size: 0.95rem;
+    color: #777;
+    font-style: italic;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.edu-details p {
+    margin: 0;
+    color: #444;
+}
+
+
+/* Liên hệ */
+.contact-icons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+    justify-content: center;
 }
 
 .contact-item {
     display: flex;
-    flex-direction: row;      /* Đổi từ column sang row */
-    align-items: center;      /* Căn giữa theo chiều dọc */
-    min-width: 200px;         /* Có thể tăng nếu cần */
-    gap: 12px;                /* Khoảng cách giữa hình và chữ */
-}
-.contact-item img {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    margin-bottom: 0;         /* Xóa margin-bottom vì không còn dọc */
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    background-color: #fefefe;
+    padding: 15px 20px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.contact-item a, .contact-item span, .contact-item p {
-    font-size: 1rem;
-    color: #333;
-    text-decoration: none; /* Remove underline */
-    word-break: break-all;
-    margin: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #ff6f00; /* Viền cam */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Styles for the Footer section */
+.contact-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 111, 0, 0.2);
+}
+
+.contact-item img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 8px; /* Bo tròn ảnh icon */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.contact-item:hover img {
+    transform: scale(1.1);
+}
+
+.contact-item a, .contact-item span {
+    font-size: 1.05rem;
+    color: #333;
+    text-decoration: none;
+    word-break: break-all;
+    margin: 0;
+    font-weight: 500;
+}
+
+.contact-item a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
 footer {
+    margin-bottom: -80px;
     background-color: #333; /* Dark background color */
     color: #fff; /* White text color */
     text-align: center; /* Center content */
-    padding: 1rem 0; /* Top and bottom padding */
+    padding: 20px 0; /* Top and bottom padding */
     margin-top: 30px; /* Space above the footer */
 }
 
@@ -236,24 +590,22 @@ footer .social-links a {
     color: #fff; /* White text color */
     text-decoration: none; /* Remove underline */
     margin: 0 10px; /* Space between social links */
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    transition-duration: 0.8s ease; /* Smooth color transition on hover */
 }
 
 footer .social-links a:hover {
-    color: #007bff; /* Change color on hover */
+    color: #ff6600; /* Change color on hover */
 }
-
 /* --- Animation Styles --- */
 
 /* Fade-in on Scroll effect */
 .fade-in-element {
-    opacity: 0; /* Initially hidden */
-    transform: translateY(20px); /* Slightly move down initially */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Transition effect */
-    will-change: opacity, transform; /* Optimize performance */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
 }
 
-/* When the element has the 'is-visible' class, it becomes visible and moves to its original position */
 .fade-in-element.is-visible {
     opacity: 1;
     transform: translateY(0);
@@ -262,87 +614,32 @@ footer .social-links a:hover {
 /* Gentle up and down text animation */
 @keyframes gentle-move {
     0%, 100% {
-        transform: translateY(0); /* Initial and final position */
+        transform: translateY(0);
     }
     50% {
-        transform: translateY(-3px); /* Highest position */
+        transform: translateY(-3px);
     }
 }
 
 .animated-text {
-    display: inline-block; /* Required to apply transform */
-    animation: gentle-move 3s ease-in-out infinite; /* Apply the animation */
+    display: inline-block;
+    animation: gentle-move 3s ease-in-out infinite;
 }
 
-
-/* --- Basic Responsive Design --- */
-@media (max-width: 768px) {
-
-    nav.main-nav ul {
-    flex-direction: column; /* Stack nav items vertically */
-    padding: 0 10px; /* Add some padding */
-}
-nav.main-nav ul li {
-    margin: 5px 0; /* Adjust space between nav items */
-}
-nav.main-nav ul li a {
-    display: block; /* Make links block for easier tapping */
-    padding: 10px; /* Increase padding for touch targets */
-}
-    header h1 {
-        font-size: 2rem; /* Reduce h1 font size */
-    }
-    nav ul {
-        flex-direction: column; /* Stack nav items vertically */
-    }
-    nav ul li {
-        margin: 15px 0; /* Reduce space between nav items */
-    }
-    main {
-        padding: 15px; /* Reduce main padding */
-        margin: 15px auto; /* Reduce main margin */
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.8rem; /* Further reduce h1 font size */
-    }
-    header p {
-        font-size: 1rem; /* Reduce paragraph font size */
-    }
-    main {
-        padding: 10px; /* Reduce main padding */
-        margin: 10px auto; /* Reduce main margin */
-    }
-}
-
-/* Optional: Further adjustments for very large screens (>= 1024px) */
-@media (min-width: 1024px) {
-    .content-container {
-        max-width: 1200px; /* Ensure max-width is maintained */
-    }
-     header img{
-        width: 6%; /* Slightly smaller logo on very large screens */
-        max-width: 100px;
-    }
-}
-
-
-/* CSS for the page transition effect */
+/* Page content transition */
 #page-content {
-    transition: opacity 0.5s ease-in-out; /* Smooth opacity transition */
+    transition: opacity 0.5s ease-in-out;
 }
 
 .fade-out {
-    opacity: 0; /* Fully transparent */
+    opacity: 0;
 }
 
 .fade-in {
-    opacity: 1; /* Fully visible */
+    opacity: 1;
 }
 
-
+/* Sticky footer fix */
 html, body {
     height: 100%;
     margin: 0;
@@ -360,31 +657,7 @@ footer {
     flex-shrink: 0;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.skill-item img,
-.contact-item img {
-    transition: 
-        transform 0.8s cubic-bezier(.23,1.01,.32,1), 
-        box-shadow 1s;
-    will-change: transform, box-shadow;
-}
-.skill-item img:hover,
-.contact-item img:hover {
-    transform: scale(2);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-    z-index: 2;
-}
-
+/* Hover effects for images */
 .hover-zoom {
     transition: transform 0.4s cubic-bezier(.23,1.01,.32,1), box-shadow 0.3s;
     will-change: transform, box-shadow;
@@ -396,16 +669,10 @@ footer {
     z-index: 2;
 }
 
-@media (min-width: 768px) {
-    nav ul li a {
-        display: block; /* Make links block for easier tapping */
-        padding: 20px; /* Increase padding for touch targets */
-    }
-}
 
+/* Back to Top & Go to Bottom Buttons */
 #back-to-top,
 #go-to-bottom {
-  
   position: fixed;
   z-index: 999;
   background-color: #444;
@@ -417,7 +684,7 @@ footer {
   font-size: 24px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
 }
 
 #back-to-top {
@@ -437,17 +704,17 @@ footer {
   visibility: visible;
 }
 
-#back-to-top:hover,
+#back-to-bottom:hover,
 #go-to-bottom:hover {
   background-color: #666;
 }
 
-/* New button for "Chuyển chế độ xem nâng cao" */
+/* Nút bật chế độ xem nâng cao */
 #enable-advanced-view-button {
     position: fixed;
-    bottom: 20px; /* Adjust as needed, considering other buttons */
-    right: 20px;
-    background-color: #007bff; /* Blue color */
+    bottom: 20px;
+    right: 20px; /* Giá trị mặc định cho desktop */
+    background-color: #007bff;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -455,8 +722,13 @@ footer {
     font-size: 1em;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    z-index: 100; /* Ensure it's above other content */
+    transition: all 0.3s ease; /* Thay đổi transition để hỗ trợ width/height */
+    z-index: 100;
+    overflow: hidden; /* Ẩn nội dung tràn ra khi thu gọn */
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    display: flex; /* Dùng flexbox để căn giữa icon/text */
+    align-items: center;
+    justify-content: center;
 }
 
 #enable-advanced-view-button:hover {
@@ -464,20 +736,19 @@ footer {
     transform: translateY(-3px);
 }
 
-
 /* Modal Styles */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 10000; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 10000;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
@@ -583,3 +854,263 @@ footer {
     }
 }
 
+/* Áp dụng chỉ cho PC (min-width: 993px) */
+@media (min-width: 993px) {
+  .timeline-item:nth-child(odd) {
+    text-align: left; /* Căn trái nội dung */
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content ul li {
+    position: relative;
+    padding-right: 25px; /* Khoảng để thêm chấm bên phải */
+    text-align: right; /* Căn nội dung sang phải */
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content ul li::after {
+    content: '\2022'; /* Dấu chấm tròn */
+    font-size: 1.5em;
+    position: absolute;
+    top: -7px;
+    right: 5px;
+    color: #444;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content {
+    max-width: 600px; /* Tăng độ rộng khung nội dung */
+  }
+}
+/* --- Responsive Design (Updated) --- */
+@media (max-width: 992px) { /* Cho tablet và màn hình nhỏ hơn desktop */
+    #skills ul li{
+        margin-bottom: 50px;
+    }
+    main {
+        padding: 15px;
+    }
+    .section-card {
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+    main h2 {
+        font-size: 1.8rem;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .info-grid {
+        grid-template-columns: 1fr; /* Stack thông tin cá nhân */
+    }
+    .hobby-icon {
+        position: static; /* Bỏ vị trí tuyệt đối */
+        transform: none; /* Bỏ transform */
+        margin-left: 10px; /* Thêm margin bên trái */
+        width: 40px !important;
+        height: 40px !important;
+    }
+    .info-item {
+        flex-direction: column; /* Stack nội dung item */
+        align-items: flex-start;
+    }
+    .info-item strong {
+        margin-bottom: 5px;
+    }
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Giảm kích thước min cho skills */
+        gap: 20px;
+    }
+    .skill-item{
+        margin-bottom: -0px;
+    }
+    .skill-item img {
+        width: 60px;
+        height: 60px;
+    }
+    .skill-name {
+        font-size: 1rem;
+    }
+    .skill-level{
+        margin-bottom: 20px;
+    }
+    .timeline::before {
+        left: 20px; /* Di chuyển timeline sang trái */
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 40px; /* Đảm bảo đủ khoảng trống cho đường kẻ */
+        padding-right: 15px;
+    }
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0;
+        text-align: left; /* Căn trái tất cả các item */
+    }
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: 14px; /* Căn chấm tròn theo đường kẻ */
+        right: auto;
+    }
+    .timeline-content,
+    .timeline-item:nth-child(odd) .timeline-content {
+        border-left: 4px solid #007bff; /* Đảm bảo border left cho tất cả */
+        border-right: none;
+    }
+    .education-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .edu-icon {
+        font-size: 38px;
+    }
+    .edu-details {
+        margin-left: 0;
+    }
+    .contact-icons-grid {
+        grid-template-columns: 1fr; /* Stack contact items */
+    }
+
+    /* Mobile specific styles for the advanced view button */
+    #enable-advanced-view-button {
+        width: 50px; /* Thu gọn thành hình tròn */
+        height: 50px;
+        border-radius: 50%; /* Làm tròn */
+        padding: 0; /* Bỏ padding */
+        text-indent: -9999px; /* Ẩn chữ */
+        background-color: #007bff; /* Màu xanh */
+        position: fixed; /* Giữ vị trí */
+        bottom: 20px;
+        right: 10px; /* Đã thay đổi từ 20px xuống 10px để thẳng hàng */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: all 0.4s ease;
+        overflow: hidden; /* Đảm bảo chữ ẩn */
+    }
+
+    #enable-advanced-view-button::before { /* Tạo icon gạch đứng */
+        content: '';
+        position: absolute;
+        width: 2px; /* Chiều rộng của gạch */
+        height: 20px; /* Chiều cao của gạch */
+        background-color: white;
+        transition: all 0.4s ease;
+    }
+
+    /* Trạng thái mở rộng của nút trên di động */
+    #enable-advanced-view-button.expanded {
+        width: auto; /* Kéo dài ra */
+        height: auto;
+        padding: 12px 20px; /* Trả lại padding ban đầu */
+        border-radius: 8px; /* Trả lại bo góc */
+        text-indent: 0; /* Hiện chữ lại */
+    }
+
+    #enable-advanced-view-button.expanded::before {
+        content: none; /* Ẩn gạch đứng khi mở rộng */
+    }
+}
+
+@media (max-width: 768px) {
+    header p {
+        font-size: 1.1rem;
+    }
+
+    nav.main-nav ul {
+        width: 95%;
+        flex-direction: column;
+    }
+    nav.main-nav ul li {
+        margin: 10px 0;
+    }
+    nav.main-nav ul li a {
+        display: block;
+        padding: 10px;
+    }
+    /* Điều chỉnh căn lề cho timeline khi màn hình nhỏ hơn 768px */
+    .timeline::before {
+        left: 10px; /* Điều chỉnh vị trí đường kẻ dọc */
+        margin-left: 0px;
+    }
+    #experience .timeline-item {
+        width: 105%;
+        padding-left: 50px; /* Đảm bảo đủ khoảng trống cho đường kẻ và chấm tròn */
+        padding-right: 0px;
+    }
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: -18px;
+        text-align: left;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: calc(5% + 4px); /* 5% từ left + 4px để căn giữa chấm tròn với đường kẻ */
+        right: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    header p {
+        font-size: 1rem;
+    }
+    main {
+        padding: 10px;
+    }
+    .section-card {
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+    main h2 {
+        font-size: 1.5rem;
+    }
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 15px;
+    }
+    .skill-item img {
+        width: 50px;
+        height: 50px;
+    }
+    .skill-name {
+        font-size: 0.9rem;
+    }
+    .skill-level {
+        font-size: 0.8rem;
+    }
+    .contact-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+    .contact-item img {
+        margin-bottom: 0;
+    }
+}
+
+/* Optional: Further adjustments for very large screens (>= 1024px) */
+@media (min-width: 1024px) {
+    .content-container {
+        max-width: 1200px;
+    }
+     header img{
+        width: 6%;
+        max-width: 100px;
+    }
+}
+
+@media (min-width: 768px) {
+    
+    nav.main-nav ul li a {
+        display: block;       /* ✅ Fix: block để dễ click */
+        padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+}

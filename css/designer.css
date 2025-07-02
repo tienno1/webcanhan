@@ -54,14 +54,27 @@ header p {
     font-size: 1rem; /* Font size for paragraphs */
     opacity: 0.8; /* Slightly reduce opacity */
 }
-
 /* Kiểu cho thanh điều hướng (Navigation) */
 nav {
     background-color: #444; /* Slightly darker background than header */
     padding: 0.8rem 0; /* Top and bottom padding */
     text-align: center; /* Center content */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add a subtle shadow */
+    /* Các thuộc tính dính sẽ được thêm bằng JavaScript thông qua class .sticky-nav */
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* Thêm transition cho độ trong suốt */
 }
+
+/* Class mới cho thanh nav dính */
+.sticky-nav {
+    position: fixed; /* Giữ thanh nav ở vị trí cố định */
+    top: 0; /* Đặt thanh nav ở trên cùng */
+    width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+    z-index: 1000; /* Đảm bảo thanh nav nằm trên các nội dung khác */
+    background-color: rgba(68, 68, 68, 0.8); /* Màu nền khi dính với độ trong suốt 80% */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Đổ bóng khi dính */
+    box-sizing: border-box; /* Đảm bảo padding và border không làm tăng kích thước tổng thể */
+}
+
 
 nav ul {
     list-style: none; /* Remove list bullets */
@@ -109,7 +122,7 @@ nav ul li a::after {
 /* Hover + Active: nền sáng hơn nav, chữ vẫn trắng */
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: #666; /* Màu sáng hơn nav */
+    background-color: #8b8b8b82; /* Màu sáng hơn nav */
     color: #ffbb87;          /* Màu chữ sáng nhẹ, không quá trắng */
 }
 
@@ -118,6 +131,7 @@ nav ul li a.active::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+
 
 /* Container cho nội dung trang để áp dụng hiệu ứng chuyển đổi */
 .content-container {
@@ -312,21 +326,22 @@ main h2::after {
 
 /* Styles for the Footer section */
 footer {
+    margin-bottom: -23px;
     background-color: #333; /* Dark background color */
     color: #fff; /* White text color */
     text-align: center; /* Center content */
-    padding: 1rem 0; /* Top and bottom padding */
+    padding: 20px 0; /* Top and bottom padding */
 }
 
 footer .social-links a {
     color: #fff; /* White text color */
     text-decoration: none; /* Remove underline */
     margin: 0 10px; /* Space between social links */
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    transition-duration: 0.8s ease; /* Smooth color transition on hover */
 }
 
 footer .social-links a:hover {
-    color: #007bff; /* Change color on hover */
+    color: #ff6600; /* Change color on hover */
 }
 
 
@@ -405,11 +420,9 @@ footer .social-links a:hover {
 /* --- Pagination Styles --- */
 .pagination-container {
     text-align: center; /* Center the pagination buttons */
-    padding: 10px 0; /* Add padding */
-    background-color: #fff; /* White background */
-    border-top: 1px solid #ddd; /* Top border */
+    padding: 5px 0; /* Add padding */
+    background-color: #ffffffb7; /* White background */
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Shadow above */
-
     /* Make the pagination bar fixed at the bottom */
     position: fixed;
     bottom: 0;

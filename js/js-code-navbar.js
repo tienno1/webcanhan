@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   const dropdowns = document.querySelectorAll('.dropdown');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('nav.main-nav');
 
   dropdowns.forEach(dropdown => {
     const toggleBtn = dropdown.querySelector('.dropdown-toggle');
@@ -18,44 +20,79 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Mobile menu toggle
-  const toggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('nav.main-nav');
-  if (toggle && nav) {
-    toggle.addEventListener('click', function () {
+  // Chuyển đổi menu di động
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', function () {
       nav.classList.toggle('open');
+      // Chuyển đổi lớp 'nav-open' trên menuToggle để thay đổi màu biểu tượng
+      menuToggle.classList.toggle('nav-open');
+      // Chuyển đổi lớp 'rotated' để thêm hiệu ứng xoay
+      menuToggle.classList.toggle('rotated');
+
+      // Nếu nav đóng, đánh giá lại vị trí cuộn để thay đổi màu
+      if (!nav.classList.contains('open')) {
+        updateMenuToggleColor(); // Gọi hàm để đặt màu dựa trên cuộn
+      }
     });
   }
 
-  // Back to Top & Go to Bottom Buttons
-    const backToTopBtn = document.getElementById('back-to-top');
-    const goToBottomBtn = document.getElementById('go-to-bottom');
+  // Nút Lên đầu trang & Xuống cuối trang
+  const backToTopBtn = document.getElementById('back-to-top');
+  const goToBottomBtn = document.getElementById('go-to-bottom');
 
-    window.addEventListener('scroll', () => {
+  function updateMenuToggleColor() {
+    const scrollY = window.scrollY;
+    const scrollThreshold = 200; // Điều chỉnh giá trị này nếu cần
+
+    // Nếu nav đang mở, biểu tượng luôn có màu trắng và xoay
+    if (nav.classList.contains('open')) {
+      menuToggle.classList.add('nav-open');
+      menuToggle.classList.remove('scrolled');
+      menuToggle.classList.add('rotated'); // Giữ xoay khi nav mở
+      return;
+    }
+
+    // Nếu nav đóng, áp dụng màu dựa trên vị trí cuộn và loại bỏ xoay
+    if (scrollY > scrollThreshold) {
+      menuToggle.classList.add('scrolled'); // Chuyển sang màu đen
+      menuToggle.classList.remove('nav-open');
+    } else {
+      menuToggle.classList.remove('scrolled'); // Chuyển sang màu trắng
+      menuToggle.classList.remove('nav-open');
+    }
+    menuToggle.classList.remove('rotated'); // Loại bỏ xoay khi nav đóng
+  }
+
+  window.addEventListener('scroll', updateMenuToggleColor);
+  window.addEventListener('resize', updateMenuToggleColor);
+  // Kiểm tra ban đầu khi tải trang
+  updateMenuToggleColor();
+
+  window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
     const docHeight = document.body.scrollHeight;
 
     // Hiện nút lên đầu khi cuộn xuống
     if (scrollY > 300) {
-        backToTopBtn.classList.add('show');
+      backToTopBtn.classList.add('show');
     } else {
-        backToTopBtn.classList.remove('show');
-        }
+      backToTopBtn.classList.remove('show');
+    }
 
     // Ẩn nút xuống nếu gần cuối trang
     if (scrollY + windowHeight >= docHeight - 100) {
-        goToBottomBtn.style.display = 'none';
-        } else {
-        goToBottomBtn.style.display = 'block';
+      goToBottomBtn.style.display = 'none';
+    } else {
+      goToBottomBtn.style.display = 'block';
     }
-    });
+  });
 
-    backToTopBtn.addEventListener('click', () => {
+  backToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  });
 
-    goToBottomBtn.addEventListener('click', () => {
+  goToBottomBtn.addEventListener('click', () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-});
+  });
 });

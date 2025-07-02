@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Cá Nhân</title>
-    <link rel="stylesheet" href="css/profile.css">
+    <title>Profile Cá Nhân - Phạm Viết Tiến</title>
     <link rel="stylesheet" href="css/code_navbar.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <!-- Font Awesome for menu icon -->
+    <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <header>
-        <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
-            <p>Profile của tôi</p>
-        <!-- Font Awesome for menu icon (replace with Lucide React or SVG if using React) -->
+        <a href="index.html"><img src="img/logo.png" alt="Logo" class="lift-on-hover"></a>
+        <p>Profile của tôi</p>
         <button aria-label="Menu" class="menu-toggle">
-            <i class="fa-solid fa-bars fa-beat-fade fa-2xl" style="color: #ffffff;"></i>
+            <i class="fa-solid fa-bars fa-2xl"></i>
         </button>
     </header>
 
@@ -25,149 +26,256 @@
             <li><a href="designer.html">Design</a></li>
             <li><a href="scores.html">Điểm Số</a></li>
             <li><a href="drawings.html">Ảnh Sưu Tầm</a></li>
-
+            <li><a href="/blog/blog.html">Blog</a></li>
             <li>
-            <div class="dropdown">
-                <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
+                <div class="dropdown">
+                    <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
                     <ul class="dropdown-menu">
-                    <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
-                    <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>
+                        <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
+                        <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>
                     </ul>
-            </div>
+                </div>
             </li>
             <li>
-            <div class="dropdown">
-                <button class="dropdown-toggle">Code Website <span class="arrow">&#9662;</span></button>
+                <div class="dropdown">
+                    <button class="dropdown-toggle">Code Website <span class="arrow">&#9662;</span></button>
                     <ul class="dropdown-menu">
                         <li><a href="jalan/View.html">View</a></li>
                         <li><a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html">web học tại lớp</a></li>
                         <li><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html">web kết thúc môn học</a></li>
                     </ul>
-            </div>
+                </div>
             </li>
         </ul>
     </nav>
 
     <div id="page-content">
         <main>
-            <section id="personal-profile" class="fade-in-element">
+            <!-- Phần thông tin cá nhân -->
+            <section id="personal-info" class="fade-in-element section-card">
                 <h2>Thông Tin Cá Nhân</h2>
-                <p class="animated-text">Đây là nơi bạn có thể tìm hiểu chi tiết hơn về tôi.</p>
-                <p><strong>Họ và Tên:</strong> Phạm Viết Tiến</p>
-                <p><strong>Ngày sinh:</strong> 21/7/2008</p>
-                <p><strong>Nghề nghiệp:</strong> Thiết Kế Đồ Họa(Designer)</p>
-                <p><strong>Sở thích:</strong> Thích vẽ tranh, thiết kế, tìm tòi học cái mới
-                    <img src="https://png.pngtree.com/png-vector/20220530/ourmid/pngtree-closeup-kid-hand-holding-a-paintbrush-png-image_4762838.png" alt="Sở thích" class="hover-zoom" style="width: 10%; margin: -40px 0px -30px 10px;">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Họ và Tên:</strong> Phạm Viết Tiến
+                    </div>
+                    <div class="info-item">
+                        <strong>Ngày sinh:</strong> 21/7/2008
+                    </div>
+                    <div class="info-item">
+                        <strong>Nghề nghiệp:</strong> Thiết Kế Đồ Họa (Designer)
+                    </div>
+                    <div class="info-item">
+                        <strong>Sở thích:</strong> Thích vẽ tranh, thiết kế, tìm tòi học cái mới
+                    </div>
+                </div>
+                <p class="animated-text intro-text">
+                    Chào mừng bạn đến với trang Profile cá nhân của tôi!
+                    Tôi là một Designer trẻ đầy nhiệt huyết, luôn tìm tòi và khám phá những ý tưởng mới để tạo ra các sản phẩm đồ họa độc đáo và ấn tượng.
+                    Hãy cùng tôi khám phá những kỹ năng, kinh nghiệm và hành trình sáng tạo của tôi nhé.
                 </p>
-                <p><strong>Kỹ năng:</strong></p>
-                <ul class="Skill_on_app">
+            </section>
+
+            <!-- Phần kỹ năng chuyên môn -->
+            <section id="skills" class="fade-in-element section-card">
+                <h2>Kỹ Năng Chuyên Môn</h2>
+                <p class="animated-text section-intro-text">
+                    Dưới đây là các công cụ và kỹ năng mà tôi đã tích lũy trong quá trình học tập và làm việc.
+                    Tôi không ngừng học hỏi và cải thiện để mang đến những thiết kế tốt nhất.
+                </p>
+
+                <h3>Phần Mềm Thiết Kế Đồ Họa & Biên Tập</h3>
+                <ul class="skills-grid">
                     <li>
                         <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop">
-                            <span>Adobe Photoshop (PS)</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop">
+                            <span class="skill-name">Adobe Photoshop (PS)</span>
+                            <div class="skill-level" data-level="90%">Thành thạo</div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png" alt="Illustrator">
-                            <span>Adobe Illustrator (Ai)</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png" alt="Adobe Illustrator">
+                            <span class="skill-name">Adobe Illustrator (Ai)</span>
+                            <div class="skill-level" data-level="85%">Thành thạo</div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="Premiere">
-                            <span>Adobe Premiere (Pr)</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/2101px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="Adobe Premiere Pro">
+                            <span class="skill-name">Adobe Premiere (Pr)</span>
+                            <div class="skill-level" data-level="75%">Khá</div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/2101px-Adobe_After_Effects_CC_icon.svg.png" alt="After Effect">
-                            <span>Adobe After Effect (Ae)</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/2101px-Adobe_After_Effects_CC_icon.svg.png" alt="Adobe After Effects">
+                            <span class="skill-name">Adobe After Effect (Ae)</span>
+                            <div class="skill-level" data-level="70%">Khá</div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Adobe_Animate_CC_icon_%282020%29.svg/2097px-Adobe_Animate_CC_icon_%282020%29.svg.png" alt="Animate">
-                            <span>Adobe Animation (An)</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Adobe_Animate_CC_icon_%282020%29.svg/2097px-Adobe_Animate_CC_icon_%282020%29.svg.png" alt="Adobe Animate">
+                            <span class="skill-name">Adobe Animate (An)</span>
+                            <div class="skill-level" data-level="60%">Cơ bản</div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-item">
-                            <img src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" alt="Coreldraw">
-                            <span>CorelDRAW graphics suite (CR)</span>
+                            <img src="https://images.seeklogo.com/logo-png/50/1/coreldraw-logo-png_seeklogo-500400.png" alt="CorelDRAW Graphics Suite">
+                            <span class="skill-name">CorelDRAW (CR)</span>
+                            <div class="skill-level" data-level="80%">Thành thạo</div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1200px-Visual_Studio_Code_1.35_icon.svg.png" alt="visual Visual_Studio_Code_1.35_icon">
-                            <span>Visual Studio Code (Vsc)</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt="Adobe InDesign">
+                            <span class="skill-name">Adobe InDesign (Id)</span>
+                            <div class="skill-level" data-level="65%">Cơ bản</div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/1200px-Adobe_InDesign_CC_icon.svg.png" alt="phone-icon-design_23-2151311652">
-                            <span>Adobe Indesign (Id)</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Adobe_Audition_CC_icon_%282020%29.svg/500px-Adobe_Audition_CC_icon_%282020%29.svg.png" alt="Adobe Audition">
+                            <span class="skill-name">Adobe Audition (Au)</span>
+                            <div class="skill-level" data-level="55%">Cơ bản</div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Adobe_Dreamweaver_CC_icon.svg/1200px-Adobe_Dreamweaver_CC_icon.svg.png" alt="Adobe_Dreamweaver_CC_icon">
-                            <span>Adobe Dereamweaver (Dw)</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Adobe_Audition_CC_icon_%282020%29.svg/500px-Adobe_Audition_CC_icon_%282020%29.svg.png" alt="Adobe_Audition_CC_icon_%282020%29">
-                            <span>Adobe Audition (Au)</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="skill-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png" alt="C++">
-                            <span>C++ (cơ bản)</span>
-                        </div>
-                    </li>
-                </ul>
-                <h3 style="margin-top: 40px;">Kinh nghiệm làm việc( chưa có )</h3>
-                <ul>
-                    <li><strong>[Vị trí], [Công ty]</strong> - [Thời gian]
-                        <p class="animated-text">Mô tả công việc và thành tựu.</p>
-                    </li>
-                    <li><strong>[Vị trí khác], [Công ty khác]</strong> - [Thời gian]
-                        <p class="animated-text">Mô tả công việc và thành tựu khác.</p>
                     </li>
                 </ul>
 
-                <h3>Giáo dục</h3>
-                <ul>
+                <h3 style="margin-top: 70px;">Kỹ Năng Lập Trình & Công Cụ Khác</h3>
+                <ul class="skills-grid">
                     <li>
-                        <div class="contact-item">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnCQ5xEeGFbsCdiBm0FJ2q8sJ2TAsKmysyTg&s" alt="Trường học">
-                            <div>
-                                <span>- Thời gian: 2023-2026</span>
-                                <p class="animated-text">Chuyên ngành: Thiết kế đồ họa</p>
-                            </div>
+                        <div class="skill-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/1200px-Visual_Studio_Code_1.35_icon.svg.png" alt="Visual Studio Code">
+                            <span class="skill-name">Visual Studio Code (VSC)</span>
+                            <div class="skill-level" data-level="70%">Html, css, js (cơ bản)</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Adobe_Dreamweaver_CC_icon.svg/1200px-Adobe_Dreamweaver_CC_icon.svg.png" alt="Adobe Dreamweaver">
+                            <span class="skill-name">Adobe Dreamweaver (Dw)</span>
+                            <div class="skill-level" data-level="60%">Html, css, js (cơ bản)</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png" alt="C++ Language">
+                            <span class="skill-name">C++ (Cơ bản)</span>
+                            <div class="skill-level" data-level="40%">Sơ cấp</div>
+                        </div>
+                    </li>
+                </ul>
+
+                <h3 style="margin-top: 70px;">Kỹ Năng Mềm</h3>
+                <ul class="skills-grid soft-skills-grid">
+                    <li>
+                        <div class="skill-item">
+                            <i class="fa-solid fa-lightbulb skill-icon"></i>
+                            <span class="skill-name">Tư duy sáng tạo</span>
+                            <div class="skill-level" data-level="95%">Rất tốt</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-item">
+                            <i class="fa-solid fa-puzzle-piece skill-icon"></i>
+                            <span class="skill-name">Giải quyết vấn đề</span>
+                            <div class="skill-level" data-level="80%">Tốt</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-item">
+                            <i class="fa-solid fa-people-group skill-icon"></i>
+                            <span class="skill-name">Làm việc nhóm</span>
+                            <div class="skill-level" data-level="85%">Rất tốt</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-item">
+                            <i class="fa-solid fa-comments skill-icon"></i>
+                            <span class="skill-name">Giao tiếp</span>
+                            <div class="skill-level" data-level="75%">Tốt</div>
                         </div>
                     </li>
                 </ul>
             </section>
 
-            <section id="contact" class="fade-in-element">
-                <h2>Liên hệ</h2>
-                <p class="animated-text">Thông tin liên hệ của tôi.</p>
-                <div class="contact-icons">
+            <!-- Phần kinh nghiệm làm việc -->
+            <section id="experience" class="fade-in-element section-card">
+                <h2>Kinh Nghiệm Làm Việc</h2>
+                <p class="animated-text section-intro-text">
+                    Dù còn trẻ, tôi đã tích cực tìm kiếm và tham gia vào các dự án thực tế để trau dồi kinh nghiệm.
+                </p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>[Vị trí Freelancer/Dự án cá nhân] | [Tên Khách hàng/Tên dự án]</h3>
+                            <span class="timeline-date">Tháng X/20XX - Hiện tại</span>
+                            <ul>
+                                <li>Thiết kế logo, bộ nhận diện thương hiệu cho [Khách hàng A] và [Khách hàng B].</li>
+                                <li>Hỗ trợ thiết kế banner, ấn phẩm truyền thông cho các chiến dịch online.</li>
+                                <li>Phát triển ý tưởng và thực hiện các sản phẩm đồ họa theo yêu cầu.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>[Vị trí tình nguyện/Hỗ trợ thiết kế] | [Tổ chức/Sự kiện]</h3>
+                            <span class="timeline-date">Tháng Y/20XX - Tháng Z/20XX</span>
+                            <ul>
+                                <li>Thiết kế poster, backdrop cho các sự kiện của trường/cộng đồng.</li>
+                                <li>Đóng góp ý tưởng và thực hiện các infographic cho các dự án phi lợi nhuận.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Thêm các mục kinh nghiệm khác vào đây -->
+                </div>
+            </section>
+
+            <!-- Phần giáo dục -->
+            <section id="education" class="fade-in-element section-card">
+                <h2>Giáo Dục</h2>
+                <p class="animated-text section-intro-text">
+                    Hành trình học tập của tôi là nền tảng vững chắc cho sự nghiệp thiết kế.
+                </p>
+                <div class="education-item">
+                    <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="edu-details">
+                        <h3>[Tên Ngành học/Khóa học] | [Tên Trường/Trung tâm]</h3>
+                        <span class="edu-date">2023 - 2026 (Dự kiến tốt nghiệp)</span>
+                        <p><strong>Chuyên ngành:</strong> Thiết kế đồ họa</p>
+                        <p class="animated-text">
+                            Được trang bị kiến thức vững chắc về nguyên lý thiết kế, sử dụng thành thạo các phần mềm chuyên nghiệp
+                            và phát triển tư duy sáng tạo trong nhiều lĩnh vực như thiết kế in ấn, web, và đa phương tiện.
+                        </p>
+                    </div>
+                </div>
+                <!-- Thêm các bằng cấp/khóa học khác vào đây -->
+            </section>
+
+            <!-- Phần liên hệ -->
+            <section id="contact" class="fade-in-element section-card">
+                <h2>Liên Hệ</h2>
+                <p class="animated-text section-intro-text">
+                    Nếu bạn có bất kỳ câu hỏi nào hoặc muốn hợp tác, đừng ngần ngại liên hệ với tôi!
+                </p>
+                <div class="contact-icons-grid">
                     <div class="contact-item">
-                        <img src="https://img.freepik.com/free-psd/phone-icon-design_23-2151311652.jpg?semt=ais_hybrid&w=740" alt="Email">
-                        <a href="mailto:tiendepzai0908@gmail.com">tiendepzai0908@gmail.com</a>
+                        <img src="https://img.freepik.com/free-psd/phone-icon-design_23-2151311652.jpg?semt=ais_hybrid&w=740" alt="Email icon">
+                        <a href="mailto:tiendepzai0908@gmail.com" class="lift-on-hover">tiendepzai0908@gmail.com</a>
                     </div>
                     <div class="contact-item">
-                        <img src="https://img.freepik.com/premium-vector/black-phone-with-black-phone-it_755034-816.jpg?semt=ais_hybrid" alt="Phone">
-                        <span>0329240391</span>
+                        <img src="https://img.freepik.com/premium-vector/black-phone-with-black-phone-it_755034-816.jpg?semt=ais_hybrid" alt="Phone icon">
+                        <span class="lift-on-hover">0329240391</span>
                     </div>
                     <div class="contact-item">
-                        <img src="https://img.freepik.com/premium-vector/facebook-color-icons_1209566-7.jpg?semt=ais_hybrid&w=740" alt="Facebook">
-                        <a href="https://www.facebook.com/hai.trinhthi.3110">Tien Tntq</a>
+                        <img src="https://img.freepik.com/premium-vector/facebook-color-icons_1209566-7.jpg?semt=ais_hybrid&w=740" alt="Facebook icon">
+                        <a href="https://www.facebook.com/hai.trinhthi.3110" target="_blank" class="lift-on-hover">Tien Tntq (Facebook)</a>
                     </div>
+                    <!-- Thêm liên kết LinkedIn, Behance, Dribbble nếu có -->
                 </div>
             </section>
         </main>
@@ -176,7 +284,9 @@
     <footer>
         <p>&copy; 2025 Phạm Viết Tiến. Mọi quyền được bảo lưu.</p>
         <div class="social-links">
-            <a href="https://www.facebook.com/hai.trinhthi.3110" class="lift-on-hover">Facebook</a> | <a href="https://zalo.me/0329240391" class="lift-on-hover">zalo</a> | <a href="mailto:tiendepzai0908@gmail.com" class="lift-on-hover">Mail</a>
+            <a href="https://www.facebook.com/hai.trinhthi.3110" target="_blank" class="lift-on-hover">Facebook</a> |
+            <a href="https://zalo.me/0329240391" target="_blank" class="lift-on-hover">Zalo</a> |
+            <a href="mailto:tiendepzai0908@gmail.com" class="lift-on-hover">Mail</a>
         </div>
     </footer>
 
@@ -196,264 +306,12 @@
         </div>
     </div>
 
-    <!-- Các script được tải sau khi các phần tử HTML đã được định nghĩa -->
-    <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
-    <!-- Inlining custom scripts -->
-    <script>
-        // Script for smooth page transitions on navigation links
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // If it's an external link, ignore
-                if (this.target === '_blank' || this.href.startsWith('http')) return;
-                e.preventDefault();
-                const pageContent = document.getElementById('page-content');
-                if (pageContent) {
-                    pageContent.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location = this.href;
-                    }, 400); // Match with CSS transition time
-                } else {
-                    window.location = this.href;
-                }
-            });
-        });
-        window.addEventListener('DOMContentLoaded', function() {
-            const pageContent = document.getElementById('page-content');
-            if (pageContent) pageContent.classList.add('fade-in');
-        });
-
-        // --- Inlining profile_animation.js content here ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Listen for the DOM to be fully loaded
-
-            // --- Animation on Scroll (Fade-in) ---
-
-            // Get all elements with the 'fade-in-element' class
-            const fadeInElements = document.querySelectorAll('.fade-in-element');
-
-            // Create an Intersection Observer
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    // If the element is currently in the viewport
-                    if (entry.isIntersecting) {
-                        // Add the 'is-visible' class to trigger CSS animations
-                        entry.target.classList.add('is-visible');
-                        // Stop observing the element after it has become visible
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                // Observer configuration
-                threshold: 0.1 // Trigger when 10% of the element is in the viewport
-            });
-
-            // Start observing each element that needs the fade-in effect
-            fadeInElements.forEach(element => {
-                observer.observe(element);
-            });
-
-            // Note: The gentle text movement effect (.animated-text) is handled entirely by CSS animation (@keyframes)
-            // and does not require JavaScript to be triggered based on scrolling in this example.
-
-
-            // Function to reveal elements on scroll for skill and contact items
-            function revealOnScroll() {
-                document.querySelectorAll('.skill-item img, .contact-item img').forEach(img => {
-                    const rect = img.getBoundingClientRect();
-                    if (rect.top < window.innerHeight - 40) {
-                        img.classList.add('visible');
-                    }
-                });
-            }
-            window.addEventListener('scroll', revealOnScroll);
-            window.addEventListener('DOMContentLoaded', revealOnScroll);
-
-            // Back to Top & Go to Bottom Buttons
-            const backToTopBtn = document.getElementById('back-to-top');
-            const goToBottomBtn = document.getElementById('go-to-bottom');
-
-            if (backToTopBtn && goToBottomBtn) { // Ensure buttons exist
-                window.addEventListener('scroll', () => {
-                    const scrollY = window.scrollY;
-                    const windowHeight = window.innerHeight;
-                    const docHeight = document.body.scrollHeight;
-
-                    // Show back to top button when scrolled down
-                    if (scrollY > 300) {
-                        backToTopBtn.classList.add('show');
-                    } else {
-                        backToTopBtn.classList.remove('show');
-                    }
-
-                    // Hide go to bottom button if near the end of the page
-                    if (scrollY + windowHeight >= docHeight - 100) {
-                        goToBottomBtn.style.display = 'none';
-                    } else {
-                        goToBottomBtn.style.display = 'block';
-                    }
-                });
-
-                backToTopBtn.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-
-                goToBottomBtn.addEventListener('click', () => {
-                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-                });
-            } else {
-                console.warn('Cảnh báo: Không tìm thấy nút "Lên đầu trang" hoặc "Xuống cuối trang".');
-            }
-
-
-            // --- Modal for advanced view on Profile page ---
-            const welcomeModal = document.getElementById('welcome-modal');
-            const closeButton = welcomeModal ? welcomeModal.querySelector('.close-button') : null;
-            const enableAdvancedViewButton = document.getElementById('enable-advanced-view');
-            const laterAdvancedViewButton = document.getElementById('later-advanced-view');
-            const toggleAdvancedViewButton = document.getElementById('enable-advanced-view-button'); // The new button
-
-            console.log('DOMContentLoaded fired in profile_animation.js (inlined)');
-            console.log('toggleAdvancedViewButton found:', !!toggleAdvancedViewButton); // Check if the button element is found
-            console.log('welcomeModal found:', !!welcomeModal); // Check if the modal element is found
-
-            // Check sessionStorage to see if the modal has been shown in this session
-            const hasShownWelcomeModal = sessionStorage.getItem('hasShownWelcomeModal_profile');
-            console.log('Trạng thái hasShownWelcomeModal_profile:', hasShownWelcomeModal);
-
-            // Initial display of the modal if not shown before (on page load)
-            // Removed automatic display on load as per original logic, only show on button click
-            if (welcomeModal && !hasShownWelcomeModal) {
-                console.log('Modal thông báo không hiển thị tự động khi tải trang.');
-            } else {
-                console.log('Modal thông báo không hiển thị (đã hiển thị trước đó hoặc không tìm thấy welcomeModal).');
-            }
-
-            // Attach event for the new toggle button
-            if (toggleAdvancedViewButton) {
-                toggleAdvancedViewButton.addEventListener('click', () => {
-                    console.log('enable-advanced-view-button clicked!'); // <-- Add this log
-                    if (welcomeModal) {
-                        welcomeModal.classList.add('active'); // Show modal when button is clicked
-                        document.body.style.overflow = 'hidden'; // Prevent main page scrolling
-                        console.log('Nút "Chuyển chế độ xem nâng cao" đã được click. Modal đã hiển thị.');
-                    } else {
-                        console.error('Lỗi: Không tìm thấy welcomeModal khi nút "Chuyển chế độ xem nâng cao" được nhấn.');
-                    }
-                });
-            } else {
-                console.error('Lỗi: Không tìm thấy nút "enable-advanced-view-button".');
-            }
-
-            // Gắn sự kiện cho nút đóng modal
-            if (closeButton) {
-                closeButton.addEventListener('click', () => {
-                    console.log('Close button clicked.');
-                    if (welcomeModal) {
-                        welcomeModal.classList.remove('active');
-                        document.body.style.overflow = ''; // Cho phép cuộn lại
-                        sessionStorage.setItem('hasShownWelcomeModal_profile', 'true'); // Đánh dấu đã hiển thị
-                        console.log('Nút đóng modal đã được click. hasShownWelcomeModal_profile set true.');
-                    }
-                });
-            } else {
-                console.warn('Cảnh báo: Không tìm thấy nút đóng modal.');
-            }
-
-            // Gắn sự kiện cho nút "Đồng ý"
-            if (enableAdvancedViewButton) {
-                enableAdvancedViewButton.addEventListener('click', () => {
-                    console.log('"Đồng ý" button clicked.');
-                    if (welcomeModal) {
-                        welcomeModal.classList.remove('active');
-                        document.body.style.overflow = ''; // Cho phép cuộn lại
-                        sessionStorage.setItem('hasShownWelcomeModal_profile', 'true'); // Đánh dấu đã hiển thị
-                        console.log('Nút "Đồng ý" đã được click. Chuyển hướng đến portfolio.html.');
-                        // Chuyển hướng đến trang portfolio.html
-                        window.location.href = 'portfolio.html';
-                    }
-                });
-            } else {
-                console.warn('Cảnh báo: Không tìm thấy nút "Đồng ý".');
-            }
-
-            // Gắn sự kiện cho nút "Không phải bây giờ"
-            if (laterAdvancedViewButton) {
-                laterAdvancedViewButton.addEventListener('click', () => {
-                    console.log('"Không phải bây giờ" button clicked.');
-                    if (welcomeModal) {
-                        welcomeModal.classList.remove('active');
-                        document.body.style.overflow = ''; // Cho phép cuộn lại
-                        sessionStorage.setItem('hasShownWelcomeModal_profile', 'true'); // Đánh dấu đã hiển thị
-                        console.log('Nút "Không phải bây giờ" đã được click. hasShownWelcomeModal_profile set true.');
-                    }
-                });
-            } else {
-                console.warn('Cảnh báo: Không tìm thấy nút "Không phải bây giờ".');
-            }
-
-            // Đóng modal khi click ra ngoài nội dung modal
-            if (welcomeModal) {
-                welcomeModal.addEventListener('click', (e) => {
-                    if (e.target === welcomeModal) {
-                        console.log('Click ngoài modal.');
-                        welcomeModal.classList.remove('active');
-                        document.body.style.overflow = ''; // Cho phép cuộn lại
-                        sessionStorage.setItem('hasShownWelcomeModal_profile', 'true'); // Đánh dấu đã hiển thị
-                        console.log('Click ngoài modal. hasShownWelcomeModal_profile set true.');
-                    }
-                });
-            }
-        });
-        // --- End of inlined profile_animation.js content ---
-
-        // Basic script for dropdown menu (if 'js-code-navbar.js' was used)
-        document.addEventListener('DOMContentLoaded', () => {
-            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-            dropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const dropdownMenu = this.nextElementSibling;
-                    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-                        // Toggle the 'open' class for dropdown sub-menus
-                        dropdownMenu.classList.toggle('open'); // Đảm bảo khớp với CSS nếu có .dropdown-menu.open
-                    }
-                });
-            });
-
-            // Close dropdowns when clicking outside
-            window.addEventListener('click', function(event) {
-                if (!event.target.matches('.dropdown-toggle')) {
-                    const dropdowns = document.querySelectorAll('.dropdown-menu');
-                    dropdowns.forEach(openDropdown => {
-                        // Close dropdowns by removing the 'open' class
-                        if (openDropdown.classList.contains('open')) { // Đã thay đổi từ 'active' thành 'open' ở đây
-                            openDropdown.classList.remove('open');
-                        }
-                    });
-                }
-            });
-
-            // Toggle for mobile menu
-            const menuToggle = document.querySelector('.menu-toggle');
-            const mainNav = document.querySelector('.main-nav');
-
-            if (menuToggle && mainNav) {
-                menuToggle.addEventListener('click', () => {
-                    // Correctly toggle the 'open' class for the main navigation
-                    mainNav.classList.toggle('open');
-                });
-            }
-        });
-
-        // Placeholder for next_tab.js (if it contains actual JS logic, it should be inlined here)
-        // For demonstration, assuming next_tab.js might handle some navigation logic.
-        // If it was empty or contained simple logic, it would be included like this.
-    </script>
-
-    <!-- Nút đi lên -->
+    <!-- Nút đi lên/xuống -->
     <button id="back-to-top" title="Lên đầu trang">&#8679;</button>
-
-    <!-- Nút đi xuống -->
     <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
 
+    <!-- External JavaScript file -->
+    <script src="js/js-code-navbar.js"></script>
+    <script src="js/profile_animation.js"></script>
 </body>
 </html>

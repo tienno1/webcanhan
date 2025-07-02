@@ -65,24 +65,43 @@ header a img {
     padding: 10px;
 }
 
-/* Navigation */
+/* Kiểu cho thanh điều hướng (Navigation) */
 nav {
-    background-color: #444;
-    padding: 0.8rem 0;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    background-color: #444; /* Slightly darker background than header */
+    padding: 0.8rem 0; /* Top and bottom padding */
+    text-align: center; /* Center content */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add a subtle shadow */
+    /* Các thuộc tính dính sẽ được thêm bằng JavaScript thông qua class .sticky-nav */
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* Thêm transition cho độ trong suốt */
 }
+
+/* Class mới cho thanh nav dính */
+.sticky-nav {
+    position: fixed; /* Giữ thanh nav ở vị trí cố định */
+    top: 0; /* Đặt thanh nav ở trên cùng */
+    width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+    z-index: 1000; /* Đảm bảo thanh nav nằm trên các nội dung khác */
+    background-color: rgba(68, 68, 68, 0.8); /* Màu nền khi dính với độ trong suốt 80% */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Đổ bóng khi dính */
+    box-sizing: border-box; /* Đảm bảo padding và border không làm tăng kích thước tổng thể */
+}
+
+
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    list-style: none; /* Remove list bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for horizontal items */
+    justify-content: center; /* Center the items */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 }
+
 nav ul li {
-    margin: 0 15px;
+    margin: 0 15px ; /* Space between list items */
+    /* Đảm bảo chiều rộng nội dung tự co giãn */
+    flex-shrink: 0; /* Ngăn không cho các mục co lại */
 }
+
 nav ul li a {
     position: relative;
     color: #fff; /* Mặc định màu chữ */
@@ -92,6 +111,9 @@ nav ul li a {
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow: hidden;
+    /* Điều chỉnh padding để chiều rộng khung nhỏ lại */
+    padding: 8px 15px; /* Giảm padding ngang một chút để khung nhỏ hơn */
+    white-space: nowrap; /* Ngăn không cho chữ xuống dòng trong nav item */
 }
 
 /* Viền chạy hiệu ứng dưới chữ */
@@ -111,7 +133,7 @@ nav ul li a::after {
 /* Hover + Active: nền sáng hơn nav, chữ vẫn trắng */
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: #666; /* Màu sáng hơn nav */
+    background-color: #8b8b8b82; /* Màu sáng hơn nav */
     color: #ffbb87;          /* Màu chữ sáng nhẹ, không quá trắng */
 }
 
@@ -120,6 +142,7 @@ nav ul li a.active::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+
 
 /* Main content & TOC container */
 .content-container {
@@ -258,19 +281,21 @@ main h2::after {
 
 /* Footer */
 footer {
+    margin-bottom: -23px;
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 1rem 0;
 }
 footer .social-links a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-    transition: color 0.3s ease;
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    margin: 0 10px; /* Space between social links */
+    transition-duration: 0.8s ease; /* Smooth color transition on hover */
 }
+
 footer .social-links a:hover {
-    color: #007bff;
+    color: #ff6600; /* Change color on hover */
 }
 
 /* Drawing sections */
@@ -423,9 +448,8 @@ footer .social-links a:hover {
 /* --- Pagination Styles --- */
 .pagination-container {
     text-align: center; /* Center the pagination buttons */
-    padding: 10px 0; /* Add padding */
-    background-color: #fff; /* White background */
-    border-top: 1px solid #ddd; /* Top border */
+    padding: 5px 0; /* Add padding */
+    background-color: #ffffffb7; /* White background */
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Shadow above */
 
     /* Make the pagination bar fixed at the bottom */
@@ -567,6 +591,18 @@ nav.main-nav ul li a { display: block; padding: 10px; }
 }
 
 @media (min-width: 768px) {
+    
+    nav.main-nav ul li a {
+        display: block;       /* ✅ Fix: block để dễ click */
+        padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Revert content container layout for larger screens */
     .content-container {
         flex-direction: row-reverse;
         margin: 20px auto;
@@ -770,7 +806,7 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
+    align-items: center;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -917,31 +953,6 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     .toc-wrapper {
         display: none !important;
     }
-}
-
-
-.menu-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: none;
-  flex-direction: column;
-  gap: 15px;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  z-index: 1001;
-}
-
-.fa-solid{
-    margin-top: 10px;
-    width: 20px;
-    height: 20px;
-  color: #ffffff;
-}
-
-.fa-bars {
-  width: 20px;
 }
 
 #back-to-top,

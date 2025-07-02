@@ -620,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // You will need to add a button next to each image (or where appropriate in your HTML)
     // with a class like 'open-info-modal-btn' and a data-attribute like data-image-id="[image_id]"
     // Example HTML for the button:
-    // <button class="open-info-modal-btn" data-image-id="image-1">Xem thông tin</button>
+    // <button class="open-info-modal-btn" data-image-id="[image_id]">Xem thông tin</button>
 
     document.querySelectorAll('.open-info-modal-btn').forEach(button => {
         button.addEventListener('click', function() {
@@ -692,4 +692,59 @@ document.addEventListener('DOMContentLoaded', () => {
     goToBottomBtn.addEventListener('click', () => {
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     });
+
+    // JavaScript for sticky navigation bar
+    const nav = document.querySelector('.main-nav');
+    const header = document.querySelector('header');
+    let stickyOffset = 0; // Khởi tạo stickyOffset
+
+    // Hàm để cập nhật stickyOffset
+    const updateStickyOffset = () => {
+        // Đảm bảo header đã được render và có offsetHeight
+        if (header) {
+            stickyOffset = header.offsetHeight; // Lấy chiều cao của header
+        } else if (nav) { // Nếu không có header, lấy vị trí ban đầu của nav
+            stickyOffset = nav.offsetTop;
+        }
+    };
+
+    // Gọi lần đầu khi DOM đã tải xong
+    updateStickyOffset();
+
+    // Cập nhật stickyOffset khi cửa sổ thay đổi kích thước (ví dụ: xoay màn hình mobile)
+    window.addEventListener('resize', updateStickyOffset);
+
+    window.addEventListener('scroll', () => {
+        if (nav) { // Đảm bảo nav tồn tại
+            if (window.innerWidth >= 768) { // Chỉ áp dụng sticky cho desktop (màn hình >= 768px)
+                if (window.pageYOffset > stickyOffset) {
+                    nav.classList.add('sticky-nav');
+                    // Thêm padding-top vào body để nội dung không bị ẩn bởi nav cố định
+                    document.body.style.paddingTop = nav.offsetHeight + 'px';
+                } else {
+                    nav.classList.remove('sticky-nav');
+                    // Xóa padding-top khi nav không còn dính
+                    document.body.style.paddingTop = '0';
+                }
+            } else { // Đối với mobile (màn hình < 768px)
+                // Trên mobile, loại bỏ hoàn toàn tính năng sticky và hiệu ứng trong suốt khi cuộn.
+                // Thanh nav sẽ luôn giữ nguyên trạng thái mặc định của nó.
+                nav.classList.remove('sticky-nav'); 
+                document.body.style.paddingTop = '0'; 
+            }
+        }
+    });
+
+    // NEW: Close mobile nav when clicking outside
+    const menuToggle = document.querySelector('.menu-toggle'); // Nút 3 gạch
+    // nav đã được khai báo ở trên
+    if (nav && menuToggle) {
+        document.addEventListener('click', (event) => {
+            // Kiểm tra nếu nav đang mở và click không phải trên nav hoặc nút toggle
+            if (nav.classList.contains('open') && !nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                nav.classList.remove('open'); // Đóng nav
+                document.body.classList.remove('toc-open'); // Thêm dòng này để loại bỏ overflow: hidden
+            }
+        });
+    }
 });
