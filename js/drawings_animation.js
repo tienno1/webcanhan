@@ -721,20 +721,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     nav.classList.add('sticky-nav');
                     // Thêm padding-top vào body để nội dung không bị ẩn bởi nav cố định
                     document.body.style.paddingTop = nav.offsetHeight + 'px';
+                    // Cập nhật lại --nav-height khi nav dính (nếu có thay đổi chiều cao)
+                    document.documentElement.style.setProperty('--nav-height', `${nav.offsetHeight}px`);
                 } else {
                     nav.classList.remove('sticky-nav');
                     // Xóa padding-top khi nav không còn dính
                     document.body.style.paddingTop = '0';
+                    // Đặt lại --nav-height về 0 hoặc chiều cao ban đầu của nav
+                    document.documentElement.style.setProperty('--nav-height', `0px`); // Hoặc `nav.offsetHeight` nếu bạn muốn nó luôn có giá trị
                 }
             } else { // Đối với mobile (màn hình < 768px)
-                // Trên mobile, loại bỏ hoàn toàn tính năng sticky và hiệu ứng trong suốt khi cuộn.
-                // Thanh nav sẽ luôn giữ nguyên trạng thái mặc định của nó.
-                nav.classList.remove('sticky-nav'); 
-                document.body.style.paddingTop = '0'; 
+                nav.classList.remove('sticky-nav'); // Đảm bảo không có class sticky-nav trên mobile
+                document.body.style.paddingTop = '0'; // Đảm bảo không có padding-top
+                document.documentElement.style.setProperty('--nav-height', `0px`); // Trên mobile, nav không sticky nên set về 0
             }
         }
     });
-
+    
     // NEW: Close mobile nav when clicking outside
     const menuToggle = document.querySelector('.menu-toggle'); // Nút 3 gạch
     // nav đã được khai báo ở trên
@@ -743,7 +746,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Kiểm tra nếu nav đang mở và click không phải trên nav hoặc nút toggle
             if (nav.classList.contains('open') && !nav.contains(event.target) && !menuToggle.contains(event.target)) {
                 nav.classList.remove('open'); // Đóng nav
-                document.body.classList.remove('toc-open'); // Thêm dòng này để loại bỏ overflow: hidden
             }
         });
     }

@@ -6,15 +6,22 @@ document.addEventListener('DOMContentLoaded', function () {
   dropdowns.forEach(dropdown => {
     const toggleBtn = dropdown.querySelector('.dropdown-toggle');
 
+    // Sử dụng sự kiện click để mở/đóng dropdown trên cả mobile và desktop
     toggleBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
+      e.stopPropagation(); // Ngăn chặn sự kiện click lan truyền lên document
       dropdown.classList.toggle('open');
-    });
-  });
 
-  document.addEventListener('click', function (e) {
-    dropdowns.forEach(dropdown => {
-      if (!dropdown.contains(e.target)) {
+      // Đóng các dropdown khác khi một dropdown được mở
+      dropdowns.forEach(otherDropdown => {
+        if (otherDropdown !== dropdown && otherDropdown.classList.contains('open')) {
+          otherDropdown.classList.remove('open');
+        }
+      });
+    });
+
+    // Đóng dropdown khi click ra ngoài (chỉ áp dụng cho desktop nếu không phải mobile menu đang mở)
+    document.addEventListener('click', function (e) {
+      if (!dropdown.contains(e.target) && !nav.classList.contains('open')) {
         dropdown.classList.remove('open');
       }
     });
@@ -32,6 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
       // Nếu nav đóng, đánh giá lại vị trí cuộn để thay đổi màu
       if (!nav.classList.contains('open')) {
         updateMenuToggleColor(); // Gọi hàm để đặt màu dựa trên cuộn
+        // Đảm bảo tất cả các dropdown đóng khi menu mobile đóng
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('open');
+        });
       }
     });
   }

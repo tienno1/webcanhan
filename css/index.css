@@ -269,7 +269,6 @@ footer .social-links a:hover {
     nav ul li a {
       color: white;
         display: block; /* Làm cho các liên kết thành khối để dễ chạm hơn */
-        padding: 20px; /* Tăng padding cho vùng chạm */
     }
     #page-content{
         margin: 0px -20px;
@@ -677,4 +676,23 @@ grid-area: dùng cho phần tử con
 
 #next-background {
     right: 10px;
+}
+@media (max-width: 767px) {
+  nav.main-nav {
+    border-radius: 10px 0px 0px 10px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 602px;
+    max-height: 100vh; /* Thay đổi height thành max-height */
+    padding-top: 30px; /* Giảm padding-top */
+    background-color: #333; /* Default background, no transparency on mobile */
+    transition: right 0.3s ease-in-out, background-color 0.3s ease; /* Add transition for background */
+    z-index: 1000;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0; /* Loại bỏ margin-top */
+  }
 }

@@ -42,7 +42,6 @@ header {
     
     nav.main-nav ul li a {
         display: block;       /* ✅ Fix: block để dễ click */
-        padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
         text-align: center;
         text-decoration: none;
         font-weight: bold;
@@ -167,13 +166,13 @@ nav ul li a.active::after {
     flex-shrink: 0; /* Prevent shrinking */
     
     /* === ADDED FOR STICKY BEHAVIOR === */
-    position: -webkit-sticky;
     position: sticky;
-    top: 20px;
-    
-    /* Adjust max-height and ensure overflow-y is auto */
-    max-height: calc(100vh - 40px); /* Limit height to viewport height minus margins */
-    overflow-y: auto; /* Add scrollbar if TOC content is too long */
+    /* Sử dụng biến CSS để điều chỉnh top */
+        top: var(--nav-height, 0px);
+        
+        /* Set a max-height to prevent the sidebar from being taller than the viewport */
+        max-height: calc(100vh - var(--nav-height, 0px)); /* 100% viewport height minus top/bottom margin */
+        overflow-y: auto; /* This remains important for long TOC lists */
 }
 
 .toc h3 {

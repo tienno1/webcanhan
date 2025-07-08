@@ -598,7 +598,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Loop backward to find the lowest section currently visible
             for (let i = sections.length - 1; i >= 0; i--) {
                 const section = sections[i];
-                if (section && section.offsetTop - 120 <= scrollPos) {
+                // Điều chỉnh offset để tính cả chiều cao của nav khi dính
+                const navHeight = document.querySelector('.main-nav.sticky-nav')?.offsetHeight || 0;
+                if (section && section.offsetTop - navHeight - 20 <= scrollPos) { // Thêm 20px để tạo khoảng đệm
                     currentIndex = i;
                     break; // Found active section, exit loop
                 }
@@ -679,13 +681,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('header');
     let stickyOffset = 0; // Khởi tạo stickyOffset
 
-    // Hàm để cập nhật stickyOffset
+    // Hàm để cập nhật stickyOffset và biến CSS --nav-height
     const updateStickyOffset = () => {
-        // Đảm bảo header đã được render và có offsetHeight
         if (header) {
             stickyOffset = header.offsetHeight; // Lấy chiều cao của header
         } else if (nav) { // Nếu không có header, lấy vị trí ban đầu của nav
             stickyOffset = nav.offsetTop;
+        }
+        // Cập nhật biến CSS --nav-height
+        if (nav) {
+            document.documentElement.style.setProperty('--nav-height', `${nav.offsetHeight}px`);
         }
     };
 
@@ -702,14 +707,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     nav.classList.add('sticky-nav');
                     // Thêm padding-top vào body để nội dung không bị ẩn bởi nav cố định
                     document.body.style.paddingTop = nav.offsetHeight + 'px';
+                    // Cập nhật lại --nav-height khi nav dính (nếu có thay đổi chiều cao)
+                    document.documentElement.style.setProperty('--nav-height', `${nav.offsetHeight}px`);
                 } else {
                     nav.classList.remove('sticky-nav');
                     // Xóa padding-top khi nav không còn dính
                     document.body.style.paddingTop = '0';
+                    // Đặt lại --nav-height về 0 hoặc chiều cao ban đầu của nav
+                    document.documentElement.style.setProperty('--nav-height', `0px`); // Hoặc `nav.offsetHeight` nếu bạn muốn nó luôn có giá trị
                 }
             } else { // Đối với mobile (màn hình < 768px)
                 nav.classList.remove('sticky-nav'); // Đảm bảo không có class sticky-nav trên mobile
                 document.body.style.paddingTop = '0'; // Đảm bảo không có padding-top
+                document.documentElement.style.setProperty('--nav-height', `0px`); // Trên mobile, nav không sticky nên set về 0
             }
         }
     });

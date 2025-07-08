@@ -250,6 +250,8 @@ main h2::after {
 }
 
 #back-to-top {
+    margin-bottom: 40px;
+    z-index: 1; /* Ensure it's above the go to bottom button */
     bottom: 80px; /* Adjust if it clashes with other buttons */
     opacity: 0;
     visibility: hidden;
@@ -261,15 +263,17 @@ main h2::after {
 }
 
 #go-to-bottom {
+    margin-bottom: 40px;
+    z-index: 1; /* Ensure it's above the go to bottom button */
     bottom: 20px;
     opacity: 1;
     visibility: visible;
 }
 
-#back-to-bottom:hover,
+#back-to-top:hover,
 #go-to-bottom:hover {
     background-color: #e66000;
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
 /* Blog banner styles */
@@ -601,6 +605,7 @@ main h2::after {
 @media (max-width: 768px) { 
     nav.main-nav{
         height: 600px;
+        z-index: 999;
     }
     header p {
         font-size: 1.1rem;
@@ -611,6 +616,7 @@ main h2::after {
     }
     nav.main-nav ul li {
         margin: 10px 0;
+        
     }
     nav.main-nav ul li a {
         display: block;
@@ -619,6 +625,8 @@ main h2::after {
     .desktop-only { /* Đổi từ 'desktop-only' sang '.desktop-only' để là class selector */
         display: none; /* Ẩn các phần tử chỉ dành cho desktop */
     }
+
+
 
     .all-box-sidebar {
         flex: none; /* Remove fixed flex */
@@ -705,7 +713,6 @@ main h2::after {
     
     nav.main-nav ul li a {
         display: block;       /* ✅ Fix: block để dễ click */
-        padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
         text-align: center;
         text-decoration: none;
         font-weight: bold;
@@ -743,4 +750,24 @@ main h2::after {
         padding-bottom: 80px; /* Restore padding */
     }
 
+}
+
+@media (max-width: 767px) {
+  nav.main-nav {
+    border-radius: 10px 0px 0px 10px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 652px;
+    max-height: 100vh; /* Thay đổi height thành max-height */
+    padding-top: 30px; /* Giảm padding-top */
+    background-color: #333; /* Default background, no transparency on mobile */
+    transition: right 0.3s ease-in-out, background-color 0.3s ease; /* Add transition for background */
+    z-index: 1000;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0; /* Loại bỏ margin-top */
+  }
 }

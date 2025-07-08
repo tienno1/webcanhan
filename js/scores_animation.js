@@ -429,24 +429,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         if (nav) { // Đảm bảo nav tồn tại
-            if (window.pageYOffset > stickyOffset) {
-                nav.classList.add('sticky-nav');
-                // Thêm padding-top vào body để nội dung không bị ẩn bởi nav cố định
-                // Chỉ thêm padding-top nếu không phải là mobile (hoặc nếu bạn muốn nó luôn có padding)
-                if (window.innerWidth >= 768) { // Ví dụ: chỉ áp dụng cho desktop
+            if (window.innerWidth >= 768) { // Chỉ áp dụng sticky cho desktop (màn hình >= 768px)
+                if (window.pageYOffset > stickyOffset) {
+                    nav.classList.add('sticky-nav');
+                    // Thêm padding-top vào body để nội dung không bị ẩn bởi nav cố định
                     document.body.style.paddingTop = nav.offsetHeight + 'px';
+                    // Cập nhật lại --nav-height khi nav dính (nếu có thay đổi chiều cao)
+                    document.documentElement.style.setProperty('--nav-height', `${nav.offsetHeight}px`);
                 } else {
-                    // Ở chế độ mobile, không cần padding-top cho body vì nav sẽ chiếm toàn bộ chiều rộng
+                    nav.classList.remove('sticky-nav');
+                    // Xóa padding-top khi nav không còn dính
                     document.body.style.paddingTop = '0';
+                    // Đặt lại --nav-height về 0 hoặc chiều cao ban đầu của nav
+                    document.documentElement.style.setProperty('--nav-height', `0px`); // Hoặc `nav.offsetHeight` nếu bạn muốn nó luôn có giá trị
                 }
-            } else {
-                nav.classList.remove('sticky-nav');
-                // Xóa padding-top khi nav không còn dính
-                document.body.style.paddingTop = '0';
+            } else { // Đối với mobile (màn hình < 768px)
+                nav.classList.remove('sticky-nav'); // Đảm bảo không có class sticky-nav trên mobile
+                document.body.style.paddingTop = '0'; // Đảm bảo không có padding-top
+                document.documentElement.style.setProperty('--nav-height', `0px`); // Trên mobile, nav không sticky nên set về 0
             }
         }
     });
-
     // NEW: Close mobile nav when clicking outside
     const menuToggle = document.querySelector('.menu-toggle'); // Nút 3 gạch
     // nav đã được khai báo ở trên

@@ -1,0 +1,95 @@
+/* Import the Bebas Neue font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* Reset default padding, margin, and box-sizing for all elements */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Set the HTML and body to be centered with a specific background color */
+html,
+body {
+    display: grid;
+    height: 100%;
+    place-items: center;
+    background-color: #474747;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+/* Styles for the wrapper that contains all profile cards */
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    gap: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* Styles for each profile card within the wrapper */
+.wrapper>div {
+    flex: 0 0 120px;
+    border-radius: 0.5rem;
+    transition: 0.5s ease-in-out;
+    box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Background images for each profile card */
+.wrapper>div:nth-of-type(1) {
+    background: url("images/image1.webp") no-repeat 50% / cover;
+}
+
+.wrapper>div:nth-of-type(2) {
+    background: url("images/image2.jpeg") no-repeat 50% / cover;
+}
+
+.wrapper>div:nth-of-type(3) {
+    background: url("images/image3.webp") no-repeat 50% / cover;
+}
+
+.wrapper>div:nth-of-type(4) {
+    background: url("images/image4.webp") no-repeat 50% / cover;
+}
+
+/* Styles for the content inside each profile card */
+.wrapper>div .content {
+    font-size: 1.5rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    flex-direction: column;
+    height: 100%;
+    opacity: 0;
+    justify-content: flex-end;
+    background: linear-gradient(0deg, rgba(2, 2, 46, 0.67) 0%, rgba(255, 255, 255, 0) 100%);
+    transform: translateY(100%);
+    transition: 0.5s ease-in-out, transform 0.5s 0.2s;
+    visibility: hidden;
+}
+
+/* Additional styles for the span inside the content */
+.wrapper>div .content span {
+    display: block;
+    margin-top: 5px;
+    font-size: 1.2rem;
+}
+
+/* Hover effect for the profile cards */
+.wrapper>div:hover {
+    flex: 0 0 250px;
+    transform: translateY(-30px);
+}
+
+/* Hover effect for the content inside the profile cards */
+.wrapper>div:hover .content {
+    opacity: 1;
+    transform: translateY(0%);
+    visibility: visible;
+}

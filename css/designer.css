@@ -11,14 +11,6 @@ body {
     padding-bottom: 80px; /* Example: adjust as needed */
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
-
-@media (min-width: 768px) {
-    nav ul li a {
-        display: block; /* Làm cho các liên kết thành khối để dễ chạm hơn */
-        padding: 20px; /* Tăng padding cho vùng chạm */
-    }
-}
-
 /* CSS cho hiệu ứng bay lên nhẹ khi di chuột */
 /* Áp dụng class 'lift-on-hover' vào các phần tử HTML bạn muốn có hiệu ứng này */
 .lift-on-hover {
@@ -96,7 +88,7 @@ nav ul li a {
     color: #fff; /* Mặc định màu chữ */
     text-decoration: none;
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 5px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow: hidden;
@@ -127,11 +119,10 @@ nav ul li a.active {
 }
 
 nav ul li a:hover::after,
-nav ul li a.active::after {
+nav ul ul li a.active::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
-
 
 /* Container cho nội dung trang để áp dụng hiệu ứng chuyển đổi */
 .content-container {
@@ -147,6 +138,7 @@ nav ul li a.active::after {
 
 /* Styles for the Table of Contents (aside.toc) */
 .toc {
+    margin-bottom: 20px;
     width: 200px; /* Adjusted width for the table of contents */
     padding: 20px;
     background-color: #f9f9f9; /* Light background */
@@ -155,8 +147,9 @@ nav ul li a.active::after {
     overflow-y: auto; /* Add scrollbar if TOC content is too long */
     position: -webkit-sticky; /* For Safari */
     position: sticky;
-    top: 20px; /* Stick to the top with some offset */
-    max-height: calc(100vh - 40px); /* Max height to fit viewport */
+    /* Cập nhật top để nó bắt đầu ngay bên dưới thanh nav */
+    top: var(--nav-height, 0px); /* Sử dụng biến CSS để điều chỉnh top */
+    max-height: calc(100vh - var(--nav-height, 0px)); /* Điều chỉnh max-height */
     z-index: auto;
     padding-top: 20px; /* Reset padding-top */
     box-shadow: none; /* Remove shadow */
@@ -326,11 +319,10 @@ main h2::after {
 
 /* Styles for the Footer section */
 footer {
-    margin-bottom: -23px;
     background-color: #333; /* Dark background color */
     color: #fff; /* White text color */
     text-align: center; /* Center content */
-    padding: 20px 0; /* Top and bottom padding */
+    margin-top: 20px; /* Space above the footer */
 }
 
 footer .social-links a {
@@ -648,17 +640,6 @@ footer .social-links a {
 
 /* Media queries for Tablets and larger (>= 768px) */
 @media (min-width: 768px) {
-    
-    nav.main-nav ul li a {
-        display: block;       /* ✅ Fix: block để dễ click */
-        padding: 20px;        /* ✅ Fix: vùng chạm rộng rãi */
-        text-align: center;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-    }
-
     /* Revert content container layout for larger screens */
     .content-container {
         flex-direction: row; /* Side-by-side layout */
@@ -679,10 +660,11 @@ footer .social-links a {
         /* --- ADDED FOR STICKY --- */
         position: -webkit-sticky;
         position: sticky;
-        top: 20px;
+        /* Sử dụng biến CSS để điều chỉnh top */
+        top: var(--nav-height, 0px);
         
         /* Set a max-height to prevent the sidebar from being taller than the viewport */
-        max-height: calc(100vh - 40px); /* 100% viewport height minus top/bottom margin */
+        max-height: calc(100vh - var(--nav-height, 0px)); /* 100% viewport height minus top/bottom margin */
         overflow-y: auto; /* This remains important for long TOC lists */
     }
 
@@ -736,7 +718,7 @@ footer .social-links a {
          padding: 10px; /* Restore padding */
          font-size: 1rem; /* Restore font size */
          width: 70%; /* Restore width */
-         max-width: 300px; /* Restore max-width */
+         max-width: 300px; /* Maximum width */
          margin-right: 5px; /* Restore margin */
          display: inline-block; /* Ensure inline-block layout */
     }
@@ -760,7 +742,10 @@ footer .social-links a {
         flex-direction: row; /* Restore horizontal layout */
     }
     nav.main-nav ul li {
-        margin: 0 15px; /* Restore margin */
+        margin: 0 20px; /* Restore margin */
+    }
+    nav.main-nav ul li a{
+        margin: -5px 0px; /* Restore margin */
     }
 
     /* Revert footer styles */
@@ -1117,4 +1102,26 @@ footer .social-links a {
 .load-more-btn:hover {
     background-color: #e07b00; /* Màu cam đậm hơn khi hover */
     transform: translateY(-2px); /* Hiệu ứng nhấc nhẹ lên khi hover */
+}
+
+
+@media (max-width: 767px) {
+  nav.main-nav {
+    border-radius: 10px 0px 0px 10px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 558px;
+    max-height: 100vh; /* Thay đổi height thành max-height */
+    background-color: #333; /* Default background, no transparency on mobile */
+    padding-top: 30px; /* Giảm padding-top */
+    padding-bottom: 0px; /* Giảm padding-bottom */
+    transition: right 0.3s ease-in-out, background-color 0.3s ease; /* Add transition for background */
+    z-index: 1000;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0; /* Loại bỏ margin-top */
+  }
 }
