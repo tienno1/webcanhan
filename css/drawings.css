@@ -1013,3 +1013,12 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     margin-top: 0; /* Loại bỏ margin-top */
   }
 }
+
+.dropdown .dropdown-toggle ul li{
+    padding: 100px;
+    width: 1005%;
+}
+.dropdown-menu {
+    padding: 10px;
+    width: 105%;
+}

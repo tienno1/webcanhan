@@ -214,7 +214,7 @@
   min-width: 100px; /* Giảm min-width để linh hoạt hơn */
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   z-index: 1000;
-  margin-top: 50px;
+  margin-top: 20px;
   /* Thêm transition cho opacity, transform và filter */
   transition: opacity 0.2s ease 2s, visibility 0.2s ease 2s, transform 0.2s ease 2s, filter 0.2s ease 2s;
   transform: translateY(-10px); /* Bắt đầu hơi dịch lên trên */
