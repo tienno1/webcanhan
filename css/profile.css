@@ -22,12 +22,6 @@ body {
     box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2); /* Bóng xanh nhẹ */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
 /* Kiểu cho phần Header */
 header {
     background-image:url(../img/sl_0210121_40570_23.jpg); /* Background image */
@@ -364,7 +358,6 @@ main h2::after {
 /* Kinh nghiệm làm việc (Timeline) */
 .timeline {
     position: relative;
-    max-width: 900px;
     margin: 0 auto;
     padding: 20px 0;
 }
@@ -619,17 +612,6 @@ main h2::after {
     opacity: 1;
 }
 
-/* Sticky footer fix */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
 #page-content {
     flex: 1 0 auto;
 }
@@ -1069,9 +1051,6 @@ body {
 
 /* Optional: Further adjustments for very large screens (>= 1024px) */
 @media (min-width: 1024px) {
-    .content-container {
-        max-width: 1200px;
-    }
      header img{
         width: 6%;
         max-width: 100px;

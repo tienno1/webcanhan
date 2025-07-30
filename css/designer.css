@@ -127,7 +127,6 @@ nav ul ul li a.active::after {
 /* Container cho nội dung trang để áp dụng hiệu ứng chuyển đổi */
 .content-container {
     display: flex; /* Use flexbox for layout */
-    max-width: 1200px; /* Limit content width */
     margin: 20px auto; /* Top and bottom margin and center alignment */
     background-color: #fff; /* White background */
     box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Add a shadow */
