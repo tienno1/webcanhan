@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Lấy tất cả hình ảnh chính trong main, loại trừ các logo nhỏ
   // Lựa chọn các thẻ img không có class 'image-logo-small' và không phải là con của .app-logos
-  const allImages = Array.from(document.querySelectorAll('main .image-wrapper img:first-of-type'));
+  const allImages = Array.from(document.querySelectorAll('main .image-wrapper img:first-of-type:not(.image-logo-small)'));
   // Danh sách hình ảnh chỉ thuộc data-page hiện tại của modal
   let currentPagedImages = [];
   // Index của hình ảnh hiện tại trong currentPagedImages
@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const messageModalCloseBtn = document.querySelector('.message-modal-close-btn');
   const messageModalOkBtn = document.getElementById('message-modal-ok-btn');
 
-  // Ẩn hai nút khi mới vào
-  if (toggleBtn) toggleBtn.style.display = 'none';
+  // Đảm bảo cả hai nút đều ẩn khi khởi tạo
   if (showBtn) showBtn.style.display = 'none';
+  if (toggleBtn) toggleBtn.style.display = 'none';
 
   function setAppLogos(srcList = []) {
     const container = document.querySelector('.app-logos');
@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Hàm cập nhật nội dung modal thông tin dựa trên data-* của ảnh
+  // CHỈ CẬP NHẬT NỘI DUNG, KHÔNG TỰ ĐỘNG MỞ MODAL
   function updateModalContent(img) {
     if (!img || !img.dataset) return;
     if (name) name.textContent = img.dataset.name || '';
@@ -76,8 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         appModal.classList.add('active');
         clearTimeout(autoCloseTimer);
         autoCloseTimer = setTimeout(() => closeAppModal(), 100000); // Tự động đóng sau 100 giây
-        if (toggleBtn) toggleBtn.style.display = 'block';
-        if (showBtn) showBtn.style.display = 'none';
+        if (toggleBtn) toggleBtn.style.display = 'block'; // Hiện nút toggle (đóng)
+        if (showBtn) showBtn.style.display = 'none'; // Ẩn nút show (mở)
     }
   }
 
@@ -86,14 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
         appModal.classList.remove('active');
         appModal.classList.add('closing');
         clearTimeout(autoCloseTimer);
-        // Sau khi animation đóng hoàn tất, đảm bảo nút show xuất hiện
-        appModal.addEventListener('transitionend', function handler() {
-            if (!appModal.classList.contains('active')) { // Chỉ xử lý khi modal thực sự đã đóng
-                if (toggleBtn) toggleBtn.style.display = 'none';
-                if (showBtn) showBtn.style.display = 'block';
-                appModal.removeEventListener('transitionend', handler); // Xóa listener để tránh chạy nhiều lần
+        setTimeout(() => {
+            if (appModal) appModal.classList.remove('closing');
+            if (toggleBtn) toggleBtn.style.display = 'none'; // Luôn ẩn toggleBtn khi appModal đóng
+            // Chỉ hiển thị showBtn nếu imageModal vẫn đang hoạt động
+            if (showBtn) {
+                if (imageModal && imageModal.classList.contains('active')) {
+                    showBtn.style.display = 'block';
+                } else {
+                    showBtn.style.display = 'none';
+                }
             }
-        });
+        }, 600); // Thời gian khớp với transition của CSS
     }
   }
 
@@ -127,118 +132,110 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Hàm ẩn tất cả modals
   function hideAllModals() {
     if (appModal) {
         appModal.classList.remove('active');
         appModal.classList.remove('closing');
-        if (toggleBtn) toggleBtn.style.display = 'none';
-        if (showBtn) showBtn.style.display = 'none';
     }
     if (imageModal) {
         imageModal.classList.remove('active', 'fullscreen'); // Đảm bảo modal hình ảnh cũng đóng
     }
     document.body.style.overflow = ''; // Cho phép cuộn lại
     closeMessageModal(); // Đảm bảo modal thông báo cũng đóng
-  }
 
-  // Hàm hiển thị modal hình ảnh và điền thông tin (hàm này được gọi từ designer_animation.js)
-  window.showImageModal = function(imgElement) {
-    if (!imageModal || !modalImg || !appModal) return;
-
-    imageModal.classList.add('active');
-    modalImg.src = imgElement.src;
-
-    // Cập nhật thông tin vào modal thông tin ứng dụng
-    updateModalContent(imgElement);
-
-    // Hiển thị nút toggle thông tin và ẩn nút show (vì thông tin đã hiển thị)
-    if (toggleBtn) toggleBtn.style.display = 'block';
+    // Ẩn cả hai nút khi tất cả các modal đều đóng
     if (showBtn) showBtn.style.display = 'none';
-    openAppModal(); // Mặc định hiển thị modal thông tin khi modal hình ảnh mở
+    if (toggleBtn) toggleBtn.style.display = 'none';
+  }
 
-    // Lấy tất cả hình ảnh liên quan trong CÙNG một section .project
-    const parentProjectSection = imgElement.closest('.project');
-    if (parentProjectSection) {
-        // Lọc ra tất cả các hình ảnh chính (không phải logo nhỏ)
-        currentPagedImages = Array.from(parentProjectSection.querySelectorAll('img:not(.image-logo-small)'))
-            .filter(img => !img.src.includes('logo.png')); // Loại trừ logo.png nếu có
-        currentImgIndex = currentPagedImages.indexOf(imgElement);
-    } else {
-        // Trường hợp dự phòng nếu hình ảnh không nằm trong .project
-        currentPagedImages = [imgElement];
-        currentImgIndex = 0;
+  // Mở modal hình ảnh (chỉ modal hình ảnh) khi click ảnh
+  allImages.forEach((img) => {
+    // Only attach click listener to main images, not small logos
+    if (!img.classList.contains('image-logo-small')) {
+        img.addEventListener('click', function() {
+            // Lấy data-page của hình ảnh được click
+            currentPageOfModal = this.closest('[data-page]') ?
+                                parseInt(this.closest('[data-page]').getAttribute('data-page')) :
+                                null;
+
+            // Lọc ra các hình ảnh chính cùng data-page
+            if (currentPageOfModal !== null) {
+                currentPagedImages = allImages.filter(image => {
+                    const imageParentSection = image.closest('[data-page]');
+                    return imageParentSection && parseInt(imageParentSection.getAttribute('data-page')) === currentPageOfModal;
+                });
+            } else {
+                // Nếu không có data-page (ví dụ: ảnh không nằm trong section có data-page), hiển thị tất cả ảnh chính
+                currentPagedImages = allImages;
+            }
+
+            // Tìm index của hình ảnh được click trong danh sách đã lọc
+            currentImgIndex = currentPagedImages.findIndex(image => image.src === this.src);
+
+            currentImgEl = currentPagedImages[currentImgIndex]; // Cập nhật currentImgEl
+            if (modalImg) modalImg.src = currentImgEl.src; // Cập nhật ảnh trong modal
+            if (imageModal) imageModal.classList.add('active'); // Mở modal hình ảnh
+            document.body.style.overflow = 'hidden'; // Ngăn cuộn trang chính
+
+            // Hiển thị nút 'showBtn' khi modal hình ảnh được mở
+            if (showBtn) showBtn.style.display = 'block';
+        });
     }
+  });
 
-    updateModalNavigation();
-  };
+  // Chức năng chuyển ảnh: Next
+  function showNextImg() {
+    if (currentPagedImages.length < 1) return;
 
-  // Hàm cập nhật trạng thái các nút điều hướng (Ảnh trước/Ảnh sau)
-  function updateModalNavigation() {
-    if (prevBtn) {
-        prevBtn.style.display = currentImgIndex > 0 ? 'block' : 'none';
+    currentImgIndex++;
+    if (currentImgIndex >= currentPagedImages.length) {
+      // Hiển thị thông báo và quay lại hình đầu tiên
+      showMessageModal('Đã hết hình ảnh', currentPageOfModal);
+      currentImgIndex = 0;
     }
-    if (nextBtn) {
-        nextBtn.style.display = currentImgIndex < currentPagedImages.length - 1 ? 'block' : 'none';
+    currentImgEl = currentPagedImages[currentImgIndex];
+    if (modalImg) modalImg.src = currentImgEl.src;
+    updateModalContent(currentImgEl); // Đảm bảo nội dung thông tin được cập nhật cho ảnh mới
+    resetZoom(); // Reset zoom khi chuyển ảnh mới
+  }
+
+  // Chức năng chuyển ảnh: Previous
+  function showPrevImg() {
+    if (currentPagedImages.length < 1) return;
+
+    currentImgIndex--;
+    if (currentImgIndex < 0) {
+      // Quay lại hình cuối cùng nếu đã ở hình đầu tiên
+      currentImgIndex = currentPagedImages.length - 1;
     }
+    currentImgEl = currentPagedImages[currentImgIndex];
+    if (modalImg) modalImg.src = currentImgEl.src;
+    updateModalContent(currentImgEl); // Đảm bảo nội dung thông tin được cập nhật cho ảnh mới
+    resetZoom(); // Reset zoom khi chuyển ảnh mới
   }
 
+  // Gắn sự kiện cho các nút điều hướng trong modal hình ảnh
+  if (nextBtn) nextBtn.addEventListener('click', showNextImg);
+  if (prevBtn) prevBtn.addEventListener('click', showPrevImg);
 
-  // Gắn sự kiện cho nút đóng modal
-  if (closeBtn) {
-      closeBtn.addEventListener('click', hideAllModals);
-  }
-
-  // Gắn sự kiện cho nút chuyển ảnh trước
-  if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-          if (currentImgIndex > 0) {
-              currentImgIndex--;
-              window.showImageModal(currentPagedImages[currentImgIndex]); // Hiển thị hình ảnh mới và cập nhật thông tin
-          }
-      });
-  }
-
-  // Gắn sự kiện cho nút chuyển ảnh sau
-  if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-          if (currentImgIndex < currentPagedImages.length - 1) {
-              currentImgIndex++;
-              window.showImageModal(currentPagedImages[currentImgIndex]); // Hiển thị hình ảnh mới và cập nhật thông tin
-          }
-      });
-  }
-
-  // Gắn sự kiện cho nút toàn màn hình
-  if (fullscreenBtn) {
-      fullscreenBtn.addEventListener('click', () => {
-          if (modalImg.requestFullscreen) {
-              modalImg.requestFullscreen();
-          } else if (modalImg.webkitRequestFullscreen) { /* Safari */
-              modalImg.webkitRequestFullscreen();
-          } else if (modalImg.msRequestFullscreen) { /* IE11 */
-              modalImg.msRequestFullscreen();
-          }
-      });
-  }
-
-  // Gắn sự kiện cho nút toggle thông tin (Ẩn/Hiện)
-  if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-          if (appModal.classList.contains('active')) {
-              closeAppModal();
-          } else {
-              openAppModal();
-          }
-      });
-  }
-
-  // Gắn sự kiện cho nút "Hiện Thông Tin Hình Ảnh" (chỉ xuất hiện khi toggle ẩn thông tin)
+  // Gắn sự kiện cho các nút điều khiển modal thông tin
+  // Dòng này chịu trách nhiệm cho việc hiển thị modal thông tin khi nhấn nút 'showBtn'
   if (showBtn) {
-      showBtn.addEventListener('click', () => {
-          openAppModal();
-      });
+    showBtn.addEventListener('click', () => {
+      // Tìm lại ảnh hiện tại trong modal ảnh để hiển thị thông tin
+      const shownSrc = modalImg?.src;
+      const foundImg = currentPagedImages.find(img => img.src === shownSrc); // Tìm trong currentPagedImages
+      if (foundImg) {
+        currentImgEl = foundImg;
+        updateModalContent(currentImgEl); // Cập nhật nội dung modal thông tin
+        openAppModal(); // CHỈ MỞ MODAL THÔNG TIN TẠI ĐÂY
+      }
+    });
   }
+
+  // Nút toggleBtn sẽ đóng modal thông tin
+  if (toggleBtn) toggleBtn.addEventListener('click', closeAppModal);
+
 
   // Logic phóng to/thu nhỏ và kéo
   let scale = 1;
@@ -351,10 +348,10 @@ document.addEventListener('DOMContentLoaded', () => {
         hideAllModals();
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault(); // Ngăn cuộn trang
-        prevBtn.click(); // Kích hoạt sự kiện click của nút prev
+        showPrevImg();
       } else if (e.key === 'ArrowRight') {
         e.preventDefault(); // Ngăn cuộn trang
-        nextBtn.click(); // Kích hoạt sự kiện click của nút next
+        showNextImg();
       }
     }
   });

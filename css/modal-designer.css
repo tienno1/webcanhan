@@ -1,31 +1,49 @@
-/* Modal info từ trên xuống khi mở, trượt sang trái khi đóng */
+/* Kiểu dáng cho lớp phủ modal thông tin ứng dụng */
 .app-info-modal {
-  position: fixed;
-  top: -330px; /* bắt đầu ngoài khung trên */
-  left: 210px;
-  transform: translateY(0);
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  z-index: 9999;
-  width: 300px;
-  height: 650px;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.8s ease-in-out;
+  display: none; /* Ẩn theo mặc định */
+  position: fixed; /* Định vị cố định so với khung nhìn */
+  top: 0; /* Bao phủ toàn bộ chiều cao khung nhìn */
+  left: 0; /* Bao phủ toàn bộ chiều rộng khung nhìn */
+  width: 100%; /* Chiều rộng đầy đủ của khung nhìn */
+  height: 100%; /* Chiều cao đầy đủ của khung nhìn */
+  overflow: auto; /* Cho phép cuộn nếu nội dung tràn */
+  background-color: rgba(0,0,0,0.4); /* Nền bán trong suốt màu đen */
+  
+  /* Sử dụng Flexbox để căn giữa nội dung */
+  display: flex; /* Bật flexbox */
+  justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+  
+  backdrop-filter: blur(5px); /* Áp dụng hiệu ứng làm mờ cho nền */
+  -webkit-backdrop-filter: blur(5px); /* Tiền tố Webkit cho hiệu ứng làm mờ */
+  
+  z-index: 9999; /* Đảm bảo nó nằm trên cùng của các nội dung khác */
+  opacity: 0; /* Bắt đầu với độ trong suốt bằng 0 (ẩn) */
+  pointer-events: none; /* Ngăn chặn tương tác khi ẩn */
+  
+  /* Chuyển đổi mượt mà cho sự xuất hiện/biến mất */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  visibility: hidden; /* Ẩn phần tử hoàn toàn khi không hoạt động */
 }
 
+/* Kiểu dáng khi modal đang hoạt động (hiển thị) */
 .app-info-modal.active {
-  top: 20px; /* vị trí xuống giữa khi mở */
-  opacity: 1;
-  pointer-events: all;
+  display: flex; /* Hiển thị dưới dạng flex để bật căn giữa */
+  opacity: 1; /* Hoàn toàn không trong suốt */
+  pointer-events: all; /* Cho phép tương tác */
+  visibility: visible; /* Hiển thị phần tử */
 }
 
+/* Kiểu dáng khi modal đang đóng (chuyển đổi sang ẩn) */
 .app-info-modal.closing {
-  bottom: 330px;
-  opacity: 0;
+  opacity: 0; /* Mờ dần */
+  visibility: hidden; /* Ẩn hoàn toàn sau khi mờ dần */
 }
+
+/* Các kiểu dáng này dành cho các logo bên trong nội dung modal, không phải bản thân modal.
+   Chúng có thể đã được định nghĩa trong drawings.css dưới .app-info-content hoặc tương tự.
+   Tôi giữ chúng ở đây để hoàn chỉnh, giả sử chúng là các kiểu logo ứng dụng chung.
+*/
 .app-logos {
     display: flex;
     flex-wrap: wrap;
