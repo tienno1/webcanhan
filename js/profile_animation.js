@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 welcomeModal.classList.remove('active');
                 document.body.style.overflow = '';
                 sessionStorage.setItem('hasShownWelcomeModal_profile', 'true');
-                window.location.href = 'portfolio.html'; // Redirect to portfolio.html (if exists)
+                window.location.href = 'profile_ver2.html'; // Redirect to portfolio.html (if exists)
             }
         });
     }
