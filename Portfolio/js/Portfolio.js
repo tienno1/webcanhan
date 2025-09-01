@@ -157,4 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // Thêm hiệu ứng nhấp nháy cho thanh thông báo mới
+const notificationBox = document.querySelector('.notification-box');
+
+if (notificationBox) {
+    // Tùy chỉnh hiệu ứng nhấp nháy cho text
+    setInterval(() => {
+        if (notificationBox.classList.contains('active')) {
+            notificationBox.classList.remove('active');
+        } else {
+            notificationBox.classList.add('active');
+        }
+    }, 1000); // Ẩn/hiện sau mỗi 1 giây
+}
+
 });
