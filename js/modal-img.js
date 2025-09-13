@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentImgEl = null;
 
   // Lấy tất cả hình ảnh chính trong main, loại trừ các logo nhỏ
-  // Lựa chọn các thẻ img không có class 'image-logo-small' và không phải là con của .app-logos
-  const allImages = Array.from(document.querySelectorAll('main .image-wrapper img:first-of-type:not(.image-logo-small)'));
+  // Lựa chọn các thẻ img không có class 'image-logo-small' và là con của main
+  const allImages = Array.from(document.querySelectorAll('main img:not(.image-logo-small)'));
   // Danh sách hình ảnh chỉ thuộc data-page hiện tại của modal
   let currentPagedImages = [];
   // Index của hình ảnh hiện tại trong currentPagedImages
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // data-page của hình ảnh đã mở modal
   let currentPageOfModal = null;
 
-  // Các phần tử của modal thông báo (đảm bảo rằng HTML cho modal này đã tồn tại)
+  // Các phần tử của modal thông báo
   const messageModal = document.getElementById('message-modal');
   const messageModalText = document.getElementById('message-modal-text');
   const messageModalCloseBtn = document.querySelector('.message-modal-close-btn');
@@ -45,18 +45,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.app-logos');
     if (!container) return;
     container.innerHTML = '';
-    srcList.forEach(src => {
-      const img = document.createElement('img');
-      img.className = 'app-logo';
-      img.src = src.trim();
-      img.alt = 'Logo App';
-      img.width = 60;
-      container.appendChild(img);
-    });
+
+    const validSrcs = srcList.filter(src => src.trim() !== '');
+
+    if (validSrcs.length > 0) {
+      container.style.display = 'flex';
+      container.style.alignItems = 'center';
+      container.style.justifyContent = 'center'; // Đã thay đổi từ 'flex-start' sang 'center'
+      container.style.margin = '0';
+      container.style.padding = '0';
+
+      validSrcs.forEach((src, index) => {
+        const img = document.createElement('img');
+        img.className = 'app-logo';
+        img.src = src.trim();
+        img.alt = 'Logo App';
+        img.width = 60;
+        // Thêm margin cho tất cả các logo, trừ logo cuối cùng
+        if (index < validSrcs.length - 1) {
+          img.style.marginRight = '10px';
+        } else {
+          img.style.marginRight = '0';
+        }
+        container.appendChild(img);
+      });
+    } else {
+      container.style.display = 'none';
+    }
   }
 
   // Hàm cập nhật nội dung modal thông tin dựa trên data-* của ảnh
-  // CHỈ CẬP NHẬT NỘI DUNG, KHÔNG TỰ ĐỘNG MỞ MODAL
   function updateModalContent(img) {
     if (!img || !img.dataset) return;
     if (name) name.textContent = img.dataset.name || '';
@@ -165,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return imageParentSection && parseInt(imageParentSection.getAttribute('data-page')) === currentPageOfModal;
                 });
             } else {
-                // Nếu không có data-page (ví dụ: ảnh không nằm trong section có data-page), hiển thị tất cả ảnh chính
+                // Nếu không có data-page, hiển thị tất cả ảnh chính
                 currentPagedImages = allImages;
             }
 
@@ -219,16 +237,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (prevBtn) prevBtn.addEventListener('click', showPrevImg);
 
   // Gắn sự kiện cho các nút điều khiển modal thông tin
-  // Dòng này chịu trách nhiệm cho việc hiển thị modal thông tin khi nhấn nút 'showBtn'
   if (showBtn) {
     showBtn.addEventListener('click', () => {
       // Tìm lại ảnh hiện tại trong modal ảnh để hiển thị thông tin
       const shownSrc = modalImg?.src;
-      const foundImg = currentPagedImages.find(img => img.src === shownSrc); // Tìm trong currentPagedImages
+      const foundImg = currentPagedImages.find(img => img.src === shownSrc);
       if (foundImg) {
         currentImgEl = foundImg;
-        updateModalContent(currentImgEl); // Cập nhật nội dung modal thông tin
-        openAppModal(); // CHỈ MỞ MODAL THÔNG TIN TẠI ĐÂY
+        updateModalContent(currentImgEl);
+        openAppModal();
       }
     });
   }

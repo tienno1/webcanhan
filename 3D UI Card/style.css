@@ -1,21 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-html, body {
-    display: grid;
-    height: 100%;
-    place-items: center;
-    background-color: #ecf0f1;
-}
 .wrapper {
-    width: 290px;
-    height: 300px;
-    perspective: 1000px;
+    width: 100%;
+    height: 22.7%;
+    perspective: 3000px;
+    margin-bottom: 50px;
 }
 .card {
     height: 100%;
@@ -28,7 +16,6 @@ html, body {
 }
 
 /* Glass overlay styles */
-
 .glass {
     transform-style: preserve-3d;
     position: absolute;
@@ -110,9 +97,9 @@ html, body {
     transform-style: preserve-3d;
 }
 .bottom .social_buttons .social_button {
-    width: 30px;
+    width: 50px;
     aspect-ratio: 1;
-    padding: 5px;
+    padding: 15px;
     background: rgb(0,0,0);
     border-radius: 50%;
     border: none;
@@ -186,7 +173,7 @@ html, body {
     transition-delay: 1.2s;
 }
 .logo .circle5 {
-    width: 50px;
+    width: 55px;
     transform: translate3d(0, 0, 100px);
     top: 30px;
     right: 30px;
