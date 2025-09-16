@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,19 +15,25 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #f4f7f6; /* Light background for the portfolio page */
+            background-color: #f4f7f6;
+            /* Light background for the portfolio page */
         }
+
         header {
-            background-color: #2c3e50; /* Dark blue-gray header */
-            color: #ecf0f1; /* Light text */
+            background-color: #2c3e50;
+            /* Dark blue-gray header */
+            color: #ecf0f1;
+            /* Light text */
             padding: 1rem 0;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         header h1 {
             margin: 0;
             font-size: 2.5em;
         }
+
         main {
             flex: 1;
             padding: 20px;
@@ -34,57 +41,69 @@
             margin: 20px auto;
             background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             animation: fadeIn 0.8s ease-out;
         }
+
         section {
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
+
         section:last-child {
             border-bottom: none;
         }
+
         h2 {
-            color: #3498db; /* Blue for section titles */
+            color: #3498db;
+            /* Blue for section titles */
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
+
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
+
         .portfolio-item {
             background-color: #ecf0f1;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .portfolio-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
+
         .portfolio-item img {
             width: 100%;
             height: 200px;
             object-fit: cover;
             display: block;
         }
+
         .portfolio-item-content {
             padding: 15px;
         }
+
         .portfolio-item-content h3 {
             margin-top: 0;
             color: #2c3e50;
             font-size: 1.4em;
         }
+
         .portfolio-item-content p {
             font-size: 0.95em;
             color: #7f8c8d;
         }
+
         .portfolio-item-content a {
             display: inline-block;
             background-color: #3498db;
@@ -95,61 +114,81 @@
             margin-top: 10px;
             transition: background-color 0.3s ease;
         }
+
         .portfolio-item-content a:hover {
             background-color: #2980b9;
         }
+
         footer {
-            background-color: #34495e; /* Darker blue-gray footer */
+            background-color: #34495e;
+            /* Darker blue-gray footer */
             color: #ecf0f1;
             text-align: center;
             padding: 1rem 0;
-            margin-top: auto; /* Push footer to the bottom */
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            margin-top: auto;
+            /* Push footer to the bottom */
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
+
         footer p {
             margin: 0;
         }
+
         .back-to-normal-button {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             padding: 15px 30px;
-            background-color: #e74c3c; /* Red color for return */
+            background-color: #e74c3c;
+            /* Red color for return */
             color: white;
             border: none;
             border-radius: 30px;
             font-size: 1.1em;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease, transform 0.3s ease;
             z-index: 100;
         }
+
         .back-to-normal-button:hover {
             background-color: #c0392b;
             transform: translateX(-50%) translateY(-3px);
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2em;
             }
+
             main {
                 margin: 15px;
                 padding: 15px;
             }
+
             .portfolio-grid {
-                grid-template-columns: 1fr; /* Stack items on small screens */
+                grid-template-columns: 1fr;
+                /* Stack items on small screens */
             }
+
             .portfolio-item {
                 margin-bottom: 20px;
             }
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -164,7 +203,8 @@
                     <img src="https://placehold.co/400x200/3498db/ffffff?text=Dự+Án+1" alt="Dự án 1">
                     <div class="portfolio-item-content">
                         <h3>Thiết Kế Logo Công Ty</h3>
-                        <p>Dự án này bao gồm việc thiết kế logo và bộ nhận diện thương hiệu hoàn chỉnh cho một công ty khởi nghiệp công nghệ.</p>
+                        <p>Dự án này bao gồm việc thiết kế logo và bộ nhận diện thương hiệu hoàn chỉnh cho một công ty
+                            khởi nghiệp công nghệ.</p>
                         <a href="#">Xem chi tiết</a>
                     </div>
                 </div>
@@ -172,7 +212,8 @@
                     <img src="https://placehold.co/400x200/2ecc71/ffffff?text=Dự+Án+2" alt="Dự án 2">
                     <div class="portfolio-item-content">
                         <h3>Trang Web Thương Mại Điện Tử</h3>
-                        <p>Phát triển giao diện người dùng (UI) và trải nghiệm người dùng (UX) cho một trang web bán lẻ trực tuyến.</p>
+                        <p>Phát triển giao diện người dùng (UI) và trải nghiệm người dùng (UX) cho một trang web bán lẻ
+                            trực tuyến.</p>
                         <a href="#">Xem chi tiết</a>
                     </div>
                 </div>
@@ -188,7 +229,8 @@
                     <img src="https://placehold.co/400x200/e67e22/ffffff?text=Dự+Án+4" alt="Dự án 4">
                     <div class="portfolio-item-content">
                         <h3>Minh Họa Sách Trẻ Em</h3>
-                        <p>Dự án minh họa cho một cuốn sách truyện thiếu nhi, tập trung vào phong cách thân thiện và màu sắc tươi sáng.</p>
+                        <p>Dự án minh họa cho một cuốn sách truyện thiếu nhi, tập trung vào phong cách thân thiện và màu
+                            sắc tươi sáng.</p>
                         <a href="#">Xem chi tiết</a>
                     </div>
                 </div>
@@ -234,4 +276,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Lấy tham số hash từ URL (ví dụ: #design-Website4)
     const hash = window.location.hash;
 

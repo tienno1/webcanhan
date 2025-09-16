@@ -18,8 +18,10 @@
 .menu-toggle i {
   color: #ffffff;
   /* Cập nhật transition cho hiệu ứng xoay nhanh và đẹp hơn */
-  transition: color 0.3s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Thời gian chuyển động 0.2s để nhanh hơn, sử dụng cubic-bezier cho hiệu ứng "nhún" */
-  transform-origin: center center; /* Đảm bảo xoay từ chính giữa của icon */
+  transition: color 0.3s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Thời gian chuyển động 0.2s để nhanh hơn, sử dụng cubic-bezier cho hiệu ứng "nhún" */
+  transform-origin: center center;
+  /* Đảm bảo xoay từ chính giữa của icon */
 }
 
 /* Color for the menu icon when scrolled down (black) */
@@ -34,7 +36,8 @@
 
 /* Rotation for the menu icon when the nav is open */
 .menu-toggle.rotated i {
-  transform: rotate(-1710deg) !important; /* Xoay 5 vòng (360 * 5 = 1800 độ) và dừng ở góc 90 độ (-1800 + 90 = -1710) */
+  transform: rotate(-1710deg) !important;
+  /* Xoay 5 vòng (360 * 5 = 1800 độ) và dừng ở góc 90 độ (-1800 + 90 = -1710) */
   /* Debugging: Add a temporary border to see if the class is applied */
   /* border: 1px solid red !important; */
 }
@@ -72,44 +75,59 @@
   nav.main-nav ul li .dropdown-toggle {
     width: 100%;
     text-align: center;
-    background: #444; /* Default background, no transparency on mobile */
+    background: #444;
+    /* Default background, no transparency on mobile */
     color: #fff;
     border: none;
     font-size: 1em;
     cursor: pointer;
     border-radius: 8px;
-    transition: background-color 0.3s ease; /* Add transition for background */
+    transition: background-color 0.3s ease;
+    /* Add transition for background */
   }
 
   nav.main-nav ul li .dropdown-toggle:hover {
-    background-color: #555; /* Default hover background on mobile */
+    background-color: #555;
+    /* Default hover background on mobile */
   }
 
   nav.main-nav ul li .dropdown .dropdown-menu {
     /* Thay đổi display: none thành opacity và visibility cho animation */
     opacity: 0;
     visibility: hidden;
-    position: static; /* Giữ nguyên static cho mobile */
+    position: static;
+    /* Giữ nguyên static cho mobile */
     width: 100%;
-    background-color: #444; /* Default background, no transparency on mobile */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    margin-top: 0; /* Đặt lại margin-top về 0 để loại bỏ khoảng trống */
+    background-color: #444;
+    /* Default background, no transparency on mobile */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 0;
+    /* Đặt lại margin-top về 0 để loại bỏ khoảng trống */
     padding: 0px 0px 0px 0px;
     /* Thêm transition cho blur và max-height */
-    transition: opacity 0.1s ease, visibility 0.1s ease, transform 0.1s ease, filter 0.1s ease, max-height 0.1s ease; /* Bỏ delay cho mobile */
-    transform: translateY(-10px); /* Bắt đầu hơi dịch lên trên */
-    filter: blur(5px); /* Bắt đầu với hiệu ứng blur */
-    max-height: 0; /* Ẩn nội dung khi đóng */
-    overflow: hidden; /* Ẩn nội dung tràn ra */
+    transition: opacity 0.1s ease, visibility 0.1s ease, transform 0.1s ease, filter 0.1s ease, max-height 0.1s ease;
+    /* Bỏ delay cho mobile */
+    transform: translateY(-10px);
+    /* Bắt đầu hơi dịch lên trên */
+    filter: blur(5px);
+    /* Bắt đầu với hiệu ứng blur */
+    max-height: 0;
+    /* Ẩn nội dung khi đóng */
+    overflow: hidden;
+    /* Ẩn nội dung tràn ra */
   }
 
   nav.main-nav ul li .dropdown.open .dropdown-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0); /* Trở về vị trí ban đầu */
-    filter: blur(0); /* Loại bỏ hiệu ứng blur */
-    transition-delay: 0s; /* Đảm bảo không có độ trễ khi xuất hiện */
-    max-height: 300px; /* Đặt một giá trị đủ lớn để hiển thị toàn bộ nội dung */
+    transform: translateY(0);
+    /* Trở về vị trí ban đầu */
+    filter: blur(0);
+    /* Loại bỏ hiệu ứng blur */
+    transition-delay: 0s;
+    /* Đảm bảo không có độ trễ khi xuất hiện */
+    max-height: 300px;
+    /* Đặt một giá trị đủ lớn để hiển thị toàn bộ nội dung */
   }
 
   nav.main-nav ul li .dropdown-menu li {
@@ -125,7 +143,8 @@
   }
 
   nav.main-nav ul li .dropdown-menu li:hover {
-    background-color: #666; /* Default hover background on mobile */
+    background-color: #666;
+    /* Default hover background on mobile */
   }
 
   nav.main-nav ul li .dropdown-toggle .arrow {
@@ -141,15 +160,19 @@
   nav.main-nav.sticky-nav {
     background-color: rgba(51, 51, 51, 0.8);
   }
+
   nav.main-nav.sticky-nav .dropdown-toggle {
     background: rgba(68, 68, 68, 0.8);
   }
+
   nav.main-nav.sticky-nav .dropdown-toggle:hover {
     background-color: rgba(85, 85, 85, 0.9);
   }
+
   nav.main-nav.sticky-nav .dropdown .dropdown-menu {
     background-color: rgba(68, 68, 68, 0.8);
   }
+
   nav.main-nav.sticky-nav .dropdown-menu li:hover {
     background-color: rgba(102, 102, 102, 0.9);
   }
@@ -169,14 +192,18 @@
   position: relative;
   display: inline-block;
   font-family: 'Poppins', sans-serif;
-  width: 190px; /* Đã điều chỉnh chiều rộng cho container dropdown */
+  width: 190px;
+  /* Đã điều chỉnh chiều rộng cho container dropdown */
 }
 
 .dropdown-toggle {
   padding: 10px;
-  width: 110%; /* Đã đặt 100% để nó lấp đầy container .dropdown */
-  background: #444; /* Default background, no transparency */
-  color: #fff; /* Màu trắng mặc định cho chữ */
+  width: 110%;
+  /* Đã đặt 100% để nó lấp đầy container .dropdown */
+  background: #444;
+  /* Default background, no transparency */
+  color: #fff;
+  /* Màu trắng mặc định cho chữ */
   border: none;
   font-size: 1em;
   cursor: pointer;
@@ -186,18 +213,23 @@
 }
 
 .dropdown-toggle:hover {
-  background: #555; /* Default hover background */
-  color: #ff6f00; /* Màu cam khi hover */
-  transition-delay: 0s; /* Đảm bảo chuyển màu ngay lập tức khi hover */
+  background: #555;
+  /* Default hover background */
+  color: #ff6f00;
+  /* Màu cam khi hover */
+  transition-delay: 0s;
+  /* Đảm bảo chuyển màu ngay lập tức khi hover */
 }
 
 /* New class for transparent dropdown toggle when nav is sticky */
 .sticky-nav .dropdown-toggle {
-  background-color: #8b8b8b82; /* Màu sáng hơn nav */
+  background-color: #8b8b8b82;
+  /* Màu sáng hơn nav */
 }
 
 .sticky-nav .dropdown-toggle:hover {
-  background: rgba(85, 85, 85, 0.9); /* Adjusted for transparency on hover when sticky */
+  background: rgba(85, 85, 85, 0.9);
+  /* Adjusted for transparency on hover when sticky */
 }
 
 
@@ -208,31 +240,40 @@
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  background-color: #444; /* Default background, no transparency */
+  background-color: #444;
+  /* Default background, no transparency */
   border-radius: 10px;
-  width: 100%; /* Sẽ là 100% của .dropdown (180px) */
-  min-width: 100px; /* Giảm min-width để linh hoạt hơn */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  width: 100%;
+  /* Sẽ là 100% của .dropdown (180px) */
+  min-width: 100px;
+  /* Giảm min-width để linh hoạt hơn */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   margin-top: 20px;
   /* Thêm transition cho opacity, transform và filter */
   transition: opacity 0.2s ease 2s, visibility 0.2s ease 2s, transform 0.2s ease 2s, filter 0.2s ease 2s;
-  transform: translateY(-10px); /* Bắt đầu hơi dịch lên trên */
-  filter: blur(5px); /* Bắt đầu với hiệu ứng blur */
+  transform: translateY(-10px);
+  /* Bắt đầu hơi dịch lên trên */
+  filter: blur(5px);
+  /* Bắt đầu với hiệu ứng blur */
 }
 
 /* New class for transparent dropdown menu when nav is sticky */
 .sticky-nav .dropdown-menu {
-  background-color: rgba(68, 68, 68, 0.8); /* Adjusted for transparency when sticky */
+  background-color: rgba(68, 68, 68, 0.8);
+  /* Adjusted for transparency when sticky */
 }
 
 /* Khi dropdown mở (dù là do click hay hover), hiển thị nó với hiệu ứng */
 .dropdown.open .dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0); /* Trở về vị trí ban đầu */
-  filter: blur(0); /* Loại bỏ hiệu ứng blur */
-  transition-delay: 0s; /* Đảm bảo không có độ trễ khi xuất hiện */
+  transform: translateY(0);
+  /* Trở về vị trí ban đầu */
+  filter: blur(0);
+  /* Loại bỏ hiệu ứng blur */
+  transition-delay: 0s;
+  /* Đảm bảo không có độ trễ khi xuất hiện */
 }
 
 /* Chỉ áp dụng hover cho desktop */
@@ -242,8 +283,10 @@
     visibility: visible;
     transform: translateY(0);
     filter: blur(0);
-    transition-delay: 0s; /* Đảm bảo không có độ trễ khi xuất hiện */
+    transition-delay: 0s;
+    /* Đảm bảo không có độ trễ khi xuất hiện */
   }
+
   .dropdown:not(:hover) .dropdown-menu {
     transition: opacity 0.1s ease 2s, visibility 0.1s ease 2s, transform 0.1s ease 2s, filter 0.1s ease 2s;
   }
@@ -255,8 +298,10 @@
   list-style: none;
   cursor: pointer;
 }
+
 .sticky-nav .dropdown-menu li a:hover {
-  background-color: #8b8b8b82; /* Màu sáng hơn nav */
+  background-color: #8b8b8b82;
+  /* Màu sáng hơn nav */
 }
 
 .dropdown-menu li a {
@@ -266,7 +311,8 @@
   padding: 10px;
   color: #fff;
 }
-.dropdown-menu li{
+
+.dropdown-menu li {
   padding: 3px 0;
   margin: 0 10px;
   left: 0;
@@ -278,10 +324,13 @@
   margin-left: 5px;
   /* Mặc định xoay sang trái và màu trắng */
   transform: rotate(-90deg);
-  color: #ffffff; /* Màu trắng mặc định */
+  color: #ffffff;
+  /* Màu trắng mặc định */
   /* Thời gian xoay về vị trí ban đầu là 0.2s, sau 2s delay */
-  transition: transform 0.2s ease 2s, color 0.2s ease 2s; /* Thêm transition cho màu */
-  display: inline-block; /* Đảm bảo transform hoạt động đúng */
+  transition: transform 0.2s ease 2s, color 0.2s ease 2s;
+  /* Thêm transition cho màu */
+  display: inline-block;
+  /* Đảm bảo transform hoạt động đúng */
 }
 
 /* Chỉ áp dụng hover cho desktop */
@@ -289,9 +338,11 @@
   .dropdown:hover .dropdown-toggle .arrow {
     /* Khi hover, xoay xuống trong 0.2s, không có delay và màu cam */
     transform: rotate(0deg);
-    color:  #ff6f00; /* Màu cam khi hover */
+    color: #ff6f00;
+    /* Màu cam khi hover */
     transition-delay: 0s;
   }
+
   .dropdown:not(:hover) .dropdown-toggle .arrow {
     transition: transform 0.2s ease 2s, color 0.2s ease 2s;
   }

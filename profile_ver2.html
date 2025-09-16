@@ -10,6 +10,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts - Inter for modern typography -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          // Khởi tạo EmailJS với Public Key của bạn.
+          // Đây là chìa khóa công khai (Public Key) của bạn.
+          // VUI LÒNG THAY THẾ "YOUR_PUBLIC_KEY" BẰNG KHÓA CÔNG KHAI THỰC TẾ CỦA BẠN TỪ BẢNG ĐIỀU KHIỂN EMAILJS.
+          // Public Key mới của bạn là "X0dHr4HpO2r71CjtJ".
+          // Vui lòng truy cập https://dashboard.emailjs.com/admin/account để lấy khóa chính xác.
+          emailjs.init({
+            publicKey: "X0dHr4HpO2r71CjtJ", // Đã cập nhật lại khóa công khai của bạn
+          });
+       })();
+    </script>
 </head>
 <body>
 
@@ -474,25 +489,36 @@
         </div>
         <div class="contact-form-container">
           <h2>Gửi tin nhắn cho tôi</h2>
-          <form class="contact-form">
-            <div class="form-group">
-              <label for="name">Tên của bạn:</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email của bạn:</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Tin nhắn:</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="submit-button"><i class="fas fa-paper-plane"></i> Gửi Tin Nhắn</button>
-          </form>
+          <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Họ và Tên</label>
+                    <input type="text" id="name" name="from_name" required placeholder="Nhập họ và tên của bạn...">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="from_email" required placeholder="Nhập email của bạn...">
+                </div>
+                <div class="form-group">
+                    <label for="message">Nội dung</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Nội dung lời nhắn của bạn..."></textarea>
+                </div>
+                <button type="submit" class="submit-button lift-on-hover">Gửi ngay</button>
+            </form>
+            <p class="form-note">
+                <i class="fa-solid fa-circle-info"></i>
+                Khi bạn nhấn nút "Gửi ngay", form sẽ gửi email trực tiếp.
+            </p>
         </div>
       </div>
     </div>
   </div>
+      <!-- Modal thông báo tùy chỉnh cho form -->
+    <div id="form-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="form-modal-close">&times;</span>
+            <p id="form-modal-message"></p>
+        </div>
+    </div>
 
   <!-- Mobile Warning Overlay and Box -->
   <div class="mobile-overlay" id="mobileOverlay"></div>
@@ -525,65 +551,8 @@
             } else {
                 console.error('Lỗi: Không tìm thấy nút "back-to-normal-button".');
             }
-
-            // Simple form submission (for demo purposes)
-            const contactForm = document.querySelector('.contact-form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // In a real application, you would send this data to a backend server.
-                    // For now, let's just log it and show a success message.
-                    console.log('Form Submitted!', {
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value,
-                        message: document.getElementById('message').value
-                    });
-                    // IMPORTANT: Replaced alert with a custom message box for better UX
-                    showCustomMessage('Cảm ơn bạn đã gửi tin nhắn! Tôi sẽ phản hồi sớm nhất có thể.', 'success');
-                    contactForm.reset();
-                });
-            }
-
-            // Function to show a custom message box (replacement for alert)
-            function showCustomMessage(message, type) {
-                const messageBox = document.createElement('div');
-                messageBox.classList.add('custom-message-box', type);
-                messageBox.innerHTML = `
-                    <p>${message}</p>
-                    <button class="close-message-box">OK</button>
-                `;
-                document.body.appendChild(messageBox);
-
-                // Center the message box
-                messageBox.style.left = '50%';
-                messageBox.style.top = '50%';
-                messageBox.style.transform = 'translate(-50%, -50%)';
-
-                const closeButton = messageBox.querySelector('.close-message-box');
-                closeButton.addEventListener('click', () => {
-                    document.body.removeChild(messageBox);
-                });
-
-                // Optional: Auto-hide after some time
-                setTimeout(() => {
-                    if (document.body.contains(messageBox)) {
-                        document.body.removeChild(messageBox);
-                    }
-                }, 5000); // Hide after 5 seconds
-            }
-
-            // Animate skill bars on scroll into view (optional, could be in JS file)
-            // This is a simple animation on load. For dynamic animation on scroll,
-            // you'd need an Intersection Observer.
-            document.querySelectorAll('.skill-bar').forEach(bar => {
-                const level = bar.dataset.level;
-                // Using setTimeout to allow CSS transition to apply
-                setTimeout(() => {
-                    bar.style.width = level;
-                }, 100);
-            });
         });
     </script>
-
+    <script src="js/mail.js"></script>
 </body>
 </html>

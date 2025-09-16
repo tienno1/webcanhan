@@ -2,86 +2,86 @@
 let myFullpage; // Biến toàn cục để lưu trữ instance của fullPage.js
 
 function initializeFullPage() {
-  if (myFullpage) {
-    myFullpage.destroy('all'); // Hủy instance cũ nếu có
-  }
-  myFullpage = new fullpage('#fullpage', {
-    autoScrolling: true,
-    navigation: true,
-    // Cập nhật mảng anchors để khớp với data-anchor trong HTML
-    anchors: ['gioi-thieu', 'so-thich', 'ky-nang', 'san-pham', 'lien-he'],
-
-    onLeave: function(origin, destination, direction) {
-      const nav = document.getElementById('sideNav');
-      const navItems = nav.querySelectorAll('ul li');
-      const theme = destination.item.dataset.navTheme;
-      const currentLogo = destination.item.dataset.logo;
-
-      // Xử lý đổi theme cho nav
-      nav.classList.remove('light', 'dark', 'green', 'blue', 'green-light');
-      if (theme) {
-        nav.classList.add(theme);
-      } else {
-        nav.classList.add('light'); // Mặc định là light nếu không có data-nav-theme
-      }
-
-      // Xử lý thay đổi logo
-      const mainLogo = document.getElementById('logo-main');
-      const defaultLogoSrc = 'img/logo_black.png'; // Logo mặc định (cho light theme)
-      const darkLogoSrc = 'img/logo.png'; // Logo cho dark/colored themes
-
-      if (currentLogo) {
-        mainLogo.src = currentLogo;
-        mainLogo.style.display = 'block';
-      } else if (theme === 'dark' || theme === 'green' || theme === 'blue'|| theme === 'green-light') {
-        mainLogo.src = darkLogoSrc;
-        mainLogo.style.display = 'block';
-      } else {
-        mainLogo.src = defaultLogoSrc;
-        mainLogo.style.display = 'block';
-      }
-      
-      // Cập nhật lớp 'active' cho các mục điều hướng
-      navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.querySelector('a').getAttribute('href') === `#${destination.anchor}`) {
-          item.classList.add('active');
-        }
-      });
-
-      // Carousel specific logic: Dừng tự động chuyển khi rời khỏi section "Sản Phẩm"
-      if (origin.anchor === 'san-pham') {
-          currentProductIndex = 0; // Đặt lại về thẻ đầu tiên khi rời đi
-          stopAutoSlide(); // Dừng tự động chuyển
-      }
-      // Skill carousel logic: Dừng tự động chuyển khi rời khỏi section "Kỹ Năng"
-      if (origin.anchor === 'ky-nang') {
-          currentSkillIndex = 0; // Đặt lại về thẻ đầu tiên khi rời đi
-          stopSkillAutoSlide(); // Dừng tự động chuyển
-      }
-    },
-
-    afterLoad: function(origin, destination, direction) {
-      // Carousel specific logic: Khởi tạo/khởi tạo lại và bắt đầu tự động chuyển khi vào section "Sản Phẩm"
-      if (destination.anchor === 'san-pham') {
-        initializeProductCarousel(); // Khởi tạo/re-initialize carousel
-        startAutoSlide(); // Bắt đầu tự động chuyển
-      }
-      // Skill carousel logic: Khởi tạo/khởi tạo lại và bắt đầu tự động chuyển khi vào section "Kỹ Năng"
-      if (destination.anchor === 'ky-nang') {
-        initializeSkillCarousel(); // Khởi tạo/re-initialize skill carousel
-        startSkillAutoSlide(); // Bắt đầu tự động chuyển
-        // Animate skill bars when entering the section
-        document.querySelectorAll('#section3 .skill-bar').forEach(bar => {
-            const level = bar.dataset.level;
-            // Using setTimeout to allow CSS transition to apply after layout render
-            setTimeout(() => {
-                bar.style.width = level;
-            }, 100);
-        });
-      }
+    if (myFullpage) {
+        myFullpage.destroy('all'); // Hủy instance cũ nếu có
     }
-  });
+    myFullpage = new fullpage('#fullpage', {
+        autoScrolling: true,
+        navigation: true,
+        // Cập nhật mảng anchors để khớp với data-anchor trong HTML
+        anchors: ['gioi-thieu', 'so-thich', 'ky-nang', 'san-pham', 'lien-he'],
+
+        onLeave: function (origin, destination, direction) {
+            const nav = document.getElementById('sideNav');
+            const navItems = nav.querySelectorAll('ul li');
+            const theme = destination.item.dataset.navTheme;
+            const currentLogo = destination.item.dataset.logo;
+
+            // Xử lý đổi theme cho nav
+            nav.classList.remove('light', 'dark', 'green', 'blue', 'green-light');
+            if (theme) {
+                nav.classList.add(theme);
+            } else {
+                nav.classList.add('light'); // Mặc định là light nếu không có data-nav-theme
+            }
+
+            // Xử lý thay đổi logo
+            const mainLogo = document.getElementById('logo-main');
+            const defaultLogoSrc = 'img/logo_black.png'; // Logo mặc định (cho light theme)
+            const darkLogoSrc = 'img/logo.png'; // Logo cho dark/colored themes
+
+            if (currentLogo) {
+                mainLogo.src = currentLogo;
+                mainLogo.style.display = 'block';
+            } else if (theme === 'dark' || theme === 'green' || theme === 'blue' || theme === 'green-light') {
+                mainLogo.src = darkLogoSrc;
+                mainLogo.style.display = 'block';
+            } else {
+                mainLogo.src = defaultLogoSrc;
+                mainLogo.style.display = 'block';
+            }
+
+            // Cập nhật lớp 'active' cho các mục điều hướng
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.querySelector('a').getAttribute('href') === `#${destination.anchor}`) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Carousel specific logic: Dừng tự động chuyển khi rời khỏi section "Sản Phẩm"
+            if (origin.anchor === 'san-pham') {
+                currentProductIndex = 0; // Đặt lại về thẻ đầu tiên khi rời đi
+                stopAutoSlide(); // Dừng tự động chuyển
+            }
+            // Skill carousel logic: Dừng tự động chuyển khi rời khỏi section "Kỹ Năng"
+            if (origin.anchor === 'ky-nang') {
+                currentSkillIndex = 0; // Đặt lại về thẻ đầu tiên khi rời đi
+                stopSkillAutoSlide(); // Dừng tự động chuyển
+            }
+        },
+
+        afterLoad: function (origin, destination, direction) {
+            // Carousel specific logic: Khởi tạo/khởi tạo lại và bắt đầu tự động chuyển khi vào section "Sản Phẩm"
+            if (destination.anchor === 'san-pham') {
+                initializeProductCarousel(); // Khởi tạo/re-initialize carousel
+                startAutoSlide(); // Bắt đầu tự động chuyển
+            }
+            // Skill carousel logic: Khởi tạo/khởi tạo lại và bắt đầu tự động chuyển khi vào section "Kỹ Năng"
+            if (destination.anchor === 'ky-nang') {
+                initializeSkillCarousel(); // Khởi tạo/re-initialize skill carousel
+                startSkillAutoSlide(); // Bắt đầu tự động chuyển
+                // Animate skill bars when entering the section
+                document.querySelectorAll('#section3 .skill-bar').forEach(bar => {
+                    const level = bar.dataset.level;
+                    // Using setTimeout to allow CSS transition to apply after layout render
+                    setTimeout(() => {
+                        bar.style.width = level;
+                    }, 100);
+                });
+            }
+        }
+    });
 }
 
 
@@ -320,7 +320,7 @@ function moveSkillCarousel(direction) {
         if (currentSkillIndex > totalSkillCards - skillsPerView) {
             currentSkillIndex = 0; // Loop to beginning
         }
-        }
+    }
     updateSkillCarousel();
 }
 
@@ -368,7 +368,7 @@ window.addEventListener('resize', () => {
         stopSkillAutoSlide();
         startSkillAutoSlide(); // Khởi động lại sau khi cập nhật layout
     }
-    
+
     // Kiểm tra và hiển thị/ẩn thông báo di động
     checkMobileView();
 });
@@ -440,7 +440,7 @@ function showMobileWarning() {
     if (overlay && warningBox) {
         overlay.style.display = 'block';
         warningBox.style.display = 'flex'; // Dùng flex để căn giữa nội dung
-        
+
         // Vô hiệu hóa fullPage.js khi thông báo hiển thị
         if (myFullpage) {
             myFullpage.destroy('all'); // Tắt fullPage.js
@@ -458,7 +458,7 @@ function hideMobileWarning() {
     if (overlay && warningBox) {
         overlay.style.display = 'none';
         warningBox.style.display = 'none';
-        
+
         // Kích hoạt lại fullPage.js khi thông báo ẩn
         if (!myFullpage) { // Chỉ khởi tạo lại nếu nó đã bị hủy
             initializeFullPage();

@@ -9,6 +9,7 @@ body {
     padding-bottom: 80px;
     overflow-x: hidden;
 }
+
 body.toc-open {
     overflow-y: hidden;
 }
@@ -18,31 +19,36 @@ body.toc-open {
     display: inline-block;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     will-change: transform, box-shadow;
-    box-shadow: 0 0 0 rgba(0,0,0,0);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
+
 .lift-on-hover:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Header */
 header {
-    background-image:url(../img/sl_0210121_40570_23.jpg); /* Background image */
+    background-image: url(../img/sl_0210121_40570_23.jpg);
+    /* Background image */
     background-size: 100%;
     color: #fff;
     padding: 1rem 0;
     text-align: center;
     position: relative;
 }
+
 header h1 {
     margin: 0;
     font-size: 2.5rem;
 }
+
 header p {
     color: #ffffff;
     font-size: 1rem;
     opacity: 0.8;
 }
+
 header a img {
     width: 30%;
     max-width: 150px;
@@ -67,44 +73,65 @@ header a img {
 
 /* Kiểu cho thanh điều hướng (Navigation) */
 nav {
-    background-color: #444; /* Slightly darker background than header */
-    padding: 0.8rem 0; /* Top and bottom padding */
-    text-align: center; /* Center content */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add a subtle shadow */
+    background-color: #444;
+    /* Slightly darker background than header */
+    padding: 0.8rem 0;
+    /* Top and bottom padding */
+    text-align: center;
+    /* Center content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Add a subtle shadow */
     /* Các thuộc tính dính sẽ được thêm bằng JavaScript thông qua class .sticky-nav */
-    transition: background-color 0.3s ease, opacity 0.3s ease; /* Thêm transition cho độ trong suốt */
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    /* Thêm transition cho độ trong suốt */
 }
 
 /* Class mới cho thanh nav dính */
 .sticky-nav {
-    position: fixed; /* Giữ thanh nav ở vị trí cố định */
-    top: 0; /* Đặt thanh nav ở trên cùng */
-    width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
-    z-index: 1000; /* Đảm bảo thanh nav nằm trên các nội dung khác */
-    background-color: rgba(68, 68, 68, 0.8); /* Màu nền khi dính với độ trong suốt 80% */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Đổ bóng khi dính */
-    box-sizing: border-box; /* Đảm bảo padding và border không làm tăng kích thước tổng thể */
+    position: fixed;
+    /* Giữ thanh nav ở vị trí cố định */
+    top: 0;
+    /* Đặt thanh nav ở trên cùng */
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng màn hình */
+    z-index: 1000;
+    /* Đảm bảo thanh nav nằm trên các nội dung khác */
+    background-color: rgba(68, 68, 68, 0.8);
+    /* Màu nền khi dính với độ trong suốt 80% */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Đổ bóng khi dính */
+    box-sizing: border-box;
+    /* Đảm bảo padding và border không làm tăng kích thước tổng thể */
 }
 
 
 nav ul {
-    list-style: none; /* Remove list bullets */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
-    display: flex; /* Use flexbox for horizontal items */
-    justify-content: center; /* Center the items */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    list-style: none;
+    /* Remove list bullets */
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
+    display: flex;
+    /* Use flexbox for horizontal items */
+    justify-content: center;
+    /* Center the items */
+    flex-wrap: wrap;
+    /* Allow items to wrap on smaller screens */
 }
 
 nav ul li {
-    margin: 0 15px ; /* Space between list items */
+    margin: 0 15px;
+    /* Space between list items */
     /* Đảm bảo chiều rộng nội dung tự co giãn */
-    flex-shrink: 0; /* Ngăn không cho các mục co lại */
+    flex-shrink: 0;
+    /* Ngăn không cho các mục co lại */
 }
 
 nav ul li a {
     position: relative;
-    color: #fff; /* Mặc định màu chữ */
+    color: #fff;
+    /* Mặc định màu chữ */
     text-decoration: none;
     font-weight: bold;
     padding: 5px 10px;
@@ -112,8 +139,10 @@ nav ul li a {
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow: hidden;
     /* Điều chỉnh padding để chiều rộng khung nhỏ lại */
-    padding: 8px 15px; /* Giảm padding ngang một chút để khung nhỏ hơn */
-    white-space: nowrap; /* Ngăn không cho chữ xuống dòng trong nav item */
+    padding: 8px 15px;
+    /* Giảm padding ngang một chút để khung nhỏ hơn */
+    white-space: nowrap;
+    /* Ngăn không cho chữ xuống dòng trong nav item */
 }
 
 /* Viền chạy hiệu ứng dưới chữ */
@@ -133,8 +162,10 @@ nav ul li a::after {
 /* Hover + Active: nền sáng hơn nav, chữ vẫn trắng */
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: #8b8b8b82; /* Màu sáng hơn nav */
-    color: #ffbb87;          /* Màu chữ sáng nhẹ, không quá trắng */
+    background-color: #8b8b8b82;
+    /* Màu sáng hơn nav */
+    color: #ffbb87;
+    /* Màu chữ sáng nhẹ, không quá trắng */
 }
 
 nav ul li a:hover::after,
@@ -150,11 +181,12 @@ nav ul li a.active::after {
     flex-direction: row;
     margin: 20px auto;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
     position: relative;
 }
+
 /* TOC sidebar */
 .toc {
     width: 200px;
@@ -166,6 +198,7 @@ nav ul li a.active::after {
     overflow-y: auto;
     max-height: calc(100vh - 150px);
 }
+
 .toc h3 {
     margin-top: 0;
     color: #007bff;
@@ -173,23 +206,28 @@ nav ul li a.active::after {
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
+
 .toc ul {
     list-style: none;
     padding: 0;
     margin: 0 0 20px 0;
 }
+
 .toc ul li {
     margin-bottom: 10px;
 }
+
 .toc ul li a {
     color: #555;
     text-decoration: none;
     transition: color 0.3s ease;
 }
+
 .toc ul li a:hover {
     color: #007bff;
     text-decoration: underline;
 }
+
 .toc ul li a.active-toc {
     color: #007bff;
     font-weight: bold;
@@ -200,36 +238,50 @@ nav ul li a.active::after {
 #toc-content-display {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #ddd; /* Separator line */
+    border-top: 1px solid #ddd;
+    /* Separator line */
     /* Ensure this area is visible to display content */
     display: block;
     /* Add some padding and styling for the displayed content */
     padding: 15px;
-    background-color: #fff; /* White background for displayed content */
+    background-color: #fff;
+    /* White background for displayed content */
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     /* Add flexbox to the container to arrange images horizontally */
     display: flex;
-    flex-wrap: wrap; /* Allow images to wrap to the next line if needed */
-    gap: 10px; /* Adjusted gap for better spacing with 24.5% width */
-    justify-content: center; /* Center images if they don't fill the line */
+    flex-wrap: wrap;
+    /* Allow images to wrap to the next line if needed */
+    gap: 10px;
+    /* Adjusted gap for better spacing with 24.5% width */
+    justify-content: center;
+    /* Center images if they don't fill the line */
 }
 
 #toc-content-display .image-wrapper {
-    width: 100%; /* In sidebar, make image wrappers take full width */
-    display: block; /* Stack them vertically in sidebar */
-    margin-bottom: 10px; /* Space between items in sidebar */
+    width: 100%;
+    /* In sidebar, make image wrappers take full width */
+    display: block;
+    /* Stack them vertically in sidebar */
+    margin-bottom: 10px;
+    /* Space between items in sidebar */
 }
 
 #toc-content-display img {
     /* Set width to 100% to fill its wrapper */
     width: 100%;
-    max-width: 100%; /* Ensure images don't exceed container width */
-    display: block; /* Make images block-level */
-    margin: 0 auto; /* Center image horizontally */
-    border-radius: 5px; /* Rounded corners for images */
-    object-fit: contain; /* Use contain to ensure images are not cropped or stretched */
-    height: auto; /* Allow height to adjust proportionally */
+    max-width: 100%;
+    /* Ensure images don't exceed container width */
+    display: block;
+    /* Make images block-level */
+    margin: 0 auto;
+    /* Center image horizontally */
+    border-radius: 5px;
+    /* Rounded corners for images */
+    object-fit: contain;
+    /* Use contain to ensure images are not cropped or stretched */
+    height: auto;
+    /* Allow height to adjust proportionally */
 }
 
 /* Hide small logo in TOC content display */
@@ -239,16 +291,21 @@ nav ul li a.active::after {
 
 
 #toc-content-display h3 {
-    color: #333; /* Darker color for content titles */
+    color: #333;
+    /* Darker color for content titles */
     margin-top: 0;
     margin-bottom: 10px;
-    width: 100%; /* Ensure heading takes full width above images */
+    width: 100%;
+    /* Ensure heading takes full width above images */
 }
+
 #toc-content-display p {
-    font-size: 0.9rem; /* Smaller font size for sidebar text */
+    font-size: 0.9rem;
+    /* Smaller font size for sidebar text */
     color: #555;
     margin-bottom: 10px;
-    width: 100%; /* Ensure paragraphs take full width above images */
+    width: 100%;
+    /* Ensure paragraphs take full width above images */
 }
 
 /* Main content area */
@@ -257,6 +314,7 @@ main {
     padding: 20px;
     overflow-y: auto;
 }
+
 main h2 {
     color: #007bff;
     border-bottom: 2px solid #007bff;
@@ -264,6 +322,7 @@ main h2 {
     margin-bottom: 20px;
     position: relative;
 }
+
 main h2::after {
     content: '';
     position: absolute;
@@ -274,6 +333,7 @@ main h2::after {
     background-color: #ff007b;
     transition: width 0.6s ease-out;
 }
+
 .fade-in-element.is-visible h2::after {
     width: 100%;
 }
@@ -286,15 +346,21 @@ footer {
     text-align: center;
     padding: 1rem 0;
 }
+
 footer .social-links a {
-    color: #fff; /* White text color */
-    text-decoration: none; /* Remove underline */
-    margin: 0 10px; /* Space between social links */
-    transition-duration: 0.8s ease; /* Smooth color transition on hover */
+    color: #fff;
+    /* White text color */
+    text-decoration: none;
+    /* Remove underline */
+    margin: 0 10px;
+    /* Space between social links */
+    transition-duration: 0.8s ease;
+    /* Smooth color transition on hover */
 }
 
 footer .social-links a:hover {
-    color: #ff6600; /* Change color on hover */
+    color: #ff6600;
+    /* Change color on hover */
 }
 
 /* Drawing sections */
@@ -305,9 +371,11 @@ footer .social-links a:hover {
     margin-bottom: 20px;
     border-radius: 5px;
 }
+
 .drawing.is-visible {
     display: block;
 }
+
 .drawing h3 {
     margin-top: 0;
     color: #555;
@@ -318,28 +386,41 @@ footer .social-links a:hover {
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center images if they don't fill the line */
-    gap: 10px; /* Khoảng cách giữa các hình ảnh */
+    justify-content: center;
+    /* Center images if they don't fill the line */
+    gap: 10px;
+    /* Khoảng cách giữa các hình ảnh */
 }
 
 /* Wrapper for image and small logo */
 .image-wrapper {
     position: relative;
-    display: inline-block; /* Changed to inline-block to arrange horizontally */
-    width: 60%;    /* Takes specific width for horizontal layout */
-    vertical-align: top; /* Align items to the top in a row */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    display: inline-block;
+    /* Changed to inline-block to arrange horizontally */
+    width: 60%;
+    /* Takes specific width for horizontal layout */
+    vertical-align: top;
+    /* Align items to the top in a row */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
     /* Default display handled by JS, will be 'none' initially for hidden items */
 }
 
 .drawing-content .image-wrapper img:first-of-type {
-    max-width: 100%; /* Ensure images fit within the image-wrapper */
-    height: auto; /* Allow height to adjust proportionally */
-    display: block; /* Ensure it's a block element within its wrapper */
-    margin: 0 auto; /* Center image horizontally within its wrapper */
-    border-radius: 5px; /* Rounded corners for images */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for images */
-    object-fit: contain; /* Use contain to ensure images are not cropped or stretched */
+    max-width: 100%;
+    /* Ensure images fit within the image-wrapper */
+    height: auto;
+    /* Allow height to adjust proportionally */
+    display: block;
+    /* Ensure it's a block element within its wrapper */
+    margin: 0 auto;
+    /* Center image horizontally within its wrapper */
+    border-radius: 5px;
+    /* Rounded corners for images */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for images */
+    object-fit: contain;
+    /* Use contain to ensure images are not cropped or stretched */
 }
 
 /* Small logo on top-left of image */
@@ -347,14 +428,20 @@ footer .social-links a:hover {
     position: absolute;
     top: 5px;
     left: 5px;
-    width: 30px; /* Kích thước logo nhỏ cố định */
-    height: 30px; /* Kích thước logo nhỏ cố định */
-    object-fit: contain; /* Đảm bảo logo không bị dẹt */
-    border-radius: 50%; /* Bo tròn logo nếu cần */
-    background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ cho logo */
+    width: 30px;
+    /* Kích thước logo nhỏ cố định */
+    height: 30px;
+    /* Kích thước logo nhỏ cố định */
+    object-fit: contain;
+    /* Đảm bảo logo không bị dẹt */
+    border-radius: 50%;
+    /* Bo tròn logo nếu cần */
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Nền trắng mờ cho logo */
     padding: 3px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1; /* Đảm bảo logo nằm trên ảnh */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    /* Đảm bảo logo nằm trên ảnh */
 }
 
 .drawing p {
@@ -385,6 +472,7 @@ footer .social-links a:hover {
     margin-bottom: 20px;
     text-align: center;
 }
+
 #search-input {
     padding: 10px;
     border: 1px solid #ccc;
@@ -394,6 +482,7 @@ footer .social-links a:hover {
     width: 70%;
     max-width: 300px;
 }
+
 #search-button {
     padding: 10px 15px;
     background-color: #007bff;
@@ -404,9 +493,11 @@ footer .social-links a:hover {
     font-size: 1rem;
     transition: background-color 0.3s ease;
 }
+
 #search-button:hover {
     background-color: #0056b3;
 }
+
 .highlight {
     background-color: yellow;
     font-weight: bold;
@@ -419,14 +510,24 @@ footer .social-links a:hover {
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     will-change: opacity, transform;
 }
+
 .fade-in-element.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
+
 @keyframes gentle-move {
-    0%, 100% { transform: translateY(0);}
-    50% { transform: translateY(-3px);}
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
 }
+
 .animated-text {
     display: inline-block;
     animation: gentle-move 3s ease-in-out infinite;
@@ -437,26 +538,32 @@ footer .social-links a:hover {
     display: inline-block;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     will-change: transform, box-shadow;
-    box-shadow: 0 0 0 rgba(0,0,0,0);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
+
 .lift-on-hover:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* --- Pagination Styles --- */
 .pagination-container {
-    text-align: center; /* Center the pagination buttons */
-    padding: 5px 0; /* Add padding */
-    background-color: #ffffffb7; /* White background */
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Shadow above */
+    text-align: center;
+    /* Center the pagination buttons */
+    padding: 5px 0;
+    /* Add padding */
+    background-color: #ffffffb7;
+    /* White background */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    /* Shadow above */
 
     /* Make the pagination bar fixed at the bottom */
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 1000;
+    /* Ensure it's above other content */
 }
 
 
@@ -488,8 +595,10 @@ footer .social-links a:hover {
 .pagination-button.next {
     font-weight: bold;
     color: #007bff;
-    border: none; /* Remove border for next button */
-    background-color: transparent; /* Transparent background for next button */
+    border: none;
+    /* Remove border for next button */
+    background-color: transparent;
+    /* Transparent background for next button */
 }
 
 .pagination-button.next:hover {
@@ -513,26 +622,51 @@ footer .social-links a:hover {
 
 
 /* Responsive Design (Mobile First) */
-header h1 { font-size: 1.8rem; }
-header p { font-size: 1rem; }
-nav.main-nav ul { flex-direction: column; padding: 0 10px; }
-nav.main-nav ul li { margin: 5px 0; }
-nav.main-nav ul li a { display: block; padding: 10px; }
+header h1 {
+    font-size: 1.8rem;
+}
+
+header p {
+    font-size: 1rem;
+}
+
+nav.main-nav ul {
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+nav.main-nav ul li {
+    margin: 5px 0;
+}
+
+nav.main-nav ul li a {
+    display: block;
+    padding: 10px;
+}
+
 @media (max-width: 768px) {
     .dropdown-toggle {
         width: 100%;
         margin: -10px 10px 0px 0px;
     }
+
     .content-container {
         flex-direction: column;
         margin: 10px;
         box-shadow: none;
         border-radius: 0;
     }
-    .toc-toggle-button { display: block; }
+
+    .toc-toggle-button {
+        display: block;
+    }
+
     .toc-wrapper {
         position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-color: rgba(0, 0, 0, 0.7);
         z-index: 999;
         display: none;
@@ -540,10 +674,12 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         transition: opacity 0.3s ease;
         opacity: 0;
     }
+
     .toc-wrapper.is-visible {
         display: block;
         opacity: 1;
     }
+
     .toc {
         position: static;
         width: 80%;
@@ -554,10 +690,11 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         max-height: none;
         overflow-y: visible;
         padding: 15px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         border-radius: 8px;
         background-color: #fff;
     }
+
     #toc-content-display {
         margin-top: 15px;
         padding-top: 15px;
@@ -565,10 +702,13 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         box-shadow: none;
         border-radius: 0;
     }
-    #toc-content-display .image-wrapper { /* Ensure image wrappers are also responsive in sidebar */
+
+    #toc-content-display .image-wrapper {
+        /* Ensure image wrappers are also responsive in sidebar */
         width: 100%;
         margin-bottom: 10px;
     }
+
     #toc-content-display img {
         max-width: 100%;
         width: 100%;
@@ -576,21 +716,60 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         display: block;
         margin: 10px auto;
         border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
+
     #toc-content-display h3,
-    #toc-content-display p { width: 100%; }
-    main { padding: 15px; }
-    main h2 { padding-bottom: 8px; margin-bottom: 15px; }
-    .drawing { padding: 10px; margin-bottom: 15px; }
+    #toc-content-display p {
+        width: 100%;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    main h2 {
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    }
+
+    .drawing {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
     /* Remove specific drawing img styling here to rely on image-wrapper/gallery */
-    .drawing p { margin: 8px auto; }
-    .search-container { margin-bottom: 15px; text-align: center; }
-    #search-input { padding: 8px; font-size: 0.9rem; width: 65%; }
-    #search-button { padding: 8px 12px; font-size: 0.9rem; }
-    footer { padding: 0.8rem 0; }
-    footer .social-links a { margin: 0 8px; }
-    body { padding-bottom: 100px; }
+    .drawing p {
+        margin: 8px auto;
+    }
+
+    .search-container {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    #search-input {
+        padding: 8px;
+        font-size: 0.9rem;
+        width: 65%;
+    }
+
+    #search-button {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    footer {
+        padding: 0.8rem 0;
+    }
+
+    footer .social-links a {
+        margin: 0 8px;
+    }
+
+    body {
+        padding-bottom: 100px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -599,11 +778,14 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     .content-container {
         flex-direction: row-reverse;
         margin: 20px auto;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         overflow: visible;
     }
-    .toc-toggle-button { display: none; }
+
+    .toc-toggle-button {
+        display: none;
+    }
 
     .toc {
         width: 350px;
@@ -615,22 +797,28 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         position: sticky;
         /* Sử dụng biến CSS để điều chỉnh top */
         top: var(--nav-height, 0px);
-        
+
         /* Set a max-height to prevent the sidebar from being taller than the viewport */
-        max-height: calc(100vh - var(--nav-height, 0px)); /* 100% viewport height minus top/bottom margin */
-        overflow-y: auto; /* This remains important for long TOC lists */
+        max-height: calc(100vh - var(--nav-height, 0px));
+        /* 100% viewport height minus top/bottom margin */
+        overflow-y: auto;
+        /* This remains important for long TOC lists */
     }
+
     #toc-content-display {
         margin-top: 20px;
         padding-top: 20px;
         padding: 15px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         border-radius: 5px;
     }
-    #toc-content-display .image-wrapper { /* Ensure image wrappers are also responsive in sidebar */
+
+    #toc-content-display .image-wrapper {
+        /* Ensure image wrappers are also responsive in sidebar */
         width: 100%;
         margin-bottom: 10px;
     }
+
     #toc-content-display img {
         max-width: 100%;
         width: 100%;
@@ -638,9 +826,13 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         display: block;
         margin: 10px auto;
         border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    main { padding: 20px; }
+
+    main {
+        padding: 20px;
+    }
+
     main h2 {
         color: #007bff;
         border-bottom: 2px solid #007bff;
@@ -648,6 +840,7 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         margin-bottom: 20px;
         position: relative;
     }
+
     main h2::after {
         content: '';
         position: absolute;
@@ -658,9 +851,11 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         background-color: #ff007b;
         transition: width 0.6s ease-out;
     }
+
     .fade-in-element.is-visible h2::after {
         width: 100%;
     }
+
     .drawing {
         background-color: #f9f9f9;
         border: 1px solid #ddd;
@@ -668,11 +863,27 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         margin-bottom: 20px;
         border-radius: 5px;
     }
-    .drawing.is-visible { display: block; }
-    .drawing h3 { margin-top: 0; color: #555; text-align: center; }
+
+    .drawing.is-visible {
+        display: block;
+    }
+
+    .drawing h3 {
+        margin-top: 0;
+        color: #555;
+        text-align: center;
+    }
+
     /* Remove specific drawing img styling here to rely on image-wrapper/gallery */
-    .drawing p { margin: 8px auto; }
-    .search-container { margin-bottom: 20px; text-align: center; }
+    .drawing p {
+        margin: 8px auto;
+    }
+
+    .search-container {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
     #search-input {
         padding: 10px;
         font-size: 1rem;
@@ -681,27 +892,48 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         margin-right: 5px;
         display: inline-block;
     }
+
     #search-button {
         padding: 10px 15px;
         font-size: 1rem;
         display: inline-block;
     }
-    header h1 { font-size: 2.5rem; }
-    header p { font-size: 1rem; }
-    nav.main-nav ul { flex-direction: row; }
-    nav.main-nav ul li { margin: 0 15px; }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    nav.main-nav ul {
+        flex-direction: row;
+    }
+
+    nav.main-nav ul li {
+        margin: 0 15px;
+    }
 }
 
 @media (min-width: 1024px) {
-    .content-container { max-width: 1200px; }
-    header img { width: 6%; max-width: 100px; }
+    .content-container {
+        max-width: 1200px;
+    }
+
+    header img {
+        width: 6%;
+        max-width: 100px;
+    }
 }
 
 @media (min-width: 768px) {
-    
+
     nav.main-nav ul li a {
-        display: block;       /* ✅ Fix: block để dễ click */
-        padding: 10px 15px;        /* ✅ Fix: vùng chạm rộng rãi */
+        display: block;
+        /* ✅ Fix: block để dễ click */
+        padding: 10px 15px;
+        /* ✅ Fix: vùng chạm rộng rãi */
         text-align: center;
         text-decoration: none;
         font-weight: bold;
@@ -709,57 +941,84 @@ nav.main-nav ul li a { display: block; padding: 10px; }
         transition: background-color 0.3s ease;
     }
 }
+
 /* Page transition effect */
 #page-content {
     transition: opacity 0.5s ease-in-out;
 }
-.fade-out { opacity: 0; }
-.fade-in { opacity: 1; }
+
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
+}
 
 
 .image-modal {
     display: none;
     position: fixed;
     z-index: 2000;
-    left: 0; top: 0; width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.6);
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(6px);
     justify-content: center;
     align-items: center;
     transition: background 0.3s;
 }
+
 .image-modal.active {
     display: flex;
     animation: fadeInModal 0.3s;
 }
+
 @keyframes fadeInModal {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
+
 .image-modal-content {
     max-width: 90vw;
     max-height: 80vh;
     border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     animation: zoomInImg 0.3s;
     background: #fff;
     cursor: grab;
     position: relative;
     z-index: 2;
     user-select: none;
-    object-fit: contain; /* Đảm bảo ảnh không bị dẹt */
-    overflow: hidden; /* FIX: Thêm thuộc tính này để ẩn nội dung tràn */
+    object-fit: contain;
+    /* Đảm bảo ảnh không bị dẹt */
+    overflow: hidden;
+    /* FIX: Thêm thuộc tính này để ẩn nội dung tràn */
 }
+
 @keyframes zoomInImg {
-    from { transform: scale(0.7);}
-    to { transform: scale(1);}
+    from {
+        transform: scale(0.7);
+    }
+
+    to {
+        transform: scale(1);
+    }
 }
+
 .image-modal-close,
 .image-modal-fullscreen,
 .image-modal-prev,
 .image-modal-next {
     position: absolute;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -773,34 +1032,69 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     justify-content: center;
     transition: background 0.2s;
 }
-.image-modal-close { top: 24px; right: 40px; font-size: 40px; }
-.image-modal-fullscreen { top: 24px; right: 100px; font-size: 28px; }
-.image-modal-prev { left: 10vw; top: 50%; transform: translateY(-50%); font-size: 32px; }
-.image-modal-next { right: 10vw; top: 50%; transform: translateY(-50%); font-size: 32px; }
+
+.image-modal-close {
+    top: 24px;
+    right: 40px;
+    font-size: 40px;
+}
+
+.image-modal-fullscreen {
+    top: 24px;
+    right: 100px;
+    font-size: 28px;
+}
+
+.image-modal-prev {
+    left: 10vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+}
+
+.image-modal-next {
+    right: 10vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+}
+
 .image-modal-close:hover,
 .image-modal-fullscreen:hover,
 .image-modal-prev:hover,
-.image-modal-next:hover { background: #007bff; }
+.image-modal-next:hover {
+    background: #007bff;
+}
+
 .image-modal.fullscreen .image-modal-content {
     max-width: 100vw;
     max-height: 100vh;
 }
+
 .image-modal.fullscreen {
     align-items: stretch;
 }
 
 /* Modal for app info (from designer.html) */
 .app-info-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 2001; /* Should be on top of image modal if both are open */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 2001;
+    /* Should be on top of image modal if both are open */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    justify-content: center; /* Center content horizontally */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    justify-content: center;
+    /* Center content horizontally */
     align-items: center;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -825,19 +1119,31 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be responsive */
-    max-width: 500px; /* Max width for larger screens */
+    width: 80%;
+    /* Could be responsive */
+    max-width: 500px;
+    /* Max width for larger screens */
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
-    animation: slideIn 0.3s ease-out; /* Simple slide-in animation */
-    color: #333; /* Ensure text is readable */
-    overflow: auto; /* Cho phép cuộn nếu nội dung tràn */
+    animation: slideIn 0.3s ease-out;
+    /* Simple slide-in animation */
+    color: #333;
+    /* Ensure text is readable */
+    overflow: auto;
+    /* Cho phép cuộn nếu nội dung tràn */
 }
 
 @keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .app-info-content h2 {
@@ -882,7 +1188,8 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    float: right; /* Align to the right */
+    float: right;
+    /* Align to the right */
     margin-top: 15px;
     transition: background-color 0.2s;
 }
@@ -895,9 +1202,13 @@ nav.main-nav ul li a { display: block; padding: 10px; }
 .message-modal {
     display: none;
     position: fixed;
-    z-index: 2002; /* Higher than app info modal */
-    left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    z-index: 2002;
+    /* Higher than app info modal */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
     opacity: 0;
@@ -916,7 +1227,7 @@ nav.main-nav ul li a { display: block; padding: 10px; }
     padding: 30px;
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     max-width: 400px;
     width: 90%;
 }
@@ -944,6 +1255,7 @@ nav.main-nav ul li a { display: block; padding: 10px; }
 
 
 @media (max-width: 767px) {
+
     .toc,
     .toc-wrapper {
         display: none !important;
@@ -952,73 +1264,80 @@ nav.main-nav ul li a { display: block; padding: 10px; }
 
 #back-to-top,
 #go-to-bottom {
-  
-  position: fixed;
-  z-index: 999;
-  background-color: #444;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    position: fixed;
+    z-index: 999;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 #back-to-top {
-  bottom: 140px;
-  right: 10px;
-  opacity: 0;
-  visibility: hidden;
+    bottom: 140px;
+    right: 10px;
+    opacity: 0;
+    visibility: hidden;
 }
 
 #go-to-bottom {
-  bottom: 80px;
-  right: 10px;
+    bottom: 80px;
+    right: 10px;
 }
 
 #back-to-top.show {
-  opacity: 1;
-  visibility: visible;
+    opacity: 1;
+    visibility: visible;
 }
 
 #back-to-top:hover,
 #go-to-bottom:hover {
-  background-color: #666;
+    background-color: #666;
 }
+
 .dropdown-menu {
     width: 100%;
 }
 
 @media (max-width: 767px) {
-  nav.main-nav {
-    border-radius: 10px 0px 0px 10px;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 250px;
-    height: 558px;
-    max-height: 100vh; /* Thay đổi height thành max-height */
-    background-color: #333; /* Default background, no transparency on mobile */
-    padding-top: 30px; /* Giảm padding-top */
-    padding-bottom: 0px; /* Giảm padding-bottom */
-    transition: right 0.3s ease-in-out, background-color 0.3s ease; /* Add transition for background */
-    z-index: 1000;
-    box-shadow: -2px 0 6px rgba(0,0,0,0.2);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-top: 0; /* Loại bỏ margin-top */
-  }
+    nav.main-nav {
+        border-radius: 10px 0px 0px 10px;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 558px;
+        max-height: 100vh;
+        /* Thay đổi height thành max-height */
+        background-color: #333;
+        /* Default background, no transparency on mobile */
+        padding-top: 30px;
+        /* Giảm padding-top */
+        padding-bottom: 0px;
+        /* Giảm padding-bottom */
+        transition: right 0.3s ease-in-out, background-color 0.3s ease;
+        /* Add transition for background */
+        z-index: 1000;
+        box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 0;
+        /* Loại bỏ margin-top */
+    }
 }
 
-.dropdown .dropdown-toggle ul li{
+.dropdown .dropdown-toggle ul li {
     padding: 100px;
     width: 1005%;
 }
+
 .dropdown-menu {
     padding: 10px;
     width: 105%;
 }
-

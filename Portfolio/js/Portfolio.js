@@ -170,5 +170,5 @@ if (notificationBox) {
         }
     }, 1000); // Ẩn/hiện sau mỗi 1 giây
 }
-
 });
+

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fallbackTimeout = 600;
 
     navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             if (this.classList.contains('active')) {
                 event.preventDefault();
                 return;
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const sidebarImages = tocContentDisplay.querySelectorAll('img:not(.image-logo-small)');
                 sidebarImages.forEach(img => {
                     img.style.cursor = 'pointer';
-                    img.addEventListener('click', function() {
+                    img.addEventListener('click', function () {
                         const imageUrl = this.getAttribute('src');
                         // Scroll to the corresponding image in main content
                         const mainContentImage = mainContent.querySelector(`img[src="${imageUrl}"]:not(.image-logo-small)`);
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tocLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             event.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Re-attach click listeners to the newly added TOC links
         const newTocLinks = tocList.querySelectorAll('a');
         newTocLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
+            link.addEventListener('click', function (event) {
                 event.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 displayFirstProjectOfCurrentPageInSidebar(targetPage);
                 updateTocListForPage(targetPage);
                 const navHeight = document.querySelector('nav')?.offsetHeight || 0;
-                    window.scrollTo({ top: navHeight, behavior: 'auto' });
+                window.scrollTo({ top: navHeight, behavior: 'auto' });
                 if (mainContent) mainContent.scrollTop = 0;
             });
             paginationContainer.appendChild(nextButton);
@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
     projectElements.forEach(project => {
         // Initialize visibleImageCounts for each project if not already set
         if (visibleImageCounts.get(project.id) === undefined) {
-             visibleImageCounts.set(project.id, 5); // Default to displaying the first 5 images for each section
+            visibleImageCounts.set(project.id, 5); // Default to displaying the first 5 images for each section
         }
         // Then, apply display logic to projects currently visible on the current page
         const projectPage = parseInt(project.getAttribute('data-page'));
@@ -630,7 +630,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check if a click event has already been attached to avoid duplicates
             if (!img.dataset.hasModalListener) {
                 img.style.cursor = 'pointer'; // Display hand cursor to indicate clickability
-                img.addEventListener('click', function() {
+                img.addEventListener('click', function () {
                     // Call the showImageModal function from modal-img.js
                     if (typeof showImageModal === 'function') {
                         showImageModal(this);
@@ -647,7 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
     flipCards.forEach(flipCard => {
         let timer;
 
-        flipCard.addEventListener('touchstart', function(event) {
+        flipCard.addEventListener('touchstart', function (event) {
             event.preventDefault(); // Prevent default behavior
             const card = this;
             timer = setTimeout(() => {
@@ -655,18 +655,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500); // Hold time (500ms)
         });
 
-        flipCard.addEventListener('touchend', function(event) {
+        flipCard.addEventListener('touchend', function (event) {
             event.preventDefault(); // Prevent default behavior
             clearTimeout(timer);
             this.classList.remove('hold');
         });
 
-        flipCard.addEventListener('touchcancel', function(event) {
+        flipCard.addEventListener('touchcancel', function (event) {
             event.preventDefault(); // Prevent default behavior
             clearTimeout(timer);
             this.classList.remove('hold');
         });
-        flipCard.addEventListener('mouseleave', function() { // Add mouseleave event
+        flipCard.addEventListener('mouseleave', function () { // Add mouseleave event
             clearTimeout(timer);
             this.classList.remove('hold');
         });

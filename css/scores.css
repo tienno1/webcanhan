@@ -1,47 +1,67 @@
 /* CSS chung cho toàn bộ trang */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Easy-to-read font */
-    margin: 0; /* Remove default body margin */
-    padding: 0; /* Remove default body padding */
-    background-color: #f4f4f4; /* Light background color */
-    color: #333; /* Main text color */
-    line-height: 1.6; /* Line spacing for readability */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Easy-to-read font */
+    margin: 0;
+    /* Remove default body margin */
+    padding: 0;
+    /* Remove default body padding */
+    background-color: #f4f4f4;
+    /* Light background color */
+    color: #333;
+    /* Main text color */
+    line-height: 1.6;
+    /* Line spacing for readability */
     /* Add padding-bottom to body to prevent content being hidden by fixed footer/pagination */
     /* Adjust this value based on the height of your footer and fixed pagination bar */
-    padding-bottom: 80px; /* Example: adjust as needed to accommodate fixed pagination */
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    
+    padding-bottom: 80px;
+    /* Example: adjust as needed to accommodate fixed pagination */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+
 }
 
 /* CSS cho hiệu ứng bay lên nhẹ khi di chuột */
 /* Áp dụng class 'lift-on-hover' vào các phần tử HTML bạn muốn có hiệu ứng này */
 .lift-on-hover {
-    display: inline-block; /* Quan trọng: Cần thiết để transform hoạt động đúng trên các phần tử inline */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Áp dụng transition cho cả transform và box-shadow */
-    will-change: transform, box-shadow; /* Tối ưu hóa hiệu suất cho animation */
-    box-shadow: 0 0 0 rgba(0,0,0,0); /* Initial transparent shadow */
+    display: inline-block;
+    /* Quan trọng: Cần thiết để transform hoạt động đúng trên các phần tử inline */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* Áp dụng transition cho cả transform và box-shadow */
+    will-change: transform, box-shadow;
+    /* Tối ưu hóa hiệu suất cho animation */
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    /* Initial transparent shadow */
 }
 
 /* Khi di chuột vào phần tử có class 'lift-on-hover' */
 .lift-on-hover:hover {
-    transform: translateY(-5px); /* Di chuyển phần tử lên trên 5px */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Add a shadow on hover */
+    transform: translateY(-5px);
+    /* Di chuyển phần tử lên trên 5px */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Add a shadow on hover */
 }
 
 /* Kiểu cho phần Header */
 header {
-    background-image:url(../img/sl_0210121_40570_23.jpg); /* Background image */
+    background-image: url(../img/sl_0210121_40570_23.jpg);
+    /* Background image */
     background-size: 100%;
-    color: #fff; /* White text color */
-    padding: 1rem 0; /* Top and bottom padding */
-    text-align: center; /* Center content */
-    position: relative; /* Needed for absolute positioning of the toggle button */
+    color: #fff;
+    /* White text color */
+    padding: 1rem 0;
+    /* Top and bottom padding */
+    text-align: center;
+    /* Center content */
+    position: relative;
+    /* Needed for absolute positioning of the toggle button */
 }
 
 @media (min-width: 768px) {
-    
+
     nav.main-nav ul li a {
-        display: block;       /* ✅ Fix: block để dễ click */
+        display: block;
+        /* ✅ Fix: block để dễ click */
         text-align: center;
         text-decoration: none;
         font-weight: bold;
@@ -51,62 +71,89 @@ header {
 }
 
 header h1 {
-    margin: 0; /* Remove default h1 margin */
-    font-size: 2.5rem; /* Large font size */
+    margin: 0;
+    /* Remove default h1 margin */
+    font-size: 2.5rem;
+    /* Large font size */
 }
 
 header p {
     color: #fff;
-    font-size: 1rem; /* Font size for paragraphs */
-    opacity: 0.8; /* Slightly reduce opacity */
+    font-size: 1rem;
+    /* Font size for paragraphs */
+    opacity: 0.8;
+    /* Slightly reduce opacity */
 }
 
-header a img{
-        width: 30%; /* Adjust logo size for tablets */
-        max-width: 150px; /* Ensure max width */
-        text-align: center;
+header a img {
+    width: 30%;
+    /* Adjust logo size for tablets */
+    max-width: 150px;
+    /* Ensure max width */
+    text-align: center;
 }
 
 /* Kiểu cho thanh điều hướng (Navigation) */
 nav {
-    background-color: #444; /* Slightly darker background than header */
-    padding: 0.8rem 0; /* Top and bottom padding */
-    text-align: center; /* Center content */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add a subtle shadow */
+    background-color: #444;
+    /* Slightly darker background than header */
+    padding: 0.8rem 0;
+    /* Top and bottom padding */
+    text-align: center;
+    /* Center content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Add a subtle shadow */
     /* Các thuộc tính dính sẽ được thêm bằng JavaScript thông qua class .sticky-nav */
-    transition: background-color 0.3s ease, opacity 0.3s ease; /* Thêm transition cho độ trong suốt */
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    /* Thêm transition cho độ trong suốt */
 }
 
 /* Class mới cho thanh nav dính */
 .sticky-nav {
-    position: fixed; /* Giữ thanh nav ở vị trí cố định */
-    top: 0; /* Đặt thanh nav ở trên cùng */
-    width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
-    z-index: 1000; /* Đảm bảo thanh nav nằm trên các nội dung khác */
-    background-color: rgba(68, 68, 68, 0.8); /* Màu nền khi dính với độ trong suốt 80% */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Đổ bóng khi dính */
-    box-sizing: border-box; /* Đảm bảo padding và border không làm tăng kích thước tổng thể */
+    position: fixed;
+    /* Giữ thanh nav ở vị trí cố định */
+    top: 0;
+    /* Đặt thanh nav ở trên cùng */
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng màn hình */
+    z-index: 1000;
+    /* Đảm bảo thanh nav nằm trên các nội dung khác */
+    background-color: rgba(68, 68, 68, 0.8);
+    /* Màu nền khi dính với độ trong suốt 80% */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Đổ bóng khi dính */
+    box-sizing: border-box;
+    /* Đảm bảo padding và border không làm tăng kích thước tổng thể */
 }
 
 
 nav ul {
-    list-style: none; /* Remove list bullets */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
-    display: flex; /* Use flexbox for horizontal items */
-    justify-content: center; /* Center the items */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    list-style: none;
+    /* Remove list bullets */
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
+    display: flex;
+    /* Use flexbox for horizontal items */
+    justify-content: center;
+    /* Center the items */
+    flex-wrap: wrap;
+    /* Allow items to wrap on smaller screens */
 }
 
 nav ul li {
-    margin: 0 15px ; /* Space between list items */
+    margin: 0 15px;
+    /* Space between list items */
     /* Đảm bảo chiều rộng nội dung tự co giãn */
-    flex-shrink: 0; /* Ngăn không cho các mục co lại */
+    flex-shrink: 0;
+    /* Ngăn không cho các mục co lại */
 }
 
 nav ul li a {
     position: relative;
-    color: #fff; /* Mặc định màu chữ */
+    color: #fff;
+    /* Mặc định màu chữ */
     text-decoration: none;
     font-weight: bold;
     padding: 5px 10px;
@@ -114,8 +161,10 @@ nav ul li a {
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow: hidden;
     /* Điều chỉnh padding để chiều rộng khung nhỏ lại */
-    padding: 8px 15px; /* Giảm padding ngang một chút để khung nhỏ hơn */
-    white-space: nowrap; /* Ngăn không cho chữ xuống dòng trong nav item */
+    padding: 8px 15px;
+    /* Giảm padding ngang một chút để khung nhỏ hơn */
+    white-space: nowrap;
+    /* Ngăn không cho chữ xuống dòng trong nav item */
 }
 
 /* Viền chạy hiệu ứng dưới chữ */
@@ -135,8 +184,10 @@ nav ul li a::after {
 /* Hover + Active: nền sáng hơn nav, chữ vẫn trắng */
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: #8b8b8b82; /* Màu sáng hơn nav */
-    color: #ffbb87;          /* Màu chữ sáng nhẹ, không quá trắng */
+    background-color: #8b8b8b82;
+    /* Màu sáng hơn nav */
+    color: #ffbb87;
+    /* Màu chữ sáng nhẹ, không quá trắng */
 }
 
 nav ul li a:hover::after,
@@ -147,32 +198,45 @@ nav ul li a.active::after {
 
 /* Container for the main content and the table of contents */
 .content-container {
-    display: flex; /* Use flexbox for layout */
-    max-width: 1200px; /* Limit content width */
-    margin: 20px auto; /* Top/bottom margin and center alignment */
-    background-color: #fff; /* White background */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Add a shadow */
-    border-radius: 8px; /* Rounded corners */
+    display: flex;
+    /* Use flexbox for layout */
+    max-width: 1200px;
+    /* Limit content width */
+    margin: 20px auto;
+    /* Top/bottom margin and center alignment */
+    background-color: #fff;
+    /* White background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Add a shadow */
+    border-radius: 8px;
+    /* Rounded corners */
     /* === CHANGED === */
-    overflow: visible; /* Changed from 'hidden' to allow sticky positioning */
+    overflow: visible;
+    /* Changed from 'hidden' to allow sticky positioning */
 }
 
 /* Styles for the Table of Contents (aside.toc) */
 .toc {
-    width: 180px; /* Fixed width for the table of contents */
+    width: 180px;
+    /* Fixed width for the table of contents */
     padding: 20px;
-    background-color: #f9f9f9; /* Light background */
-    border-right: 1px solid #ddd; /* Separator line */
-    flex-shrink: 0; /* Prevent shrinking */
-    
+    background-color: #f9f9f9;
+    /* Light background */
+    border-right: 1px solid #ddd;
+    /* Separator line */
+    flex-shrink: 0;
+    /* Prevent shrinking */
+
     /* === ADDED FOR STICKY BEHAVIOR === */
     position: sticky;
     /* Sử dụng biến CSS để điều chỉnh top */
-        top: var(--nav-height, 0px);
-        
-        /* Set a max-height to prevent the sidebar from being taller than the viewport */
-        max-height: calc(100vh - var(--nav-height, 0px)); /* 100% viewport height minus top/bottom margin */
-        overflow-y: auto; /* This remains important for long TOC lists */
+    top: var(--nav-height, 0px);
+
+    /* Set a max-height to prevent the sidebar from being taller than the viewport */
+    max-height: calc(100vh - var(--nav-height, 0px));
+    /* 100% viewport height minus top/bottom margin */
+    overflow-y: auto;
+    /* This remains important for long TOC lists */
 }
 
 .toc h3 {
@@ -208,7 +272,8 @@ nav ul li a.active::after {
 #toc-content-display {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #ddd; /* Separator line */
+    border-top: 1px solid #ddd;
+    /* Separator line */
     /* Hide this area as it's not used for displaying content on this page */
     display: none;
 }
@@ -216,9 +281,11 @@ nav ul li a.active::after {
 
 /* Styles for the Main content area */
 main {
-    flex-grow: 1; /* Allow main content to take remaining space */
+    flex-grow: 1;
+    /* Allow main content to take remaining space */
     padding: 20px;
-    overflow-y: auto; /* Add scroll if content is too long */
+    overflow-y: auto;
+    /* Add scroll if content is too long */
 }
 
 /* Note: Removed general main section styles that might conflict with .score-section */
@@ -233,11 +300,16 @@ main section:last-child {
 } */
 
 main h2 {
-    color: #007bff; /* Color for section titles */
-    border-bottom: 2px solid #007bff; /* Underline for titles */
-    padding-bottom: 10px; /* Padding below title */
-    margin-bottom: 20px; /* Space below title */
-    position: relative; /* Required for the pseudo-element */
+    color: #007bff;
+    /* Color for section titles */
+    border-bottom: 2px solid #007bff;
+    /* Underline for titles */
+    padding-bottom: 10px;
+    /* Padding below title */
+    margin-bottom: 20px;
+    /* Space below title */
+    position: relative;
+    /* Required for the pseudo-element */
 }
 
 /* Animation effect for line drawing under h2 */
@@ -245,80 +317,113 @@ main h2::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -2px; /* Position right below the border */
-    width: 0; /* Initial width is 0 */
-    height: 2px; /* Height of the line */
-    background-color: #ff007b; /* Color of the line */
-    transition: width 0.6s ease-out; /* Animation transition */
+    bottom: -2px;
+    /* Position right below the border */
+    width: 0;
+    /* Initial width is 0 */
+    height: 2px;
+    /* Height of the line */
+    background-color: #ff007b;
+    /* Color of the line */
+    transition: width 0.6s ease-out;
+    /* Animation transition */
 }
 
 /* When the element has the 'is-visible' class, the line expands */
 .fade-in-element.is-visible h2::after {
-    width: 100%; /* Expand to full width */
+    width: 100%;
+    /* Expand to full width */
 }
 
 /* Styles for the Footer section */
 footer {
     margin-bottom: -23px;
-    background-color: #333; /* Dark background color */
-    color: #fff; /* White text color */
-    text-align: center; /* Center content */
-    padding: 1rem 0; /* Top and bottom padding */
+    background-color: #333;
+    /* Dark background color */
+    color: #fff;
+    /* White text color */
+    text-align: center;
+    /* Center content */
+    padding: 1rem 0;
+    /* Top and bottom padding */
     /* Remove margin-top if pagination is fixed below it */
     /* margin-top: 30px; */
 }
+
 footer .social-links a {
-    color: #fff; /* White text color */
-    text-decoration: none; /* Remove underline */
-    margin: 0 10px; /* Space between social links */
-    transition-duration: 0.8s ease; /* Smooth color transition on hover */
+    color: #fff;
+    /* White text color */
+    text-decoration: none;
+    /* Remove underline */
+    margin: 0 10px;
+    /* Space between social links */
+    transition-duration: 0.8s ease;
+    /* Smooth color transition on hover */
 }
 
 footer .social-links a:hover {
-    color: #ff6600; /* Change color on hover */
+    color: #ff6600;
+    /* Change color on hover */
 }
 
 /* --- Styles for Score Tables --- */
 table {
     width: 100%;
-    border-collapse: collapse; /* Collapse borders */
+    border-collapse: collapse;
+    /* Collapse borders */
     margin-top: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    overflow: hidden; /* Needed for rounded corners on table */
+    overflow: hidden;
+    /* Needed for rounded corners on table */
 }
 
-th, td {
+th,
+td {
     padding: 12px 15px;
-    border-bottom: 1px solid #ddd; /* Bottom border for rows */
+    border-bottom: 1px solid #ddd;
+    /* Bottom border for rows */
 }
 
 th {
-    background-color: #007bff; /* Header background color */
-    color: white; /* Header text color */
+    background-color: #007bff;
+    /* Header background color */
+    color: white;
+    /* Header text color */
     font-weight: bold;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* Zebra striping for rows */
+    background-color: #f2f2f2;
+    /* Zebra striping for rows */
 }
 
 tbody tr:hover {
-    background-color: #ddd; /* Highlight row on hover */
+    background-color: #ddd;
+    /* Highlight row on hover */
 }
 
 /* --- Pagination Styles --- */
 .pagination-container {
-    text-align: center; /* Center the pagination buttons */
-    padding: 5px 0; /* Add padding */
-    background-color: #ffffffb7; /* White background */
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Shadow above */
+    text-align: center;
+    /* Center the pagination buttons */
+    padding: 5px 0;
+    /* Add padding */
+    background-color: #ffffffb7;
+    /* White background */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    /* Shadow above */
     /* Make the pagination bar fixed at the bottom */
-    position: fixed; /* Set position to fixed */
-    bottom: 0; /* Align to the bottom */
-    left: 0; /* Align to the left */
-    width: 100%; /* Full width */
-    z-index: 1000; /* Ensure it's above other content */
+    position: fixed;
+    /* Set position to fixed */
+    bottom: 0;
+    /* Align to the bottom */
+    left: 0;
+    /* Align to the left */
+    width: 100%;
+    /* Full width */
+    z-index: 1000;
+    /* Ensure it's above other content */
 }
 
 
@@ -350,8 +455,10 @@ tbody tr:hover {
 .pagination-button.next {
     font-weight: bold;
     color: #007bff;
-    border: none; /* Remove border for next button */
-    background-color: transparent; /* Transparent background for next button */
+    border: none;
+    /* Remove border for next button */
+    background-color: transparent;
+    /* Transparent background for next button */
 }
 
 .pagination-button.next:hover {
@@ -363,10 +470,14 @@ tbody tr:hover {
 
 /* Fade-in on Scroll effect */
 .fade-in-element {
-    opacity: 0; /* Initially hidden */
-    transform: translateY(20px); /* Slightly move down initially */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Transition effect */
-    will-change: opacity, transform; /* Optimize performance */
+    opacity: 0;
+    /* Initially hidden */
+    transform: translateY(20px);
+    /* Slightly move down initially */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    /* Transition effect */
+    will-change: opacity, transform;
+    /* Optimize performance */
 }
 
 /* When the element has the 'is-visible' class, it becomes visible and moves to its original position */
@@ -377,50 +488,70 @@ tbody tr:hover {
 
 /* Gentle up and down text animation */
 @keyframes gentle-move {
-    0%, 100% {
-        transform: translateY(0); /* Initial and final position */
+
+    0%,
+    100% {
+        transform: translateY(0);
+        /* Initial and final position */
     }
+
     50% {
-        transform: translateY(-3px); /* Highest position */
+        transform: translateY(-3px);
+        /* Highest position */
     }
 }
 
 .animated-text {
-    display: inline-block; /* Required to apply transform */
-    animation: gentle-move 3s ease-in-out infinite; /* Apply the animation */
+    display: inline-block;
+    /* Required to apply transform */
+    animation: gentle-move 3s ease-in-out infinite;
+    /* Apply the animation */
 }
 
 /* --- Styles for Paginated Score Sections --- */
 .score-section {
     /* Initially hide sections that are not on the current page */
-    /* display: none; */ /* This will be handled by pagination JS if active */
+    /* display: none; */
+    /* This will be handled by pagination JS if active */
     /* Add padding/margin/border if needed, similar to .project */
-    background-color: #f9f9f9; /* Light background for each section */
-    border: 1px solid #ddd; /* Light border */
-    padding: 15px; /* Inner padding */
-    margin-bottom: 20px; /* Space below each section */
-    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9;
+    /* Light background for each section */
+    border: 1px solid #ddd;
+    /* Light border */
+    padding: 15px;
+    /* Inner padding */
+    margin-bottom: 20px;
+    /* Space below each section */
+    border-radius: 5px;
+    /* Rounded corners */
 }
 
 /* Style for score sections that should be displayed (used by pagination JS) */
 .score-section.is-visible {
-    display: block; /* Show the section */
+    display: block;
+    /* Show the section */
 }
 
 
 /* --- Basic Responsive Design --- */
 @media (max-width: 768px) {
     .content-container {
-        flex-direction: column; /* Stack content and toc vertically */
+        flex-direction: column;
+        /* Stack content and toc vertically */
     }
 
     .toc {
-        width: 100%; /* Full width for toc */
+        width: 100%;
+        /* Full width for toc */
         border-right: none;
-        border-bottom: 1px solid #ddd; /* Add bottom border */
-        max-height: none; /* Remove max height on small screens */
-        overflow-y: visible; /* Allow content to push layout */
-        position: static; /* Revert sticky for mobile */
+        border-bottom: 1px solid #ddd;
+        /* Add bottom border */
+        max-height: none;
+        /* Remove max height on small screens */
+        overflow-y: visible;
+        /* Allow content to push layout */
+        position: static;
+        /* Revert sticky for mobile */
     }
 
     #toc-content-display {
@@ -432,24 +563,39 @@ tbody tr:hover {
 
 
     header h1 {
-        font-size: 2rem; /* Reduce h1 font size */
+        font-size: 2rem;
+        /* Reduce h1 font size */
     }
+
     header p {
-        font-size: 1rem; /* Reduce h1 font size */
+        font-size: 1rem;
+        /* Reduce h1 font size */
     }
+
     nav.main-nav ul {
-        flex-direction: column; /* Stack nav items vertically */
+        flex-direction: column;
+        /* Stack nav items vertically */
     }
+
     nav.main-nav ul li {
-        margin: 15px 0; /* Reduce space between nav items */
+        margin: 15px 0;
+        /* Reduce space between nav items */
     }
+
     main {
-        padding: 15px; /* Reduce main padding */
-        margin: 0 auto; /* Remove top/bottom margin */
+        padding: 15px;
+        /* Reduce main padding */
+        margin: 0 auto;
+        /* Remove top/bottom margin */
     }
 
     /* Adjust table styles for smaller screens */
-    table, thead, tbody, th, td, tr {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
         display: block;
     }
 
@@ -459,14 +605,18 @@ tbody tr:hover {
         left: -9999px;
     }
 
-    tr { border: 1px solid #ccc; margin-bottom: 5px; }
+    tr {
+        border: 1px solid #ccc;
+        margin-bottom: 5px;
+    }
 
     td {
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
         padding-left: 50%;
-        text-align: right; /* Align text to the right for data */
+        text-align: right;
+        /* Align text to the right for data */
     }
 
     td:before {
@@ -480,37 +630,51 @@ tbody tr:hover {
         /* You need to add data-label attributes to your <td> elements in HTML */
         content: attr(data-label);
         font-weight: bold;
-        text-align: left; /* Align labels to the left */
+        text-align: left;
+        /* Align labels to the left */
     }
-     /* Adjust padding for body on small screens to prevent content being hidden by fixed pagination */
-     body {
-        padding-bottom: 100px; /* Adjust if needed for smaller screens */
+
+    /* Adjust padding for body on small screens to prevent content being hidden by fixed pagination */
+    body {
+        padding-bottom: 100px;
+        /* Adjust if needed for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
     header h1 {
-        font-size: 1.8rem; /* Further reduce h1 font size */
+        font-size: 1.8rem;
+        /* Further reduce h1 font size */
     }
+
     header p {
-        font-size: 1rem; /* Reduce paragraph font size */
+        font-size: 1rem;
+        /* Reduce paragraph font size */
     }
+
     main {
-        padding: 10px; /* Reduce main padding */
-        margin: 0 auto; /* Remove top/bottom margin */
+        padding: 10px;
+        /* Reduce main padding */
+        margin: 0 auto;
+        /* Remove top/bottom margin */
     }
-     /* Adjust padding for body on very small screens */
-     body {
-        padding-bottom: 120px; /* Adjust if needed */
+
+    /* Adjust padding for body on very small screens */
+    body {
+        padding-bottom: 120px;
+        /* Adjust if needed */
     }
 }
 
 @media (min-width: 1024px) {
     .content-container {
-        max-width: 1200px; /* Ensure max-width is maintained */
+        max-width: 1200px;
+        /* Ensure max-width is maintained */
     }
-     header img{
-        width: 8%; /* Slightly smaller logo on very large screens */
+
+    header img {
+        width: 8%;
+        /* Slightly smaller logo on very large screens */
         max-width: 100px;
     }
 }
@@ -520,19 +684,23 @@ tbody tr:hover {
 #page-content {
     transition: opacity 0.5s ease-in-out;
 }
+
 .fade-out {
     opacity: 0;
 }
+
 .fade-in {
     opacity: 1;
 }
 
 th {
-    border: 1px solid  #1a4c8b;
+    border: 1px solid #1a4c8b;
     padding: 6px 8px;
     text-align: center;
-    background: none; /* Không màu nền */
-    color: #111;      /* Chữ đen */
+    background: none;
+    /* Không màu nền */
+    color: #111;
+    /* Chữ đen */
 }
 
 table.bang-ket-qua {
@@ -542,26 +710,31 @@ table.bang-ket-qua {
 }
 
 .bang-ket-qua th {
-    background-color: #007bff; /* Header background color */
+    background-color: #007bff;
+    /* Header background color */
     color: #ffffff;
     font-weight: bold;
 }
+
 .bang-ket-qua tr:nth-child(even) td {
-    background: none; /* Không màu nền cho dòng chẵn */
+    background: none;
+    /* Không màu nền cho dòng chẵn */
 }
+
 .bang-ket-qua tr td:first-child,
 .bang-ket-qua tr th:first-child {
     font-weight: bold;
 }
 
 .header_CHINH {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.header_CHINH .left, .header_CHINH .right {
-  width: 100%;
+.header_CHINH .left,
+.header_CHINH .right {
+    width: 100%;
 }
 
 .bang-thong-tin {
@@ -569,11 +742,13 @@ table.bang-ket-qua {
     border-collapse: collapse;
     margin-bottom: 12px;
 }
+
 .bang-thong-tin td {
     padding: 4px 12px 4px 0;
     font-size: 1em;
     vertical-align: top;
 }
+
 .bang-thong-tin td:first-child,
 .bang-thong-tin td:nth-child(3) {
     color: #0000cc;
@@ -585,7 +760,7 @@ h1 {
     font-size: 2.2em;
     margin: 12px 0;
     text-align: center;
-    background: linear-gradient(90deg, #ff512f, #dd2476, #24c6dc, #77ff00, #6e8bff,#f86dff, #ff512f);
+    background: linear-gradient(90deg, #ff512f, #dd2476, #24c6dc, #77ff00, #6e8bff, #f86dff, #ff512f);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -595,15 +770,25 @@ h1 {
 }
 
 @keyframes h1-gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @media(min-width: 600px) {
-  .header_CHINH .left, .header_CHINH .right {
-    width: 48%;
-  }
+
+    .header_CHINH .left,
+    .header_CHINH .right {
+        width: 48%;
+    }
 }
 
 .header_CHINH {
@@ -613,21 +798,25 @@ h1 {
     align-items: flex-start;
     margin-bottom: 8px;
 }
-.header_CHINH .left, .header_CHINH .right {
+
+.header_CHINH .left,
+.header_CHINH .right {
     width: 50%;
     text-align: center;
     color: #0000cc;
 }
-.header_CHINH b, .header_CHINH u {
+
+.header_CHINH b,
+.header_CHINH u {
     font-size: 1.1em;
 }
 
 .title {
-  text-align: center;
-  font-weight: bold;
-  margin: 20px 0;
-  font-size: 18px;
-  text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+    font-size: 18px;
+    text-transform: uppercase;
 }
 
 .info-grid {
@@ -638,23 +827,30 @@ h1 {
     font-size: 1em;
     align-items: center;
 }
-.info-grid > div {
+
+.info-grid>div {
     padding: 2px 0;
 }
+
 @media (max-width: 700px) {
     .info-grid {
         grid-template-columns: max-content 1fr;
         gap: 4px 12px;
     }
 }
+
 .table-responsive {
     width: 100%;
     overflow-x: auto;
 }
+
 .table-responsive table {
-    min-width: 700px; /* hoặc lớn hơn nếu bảng nhiều cột */
+    min-width: 700px;
+    /* hoặc lớn hơn nếu bảng nhiều cột */
 }
+
 @media (max-width: 600px) {
+
     .bang-thong-tin,
     .bang-thong-tin tr,
     .bang-thong-tin td {
@@ -662,10 +858,12 @@ h1 {
         width: 100%;
         box-sizing: border-box;
     }
+
     .bang-thong-tin td {
         padding-left: 40%;
         position: relative;
     }
+
     .bang-thong-tin td:first-child,
     .bang-thong-tin td:nth-child(3) {
         padding-left: 0;
@@ -677,16 +875,20 @@ h1 {
 .note {
     margin-top: 12px;
     font-size: 1.05em;
-    text-align: justify; /* căn đều 2 bên */
+    text-align: justify;
+    /* căn đều 2 bên */
 }
 
-.bang-ren-luyen th, .bang-ren-luyen td {
+.bang-ren-luyen th,
+.bang-ren-luyen td {
     border: 1px solid #ffffff;
     padding: 6px;
     text-align: center;
 }
+
 .bang-ren-luyen th {
-    background-color: #007bff; /* Header background color */
+    background-color: #007bff;
+    /* Header background color */
     color: #ffffff;
     font-weight: bold;
 }
@@ -700,33 +902,43 @@ aside.toc ul#toc-list a.active {
 }
 
 #mobile-warning {
-    display: none; /* Ẩn mặc định */
+    display: none;
+    /* Ẩn mặc định */
     position: fixed;
     top: 0;
     left: 10;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Màu nền đen mờ */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Màu nền đen mờ */
     color: white;
     text-align: center;
     font-size: 1.5em;
     padding: 20px;
-    z-index: 10000; /* Đảm bảo hiển thị trên cùng */
+    z-index: 10000;
+    /* Đảm bảo hiển thị trên cùng */
     box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
     #mobile-warning {
-        display: flex; /* Sử dụng flexbox để căn giữa nút */
+        display: flex;
+        /* Sử dụng flexbox để căn giữa nút */
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        display: block; /* Hiển thị trên điện thoại */
+        display: block;
+        /* Hiển thị trên điện thoại */
     }
-    .content-container, footer, main {
-        display: none !important; /* Ẩn nội dung chính, footer */
+
+    .content-container,
+    footer,
+    main {
+        display: none !important;
+        /* Ẩn nội dung chính, footer */
     }
 }
+
 .back-button {
     display: inline-block;
     padding: 10px 20px;
@@ -756,128 +968,149 @@ aside.toc ul#toc-list a.active {
 }
 
 #password-protection {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex; /* Đảm bảo lớp phủ hiển thị ban đầu */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        #password-form {
-            width: 300px;
-            height: 300px;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 15px;
-            text-align: center;
-            position: relative; /* Để định vị tuyệt đối cho nút ẩn hiện mật khẩu */
-        }
-        /* CSS cho nút ẩn hiện mật khẩu */
-        #togglePassword {
-            position: absolute;
-            top: 40%;
-            right: 5px;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    /* Đảm bảo lớp phủ hiển thị ban đầu */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
 
-        .hidden-on-lock {
-        display: none !important;
-        }
+#password-form {
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    /* Để định vị tuyệt đối cho nút ẩn hiện mật khẩu */
+}
+
+/* CSS cho nút ẩn hiện mật khẩu */
+#togglePassword {
+    position: absolute;
+    top: 40%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.hidden-on-lock {
+    display: none !important;
+}
 
 input {
-    width: 70%; /* Giữ nguyên chiều rộng */
+    width: 70%;
+    /* Giữ nguyên chiều rộng */
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;     
-    box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước */
-    padding-right: 20px; /* Thêm khoảng trống bên phải để chứa nút con mắt */
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* Đảm bảo padding và border không làm thay đổi kích thước */
+    padding-right: 20px;
+    /* Thêm khoảng trống bên phải để chứa nút con mắt */
 }
+
 #togglePassword {
     position: absolute;
     top: 20%;
     right: 5px;
     transform: translateY(-50%);
     cursor: pointer;
-    padding: 8px; /* Thêm padding */
-    border: 1px solid #ccc; /* Thêm border */
-    border-radius: 5px; /* Bo tròn góc */
-    background-color: #f9f9f9; /* Màu nền nhạt */
-    font-size: 14px; /* Điều chỉnh kích thước font */
-    box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước */
+    padding: 8px;
+    /* Thêm padding */
+    border: 1px solid #ccc;
+    /* Thêm border */
+    border-radius: 5px;
+    /* Bo tròn góc */
+    background-color: #f9f9f9;
+    /* Màu nền nhạt */
+    font-size: 14px;
+    /* Điều chỉnh kích thước font */
+    box-sizing: border-box;
+    /* Đảm bảo padding và border không làm thay đổi kích thước */
 }
 
 #togglePassword:hover {
-    background-color: #e0e0e0; /* Thay đổi màu nền khi hover */
+    background-color: #e0e0e0;
+    /* Thay đổi màu nền khi hover */
 }
 
 #togglePassword.fa-eye-slash {
     /* Giao diện khi ẩn mật khẩu */
-    color: #888; /* Màu xám */
+    color: #888;
+    /* Màu xám */
 }
 
 #togglePassword.fa-eye {
     /* Giao diện khi hiện mật khẩu */
-    color: #007bff; /* Màu xanh */
+    color: #007bff;
+    /* Màu xanh */
 }
 
 button[type="submit"] {
-            width: 40%;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
+    width: 40%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
 button:hover {
-    background-color: #0056b3; /* Màu nền khi hover */
-    color: white; /* Màu chữ khi hover */
+    background-color: #0056b3;
+    /* Màu nền khi hover */
+    color: white;
+    /* Màu chữ khi hover */
 }
 
 #back-to-top,
 #go-to-bottom {
-  
-  position: fixed;
-  z-index: 999;
-  background-color: #444;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    position: fixed;
+    z-index: 999;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 #back-to-top {
-  bottom: 140px;
-  right: 10px;
-  opacity: 0;
-  visibility: hidden;
+    bottom: 140px;
+    right: 10px;
+    opacity: 0;
+    visibility: hidden;
 }
 
 #go-to-bottom {
-  bottom: 80px;
-  right: 10px;
+    bottom: 80px;
+    right: 10px;
 }
 
 #back-to-top.show {
-  opacity: 1;
-  visibility: visible;
+    opacity: 1;
+    visibility: visible;
 }
 
 #back-to-top:hover,
 #go-to-bottom:hover {
-  background-color: #666;
+    background-color: #666;
 }

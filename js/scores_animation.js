@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add click event listener to each main navigation link
     navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             // Check if the link is already the current page link
             if (this.classList.contains('active')) {
                 console.log('Page transition: Link is already the active page, preventing navigation.'); // Debugging
@@ -34,34 +34,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Add the 'fade-out' class to the current page content
             if (pageContent) {
-                 pageContent.classList.add('fade-out');
-                 console.log('Page transition: Added fade-out class to pageContent'); // Debugging
+                pageContent.classList.add('fade-out');
+                console.log('Page transition: Added fade-out class to pageContent'); // Debugging
 
-                 // Add a listener for the transitionend event
-                 const transitionEndHandler = () => {
-                     console.log('Page transition: Fade-out transition ended, navigating to:', targetUrl); // Debugging
-                     window.location.href = targetUrl;
-                     // Clean up the event listener after it fires
-                     pageContent.removeEventListener('transitionend', transitionEndHandler);
-                 };
+                // Add a listener for the transitionend event
+                const transitionEndHandler = () => {
+                    console.log('Page transition: Fade-out transition ended, navigating to:', targetUrl); // Debugging
+                    window.location.href = targetUrl;
+                    // Clean up the event listener after it fires
+                    pageContent.removeEventListener('transitionend', transitionEndHandler);
+                };
 
-                 pageContent.addEventListener('transitionend', transitionEndHandler);
+                pageContent.addEventListener('transitionend', transitionEndHandler);
 
-                 // Set a fallback timeout in case transitionend doesn't fire
-                 setTimeout(() => {
-                     // Check if the transitionend handler has already fired (by checking if the class is still there)
-                     if (pageContent.classList.contains('fade-out')) {
-                          console.log('Page transition: Fallback timeout triggered, navigating to:', targetUrl); // Debugging
-                          window.location.href = targetUrl;
-                          // Clean up the transitionend listener if the timeout handles navigation
-                          pageContent.removeEventListener('transitionend', transitionEndHandler);
-                     }
-                 }, fallbackTimeout);
+                // Set a fallback timeout in case transitionend doesn't fire
+                setTimeout(() => {
+                    // Check if the transitionend handler has already fired (by checking if the class is still there)
+                    if (pageContent.classList.contains('fade-out')) {
+                        console.log('Page transition: Fallback timeout triggered, navigating to:', targetUrl); // Debugging
+                        window.location.href = targetUrl;
+                        // Clean up the transitionend listener if the timeout handles navigation
+                        pageContent.removeEventListener('transitionend', transitionEndHandler);
+                    }
+                }, fallbackTimeout);
 
             } else {
-                 // If pageContent doesn't exist, just navigate directly
-                 console.log('Page transition: pageContent not found, navigating directly to:', targetUrl); // Debugging: Fallback navigation
-                 window.location.href = targetUrl;
+                // If pageContent doesn't exist, just navigate directly
+                console.log('Page transition: pageContent not found, navigating directly to:', targetUrl); // Debugging: Fallback navigation
+                window.location.href = targetUrl;
             }
         });
     });
@@ -76,8 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pageContent.classList.remove('fade-out');
         // Add fade-in class after a short delay
         setTimeout(() => {
-             pageContent.classList.add('fade-in');
-             console.log('Page transition: Added fade-in class to pageContent'); // Debugging
+            pageContent.classList.add('fade-in');
+            console.log('Page transition: Added fade-in class to pageContent'); // Debugging
         }, 50); // Adjust delay if needed
     }
 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     originalTocListItems.forEach(listItem => {
         const link = listItem.querySelector('a');
         if (link) {
-            link.addEventListener('click', function(event) {
+            link.addEventListener('click', function (event) {
                 event.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
@@ -158,15 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionPage = parseInt(section.getAttribute('data-page')); // Get data-page attribute
 
             if (!isNaN(sectionPage) && sectionPage === pageNumber) {
-                 section.style.display = 'block'; // Show the section
-                 // Optional: Re-trigger fade-in animation for visible sections
-                 section.classList.remove('is-visible');
-                 setTimeout(() => {
-                     section.classList.add('is-visible');
-                 }, 10); // Small delay
+                section.style.display = 'block'; // Show the section
+                // Optional: Re-trigger fade-in animation for visible sections
+                section.classList.remove('is-visible');
+                setTimeout(() => {
+                    section.classList.add('is-visible');
+                }, 10); // Small delay
             } else {
                 section.style.display = 'none'; // Hide the section
-                 section.classList.remove('is-visible'); // Remove animation class
+                section.classList.remove('is-visible'); // Remove animation class
             }
         });
     }
@@ -175,8 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateTocListForPage(pageNumber) {
         console.log('Updating TOC list for page:', pageNumber); // Debugging
         if (!tocList) {
-             console.log('TOC list element not found.'); // Debugging
-             return; // Exit if TOC list element not found
+            console.log('TOC list element not found.'); // Debugging
+            return; // Exit if TOC list element not found
         }
 
         // Clear the current TOC list
@@ -193,11 +193,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionId = section.id;
             console.log('Processing section with ID:', sectionId); // Debugging
 
-             // Find the corresponding original TOC list item using the stored references
+            // Find the corresponding original TOC list item using the stored references
             const originalListItem = originalTocListItems.find(item => {
-                 const link = item.querySelector('a');
-                 return link && link.getAttribute('href') === `#${sectionId}`;
-             });
+                const link = item.querySelector('a');
+                return link && link.getAttribute('href') === `#${sectionId}`;
+            });
 
             console.log('Original list item found for', sectionId, ':', originalListItem); // Debugging
 
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tocList.appendChild(listItem);
                 console.log('Added link for', sectionId, 'to TOC list.'); // Debugging
             } else {
-                 console.log('Original TOC list item not found for section ID:', sectionId); // Debugging
+                console.log('Original TOC list item not found for section ID:', sectionId); // Debugging
             }
         });
 
@@ -217,25 +217,25 @@ document.addEventListener('DOMContentLoaded', () => {
         // using a similar approach as the philosophy link in the designer JS.
 
 
-         console.log('Finished updating TOC list for page:', pageNumber); // Debugging
+        console.log('Finished updating TOC list for page:', pageNumber); // Debugging
 
-         // Re-attach click listeners to the newly added TOC links
-         // We need to do this because cloning elements removes their event listeners
-         const newTocLinks = tocList.querySelectorAll('a');
-         console.log('Re-attaching click listeners to new TOC links:', newTocLinks.length); // Debugging
-         newTocLinks.forEach(link => {
-             link.addEventListener('click', function(event) {
-                 event.preventDefault();
-                 const targetId = this.getAttribute('href');
-                 const targetElement = document.querySelector(targetId);
-                 if (targetElement) {
-                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                     console.log('New TOC link clicked: Scrolling to:', targetId); // Debugging
-                 } else {
-                     console.log('New TOC link clicked: Target element not found:', targetId); // Debugging
-                 }
-             });
-         });
+        // Re-attach click listeners to the newly added TOC links
+        // We need to do this because cloning elements removes their event listeners
+        const newTocLinks = tocList.querySelectorAll('a');
+        console.log('Re-attaching click listeners to new TOC links:', newTocLinks.length); // Debugging
+        newTocLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    console.log('New TOC link clicked: Scrolling to:', targetId); // Debugging
+                } else {
+                    console.log('New TOC link clicked: Target element not found:', targetId); // Debugging
+                }
+            });
+        });
     }
 
 
@@ -276,75 +276,75 @@ document.addEventListener('DOMContentLoaded', () => {
             button.textContent = i; // Button text is the page number
 
             // Add click listener to handle pagination button clicks
-            button.addEventListener('click', function(event) {
-                 event.preventDefault(); // Prevent default navigation
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default navigation
 
-                 const targetPage = parseInt(this.textContent); // Get the page number from button text
+                const targetPage = parseInt(this.textContent); // Get the page number from button text
 
-                 if (targetPage !== currentPage) { // Only update if clicking a different page
-                     console.log('Pagination button clicked, navigating to page:', targetPage); // Debugging
+                if (targetPage !== currentPage) { // Only update if clicking a different page
+                    console.log('Pagination button clicked, navigating to page:', targetPage); // Debugging
 
-                     // Update URL without full page reload
-                     history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+                    // Update URL without full page reload
+                    history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
 
-                     // Update main content to display sections for the new page
-                     displayScoreSectionsForPage(targetPage); // Use displayScoreSectionsForPage
+                    // Update main content to display sections for the new page
+                    displayScoreSectionsForPage(targetPage); // Use displayScoreSectionsForPage
 
-                     // Update pagination buttons active state
-                     renderPagination(targetPage, totalPages);
+                    // Update pagination buttons active state
+                    renderPagination(targetPage, totalPages);
 
-                     // Update the TOC list to show only links for the new page's sections
-                     updateTocListForPage(targetPage); // Call the new function
+                    // Update the TOC list to show only links for the new page's sections
+                    updateTocListForPage(targetPage); // Call the new function
 
-                     // Optional: Scroll main content to top after changing page
-                     if (mainContent) {
-                         mainContent.scrollTop = 0;
-                     }
-                 } else {
-                     console.log('Pagination button clicked for current page, no action needed.'); // Debugging
-                 }
+                    // Optional: Scroll main content to top after changing page
+                    if (mainContent) {
+                        mainContent.scrollTop = 0;
+                    }
+                } else {
+                    console.log('Pagination button clicked for current page, no action needed.'); // Debugging
+                }
             });
 
             paginationContainer.appendChild(button); // Add button to the container
         }
 
         // Add the "Next >" button if not on the last page
-         if (currentPage < totalPages) {
-             const nextButton = document.createElement('a');
-             // Use history.pushState for smoother URL update
-             nextButton.href = `scores.html?page=${currentPage + 1}`; // Link to the next page (updated file name)
-             nextButton.classList.add('pagination-button', 'next');
-             nextButton.innerHTML = 'Next &gt;';
+        if (currentPage < totalPages) {
+            const nextButton = document.createElement('a');
+            // Use history.pushState for smoother URL update
+            nextButton.href = `scores.html?page=${currentPage + 1}`; // Link to the next page (updated file name)
+            nextButton.classList.add('pagination-button', 'next');
+            nextButton.innerHTML = 'Next &gt;';
 
-             // Add click listener for smooth transition
-             nextButton.addEventListener('click', function(event) {
-                  event.preventDefault(); // Prevent default navigation
+            // Add click listener for smooth transition
+            nextButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default navigation
 
-                  const targetPage = currentPage + 1;
+                const targetPage = currentPage + 1;
 
-                  console.log('Next button clicked, navigating to page:', targetPage); // Debugging
+                console.log('Next button clicked, navigating to page:', targetPage); // Debugging
 
-                  // Update URL without full page reload
-                  history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+                // Update URL without full page reload
+                history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
 
-                  // Update main content to display sections for the new page
-                  displayScoreSectionsForPage(targetPage); // Use displayScoreSectionsForPage
+                // Update main content to display sections for the new page
+                displayScoreSectionsForPage(targetPage); // Use displayScoreSectionsForPage
 
-                  // Update pagination buttons active state
-                  renderPagination(targetPage, totalPages);
+                // Update pagination buttons active state
+                renderPagination(targetPage, totalPages);
 
-                  // Update the TOC list to show only links for the new page's sections
-                  updateTocListForPage(targetPage); // Call the new function
+                // Update the TOC list to show only links for the new page's sections
+                updateTocListForPage(targetPage); // Call the new function
 
-                   // Optional: Scroll main content to top after changing page
-                  const nav = document.querySelector('nav');
-                    const navHeight = nav ? nav.offsetHeight : 0;
-                    window.scrollTo({ top: navHeight, behavior: 'smooth' });
+                // Optional: Scroll main content to top after changing page
+                const nav = document.querySelector('nav');
+                const navHeight = nav ? nav.offsetHeight : 0;
+                window.scrollTo({ top: navHeight, behavior: 'smooth' });
 
-             });
+            });
 
-             paginationContainer.appendChild(nextButton);
-         }
+            paginationContainer.appendChild(nextButton);
+        }
     }
 
     // --- Initialize Pagination and Content on Load ---
@@ -379,31 +379,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const goToBottomBtn = document.getElementById('go-to-bottom');
 
     window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const docHeight = document.body.scrollHeight;
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.body.scrollHeight;
 
-    // Hiện nút lên đầu khi cuộn xuống
-    if (scrollY > 300) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
+        // Hiện nút lên đầu khi cuộn xuống
+        if (scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
         }
 
-    // Ẩn nút xuống nếu gần cuối trang
-    if (scrollY + windowHeight >= docHeight - 100) {
-        goToBottomBtn.style.display = 'none';
+        // Ẩn nút xuống nếu gần cuối trang
+        if (scrollY + windowHeight >= docHeight - 100) {
+            goToBottomBtn.style.display = 'none';
         } else {
-        goToBottomBtn.style.display = 'block';
-    }
+            goToBottomBtn.style.display = 'block';
+        }
     });
 
     backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     goToBottomBtn.addEventListener('click', () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     });
 
     // JavaScript for sticky navigation bar

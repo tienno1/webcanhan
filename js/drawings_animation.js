@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fallbackTimeout = 600;
 
     navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             if (this.classList.contains('active')) {
                 event.preventDefault();
                 return;
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tocLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             event.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(`main ${targetId}`);
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const newTocLinks = tocList.querySelectorAll('a');
         newTocLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
+            link.addEventListener('click', function (event) {
                 event.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(`main ${targetId}`);
@@ -407,80 +407,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderPagination(currentPage, totalPages) {
-    if (!paginationContainer) return;
-    paginationContainer.innerHTML = '';
+        if (!paginationContainer) return;
+        paginationContainer.innerHTML = '';
 
-    const maxVisibleButtons = 3;
-    let startPage = Math.max(1, currentPage - 1);
-    let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+        const maxVisibleButtons = 3;
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
 
-    if (endPage - startPage < maxVisibleButtons - 1) {
-        startPage = Math.max(1, endPage - maxVisibleButtons + 1);
-    }
-
-    // Back button
-    if (currentPage > 1) {
-        const backButton = document.createElement('a');
-        backButton.href = `drawings.html?page=${currentPage - 1}`;
-        backButton.classList.add('pagination-button', 'prev');
-        backButton.innerHTML = '&lt; Back';
-        backButton.addEventListener('click', function (event) {
-            event.preventDefault();
-            const targetPage = currentPage - 1;
-            history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
-            displayContentForPage(targetPage);
-            renderPagination(targetPage, totalPages);
-            displayFirstContentOfCurrentPageInSidebar(targetPage);
-            updateTocListForPage(targetPage);
-            const navHeight = document.querySelector('nav')?.offsetHeight || 0;
-                    window.scrollTo({ top: navHeight, behavior: 'auto' });
-        });
-        paginationContainer.appendChild(backButton);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-        const button = document.createElement('a');
-        button.href = `drawings.html?page=${i}`;
-        button.classList.add('pagination-button');
-        if (i === currentPage) {
-            button.classList.add('active');
+        if (endPage - startPage < maxVisibleButtons - 1) {
+            startPage = Math.max(1, endPage - maxVisibleButtons + 1);
         }
-        button.textContent = i;
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-            const targetPage = parseInt(this.textContent);
-            if (targetPage !== currentPage) {
+
+        // Back button
+        if (currentPage > 1) {
+            const backButton = document.createElement('a');
+            backButton.href = `drawings.html?page=${currentPage - 1}`;
+            backButton.classList.add('pagination-button', 'prev');
+            backButton.innerHTML = '&lt; Back';
+            backButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetPage = currentPage - 1;
                 history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
                 displayContentForPage(targetPage);
                 renderPagination(targetPage, totalPages);
                 displayFirstContentOfCurrentPageInSidebar(targetPage);
                 updateTocListForPage(targetPage);
                 const navHeight = document.querySelector('nav')?.offsetHeight || 0;
-                    window.scrollTo({ top: navHeight, behavior: 'auto' });
-            }
-        });
-        paginationContainer.appendChild(button);
-    }
+                window.scrollTo({ top: navHeight, behavior: 'auto' });
+            });
+            paginationContainer.appendChild(backButton);
+        }
 
-    if (currentPage < totalPages) {
-        const nextButton = document.createElement('a');
-        nextButton.href = `drawings.html?page=${currentPage + 1}`;
-        nextButton.classList.add('pagination-button', 'next');
-        nextButton.innerHTML = 'Next &gt;';
-        nextButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            const targetPage = currentPage + 1;
-            history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
-            displayContentForPage(targetPage);
-            renderPagination(targetPage, totalPages);
-            displayFirstContentOfCurrentPageInSidebar(targetPage);
-            updateTocListForPage(targetPage);
-            const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+        for (let i = startPage; i <= endPage; i++) {
+            const button = document.createElement('a');
+            button.href = `drawings.html?page=${i}`;
+            button.classList.add('pagination-button');
+            if (i === currentPage) {
+                button.classList.add('active');
+            }
+            button.textContent = i;
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetPage = parseInt(this.textContent);
+                if (targetPage !== currentPage) {
+                    history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+                    displayContentForPage(targetPage);
+                    renderPagination(targetPage, totalPages);
+                    displayFirstContentOfCurrentPageInSidebar(targetPage);
+                    updateTocListForPage(targetPage);
+                    const navHeight = document.querySelector('nav')?.offsetHeight || 0;
                     window.scrollTo({ top: navHeight, behavior: 'auto' });
-        });
-        paginationContainer.appendChild(nextButton);
+                }
+            });
+            paginationContainer.appendChild(button);
+        }
+
+        if (currentPage < totalPages) {
+            const nextButton = document.createElement('a');
+            nextButton.href = `drawings.html?page=${currentPage + 1}`;
+            nextButton.classList.add('pagination-button', 'next');
+            nextButton.innerHTML = 'Next &gt;';
+            nextButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetPage = currentPage + 1;
+                history.pushState({ page: targetPage }, `Page ${targetPage}`, `?page=${targetPage}`);
+                displayContentForPage(targetPage);
+                renderPagination(targetPage, totalPages);
+                displayFirstContentOfCurrentPageInSidebar(targetPage);
+                updateTocListForPage(targetPage);
+                const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                window.scrollTo({ top: navHeight, behavior: 'auto' });
+            });
+            paginationContainer.appendChild(nextButton);
+        }
     }
-}
     window.addEventListener('popstate', (event) => {
         const state = event.state;
         const pageFromState = state && state.page ? state.page : getCurrentPage();
@@ -615,7 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
+
     // --- NEW: Add a button to open the info modal for each image ---
     // You will need to add a button next to each image (or where appropriate in your HTML)
     // with a class like 'open-info-modal-btn' and a data-attribute like data-image-id="[image_id]"
@@ -623,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // <button class="open-info-modal-btn" data-image-id="[image_id]">Xem thông tin</button>
 
     document.querySelectorAll('.open-info-modal-btn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Here you would fetch or populate the modal content based on the data-image-id
             // For now, we just show the modal.
             showAppInfoModal();
@@ -648,7 +648,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize visibleImageCounts for each section if not set
         if (section.classList.contains('drawing')) { // Only for drawing sections
             if (visibleImageCounts.get(section.id) === undefined) {
-                 visibleImageCounts.set(section.id, 5); // Default to displaying the first 5 images for each section
+                visibleImageCounts.set(section.id, 5); // Default to displaying the first 5 images for each section
             }
             // Then, apply display logic to sections currently displayed on the current page
             const sectionPage = parseInt(section.getAttribute('data-page'));
@@ -737,7 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    
+
     // NEW: Close mobile nav when clicking outside
     const menuToggle = document.querySelector('.menu-toggle'); // Nút 3 gạch
     // nav đã được khai báo ở trên

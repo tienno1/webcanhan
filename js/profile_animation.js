@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isMobile()) {
                 // If resized to mobile, ensure it's collapsed unless modal is active
                 if (!welcomeModal.classList.contains('active')) {
-                     collapseButton();
+                    collapseButton();
                 }
             } else {
                 // If resized to desktop, remove mobile-specific styles and ensure button is fully visible
@@ -252,15 +252,15 @@ document.addEventListener('DOMContentLoaded', () => {
             } else { // Đối với mobile (màn hình < 768px)
                 // Trên mobile, loại bỏ hoàn toàn tính năng sticky và hiệu ứng trong suốt khi cuộn.
                 // Thanh nav sẽ luôn giữ nguyên trạng thái mặc định của nó.
-                nav.classList.remove('sticky-nav'); 
-                document.body.style.paddingTop = '0'; 
+                nav.classList.remove('sticky-nav');
+                document.body.style.paddingTop = '0';
             }
         }
     });
 
     // Script for smooth page transitions on navigation links (kept here as it's page-specific content transition)
     document.querySelectorAll('nav ul li a').forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             if (this.target === '_blank' || this.href.startsWith('http') || this.classList.contains('dropdown-toggle')) {
                 return; // Do not apply transition to external links or dropdown toggles
             }
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    window.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('DOMContentLoaded', function () {
         const pageContent = document.getElementById('page-content');
         if (pageContent) pageContent.classList.add('fade-in');
     });
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nav.classList.contains('open') && !nav.contains(event.target) && !menuToggle.contains(event.target)) {
                 nav.classList.remove('open'); // Đóng nav
                 // Đảm bảo loại bỏ class 'toc-open' khỏi body để khôi phục cuộn
-                document.body.classList.remove('toc-open'); 
+                document.body.classList.remove('toc-open');
             }
         });
     }

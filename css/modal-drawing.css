@@ -1,43 +1,66 @@
 /* Kiểu dáng cho lớp phủ modal thông tin ứng dụng */
 .app-info-modal {
-  display: none; /* Ẩn theo mặc định */
-  position: fixed; /* Định vị cố định so với khung nhìn */
-  top: 0; /* Bao phủ toàn bộ chiều cao khung nhìn */
-  left: 0; /* Bao phủ toàn bộ chiều rộng khung nhìn */
-  width: 100%; /* Chiều rộng đầy đủ của khung nhìn */
-  height: 100%; /* Chiều cao đầy đủ của khung nhìn */
-  overflow: auto; /* Cho phép cuộn nếu nội dung tràn */
-  background-color: rgba(0,0,0,0.4); /* Nền bán trong suốt màu đen */
-  
+  display: none;
+  /* Ẩn theo mặc định */
+  position: fixed;
+  /* Định vị cố định so với khung nhìn */
+  top: 0;
+  /* Bao phủ toàn bộ chiều cao khung nhìn */
+  left: 0;
+  /* Bao phủ toàn bộ chiều rộng khung nhìn */
+  width: 100%;
+  /* Chiều rộng đầy đủ của khung nhìn */
+  height: 100%;
+  /* Chiều cao đầy đủ của khung nhìn */
+  overflow: auto;
+  /* Cho phép cuộn nếu nội dung tràn */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Nền bán trong suốt màu đen */
+
   /* Sử dụng Flexbox để căn giữa nội dung */
-  display: flex; /* Bật flexbox */
-  justify-content: center; /* Căn giữa nội dung theo chiều ngang */
-  align-items: center; /* Căn giữa nội dung theo chiều dọc */
-  
-  backdrop-filter: blur(5px); /* Áp dụng hiệu ứng làm mờ cho nền */
-  -webkit-backdrop-filter: blur(5px); /* Tiền tố Webkit cho hiệu ứng làm mờ */
-  
-  z-index: 9999; /* Đảm bảo nó nằm trên cùng của các nội dung khác */
-  opacity: 0; /* Bắt đầu với độ trong suốt bằng 0 (ẩn) */
-  pointer-events: none; /* Ngăn chặn tương tác khi ẩn */
-  
+  display: flex;
+  /* Bật flexbox */
+  justify-content: center;
+  /* Căn giữa nội dung theo chiều ngang */
+  align-items: center;
+  /* Căn giữa nội dung theo chiều dọc */
+
+  backdrop-filter: blur(5px);
+  /* Áp dụng hiệu ứng làm mờ cho nền */
+  -webkit-backdrop-filter: blur(5px);
+  /* Tiền tố Webkit cho hiệu ứng làm mờ */
+
+  z-index: 9999;
+  /* Đảm bảo nó nằm trên cùng của các nội dung khác */
+  opacity: 0;
+  /* Bắt đầu với độ trong suốt bằng 0 (ẩn) */
+  pointer-events: none;
+  /* Ngăn chặn tương tác khi ẩn */
+
   /* Chuyển đổi mượt mà cho sự xuất hiện/biến mất */
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  visibility: hidden; /* Ẩn phần tử hoàn toàn khi không hoạt động */
+  visibility: hidden;
+  /* Ẩn phần tử hoàn toàn khi không hoạt động */
 }
 
 /* Kiểu dáng khi modal đang hoạt động (hiển thị) */
 .app-info-modal.active {
-  display: flex; /* Hiển thị dưới dạng flex để bật căn giữa */
-  opacity: 1; /* Hoàn toàn không trong suốt */
-  pointer-events: all; /* Cho phép tương tác */
-  visibility: visible; /* Hiển thị phần tử */
+  display: flex;
+  /* Hiển thị dưới dạng flex để bật căn giữa */
+  opacity: 1;
+  /* Hoàn toàn không trong suốt */
+  pointer-events: all;
+  /* Cho phép tương tác */
+  visibility: visible;
+  /* Hiển thị phần tử */
 }
 
 /* Kiểu dáng khi modal đang đóng (chuyển đổi sang ẩn) */
 .app-info-modal.closing {
-  opacity: 0; /* Mờ dần */
-  visibility: hidden; /* Ẩn hoàn toàn sau khi mờ dần */
+  opacity: 0;
+  /* Mờ dần */
+  visibility: hidden;
+  /* Ẩn hoàn toàn sau khi mờ dần */
 }
 
 /* Các kiểu dáng này dành cho các logo bên trong nội dung modal, không phải bản thân modal.
@@ -45,13 +68,14 @@
    Tôi giữ chúng ở đây để hoàn chỉnh, giả sử chúng là các kiểu logo ứng dụng chung.
 */
 .app-logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .app-logo {
-    max-height: 60px;
-    object-fit: contain;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.app-logo {
+  max-height: 60px;
+  object-fit: contain;
+}

@@ -91,32 +91,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openAppModal() {
     if (appModal) {
-        appModal.classList.remove('closing');
-        appModal.classList.add('active');
-        clearTimeout(autoCloseTimer);
-        autoCloseTimer = setTimeout(() => closeAppModal(), 100000); // Tự động đóng sau 100 giây
-        if (toggleBtn) toggleBtn.style.display = 'block'; // Hiện nút toggle (đóng)
-        if (showBtn) showBtn.style.display = 'none'; // Ẩn nút show (mở)
+      appModal.classList.remove('closing');
+      appModal.classList.add('active');
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = setTimeout(() => closeAppModal(), 100000); // Tự động đóng sau 100 giây
+      if (toggleBtn) toggleBtn.style.display = 'block'; // Hiện nút toggle (đóng)
+      if (showBtn) showBtn.style.display = 'none'; // Ẩn nút show (mở)
     }
   }
 
   function closeAppModal() {
     if (appModal) {
-        appModal.classList.remove('active');
-        appModal.classList.add('closing');
-        clearTimeout(autoCloseTimer);
-        setTimeout(() => {
-            if (appModal) appModal.classList.remove('closing');
-            if (toggleBtn) toggleBtn.style.display = 'none'; // Luôn ẩn toggleBtn khi appModal đóng
-            // Chỉ hiển thị showBtn nếu imageModal vẫn đang hoạt động
-            if (showBtn) {
-                if (imageModal && imageModal.classList.contains('active')) {
-                    showBtn.style.display = 'block';
-                } else {
-                    showBtn.style.display = 'none';
-                }
-            }
-        }, 600); // Thời gian khớp với transition của CSS
+      appModal.classList.remove('active');
+      appModal.classList.add('closing');
+      clearTimeout(autoCloseTimer);
+      setTimeout(() => {
+        if (appModal) appModal.classList.remove('closing');
+        if (toggleBtn) toggleBtn.style.display = 'none'; // Luôn ẩn toggleBtn khi appModal đóng
+        // Chỉ hiển thị showBtn nếu imageModal vẫn đang hoạt động
+        if (showBtn) {
+          if (imageModal && imageModal.classList.contains('active')) {
+            showBtn.style.display = 'block';
+          } else {
+            showBtn.style.display = 'none';
+          }
+        }
+      }, 600); // Thời gian khớp với transition của CSS
     }
   }
 
@@ -145,18 +145,18 @@ document.addEventListener('DOMContentLoaded', () => {
     messageModalOkBtn.addEventListener('click', closeMessageModal);
   }
   if (messageModal) {
-    messageModal.addEventListener('click', function(e) {
+    messageModal.addEventListener('click', function (e) {
       if (e.target === messageModal) closeMessageModal();
     });
   }
 
   function hideAllModals() {
     if (appModal) {
-        appModal.classList.remove('active');
-        appModal.classList.remove('closing');
+      appModal.classList.remove('active');
+      appModal.classList.remove('closing');
     }
     if (imageModal) {
-        imageModal.classList.remove('active', 'fullscreen'); // Đảm bảo modal hình ảnh cũng đóng
+      imageModal.classList.remove('active', 'fullscreen'); // Đảm bảo modal hình ảnh cũng đóng
     }
     document.body.style.overflow = ''; // Cho phép cuộn lại
     closeMessageModal(); // Đảm bảo modal thông báo cũng đóng
@@ -170,34 +170,34 @@ document.addEventListener('DOMContentLoaded', () => {
   allImages.forEach((img) => {
     // Only attach click listener to main images, not small logos
     if (!img.classList.contains('image-logo-small')) {
-        img.addEventListener('click', function() {
-            // Lấy data-page của hình ảnh được click
-            currentPageOfModal = this.closest('[data-page]') ?
-                                parseInt(this.closest('[data-page]').getAttribute('data-page')) :
-                                null;
+      img.addEventListener('click', function () {
+        // Lấy data-page của hình ảnh được click
+        currentPageOfModal = this.closest('[data-page]') ?
+          parseInt(this.closest('[data-page]').getAttribute('data-page')) :
+          null;
 
-            // Lọc ra các hình ảnh chính cùng data-page
-            if (currentPageOfModal !== null) {
-                currentPagedImages = allImages.filter(image => {
-                    const imageParentSection = image.closest('[data-page]');
-                    return imageParentSection && parseInt(imageParentSection.getAttribute('data-page')) === currentPageOfModal;
-                });
-            } else {
-                // Nếu không có data-page, hiển thị tất cả ảnh chính
-                currentPagedImages = allImages;
-            }
+        // Lọc ra các hình ảnh chính cùng data-page
+        if (currentPageOfModal !== null) {
+          currentPagedImages = allImages.filter(image => {
+            const imageParentSection = image.closest('[data-page]');
+            return imageParentSection && parseInt(imageParentSection.getAttribute('data-page')) === currentPageOfModal;
+          });
+        } else {
+          // Nếu không có data-page, hiển thị tất cả ảnh chính
+          currentPagedImages = allImages;
+        }
 
-            // Tìm index của hình ảnh được click trong danh sách đã lọc
-            currentImgIndex = currentPagedImages.findIndex(image => image.src === this.src);
+        // Tìm index của hình ảnh được click trong danh sách đã lọc
+        currentImgIndex = currentPagedImages.findIndex(image => image.src === this.src);
 
-            currentImgEl = currentPagedImages[currentImgIndex]; // Cập nhật currentImgEl
-            if (modalImg) modalImg.src = currentImgEl.src; // Cập nhật ảnh trong modal
-            if (imageModal) imageModal.classList.add('active'); // Mở modal hình ảnh
-            document.body.style.overflow = 'hidden'; // Ngăn cuộn trang chính
+        currentImgEl = currentPagedImages[currentImgIndex]; // Cập nhật currentImgEl
+        if (modalImg) modalImg.src = currentImgEl.src; // Cập nhật ảnh trong modal
+        if (imageModal) imageModal.classList.add('active'); // Mở modal hình ảnh
+        document.body.style.overflow = 'hidden'; // Ngăn cuộn trang chính
 
-            // Hiển thị nút 'showBtn' khi modal hình ảnh được mở
-            if (showBtn) showBtn.style.display = 'block';
-        });
+        // Hiển thị nút 'showBtn' khi modal hình ảnh được mở
+        if (showBtn) showBtn.style.display = 'block';
+      });
     }
   });
 
@@ -260,44 +260,44 @@ document.addEventListener('DOMContentLoaded', () => {
   let translateY = 0;
 
   function resetZoom() {
-      scale = 1;
-      translateX = 0;
-      translateY = 0;
-      updateTransform();
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
+    updateTransform();
   }
 
   function updateTransform() {
-      if (modalImg) {
-          modalImg.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
-          // Cập nhật cursor dựa trên trạng thái scale
-          modalImg.style.cursor = (scale > 1) ? 'grab' : 'zoom-in';
-      }
+    if (modalImg) {
+      modalImg.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+      // Cập nhật cursor dựa trên trạng thái scale
+      modalImg.style.cursor = (scale > 1) ? 'grab' : 'zoom-in';
+    }
   }
 
   // Zoom in/out bằng nút fullscreen và double-click
   if (fullscreenBtn) {
-      fullscreenBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (scale === 1) { // Nếu chưa zoom, phóng to
-              scale = 1.5; // Phóng to 1.5 lần
-          } else { // Nếu đã zoom, reset về ban đầu
-              resetZoom();
-          }
-          updateTransform();
-      });
+    fullscreenBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (scale === 1) { // Nếu chưa zoom, phóng to
+        scale = 1.5; // Phóng to 1.5 lần
+      } else { // Nếu đã zoom, reset về ban đầu
+        resetZoom();
+      }
+      updateTransform();
+    });
   }
 
   // Zoom bằng double-click
   if (modalImg) {
-      modalImg.addEventListener('dblclick', (e) => {
-          e.stopPropagation();
-          if (scale === 1) {
-              scale = 1.5; // Phóng to 1.5 lần khi double-click
-          } else {
-              resetZoom(); // Reset về 100% khi double-click lần nữa
-          }
-          updateTransform();
-      });
+    modalImg.addEventListener('dblclick', (e) => {
+      e.stopPropagation();
+      if (scale === 1) {
+        scale = 1.5; // Phóng to 1.5 lần khi double-click
+      } else {
+        resetZoom(); // Reset về 100% khi double-click lần nữa
+      }
+      updateTransform();
+    });
   }
 
   // Kéo modal (drag)
@@ -308,44 +308,44 @@ document.addEventListener('DOMContentLoaded', () => {
   let initialTranslateY = 0;
 
   if (modalImg) {
-      modalImg.addEventListener('mousedown', (e) => {
-          // Chỉ kéo khi đang zoom (scale > 1) và click chuột trái
-          if (scale === 1 || e.button !== 0) return;
-          isDragging = true;
-          startPointerX = e.clientX;
-          startPointerY = e.clientY;
-          initialTranslateX = translateX;
-          initialTranslateY = translateY;
-          modalImg.style.cursor = 'grabbing';
-          e.preventDefault();
-      });
+    modalImg.addEventListener('mousedown', (e) => {
+      // Chỉ kéo khi đang zoom (scale > 1) và click chuột trái
+      if (scale === 1 || e.button !== 0) return;
+      isDragging = true;
+      startPointerX = e.clientX;
+      startPointerY = e.clientY;
+      initialTranslateX = translateX;
+      initialTranslateY = translateY;
+      modalImg.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
 
-      document.addEventListener('mousemove', (e) => {
-          if (!isDragging) return;
-          // Tính toán sự thay đổi vị trí dựa trên chuyển động của chuột và tỷ lệ zoom
-          const dx = (e.clientX - startPointerX) / scale;
-          const dy = (e.clientY - startPointerY) / scale;
-          translateX = initialTranslateX + dx;
-          translateY = initialTranslateY + dy;
-          updateTransform();
-      });
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      // Tính toán sự thay đổi vị trí dựa trên chuyển động của chuột và tỷ lệ zoom
+      const dx = (e.clientX - startPointerX) / scale;
+      const dy = (e.clientY - startPointerY) / scale;
+      translateX = initialTranslateX + dx;
+      translateY = initialTranslateY + dy;
+      updateTransform();
+    });
 
-      document.addEventListener('mouseup', () => {
-          if (!isDragging) return;
-          isDragging = false;
-          modalImg.style.cursor = (scale > 1) ? 'grab' : 'zoom-in'; // Cập nhật lại cursor
-      });
+    document.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      modalImg.style.cursor = (scale > 1) ? 'grab' : 'zoom-in'; // Cập nhật lại cursor
+    });
 
-      // Reset vị trí và zoom khi ảnh mới được tải vào modal hoặc modal đóng
-      modalImg.addEventListener('load', function() {
-          resetZoom(); // Đảm bảo reset zoom khi ảnh mới được tải
-      });
-      imageModal.addEventListener('transitionend', function() {
-          // Reset zoom khi modal đóng (dựa vào class 'active' của imageModal)
-          if (!imageModal.classList.contains('active')) {
-              resetZoom();
-          }
-      });
+    // Reset vị trí và zoom khi ảnh mới được tải vào modal hoặc modal đóng
+    modalImg.addEventListener('load', function () {
+      resetZoom(); // Đảm bảo reset zoom khi ảnh mới được tải
+    });
+    imageModal.addEventListener('transitionend', function () {
+      // Reset zoom khi modal đóng (dựa vào class 'active' của imageModal)
+      if (!imageModal.classList.contains('active')) {
+        resetZoom();
+      }
+    });
   }
 
   // Đóng tất cả modal khi nhấn nút đóng hoặc click ra ngoài modal ảnh
@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Gắn sự kiện cho nút đóng của modal thông tin
   const appInfoCloseBtn = document.querySelector('#app-info-modal .app-info-close-btn');
-    if (appInfoCloseBtn) {
-        appInfoCloseBtn.addEventListener('click', closeAppModal);
-    }
+  if (appInfoCloseBtn) {
+    appInfoCloseBtn.addEventListener('click', closeAppModal);
+  }
 });

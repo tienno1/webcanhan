@@ -2,6 +2,7 @@
 * {
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
@@ -9,8 +10,10 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif; /* Using Inter font */
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  font-family: 'Inter', sans-serif;
+  /* Using Inter font */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
 /* ================= NAVIGATION ================== */
@@ -19,9 +22,11 @@ nav {
   top: 0;
   left: 0;
   height: 100%;
-  width: 250px; /* Slightly wider nav */
+  width: 250px;
+  /* Slightly wider nav */
   padding: 40px 20px;
-  z-index: 1000; /* Ensure nav is always on top */
+  z-index: 1000;
+  /* Ensure nav is always on top */
   transition: background 0.8s ease, color 0.8s ease;
   display: flex;
   flex-direction: column;
@@ -33,21 +38,30 @@ nav.light {
   background: white;
   color: black;
 }
+
 nav.dark {
-  background: rgb(24, 24, 24); /* Darker black */
+  background: rgb(24, 24, 24);
+  /* Darker black */
   color: white;
 }
+
 nav.green {
   background: rgb(21, 255, 21);
   color: rgb(0, 0, 0);
 }
+
 nav.blue {
-  background: rgb(0, 106, 173); /* A more modern blue */
-  color: white; /* Changed to white for better contrast */
+  background: rgb(0, 106, 173);
+  /* A more modern blue */
+  color: white;
+  /* Changed to white for better contrast */
 }
+
 nav.green-light {
-  background: rgb(104, 255, 215); /* A more modern blue */
-  color: rgb(0, 0, 0); /* Changed to white for better contrast */
+  background: rgb(104, 255, 215);
+  /* A more modern blue */
+  color: rgb(0, 0, 0);
+  /* Changed to white for better contrast */
 }
 
 nav ul {
@@ -56,33 +70,42 @@ nav ul {
   padding: 0;
   width: 100%;
 }
+
 nav ul li {
-  margin: 15px 0; /* Slightly reduced margin for more items */
+  margin: 15px 0;
+  /* Slightly reduced margin for more items */
   cursor: pointer;
-  font-weight: 600; /* Semi-bold */
+  font-weight: 600;
+  /* Semi-bold */
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 nav ul li a {
   text-decoration: none;
   color: inherit;
-  display: flex; /* Use flex for icon and text alignment */
+  display: flex;
+  /* Use flex for icon and text alignment */
   align-items: center;
-  padding: 10px 15px; /* More padding for clickable area */
+  padding: 10px 15px;
+  /* More padding for clickable area */
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 nav ul li a i {
-  margin-right: 15px; /* Space between icon and text */
+  margin-right: 15px;
+  /* Space between icon and text */
   font-size: 1.1em;
 }
 
 /* Hover effects for nav items */
 nav ul li a:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
-  transform: translateX(5px); /* Slight slide effect */
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Subtle background on hover */
+  transform: translateX(5px);
+  /* Slight slide effect */
 }
+
 nav.light ul li a:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
@@ -90,22 +113,28 @@ nav.light ul li a:hover {
 
 /* Active nav item */
 nav ul li.active {
-  color: #FF6600; /* Orange always prominent */
-  background-color: rgba(255, 102, 0, 0.1); /* Subtle orange background for active */
-  border-left: 5px solid #FF6600; /* Highlight active with a border */
-  padding-left: 10px; /* Adjust padding due to border */
+  color: #FF6600;
+  /* Orange always prominent */
+  background-color: rgba(255, 102, 0, 0.1);
+  /* Subtle orange background for active */
+  border-left: 5px solid #FF6600;
+  /* Highlight active with a border */
+  padding-left: 10px;
+  /* Adjust padding due to border */
 }
 
 /* Adjust active link hover */
 nav ul li.active a:hover {
-    background-color: rgba(255, 102, 0, 0.15);
+  background-color: rgba(255, 102, 0, 0.15);
 }
 
 
 /* =================== PAGE SECTIONS =================== */
 #fullpage {
-  margin-left: 250px; /* Adjusted margin for wider nav */
+  margin-left: 250px;
+  /* Adjusted margin for wider nav */
 }
+
 .section {
   display: flex;
   align-items: center;
@@ -113,13 +142,16 @@ nav ul li.active a:hover {
   height: 100vh;
   transition: background 1s ease-in-out;
 }
+
 .section-content {
   display: flex;
   flex-direction: row;
-  width: calc(100vw - 250px); /* Adjusted width */
+  width: calc(100vw - 250px);
+  /* Adjusted width */
   height: 100vh;
   overflow: hidden;
-  position: relative; /* Needed for absolute positioning of background effects */
+  position: relative;
+  /* Needed for absolute positioning of background effects */
 }
 
 /* Dynamic background effects (conceptual) */
@@ -131,54 +163,87 @@ nav ul li.active a:hover {
   width: 100%;
   height: 100%;
   background-size: cover;
-  opacity: 0.05; /* Subtle */
-  z-index: 0; /* Behind content */
+  opacity: 0.05;
+  /* Subtle */
+  z-index: 0;
+  /* Behind content */
   animation: backgroundPulse 20s infinite alternate;
 }
 
 @keyframes backgroundPulse {
-    0% { transform: scale(1); opacity: 0.05; }
-    100% { transform: scale(1.05); opacity: 0.07; }
+  0% {
+    transform: scale(1);
+    opacity: 0.05;
+  }
+
+  100% {
+    transform: scale(1.05);
+    opacity: 0.07;
+  }
 }
 
 #section1::before {
-  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+1'); /* Placeholder */
+  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+1');
+  /* Placeholder */
   animation: movePattern1 30s linear infinite;
 }
+
 @keyframes movePattern1 {
-  from { background-position: 0 0; }
-  to { background-position: 100% 100%; }
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 100% 100%;
+  }
 }
 
 #section2::before {
-  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+2'); /* Placeholder */
+  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+2');
+  /* Placeholder */
   animation: movePattern2 40s linear infinite alternate;
 }
+
 @keyframes movePattern2 {
-  from { background-position: 0 50%; }
-  to { background-position: 100% 50%; }
+  from {
+    background-position: 0 50%;
+  }
+
+  to {
+    background-position: 100% 50%;
+  }
 }
 
 #section3::before {
-  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+3'); /* Placeholder */
+  background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Abstract+Pattern+3');
+  /* Placeholder */
   animation: movePattern3 25s linear infinite;
 }
+
 @keyframes movePattern3 {
-  from { background-position: 50% 0; }
-  to { background-position: 50% 100%; }
+  from {
+    background-position: 50% 0;
+  }
+
+  to {
+    background-position: 50% 100%;
+  }
 }
 
 /* ================= SECTION 1 & 2: Layout chung ================= */
 .profile-left {
   flex: 3;
-  background: #1a1a1d; /* Darker background for image */
+  background: #1a1a1d;
+  /* Darker background for image */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: inset -5px 0 15px rgba(0,0,0,0.5); /* Inner shadow */
+  box-shadow: inset -5px 0 15px rgba(0, 0, 0, 0.5);
+  /* Inner shadow */
 }
+
 .profile-left img {
   width: 100%;
   height: 100vh;
@@ -186,42 +251,57 @@ nav ul li.active a:hover {
   object-position: center;
   transition: transform 0.5s ease;
 }
+
 .profile-left img:hover {
-  transform: scale(1.03); /* Subtle zoom on hover */
+  transform: scale(1.03);
+  /* Subtle zoom on hover */
 }
 
 .profile-right {
   flex: 2;
-  max-width: 800px; /* Slightly wider text area */
-  padding: 80px 70px 80px 120px; /* Adjusted padding */
+  max-width: 800px;
+  /* Slightly wider text area */
+  padding: 80px 70px 80px 120px;
+  /* Adjusted padding */
   background: #2d2f33;
   display: flex;
   flex-direction: column;
   justify-content: center;
   color: white;
-  position: relative; /* For z-index and potential overlaps */
+  position: relative;
+  /* For z-index and potential overlaps */
 }
+
 .profile-right h1 {
-  font-size: 4em; /* Larger heading */
+  font-size: 4em;
+  /* Larger heading */
   line-height: 1.1;
   margin: 0 0 25px;
-  font-weight: 800; /* Extra bold */
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  font-weight: 800;
+  /* Extra bold */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
+
 .profile-right h1 strong {
   display: block;
   font-weight: 800;
-  color: #FF6600; /* Highlight name with accent color */
+  color: #FF6600;
+  /* Highlight name with accent color */
 }
+
 .roles {
   display: flex;
-  font-size: 1.5em; /* Larger roles text */
+  font-size: 1.5em;
+  /* Larger roles text */
   margin-bottom: 25px;
-  flex-wrap: wrap; /* Allow wrapping on small screens */
+  flex-wrap: wrap;
+  /* Allow wrapping on small screens */
 }
+
 .roles p {
   margin: 0 5px;
-  color: #00FFC8; /* Accent color for roles */
+  color: #00FFC8;
+  /* Accent color for roles */
   font-weight: 700;
   position: relative;
   overflow: hidden;
@@ -231,44 +311,64 @@ nav ul li.active a:hover {
 .role-animate {
   animation: typing 3s steps(10, end) infinite alternate, blink-caret .75s step-end infinite;
   white-space: nowrap;
-  border-right: .15em solid orange; /* The caret */
-  width: 10ch; /* Adjust based on max chars in role */
+  border-right: .15em solid orange;
+  /* The caret */
+  width: 10ch;
+  /* Adjust based on max chars in role */
 }
 
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
 }
 
 @keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange }
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: orange
+  }
 }
 
 
 .bio {
   margin-top: 20px;
-  font-size: 1.1em; /* Slightly larger bio text */
+  font-size: 1.1em;
+  /* Slightly larger bio text */
   line-height: 1.7;
-  color: #ddd; /* Lighter text for readability */
+  color: #ddd;
+  /* Lighter text for readability */
   text-align: justify;
 }
+
 .bio strong {
-    color: #FF6600; /* Highlight strong words in bio */
+  color: #FF6600;
+  /* Highlight strong words in bio */
 }
 
 .buttons {
   margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
-  gap: 15px; /* Spacing between buttons */
+  gap: 15px;
+  /* Spacing between buttons */
 }
 
 .buttons button {
   padding: 12px 20px;
   font-size: 1.1em;
   border: none;
-  border-radius: 25px; /* More rounded buttons */
+  border-radius: 25px;
+  /* More rounded buttons */
   background: #444;
   color: white;
   cursor: pointer;
@@ -276,7 +376,7 @@ nav ul li.active a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .buttons button i {
@@ -285,9 +385,10 @@ nav ul li.active a:hover {
 }
 
 .buttons button:hover {
-  background: #FF6600; /* Orange on hover */
+  background: #FF6600;
+  /* Orange on hover */
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 .social-links {
@@ -295,33 +396,41 @@ nav ul li.active a:hover {
   display: flex;
   gap: 20px;
 }
+
 .social-links a {
   color: white;
   font-size: 1.8em;
   transition: color 0.3s ease, transform 0.3s ease;
 }
+
 .social-links a:hover {
   color: #FF6600;
   transform: translateY(-3px) scale(1.1);
 }
 
-.buttons_1 { /* For "More Skill" button */
+.buttons_1 {
+  /* For "More Skill" button */
   margin-top: -30px;
   margin-bottom: 10px;
-  text-align: center; /* Center the button */
+  text-align: center;
+  /* Center the button */
 }
 
 .buttons_1 button {
-  padding: 8px 15px; /* Smaller padding */
-  font-size: 0.9em; /* Smaller font size */
+  padding: 8px 15px;
+  /* Smaller padding */
+  font-size: 0.9em;
+  /* Smaller font size */
   border: none;
   border-radius: 25px;
-  background: #FF6600; /* Orange button */
+  background: #FF6600;
+  /* Orange button */
   color: white;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  display: inline-flex; /* Use inline-flex for button content alignment */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  /* Use inline-flex for button content alignment */
   align-items: center;
   justify-content: center;
 }
@@ -331,9 +440,10 @@ nav ul li.active a:hover {
 }
 
 .buttons_1 button:hover {
-  background: #e65c00; /* Darker orange on hover */
+  background: #e65c00;
+  /* Darker orange on hover */
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -341,7 +451,8 @@ nav ul li.active a:hover {
 .skill-section {
   max-width: 1280px;
   max-height: 1600px;
-  padding: 80px 0; /* Adjusted padding for full width carousel */
+  padding: 80px 0;
+  /* Adjusted padding for full width carousel */
   background: #f7f7f7;
   color: #333;
   width: 100%;
@@ -351,52 +462,70 @@ nav ul li.active a:hover {
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow: hidden; /* Important for hiding overflowing cards */
+  overflow: hidden;
+  /* Important for hiding overflowing cards */
 }
+
 .skill-title {
   font-size: 3em;
   text-align: center;
   margin-top: -30px;
-  margin-bottom: 10px; /* Reduced margin */
+  margin-bottom: 10px;
+  /* Reduced margin */
   color: #222;
   font-weight: 700;
   position: relative;
   z-index: 1;
-  display: flex; /* Allow button to be next to title */
+  display: flex;
+  /* Allow button to be next to title */
   align-items: center;
   justify-content: center;
 }
+
 .skill-title a {
   margin-left: 20px;
   text-decoration: none;
 }
 
 .skill-carousel-container {
-  width: 95%; /* Adjust width of carousel container */
-  max-width: 1400px; /* Max width for the carousel */
+  width: 95%;
+  /* Adjust width of carousel container */
+  max-width: 1400px;
+  /* Max width for the carousel */
   max-height: 600px;
   position: relative;
-  overflow: hidden; /* Only show items within container */
-  padding: 20px 0; /* Padding for navigation buttons and shadow */
+  overflow: hidden;
+  /* Only show items within container */
+  padding: 20px 0;
+  /* Padding for navigation buttons and shadow */
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Subtle shadow for the carousel */
-  background-color: rgba(255, 255, 255, 0.6); /* Slightly transparent white background */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for the carousel */
+  background-color: rgba(255, 255, 255, 0.6);
+  /* Slightly transparent white background */
 }
 
-.skill-grid { /* Renamed from .skill-grid to be a flex container for scrolling */
+.skill-grid {
+  /* Renamed from .skill-grid to be a flex container for scrolling */
   display: flex;
-  gap: 30px; /* Gap between skill items */
-  padding: 0 20px; /* Padding for items at start/end */
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth scroll transition */
-  align-items: stretch; /* Ensure all items stretch to same height */
+  gap: 30px;
+  /* Gap between skill items */
+  padding: 0 20px;
+  /* Padding for items at start/end */
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Smooth scroll transition */
+  align-items: stretch;
+  /* Ensure all items stretch to same height */
 }
 
 .skill-item {
-  max-width: 373px; /* Increased min-width for each skill card */
-  flex-shrink: 0; /* Prevent cards from shrinking */
+  max-width: 373px;
+  /* Increased min-width for each skill card */
+  flex-shrink: 0;
+  /* Prevent cards from shrinking */
   background: white;
   border-radius: 18px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -408,7 +537,7 @@ nav ul li.active a:hover {
 
 .skill-item:hover {
   transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
 }
 
 .skill-icon {
@@ -420,8 +549,9 @@ nav ul li.active a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .skill-icon img {
   max-width: 70%;
   max-height: 70%;
@@ -429,10 +559,12 @@ nav ul li.active a:hover {
 }
 
 .skill-info {
-    flex-grow: 1; /* Allow info to take up available space */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Push description to bottom if needed */
+  flex-grow: 1;
+  /* Allow info to take up available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Push description to bottom if needed */
 }
 
 .skill-info h3 {
@@ -440,84 +572,93 @@ nav ul li.active a:hover {
   margin-bottom: 10px;
   color: #FF6600;
 }
+
 .skill-info p {
   font-size: 1em;
   color: #555;
   line-height: 1.6;
   /* Removed -webkit-line-clamp to allow more text */
-  overflow: visible; /* Ensure all content is visible */
-  margin-bottom: 15px; /* Added margin for spacing */
+  overflow: visible;
+  /* Ensure all content is visible */
+  margin-bottom: 15px;
+  /* Added margin for spacing */
 }
 
 /* Skill Proficiency Bar */
 .skill-proficiency {
-    width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    height: 15px;
-    margin-bottom: 15px;
-    position: relative;
-    overflow: hidden; /* Ensure the bar stays within bounds */
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  height: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+  /* Ensure the bar stays within bounds */
 }
 
 .skill-bar {
-    height: 100%;
-    background-color: #00C853; /* Green for proficiency */
-    border-radius: 10px;
-    width: 0; /* Initial width for animation */
-    transition: width 1.5s ease-out; /* Smooth animation */
-    position: absolute;
-    left: 0;
-    top: 0;
+  height: 100%;
+  background-color: #00C853;
+  /* Green for proficiency */
+  border-radius: 10px;
+  width: 0;
+  /* Initial width for animation */
+  transition: width 1.5s ease-out;
+  /* Smooth animation */
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .skill-level-text {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.8em;
-    font-weight: bold;
-    color: #333;
-    z-index: 2; /* Ensure text is above the bar */
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8em;
+  font-weight: bold;
+  color: #333;
+  z-index: 2;
+  /* Ensure text is above the bar */
 }
 
 /* Skill Projects Section */
 .skill-projects {
-    width: 100%;
-    text-align: left;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
+  width: 100%;
+  text-align: left;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
 }
 
 .skill-projects h4 {
-    font-size: 1em;
-    color: #333;
-    margin-bottom: 10px;
-    font-weight: 600;
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .skill-projects ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .skill-projects li {
-    font-size: 0.9em;
-    margin-bottom: 8px;
+  font-size: 0.9em;
+  margin-bottom: 8px;
 }
 
 .skill-projects a {
-    color: #007bff; /* Blue for links */
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: #007bff;
+  /* Blue for links */
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .skill-projects a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 /* Carousel navigation buttons for skills */
@@ -563,7 +704,8 @@ nav ul li.active a:hover {
 
 /* ================= SECTION 4: Product Carousel ================= */
 .products-carousel-section-content {
-  max-height: 800px; /* Min height to keep cards consistent */
+  max-height: 800px;
+  /* Min height to keep cards consistent */
   flex-direction: column;
   background: #333;
   color: white;
@@ -576,7 +718,8 @@ nav ul li.active a:hover {
 
 .products-carousel-title {
   margin-top: 0px;
-  font-size: 2.8em; /* Slightly larger title */
+  font-size: 2.8em;
+  /* Slightly larger title */
   margin-bottom: 30px;
   color: white;
   text-align: center;
@@ -585,47 +728,62 @@ nav ul li.active a:hover {
 
 .products-carousel-container {
   padding: 20px;
-  width: 95%; /* Adjust width of carousel container */
-  max-width: 1500px; /* Max width for the carousel */
+  width: 95%;
+  /* Adjust width of carousel container */
+  max-width: 1500px;
+  /* Max width for the carousel */
   max-height: 600px;
   position: relative;
-  overflow: hidden; /* Only show items within container */
+  overflow: hidden;
+  /* Only show items within container */
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Stronger shadow */
-  background-color: rgba(0,0,0,0.1); /* Subtle dark background inside carousel */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  /* Stronger shadow */
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Subtle dark background inside carousel */
 }
 
 .products-wrapper {
   display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother transition */
-  gap: 40px; /* Larger gap */
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Smoother transition */
+  gap: 40px;
+  /* Larger gap */
 }
 
 .product-card {
-  max-width: 380px; /* Increased min-width for product cards */
-  flex-shrink: 0; /* Prevent cards from shrinking */
+  max-width: 380px;
+  /* Increased min-width for product cards */
+  flex-shrink: 0;
+  /* Prevent cards from shrinking */
   background: white;
-  border-radius: 18px; /* More rounded */
+  border-radius: 18px;
+  /* More rounded */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   overflow: hidden;
-  height: auto; /* Allow height to adjust to content */
-  max-height: 800px; /* Min height to keep cards consistent */
+  height: auto;
+  /* Allow height to adjust to content */
+  max-height: 800px;
+  /* Min height to keep cards consistent */
   display: flex;
   flex-direction: column;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   color: black;
-  max-width: 368px; /* Increased max-width */
+  max-width: 368px;
+  /* Increased max-width */
 }
 
 .product-card:hover {
-  transform: translateY(-12px) scale(1.02); /* More pronounced hover */
+  transform: translateY(-12px) scale(1.02);
+  /* More pronounced hover */
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
 }
 
 .product-image-wrapper {
-  
+
   width: 100%;
-  height: 250px; /* Increased image height */
+  height: 250px;
+  /* Increased image height */
   overflow: hidden;
   border-bottom: 1px solid #eee;
 }
@@ -645,7 +803,8 @@ nav ul li.active a:hover {
 
 .product-name {
   margin-top: 10px;
-  font-size: 1.8em; /* Larger product name */
+  font-size: 1.8em;
+  /* Larger product name */
   margin-bottom: 10px;
   line-height: 1.2;
   font-weight: bold;
@@ -654,7 +813,8 @@ nav ul li.active a:hover {
 
 .nhan_vo {
   margin-top: 5px;
-  margin-bottom: 10px; /* Space above description */
+  margin-bottom: 10px;
+  /* Space above description */
 }
 
 .nhan_vo .btn {
@@ -662,18 +822,21 @@ nav ul li.active a:hover {
   align-items: center;
   justify-content: center;
   padding: 8px 15px;
-  background-color: #007bff; /* Blue for call to action */
+  background-color: #007bff;
+  /* Blue for call to action */
   color: white;
   border-radius: 8px;
   text-decoration: none;
   font-size: 0.95em;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
+
 .nhan_vo .btn:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
 }
+
 .nhan_vo .btn i {
   margin-right: 8px;
 }
@@ -718,7 +881,8 @@ nav ul li.active a:hover {
 
 .verified-badge {
   font-size: 0.8em;
-  color: #28a745; /* Green checkmark */
+  color: #28a745;
+  /* Green checkmark */
   margin-left: 5px;
 }
 
@@ -732,7 +896,8 @@ nav ul li.active a:hover {
 }
 
 .category-icon {
-  width: 25px; /* Icon size */
+  width: 25px;
+  /* Icon size */
   height: 25px;
   object-fit: contain;
   margin-right: 8px;
@@ -758,7 +923,8 @@ nav ul li.active a:hover {
   margin-left: 10px;
   padding: 8px 8px;
   font-size: 0.95em;
-  border-radius: 10px; /* More rounded */
+  border-radius: 10px;
+  /* More rounded */
   background-color: #FF6600;
   color: white;
   border: none;
@@ -767,6 +933,7 @@ nav ul li.active a:hover {
   display: inline-flex;
   align-items: center;
 }
+
 .live-button i {
   margin-right: 8px;
 }
@@ -782,6 +949,7 @@ nav ul li.active a:hover {
   display: inline-flex;
   align-items: center;
 }
+
 .views i {
   margin-right: 8px;
   color: #FF6600;
@@ -821,20 +989,24 @@ nav ul li.active a:hover {
 }
 
 .prev-button {
-  left: 20px; /* More space from edge */
+  left: 20px;
+  /* More space from edge */
 }
 
 .next-button {
-  right: 20px; /* More space from edge */
+  right: 20px;
+  /* More space from edge */
 }
 
 
 /* ================= SECTION 5: Contact ================= */
 .contact-section-content {
-  flex-direction: row; /* Ensure it's row layout */
+  flex-direction: row;
+  /* Ensure it's row layout */
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #2d2f33 50%, #1a1a1d 50%); /* Split background */
+  background: linear-gradient(to right, #2d2f33 50%, #1a1a1d 50%);
+  /* Split background */
   padding: 50px;
 }
 
@@ -859,9 +1031,11 @@ nav ul li.active a:hover {
   margin-bottom: 15px;
   color: #ddd;
 }
+
 .contact-info p i {
   margin-right: 15px;
-  color: #00FFC8; /* Accent for icons */
+  color: #00FFC8;
+  /* Accent for icons */
 }
 
 .contact-info a {
@@ -869,6 +1043,7 @@ nav ul li.active a:hover {
   text-decoration: none;
   transition: color 0.3s ease;
 }
+
 .contact-info a:hover {
   color: #FF6600;
 }
@@ -878,11 +1053,13 @@ nav ul li.active a:hover {
   display: flex;
   gap: 25px;
 }
+
 .social-contact .social-icon {
   font-size: 2.2em;
   color: white;
   transition: color 0.3s ease, transform 0.3s ease;
 }
+
 .social-contact .social-icon:hover {
   color: #FF6600;
   transform: translateY(-5px) scale(1.1);
@@ -893,7 +1070,7 @@ nav ul li.active a:hover {
   background: white;
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   max-width: 550px;
 }
 
@@ -938,7 +1115,8 @@ nav ul li.active a:hover {
 }
 
 .contact-form textarea {
-  resize: vertical; /* Allow vertical resizing */
+  resize: vertical;
+  /* Allow vertical resizing */
 }
 
 .contact-form .submit-button {
@@ -953,11 +1131,12 @@ nav ul li.active a:hover {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .contact-form .submit-button i {
   margin-right: 10px;
 }
@@ -965,87 +1144,100 @@ nav ul li.active a:hover {
 .contact-form .submit-button:hover {
   background-color: #e65c00;
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 
 /* Custom Message Box (for alert replacement) */
 .custom-message-box {
-    position: fixed;
-    z-index: 10000;
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 350px;
-    border: 1px solid #ddd;
+  position: fixed;
+  z-index: 10000;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 350px;
+  border: 1px solid #ddd;
 }
 
 .custom-message-box p {
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    color: #333;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+  color: #333;
 }
 
 .custom-message-box button {
-    background-color: #FF6600;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+  background-color: #FF6600;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
 }
 
 .custom-message-box button:hover {
-    background-color: #e65c00;
+  background-color: #e65c00;
 }
 
 /* Specific styles for message types */
 .custom-message-box.success {
-    border-color: #28a745;
+  border-color: #28a745;
 }
+
 .custom-message-box.error {
-    border-color: #dc3545;
+  border-color: #dc3545;
 }
 
 
 /* Back to Normal Button Styling (Existing, but re-checked) */
 @keyframes pulse-background {
-  0% { background-color: #e74c3c; color: white; }
-  50% { background-color: #f1c40f; color: black; }
-  100% { background-color: #e74c3c; color: white; }
+  0% {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  50% {
+    background-color: #f1c40f;
+    color: black;
+  }
+
+  100% {
+    background-color: #e74c3c;
+    color: white;
+  }
 }
 
 .back-to-normal-button {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 15px 10px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 0.9em;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 101;
-    text-align: center;
-    width: calc(100% - 40px);
-    max-width: 200px; /* Slightly wider max-width for button */
-    animation: pulse-background 2s infinite alternate;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.9em;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 101;
+  text-align: center;
+  width: calc(100% - 40px);
+  max-width: 200px;
+  /* Slightly wider max-width for button */
+  animation: pulse-background 2s infinite alternate;
 }
 
 .back-to-normal-button:hover {
-    animation: none;
-    background-color: #c0392b;
-    color: white;
-    transform: translateX(-50%) translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  animation: none;
+  background-color: #c0392b;
+  color: white;
+  transform: translateX(-50%) translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
 /* Mobile Warning Overlay and Box Styles */
@@ -1055,9 +1247,12 @@ nav ul li.active a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0); /* Mờ đen */
-  z-index: 9998; /* Dưới hộp thông báo */
-  display: none; /* Mặc định ẩn */
+  background-color: rgb(0, 0, 0);
+  /* Mờ đen */
+  z-index: 9998;
+  /* Dưới hộp thông báo */
+  display: none;
+  /* Mặc định ẩn */
 }
 
 .mobile-warning-box {
@@ -1071,10 +1266,14 @@ nav ul li.active a:hover {
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   text-align: center;
-  max-width: 90%; /* Chiều rộng tối đa trên di động */
-  width: 400px; /* Chiều rộng cố định cho desktop/tablet */
-  z-index: 9999; /* Luôn ở trên cùng */
-  display: none; /* Mặc định ẩn */
+  max-width: 90%;
+  /* Chiều rộng tối đa trên di động */
+  width: 400px;
+  /* Chiều rộng cố định cho desktop/tablet */
+  z-index: 9999;
+  /* Luôn ở trên cùng */
+  display: none;
+  /* Mặc định ẩn */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -1088,8 +1287,10 @@ nav ul li.active a:hover {
 
 .mobile-warning-buttons {
   display: flex;
-  flex-direction: column; /* Stack buttons vertically on mobile */
-  gap: 15px; /* Khoảng cách giữa các nút */
+  flex-direction: column;
+  /* Stack buttons vertically on mobile */
+  gap: 15px;
+  /* Khoảng cách giữa các nút */
   width: 100%;
 }
 
@@ -1100,7 +1301,8 @@ nav ul li.active a:hover {
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%; /* Đảm bảo nút chiếm toàn bộ chiều rộng */
+  width: 100%;
+  /* Đảm bảo nút chiếm toàn bộ chiều rộng */
 }
 
 #mobileSwitchToNormal {
@@ -1111,7 +1313,7 @@ nav ul li.active a:hover {
 #mobileSwitchToNormal:hover {
   background-color: #e65c00;
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 #mobileBackToIntro {
@@ -1122,57 +1324,72 @@ nav ul li.active a:hover {
 #mobileBackToIntro:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Adjustments */
 @media screen and (max-width: 1200px) {
+
   /* No skill-grid specific changes here, as it's now carousel-like */
   .products-carousel-container {
     max-width: 1000px;
   }
+
   .product-card {
     min-height: 550px;
   }
+
   .skill-item {
-      min-width: 400px; /* Adjusted for larger content */
-      padding: 20px;
+    min-width: 400px;
+    /* Adjusted for larger content */
+    padding: 20px;
   }
 }
 
 @media screen and (max-width: 1024px) {
   nav {
-    width: 200px; /* Slightly narrower nav on tablet */
+    width: 200px;
+    /* Slightly narrower nav on tablet */
     padding: 30px 15px;
   }
+
   #fullpage {
     margin-left: 200px;
   }
+
   .section-content {
     width: calc(100vw - 200px);
   }
+
   .profile-right {
     padding: 60px 40px 60px 80px;
   }
+
   .profile-right h1 {
     font-size: 3.5em;
   }
+
   .roles {
     font-size: 1.3em;
   }
+
   .bio {
     font-size: 1em;
   }
+
   .buttons {
     gap: 10px;
   }
+
   .buttons button {
     font-size: 1em;
     padding: 10px 15px;
   }
+
   .social-links {
     gap: 15px;
   }
+
   .social-links a {
     font-size: 1.5em;
   }
@@ -1180,77 +1397,101 @@ nav ul li.active a:hover {
   .skill-title {
     font-size: 2.5em;
   }
+
   /* No skill-grid specific changes here, as it's now carousel-like */
   .skill-item {
-    min-width: 320px; /* Adjust min-width for tablet */
+    min-width: 320px;
+    /* Adjust min-width for tablet */
     padding: 20px;
   }
+
   .skill-icon {
     width: 80px;
     height: 80px;
   }
+
   .skill-info h3 {
     font-size: 1.3em;
   }
+
   .skill-info p {
     font-size: 0.9em;
   }
+
   .buttons_1 {
-      margin-top: 10px; /* Adjust spacing */
+    margin-top: 10px;
+    /* Adjust spacing */
   }
 
   .products-carousel-title {
     font-size: 2.2em;
   }
+
   .products-carousel-container {
     padding: 15px;
   }
+
   .products-wrapper {
     gap: 25px;
   }
+
   .product-card {
-    min-width: calc((100% / 2) - 12.5px); /* Show 2 cards on tablet */
+    min-width: calc((100% / 2) - 12.5px);
+    /* Show 2 cards on tablet */
     min-height: 520px;
   }
+
   .product-image-wrapper {
     height: 200px;
   }
+
   .product-name {
     font-size: 1.6em;
   }
+
   .product-description {
     font-size: 0.95em;
     -webkit-line-clamp: 4;
   }
+
   .carousel-nav-button {
     font-size: 1.6em;
     padding: 12px 16px;
   }
 
   .contact-section-content {
-    flex-direction: column; /* Stack contact info and form vertically */
+    flex-direction: column;
+    /* Stack contact info and form vertically */
     padding: 30px;
   }
-  .contact-info, .contact-form-container {
+
+  .contact-info,
+  .contact-form-container {
     padding: 30px;
     max-width: 100%;
     margin-bottom: 20px;
   }
+
   .contact-form-container:last-child {
-      margin-bottom: 0;
+    margin-bottom: 0;
   }
+
   .contact-info h1 {
     font-size: 3em;
     text-align: center;
   }
-  .contact-info p, .contact-info a {
-      text-align: center;
+
+  .contact-info p,
+  .contact-info a {
+    text-align: center;
   }
+
   .contact-details p {
-      justify-content: center;
+    justify-content: center;
   }
+
   .social-contact {
-      justify-content: center;
+    justify-content: center;
   }
 }
 
@@ -1265,14 +1506,19 @@ nav ul li.active a:hover {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
     /* Mobile specific: transparent background with blur */
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    backdrop-filter: blur(5px); /* Frosted glass effect */
+    background: rgba(255, 255, 255, 0.8);
+    /* Semi-transparent white */
+    backdrop-filter: blur(5px);
+    /* Frosted glass effect */
   }
+
   nav #logo-main {
-      display: none !important; /* Hide logo on mobile nav */
+    display: none !important;
+    /* Hide logo on mobile nav */
   }
+
   nav ul {
     margin-top: 0;
     display: flex;
@@ -1280,61 +1526,86 @@ nav ul li.active a:hover {
     justify-content: center;
     width: 100%;
   }
+
   nav ul li {
     margin: 5px 10px;
   }
+
   nav ul li a {
-      padding: 8px 10px;
-      font-size: 0.9em;
+    padding: 8px 10px;
+    font-size: 0.9em;
   }
+
   nav ul li a i {
-      margin-right: 5px;
-      font-size: 0.9em;
+    margin-right: 5px;
+    font-size: 0.9em;
   }
+
   nav ul li.active {
-      border-left: none; /* Remove left border on mobile */
-      border-bottom: 3px solid #FF6600; /* Use bottom border for active */
-      padding-left: 0;
-      padding-bottom: 2px;
+    border-left: none;
+    /* Remove left border on mobile */
+    border-bottom: 3px solid #FF6600;
+    /* Use bottom border for active */
+    padding-left: 0;
+    padding-bottom: 2px;
   }
 
   #fullpage {
-    margin-left: 0; /* No margin on mobile */
-    padding-bottom: 60px; /* Add padding to prevent content from being hidden by nav */
+    margin-left: 0;
+    /* No margin on mobile */
+    padding-bottom: 60px;
+    /* Add padding to prevent content from being hidden by nav */
   }
+
   .section-content {
-    width: 100vw; /* Full width on mobile */
-    flex-direction: column; /* Stack content vertically */
+    width: 100vw;
+    /* Full width on mobile */
+    flex-direction: column;
+    /* Stack content vertically */
     padding: 20px;
   }
-  .profile-left, .profile-right {
+
+  .profile-left,
+  .profile-right {
     flex: none;
     width: 100%;
     padding: 30px 20px;
   }
+
   .profile-left img {
-    height: auto; /* Allow height to adjust */
-    max-height: 250px; /* Max height for mobile image */
-    object-fit: contain; /* Contain for better fit */
-    margin-bottom: 20px; /* Space between image and text */
+    height: auto;
+    /* Allow height to adjust */
+    max-height: 250px;
+    /* Max height for mobile image */
+    object-fit: contain;
+    /* Contain for better fit */
+    margin-bottom: 20px;
+    /* Space between image and text */
   }
+
   .profile-right {
     text-align: center;
-    background: #2d2f33; /* Ensure consistent background */
+    background: #2d2f33;
+    /* Ensure consistent background */
   }
+
   .profile-right h1 {
     font-size: 2.8em;
   }
+
   .roles {
     justify-content: center;
     font-size: 1.2em;
   }
+
   .bio {
     font-size: 0.9em;
   }
+
   .buttons {
     justify-content: center;
   }
+
   .social-links {
     justify-content: center;
   }
@@ -1342,39 +1613,54 @@ nav ul li.active a:hover {
   .skill-title {
     font-size: 2em;
   }
+
   /* Skill carousel adjustments for mobile */
   .skill-carousel-container {
     width: 100%;
     padding: 10px;
   }
+
   .skill-grid {
     gap: 15px;
   }
+
   .skill-item {
-    min-width: 280px; /* Ensure a decent width on mobile */
+    min-width: 280px;
+    /* Ensure a decent width on mobile */
     padding: 15px;
     /* Increase height to ensure all content fits */
-    height: auto; /* Allow height to adjust dynamically */
-    min-height: 450px; /* Ensure minimum height for consistency */
+    height: auto;
+    /* Allow height to adjust dynamically */
+    min-height: 450px;
+    /* Ensure minimum height for consistency */
   }
+
   .skill-info p {
-    overflow: visible; /* Ensure all content is visible */
-    display: block; /* Override webkit box for full text */
+    overflow: visible;
+    /* Ensure all content is visible */
+    display: block;
+    /* Override webkit box for full text */
     -webkit-line-clamp: unset;
   }
+
   .skill-icon {
     width: 70px;
     height: 70px;
   }
+
   .skill-info h3 {
     font-size: 1.2em;
   }
+
   .skill-info p {
     font-size: 0.85em;
   }
+
   .buttons_1 {
-      margin-top: 10px; /* Adjust spacing */
+    margin-top: 10px;
+    /* Adjust spacing */
   }
+
   .skill-nav-button {
     font-size: 1.2em;
     padding: 10px 14px;
@@ -1387,30 +1673,40 @@ nav ul li.active a:hover {
     font-size: 2em;
     margin-bottom: 20px;
   }
+
   .products-carousel-container {
     width: 100%;
     padding: 10px;
   }
+
   .products-wrapper {
     gap: 15px;
   }
+
   .product-card {
-    min-width: 100%; /* Single card on mobile */
+    min-width: 100%;
+    /* Single card on mobile */
     min-height: 480px;
-    height: auto; /* Allow height to adjust */
+    height: auto;
+    /* Allow height to adjust */
   }
+
   .product-image-wrapper {
     height: 180px;
   }
+
   .product-name {
     font-size: 1.4em;
   }
+
   .product-description {
     font-size: 0.9em;
-    -webkit-line-clamp: unset; /* Ensure full description is visible */
+    -webkit-line-clamp: unset;
+    /* Ensure full description is visible */
     display: block;
     overflow: visible;
   }
+
   .carousel-nav-button {
     font-size: 1.2em;
     padding: 10px 14px;
@@ -1421,36 +1717,52 @@ nav ul li.active a:hover {
   .contact-section-content {
     padding: 20px;
   }
-  .contact-info, .contact-form-container {
+
+  .contact-info,
+  .contact-form-container {
     padding: 20px;
   }
+
   .contact-info h1 {
     font-size: 2.5em;
-    text-align: center; /* Center contact title */
+    text-align: center;
+    /* Center contact title */
   }
+
   .contact-info p {
-      font-size: 1em;
-      text-align: center; /* Center contact details text */
-      display: flex; /* Use flex to align icon and text */
-      justify-content: center; /* Center the content within each p tag */
-      align-items: center;
+    font-size: 1em;
+    text-align: center;
+    /* Center contact details text */
+    display: flex;
+    /* Use flex to align icon and text */
+    justify-content: center;
+    /* Center the content within each p tag */
+    align-items: center;
   }
+
   .contact-details p i {
-      margin-right: 10px; /* Adjust space for icon */
+    margin-right: 10px;
+    /* Adjust space for icon */
   }
+
   .contact-info a {
-      text-align: center;
+    text-align: center;
   }
+
   .social-contact {
-      justify-content: center; /* Center social icons */
+    justify-content: center;
+    /* Center social icons */
   }
+
   .contact-form-container h2 {
     font-size: 1.8em;
   }
+
   .contact-form .submit-button {
     font-size: 1em;
     padding: 12px;
   }
+
   .back-to-normal-button {
     position: static;
     margin-top: 15px;
@@ -1460,4 +1772,98 @@ nav ul li.active a:hover {
     padding: 10px 20px;
     animation: none;
   }
+}
+
+
+/* Kiểu cho Modal */
+.modal {
+  display: none;
+  /* Ẩn theo mặc định */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.modal-content h2 {
+  color: #007bff;
+  margin-top: 0;
+}
+
+.modal-content p {
+  color: #555;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+#enable-advanced-view {
+  background-color: #007bff;
+  color: white;
+}
+
+#enable-advanced-view:hover {
+  background-color: #0056b3;
+}
+
+#later-advanced-view {
+  background-color: #ccc;
+  color: #333;
+}
+
+#later-advanced-view:hover {
+  background-color: #bbb;
+}
+
+.close-button {
+  color: #aaa;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
 }
