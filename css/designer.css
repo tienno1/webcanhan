@@ -1607,3 +1607,73 @@ footer .social-links a {
         /* Loại bỏ margin-top */
     }
 }
+
+#notice-popup {
+    position: fixed;
+    bottom: 20px;
+    /* nếu muốn ở trên thì đổi thành top: 20px */
+    left: 20px;
+    /* Chuyển sang bên trái */
+    background: #ff5722;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 12px;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    animation: fadeIn 1s ease, bounce 3s infinite, shake 5s infinite;
+}
+
+/* Hiệu ứng nhảy nhảy nhẹ */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Hiệu ứng lắc lắc */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(-3deg);
+    }
+
+    20% {
+        transform: rotate(3deg);
+    }
+
+    30% {
+        transform: rotate(-3deg);
+    }
+
+    40% {
+        transform: rotate(3deg);
+    }
+}
+
+/* Hiệu ứng hiện dần */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+        /* Xuất hiện từ trái */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

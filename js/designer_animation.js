@@ -736,4 +736,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Popup thông báo ---
+    const notice = document.getElementById("notice-popup");
+    const modal = document.getElementById("myModal");
+
+
+    if (notice && modal) {
+        // Lắng nghe sự kiện hiển thị modal
+        const showHandler = () => {
+            notice.style.display = "none";
+        };
+
+
+        const hideHandler = () => {
+            notice.style.display = "flex";
+        };
+
+
+        // Nếu modal dùng class để hiển thị
+        const observer = new MutationObserver(() => {
+            if (modal.classList.contains("open") || modal.style.display === "flex" || modal.style.display === "block") {
+                showHandler();
+            } else {
+                hideHandler();
+            }
+        });
+
+
+        observer.observe(modal, { attributes: true, attributeFilter: ["style", "class"] });
+
+
+        // Nếu modal đóng bằng nút X hoặc click ra ngoài
+        modal.addEventListener("close", hideHandler);
+    }
+
 });
