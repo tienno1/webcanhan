@@ -1,12 +1,22 @@
 // mail.js
 // Khởi tạo EmailJS với Public Key của bạn.
 // Đây là chìa khóa công khai (Public Key) của bạn.
+// VUI LÒNG THAY THẾ "YOUR_PUBLIC_KEY" BẰNG KHÓA CÔNG KHAI THỰC TẾ CỦA BẠN TỪ BẢNG ĐIỀU KHIỂN EMAILJS.
+// Public Key mới của bạn là "X0dHr4HpO2r71CjtJ".
+// Vui lòng truy cập https://dashboard.emailjs.com/admin/account để lấy khóa chính xác.
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Khởi tạo EmailJS với Public Key của bạn.
+    emailjs.init({
+        publicKey: "X0dHr4HpO2r71CjtJ", 
+    });
+
     const form = document.getElementById('contactForm');
     const formModal = document.getElementById('form-modal');
     const formModalMessage = document.getElementById('form-modal-message');
     const formModalClose = document.getElementById('form-modal-close');
 
+    // Chức năng hiển thị và ẩn modal
     const showFormModal = (message) => {
         formModalMessage.textContent = message;
         formModal.style.display = 'flex';
@@ -24,93 +34,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Lắng nghe sự kiện gửi form
     form.addEventListener('submit', (event) => {
-        event.preventDefault();
+        event.preventDefault(); // Ngăn form gửi đi theo cách truyền thống
 
-        emailjs.sendForm('service_piwyyzm', 'template_t6ikeuu', form)
-            .then(() => {
-                showFormModal('Lời nhắn của bạn đã được gửi thành công!');
-                form.reset();
-                console.log('Thành công!');
-            }, (error) => {
-                console.error('Gửi thất bại:', error);
-                // Thông báo lỗi chi tiết hơn từ EmailJS
-                if (error.status === 400 && error.text.includes("Public Key is invalid")) {
-                    showFormModal('Lỗi: Khóa công khai (Public Key) không hợp lệ. Vui lòng kiểm tra lại ID này trên EmailJS.');
-                } else {
-                    showFormModal('Gửi lời nhắn thất bại. Vui lòng thử lại sau.');
-                }
-            });
-    });
-
-    // Các logic modal welcome và nút cuộn trang
-    const welcomeModal = document.getElementById('welcome-modal');
-    const enableAdvancedViewButton = document.getElementById('enable-advanced-view');
-    const laterAdvancedViewButton = document.getElementById('later-advanced-view');
-    const backToTopButton = document.getElementById('back-to-top');
-    const goToBottomButton = document.getElementById('go-to-bottom');
-    const advancedViewToggle = document.getElementById('enable-advanced-view-button');
-
-    const hideWelcomeModal = () => {
-        welcomeModal.style.display = 'none';
-    };
-
-    if (!localStorage.getItem('advancedViewModalShown')) {
-        welcomeModal.style.display = 'flex';
-        localStorage.setItem('advancedViewModalShown', 'true');
-    }
-
-    enableAdvancedViewButton.addEventListener('click', () => {
-        document.body.classList.add('advanced-view-mode');
-        hideWelcomeModal();
-    });
-
-    laterAdvancedViewButton.addEventListener('click', () => {
-        hideWelcomeModal();
-    });
-
-    welcomeModal.querySelector('.close-button').addEventListener('click', () => {
-        hideWelcomeModal();
-    });
-
-    advancedViewToggle.addEventListener('click', () => {
-        document.body.classList.toggle('advanced-view-mode');
-    });
-
-    // Scroll to top button
-    window.onscroll = () => {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            backToTopButton.style.display = "block";
-        } else {
-            backToTopButton.style.display = "none";
-        }
-    };
-
-    backToTopButton.addEventListener('click', () => {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    });
-
-    goToBottomButton.addEventListener('click', () => {
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
+        // Gửi email bằng EmailJS, sử dụng sendForm để gửi toàn bộ dữ liệu form
+        emailjs.sendForm("service_piwyyzm", "template_t6ikeuu", form)
+        .then(() => {
+            showFormModal('Lời nhắn của bạn đã được gửi thành công!');
+            form.reset();
+            console.log('Thành công!');
+        }, (error) => {
+            console.error('Gửi thất bại:', error);
+            showFormModal('Rất tiếc, đã có lỗi xảy ra. Vui lòng thử lại sau.');
         });
     });
 
-    // Giao diện người dùng
+    // Các phần code khác...
+    const welcomeModal = document.getElementById('welcome-modal');
+    if (welcomeModal) {
+        welcomeModal.querySelector('.close-button').addEventListener('click', () => {
+            welcomeModal.style.display = 'none';
+        });
+    }
+
+    const advancedViewToggle = document.querySelector('.advanced-view-toggle');
+    if (advancedViewToggle) {
+        advancedViewToggle.addEventListener('click', () => {
+            document.body.classList.toggle('advanced-view-mode');
+        });
+    }
+
+    const backToTopButton = document.getElementById('back-to-top');
+    const goToBottomButton = document.getElementById('go-to-bottom');
+
+    window.onscroll = () => {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            if (backToTopButton) backToTopButton.style.display = "block";
+        } else {
+            if (backToTopButton) backToTopButton.style.display = "none";
+        }
+    };
+
+    if (backToTopButton) {
+        backToTopButton.addEventListener('click', () => {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
+    }
+
+    if (goToBottomButton) {
+        goToBottomButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        });
+    }
+
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.querySelector('.main-nav');
-    menuToggle.addEventListener('click', () => {
-        mainNav.classList.toggle('active');
-    });
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+    }
 
-    // Dropdowns
     const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
     dropdownToggles.forEach(toggle => {
         toggle.addEventListener('click', function (event) {
             event.preventDefault();
-            const parent = this.parentElement;
+            const parent = this.closest('li');
             parent.classList.toggle('open');
         });
     });

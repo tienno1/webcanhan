@@ -13,18 +13,6 @@
 
     <!-- EmailJS CDN -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function () {
-            // Khởi tạo EmailJS với Public Key của bạn.
-            // Đây là chìa khóa công khai (Public Key) của bạn.
-            // VUI LÒNG THAY THẾ "YOUR_PUBLIC_KEY" BẰNG KHÓA CÔNG KHAI THỰC TẾ CỦA BẠN TỪ BẢNG ĐIỀU KHIỂN EMAILJS.
-            // Public Key mới của bạn là "X0dHr4HpO2r71CjtJ".
-            // Vui lòng truy cập https://dashboard.emailjs.com/admin/account để lấy khóa chính xác.
-            emailjs.init({
-                publicKey: "X0dHr4HpO2r71CjtJ", // Đã cập nhật lại khóa công khai của bạn
-            });
-        })();
-    </script>
 </head>
 
 <body>
@@ -316,29 +304,32 @@
             </section>
             <!-- Phần thông tin liên hệ được cập nhật -->
             <section class="section-card fade-in-element contact-section">
-                <h2>Gửi Lời Nhắn Đến Tôi</h2>
-                <p class="contact-description">Hãy để lại thông tin của bạn. Tôi sẽ phản hồi lại sớm nhất có thể.</p>
-                <form id="contactForm" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Họ và Tên</label>
-                        <input type="text" id="name" name="from_name" required placeholder="Nhập họ và tên của bạn...">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="from_email" required placeholder="Nhập email của bạn...">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Nội dung</label>
-                        <textarea id="message" name="message" rows="5" required
-                            placeholder="Nội dung lời nhắn của bạn..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-button lift-on-hover">Gửi ngay</button>
-                </form>
-                <p class="form-note">
-                    <i class="fa-solid fa-circle-info"></i>
-                    Khi bạn nhấn nút "Gửi ngay", form sẽ gửi email trực tiếp.
-                </p>
-            </section>
+            <h2>Gửi Lời Nhắn Đến Tôi</h2>
+            <p class="contact-description">Hãy để lại thông tin của bạn. Tôi sẽ phản hồi lại sớm nhất có thể.</p>
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Họ và Tên</label>
+                    <input type="text" id="name" name="from_name" required placeholder="Nhập họ và tên của bạn...">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="from_email" required placeholder="Nhập email của bạn...">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn...">
+                </div>
+                <div class="form-group">
+                    <label for="message">Nội dung</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Nội dung lời nhắn của bạn..."></textarea>
+                </div>
+                <button type="submit" class="submit-button lift-on-hover">Gửi ngay</button>
+            </form>
+            <p class="form-note">
+                <i class="fa-solid fa-circle-info"></i>
+                Khi bạn nhấn nút "Gửi ngay", form sẽ gửi email trực tiếp.
+            </p>
+        </section>
         </main>
     </div>
 

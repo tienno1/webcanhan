@@ -1096,6 +1096,7 @@ nav ul li.active a:hover {
 
 .contact-form input[type="text"],
 .contact-form input[type="email"],
+.contact-form input[type="tel"],
 .contact-form textarea {
   width: 100%;
   padding: 12px 15px;
@@ -1108,6 +1109,7 @@ nav ul li.active a:hover {
 
 .contact-form input[type="text"]:focus,
 .contact-form input[type="email"]:focus,
+.contact-form input[type="tel"]:focus,
 .contact-form textarea:focus {
   border-color: #FF6600;
   box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
