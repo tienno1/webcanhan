@@ -1607,13 +1607,11 @@ footer .social-links a {
         /* Loại bỏ margin-top */
     }
 }
-
+/* Mặc định cho màn hình lớn (desktop) */
 #notice-popup {
     position: fixed;
     bottom: 20px;
-    /* nếu muốn ở trên thì đổi thành top: 20px */
     left: 20px;
-    /* Chuyển sang bên trái */
     background: #ff5722;
     color: white;
     font-size: 14px;
@@ -1628,12 +1626,10 @@ footer .social-links a {
 
 /* Hiệu ứng nhảy nhảy nhẹ */
 @keyframes bounce {
-
     0%,
     100% {
         transform: translateY(0);
     }
-
     50% {
         transform: translateY(-5px);
     }
@@ -1641,39 +1637,55 @@ footer .social-links a {
 
 /* Hiệu ứng lắc lắc */
 @keyframes shake {
-
     0%,
     100% {
         transform: rotate(0deg);
     }
-
     10% {
         transform: rotate(-3deg);
     }
-
     20% {
         transform: rotate(3deg);
     }
-
     30% {
         transform: rotate(-3deg);
     }
-
     40% {
         transform: rotate(3deg);
     }
 }
 
-/* Hiệu ứng hiện dần */
+/* Hiệu ứng hiện dần từ trái */
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateX(-20px);
-        /* Xuất hiện từ trái */
     }
-
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+/* Thay đổi kiểu dáng cho màn hình điện thoại */
+@media (max-width: 768px) {
+    #notice-popup {
+        z-index: 100;
+        top: 20px;
+        bottom: auto; /* Hủy bỏ vị trí ở dưới */
+        left: 20px; /* Cố định ở bên trái */
+        transform: translateX(0); /* Hủy bỏ căn giữa ngang */
+    }
+
+    /* Hiệu ứng hiện dần từ trên xuống cho điện thoại */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
