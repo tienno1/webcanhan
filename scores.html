@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Điểm Số</title>
     <link rel="stylesheet" href="css/scores.css">
+    <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="css/code_navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
@@ -20,7 +21,9 @@
 </head>
 
 <body>
-
+    <div id="loader-overlay">
+        <div class="loader"></div>
+    </div>
     <div id="password-protection">
         <div id="password-form">
             <a href="index.html" class="back-button">Back to Home</a>
@@ -562,6 +565,7 @@
     <!-- Nút đi xuống -->
     <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
     <script src="js/next_tab.js"></script>
+    <script src="js/loading.js"></script>
 </body>
 
 </html>

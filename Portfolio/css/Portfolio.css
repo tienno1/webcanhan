@@ -136,12 +136,13 @@ nav ul li a.active::after {
 
 
 footer {
+    width: 100%;
+    margin-top: 20px;
     margin-bottom: -80px;
     background-color: #333; /* Dark background color */
     color: #fff; /* White text color */
     text-align: center; /* Center content */
     padding: 20px 0; /* Top and bottom padding */
-    margin-top: 30px; /* Space above the footer */
 }
 
 footer .social-links a {

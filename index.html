@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Giới thiệu</title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/loading.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -14,6 +15,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
+    <div id="loader-overlay">
+    <div class="loader"></div>
+</div>
 <div class="background" id="background-slideshow"> 
     <header>
         <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
@@ -289,5 +293,6 @@
     <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
     <script src="js/next_tab.js"></script>
     <script src="js/mail.js"></script>
+    <script src="js/loading.js"></script>
 </body>
 </html>

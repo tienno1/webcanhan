@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Mỹ Phẩm</title>
+    <title>Portfolio Logo</title>
     <link rel="stylesheet" href="../css/code_navbar.css">
     <link rel="stylesheet" href="../css/loading.css">
     <link rel="stylesheet" href="../css/profile.css">
@@ -101,19 +101,31 @@
         /* Styles for the new image gallery layout */
         .image-gallery {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             overflow: hidden;
+        }
+
+        .image-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .image-row.reverse {
+            flex-direction: row-reverse;
         }
         
         .image-wrapper {
             position: relative;
-            margin-bottom: 10px;
             cursor: pointer;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 50%;
+            padding: 10px;
         }
         
         .image-wrapper:hover {
@@ -127,16 +139,24 @@
             display: block;
         }
         
-        /* Desktop widths using flex-basis */
-        .image-wrapper.w-46-5 { flex-basis: 46.5%; }
-        .image-wrapper.w-53 { flex-basis: 53%; }
-        .image-wrapper.w-54 { flex-basis: 54%; }
-        .image-wrapper.w-45 { flex-basis: 45%; }
-        .image-wrapper.w-48-5 { flex-basis: 48.5%; }
-        .image-wrapper.w-50-5 { flex-basis: 50.5%; }
-        .image-wrapper.w-49-5 { flex-basis: 49.5%; }
-        .image-wrapper.w-43-5 { flex-basis: 43.5%; }
-        .image-wrapper.w-56 { flex-basis: 56%; }
+        .image-content {
+            width: 50%;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .image-content h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .image-content p {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.5;
+        }
 
         .view-button {
             position: absolute;
@@ -164,15 +184,14 @@
 
         /* Responsive: Khi ở chế độ mobile, hình ảnh chiếm 100% chiều rộng và căn giữa */
         @media (max-width: 768px) {
-            .image-gallery {
-                flex-direction: column;
+            .image-row {
+                flex-direction: column !important;
                 align-items: center;
             }
-            .image-wrapper {
+            .image-wrapper, .image-content {
                 width: 100%;
-                flex-basis: auto;
+                padding: 5px;
             }
-            /* Ẩn modal trên thiết bị di động */
             .modal {
                 display: none !important;
             }
@@ -186,7 +205,7 @@
     </div>
     <header style="background-image:url(../img/sl_0210121_40570_23.jpg);">
         <a href="../index.html"><img src="../img/logo.png" alt="Logo" class="lift-on-hover"></a>
-        <p>Trang trưng bày thiết kế mỹ phẩm </p>
+        <p>Trang trưng bày thiết kế logo</p>
         <button aria-label="Menu" class="menu-toggle">
             <i class="fa-solid fa-bars fa-2xl"></i>
         </button>
@@ -232,51 +251,121 @@
                     <div class="icon">
                         <i class="fa-solid fa-angle-right"></i>
                     </div>
-                    <div>Mỹ Phẩm</div>
+                    <div>Logo</div>
                 </div>
             </div>
         </div>
         <div class="box-content-blog" style="padding: 0px 5px;">
             <div class="blog-1 section-card fade-in-element image-gallery">
-                <div class="image-wrapper w-46-5">
-                    <img src="../img/portfolio/My-pham/my pham (1).jpg" alt="Blog Post Image 1">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 1: Image Left, Content Right -->
+                <div class="image-row">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/FF5733/FFFFFF?text=Logo+Design+1" alt="Logo Design 1">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 1</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ nhất. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-53">
-                    <img src="../img/portfolio/My-pham/my pham (2).jpg" alt="Blog Post Image 1">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 2: Image Right, Content Left -->
+                <div class="image-row reverse">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/33FF57/FFFFFF?text=Logo+Design+2" alt="Logo Design 2">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 2</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ hai. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-54">
-                    <img src="../img/portfolio/My-pham/my pham (4).jpg" alt="Blog Post Image 2">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 3: Image Left, Content Right -->
+                <div class="image-row">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/3357FF/FFFFFF?text=Logo+Design+3" alt="Logo Design 3">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 3</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ ba. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-45">
-                    <img src="../img/portfolio/My-pham/my pham (5).jpg" alt="Blog Post Image 3">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 4: Image Right, Content Left -->
+                <div class="image-row reverse">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/FFFF33/000000?text=Logo+Design+4" alt="Logo Design 4">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 4</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ tư. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-48-5">
-                    <img src="../img/portfolio/My-pham/my pham (6).jpg" alt="Blog Post Image 4">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 5: Image Left, Content Right -->
+                <div class="image-row">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/8B33FF/FFFFFF?text=Logo+Design+5" alt="Logo Design 5">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 5</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ năm. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-50-5">
-                    <img src="../img/portfolio/My-pham/my pham (7).jpg" alt="Blog Post Image 4">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 6: Image Right, Content Left -->
+                <div class="image-row reverse">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/FF33FB/FFFFFF?text=Logo+Design+6" alt="Logo Design 6">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 6</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ sáu. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-49-5">
-                    <img src="../img/portfolio/My-pham/my pham (8).jpg" alt="Blog Post Image 3">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 7: Image Left, Content Right -->
+                <div class="image-row">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/33FFC1/000000?text=Logo+Design+7" alt="Logo Design 7">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 7</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ bảy. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-49-5">
-                    <img src="../img/portfolio/My-pham/my pham (9).jpg" alt="Blog Post Image 3">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 8: Image Right, Content Left -->
+                <div class="image-row reverse">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/FFC133/000000?text=Logo+Design+8" alt="Logo Design 8">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 8</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ tám. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-43-5">
-                    <img src="../img/portfolio/My-pham/my pham (10).jpg" alt="Blog Post Image 4">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 9: Image Left, Content Right -->
+                <div class="image-row">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/9833FF/FFFFFF?text=Logo+Design+9" alt="Logo Design 9">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 9</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ chín. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
-                <div class="image-wrapper w-56">
-                    <img src="../img/portfolio/My-pham/my pham (3).jpg" alt="Blog Post Image 1">
-                    <button class="view-button">Xem hình ảnh</button>
+                <!-- Row 10: Image Right, Content Left -->
+                <div class="image-row reverse">
+                    <div class="image-wrapper">
+                        <img src="https://placehold.co/600x400/33FF8D/000000?text=Logo+Design+10" alt="Logo Design 10">
+                        <button class="view-button">Xem hình ảnh</button>
+                    </div>
+                    <div class="image-content">
+                        <h3>Tiêu đề logo 10</h3>
+                        <p>Đây là nội dung mô tả cho logo thứ mười. Hãy thêm các chi tiết về ý tưởng, quá trình thiết kế và mục tiêu của dự án này.</p>
+                    </div>
                 </div>
             </div>
         </div>

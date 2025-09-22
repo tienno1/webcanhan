@@ -7,6 +7,7 @@
     <title>Portfolio của tôi</title>
     <!-- Your existing stylesheets -->
     <link rel="stylesheet" href="../css/code_navbar.css">
+    <link rel="stylesheet" href="../css/loading.css">
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="../3D UI Card/style.css">
     <link rel="stylesheet" href="css/Portfolio.css">
@@ -18,7 +19,9 @@
 </head>
 
 <body>
-
+    <div id="loader-overlay">
+        <div class="loader"></div>
+    </div>
     <header style="background-image:url(../img/sl_0210121_40570_23.jpg);">
         <a href="../index.html"><img src="../img/logo.png" alt="Logo" class="lift-on-hover"></a>
         <p>Portfolio của tôi</p>
@@ -283,9 +286,9 @@
                         </div>
                         <!-- Glass overlay -->
                         <div class="content">
-                            <span class="title">
-                                <img src="../img/portfolio/QUOC KHANH/1.jpg" alt="Code Icon"
-                                    style="width: 100%;margin-top: -70px;padding: 20px;" />
+                            <span class="title"><a href="2-9.html">
+                                    <img src="../img/portfolio/QUOC KHANH/1.jpg" alt="Code Icon"
+                                        style="width: 100%;margin-top: -70px;padding: 20px;" /></a>
                             </span>
                             <div class="content-blog-1">
                                 <div class="list-link">
@@ -428,25 +431,25 @@
                 </div>
                 <div class="blog-2">
                     <div class="box-1 pading-img-1 section-card fade-in-element">
-                        <a href="Text-Efect.html">
-                            <img src="../img/portfolio/text effect/1-01.jpg" alt="Blog Post Image 2">
+                        <a href="poster.html">
+                            <img src="../img/portfolio/poster/(1).jpg" alt="Blog Post Image 2">
                             <!-- Placeholder image -->
                         </a>
                         <div class="content-box-1">
                             <div class="first-content">
-                                <a href="#">text effect</a>
+                                <a href="#">Poster</a>
                                 <span>,</span>
-                                <a href="#">form</a>
+                                <a href="#">Graphic design</a>
                                 <span>,</span>
-                                <a href="#">font</a>
+                                <a href="#">Design</a>
                             </div>
                             <div class="second-content">
-                                <a href="#">Text Effect đa đạng và phù hợp</a>
+                                <a href="#">Poster đẹp, chất, hợp thời</a>
                             </div>
                             <div class="three-content">
                                 <span>By : Phạm Viết Tiến</span>
                                 <span>|</span>
-                                <span>App : Illustrator</span>
+                                <span>App : Photoshop</span>
                             </div>
                         </div>
                     </div>
@@ -471,32 +474,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="blog-1 section-card fade-in-element" style="margin-top: -60px;">
-                    <a href="#" style="border-radius: 10px ;">
-                        <img src="../img/portfolio/mockup 1.jpg" alt="Blog Post Image 4"> <!-- Placeholder image -->
-                    </a>
-                    <div class="content-blog-1">
-                        <div class="list-link">
-                            <a href="#">Mockup</a>
-                            <span>,</span>
-                            <a href="#">bo nhan dien thuong hieu</a>
-                            <span>,</span>
-                            <a href="#">form</a>
-                            <span>,</span>
-                            <a href="#">style</a>
-                        </div>
-                        <div class="title">
-                            <a href="#">Thiết kế bộ nhận diện thương hiệu</a>
-                        </div>
-                        <div class="box-by">
-                            <span>By : Phạm Viết Tiến</span>
-                            <span>|</span>
-                            <span>App : Photoshop</span>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </div>
@@ -556,6 +533,7 @@
         });
     </script>
     <script src="../js/mail.js"></script>
+    <script src="../js/loading.js"></script>
 
     <!-- Modal thông báo tùy chỉnh cho form -->
     <div id="form-modal" class="modal">

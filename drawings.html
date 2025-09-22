@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ảnh vẽ của tôi</title>
     <link rel="stylesheet" href="css/drawings.css">
+    <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/code_navbar.css">
@@ -20,7 +21,9 @@
 </head>
 
 <body>
-
+    <div id="loader-overlay">
+        <div class="loader"></div>
+    </div>
     <header>
         <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
         <p>Bộ sưu tập và tranh vẽ của tôi</p>
@@ -561,6 +564,7 @@
     <!-- Nút đi xuống -->
     <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
     <script src="js/next_tab.js"></script>
+    <script src="js/loading.js"></script>
     <div id="notice-popup">
         📢 NHẤN VÀO HÌNH ĐỂ XEM CHI TIẾT
     </div>

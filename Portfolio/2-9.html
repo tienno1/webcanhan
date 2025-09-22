@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +9,176 @@
     <link rel="stylesheet" href="css/Portfolio.css">
     <!-- Font Awesome cho các icon -->
     <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
-</head>
+    <style>
+        /* CSS cho modal */
+        .modal {
+            display: none; /* Ẩn modal theo mặc định */
+            position: fixed; /* Giữ modal ở một vị trí cố định */
+            z-index: 1000; /* Hiển thị trên cùng các nội dung khác */
+            padding-top: 50px; /* Khoảng đệm từ trên xuống */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Cho phép cuộn nếu nội dung quá lớn */
+            background-color: rgba(0,0,0,0.9); /* Nền đen mờ */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
 
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: zoom 0.6s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .prev, .next, .zoom-in, .zoom-out {
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            user-select: none;
+            padding: 16px;
+            border-radius: 5px;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .prev {
+            margin-left: 20px;
+        }
+
+        .next {
+            margin-right: 20px;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Styles for the new image gallery layout */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+        
+        .image-wrapper {
+            position: relative;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .image-wrapper:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Desktop widths using flex-basis */
+        .image-wrapper.w-27 { flex-basis: 27%; }
+        .image-wrapper.w-44-7 { flex-basis: 44.7%; }
+        .image-wrapper.w-52 { flex-basis: 52%; }
+        .image-wrapper.w-46-5 { flex-basis: 46.5%; }
+        .image-wrapper.w-44 { flex-basis: 44%; }
+        .image-wrapper.w-29 { flex-basis: 29%; }
+        .image-wrapper.w-25-5 { flex-basis: 25.5%; }
+        .image-wrapper.w-33 { flex-basis: 33%; }
+        .image-wrapper.w-66-5 { flex-basis: 66.5%; }
+        .image-wrapper.w-64-6 { flex-basis: 64.6%; }
+        .image-wrapper.w-35 { flex-basis: 35%; }
+
+        .view-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .image-wrapper:hover .view-button {
+            opacity: 1;
+        }
+        
+        .notification-container {
+            display: none;
+        }
+
+        /* Responsive: Khi ở chế độ mobile, hình ảnh chiếm 100% chiều rộng và căn giữa */
+        @media (max-width: 768px) {
+            .image-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            .image-wrapper {
+                width: 100%;
+                flex-basis: auto;
+            }
+            /* Ẩn modal trên thiết bị di động */
+            .modal {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
 <body>
 
     <header style="background-image:url(../img/sl_0210121_40570_23.jpg);">
@@ -29,7 +196,7 @@
             <li><a href="../designer.html">Design</a></li>
             <li><a href="../scores.html">Điểm Số</a></li>
             <li><a href="../drawings.html">Ảnh Sưu Tầm</a></li>
-            <li><a href="Portfolio.html" class="active">Portfolio</a></li> <!-- Đặt class active cho trang blog -->
+            <li><a href="Portfolio.html" class="active">Portfolio</a></li>
 
             <li>
                 <div class="dropdown">
@@ -67,30 +234,55 @@
             </div>
         </div>
         <div class="box-content-blog" style="padding: 0px 5px;">
-            <div class="blog-1 section-card fade-in-element">
-                <img src="../img/portfolio/QUOC KHANH/2.jpg" alt="Blog Post Image 1" style="width: 27%;">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/3.jpg" alt="Blog Post Image 1" style="width: 27%; float: right;">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/1.jpg" alt="Blog Post Image 1" style="width: 44.7%;">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/6.jpg" alt="Blog Post Image 2" style="width: 52%;">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/7.png" alt="Blog Post Image 3" style="width: 46.5%;float: right;">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/4.jpg" alt="Blog Post Image 4" style="width: 44%;">
-                <img src="../img/portfolio/QUOC KHANH/5.jpg" alt="Blog Post Image 4" style="width: 29%">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/8.jpg" alt="Blog Post Image 3" style="width: 25.5%;float: right;">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/10.jpg" alt="Blog Post Image 3" style="width: 33%">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/9.jpg" alt="Blog Post Image 4" style="width: 66.5%;float: right;">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/11.jpg" alt="Blog Post Image 4" style="width: 64.6%;">
-                <!-- Placeholder image -->
-                <img src="../img/portfolio/QUOC KHANH/12.jpg" alt="Blog Post Image 4" style="width: 35%;float: right;">
-                <!-- Placeholder image -->
+            <div class="blog-1 section-card fade-in-element image-gallery">
+                <div class="image-wrapper w-27">
+                    <img src="../img/portfolio/QUOC KHANH/2.jpg" alt="Blog Post Image 1">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-27">
+                    <img src="../img/portfolio/QUOC KHANH/3.jpg" alt="Blog Post Image 1">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-44-7">
+                    <img src="../img/portfolio/QUOC KHANH/1.jpg" alt="Blog Post Image 1">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-52">
+                    <img src="../img/portfolio/QUOC KHANH/6.jpg" alt="Blog Post Image 2">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-46-5">
+                    <img src="../img/portfolio/QUOC KHANH/7.png" alt="Blog Post Image 3">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-44">
+                    <img src="../img/portfolio/QUOC KHANH/4.jpg" alt="Blog Post Image 4">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-29">
+                    <img src="../img/portfolio/QUOC KHANH/5.jpg" alt="Blog Post Image 4">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-25-5">
+                    <img src="../img/portfolio/QUOC KHANH/8.jpg" alt="Blog Post Image 3">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-33">
+                    <img src="../img/portfolio/QUOC KHANH/10.jpg" alt="Blog Post Image 3">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-66-5">
+                    <img src="../img/portfolio/QUOC KHANH/9.jpg" alt="Blog Post Image 4">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-64-6">
+                    <img src="../img/portfolio/QUOC KHANH/11.jpg" alt="Blog Post Image 4">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
+                <div class="image-wrapper w-35">
+                    <img src="../img/portfolio/QUOC KHANH/12.jpg" alt="Blog Post Image 4">
+                    <button class="view-button">Xem hình ảnh</button>
+                </div>
             </div>
         </div>
     </div>
@@ -108,15 +300,104 @@
     <button id="back-to-top" title="Lên đầu trang">&#8679;</button>
     <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
 
-    <!-- External JavaScript files -->
-    <script src="js/Portfolio.js"></script>
-    <script src="../js/js-code-navbar.js"></script> <!-- Đảm bảo file này được liên kết -->
-    <div class="notification-container">
-        <div class="notification-box">
-            <span class="notification-text" style="color: white;"><a href="Portfolio.html"
-                    style="color: white;text-decoration: none;">Quay về trang portfolio chính của tôi</a></span>
+    <!-- Modal cho hình ảnh -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-controls">
+            <span class="prev"><i class="fa-solid fa-angle-left fa-xl"></i></span>
+            <span class="next"><i class="fa-solid fa-angle-right fa-xl"></i></span>
+        </div>
+        <img class="modal-content" id="modalImage">
+        <div class="zoom-controls">
+            <span class="zoom-in"><i class="fa-solid fa-plus fa-lg"></i></span>
+            <span class="zoom-out"><i class="fa-solid fa-minus fa-lg"></i></span>
         </div>
     </div>
-</body>
 
+    <!-- External JavaScript files -->
+    <script src="js/Portfolio.js"></script>
+    <script src="../js/js-code-navbar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            const gallery = document.querySelector(".image-gallery");
+            const closeBtn = document.querySelector(".close");
+            const prevBtn = document.querySelector(".prev");
+            const nextBtn = document.querySelector(".next");
+            const zoomInBtn = document.querySelector(".zoom-in");
+            const zoomOutBtn = document.querySelector(".zoom-out");
+            let currentIndex = 0;
+            // Lấy tất cả các thẻ img trong gallery
+            let images = Array.from(gallery.querySelectorAll("img"));
+            let currentScale = 1;
+
+            // Open modal on image or button click
+            gallery.addEventListener('click', (e) => {
+                // Kiểm tra nếu đang ở chế độ mobile, không mở modal
+                if (window.innerWidth <= 768) {
+                    return;
+                }
+                
+                const targetWrapper = e.target.closest('.image-wrapper');
+                if (targetWrapper) {
+                    modal.style.display = "block";
+                    const img = targetWrapper.querySelector('img');
+                    modalImg.src = img.src;
+                    currentIndex = images.indexOf(img);
+                    currentScale = 1;
+                    modalImg.style.transform = `scale(${currentScale})`;
+                }
+            });
+
+            // Close modal
+            closeBtn.onclick = () => {
+                modal.style.display = "none";
+            };
+
+            // Navigate to next image
+            nextBtn.onclick = () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                modalImg.src = images[currentIndex].src;
+                currentScale = 1;
+                modalImg.style.transform = `scale(${currentScale})`;
+            };
+
+            // Navigate to previous image
+            prevBtn.onclick = () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                modalImg.src = images[currentIndex].src;
+                currentScale = 1;
+                modalImg.style.transform = `scale(${currentScale})`;
+            };
+
+            // Zoom in
+            zoomInBtn.onclick = () => {
+                currentScale += 0.2;
+                modalImg.style.transform = `scale(${currentScale})`;
+            };
+
+            // Zoom out
+            zoomOutBtn.onclick = () => {
+                if (currentScale > 0.2) {
+                    currentScale -= 0.2;
+                    modalImg.style.transform = `scale(${currentScale})`;
+                }
+            };
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (modal.style.display === "block") {
+                    if (e.key === "ArrowRight") {
+                        nextBtn.click();
+                    } else if (e.key === "ArrowLeft") {
+                        prevBtn.click();
+                    } else if (e.key === "Escape") {
+                        closeBtn.click();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
 </html>
