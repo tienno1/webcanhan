@@ -1,12 +1,13 @@
-// script.js
+document.addEventListener('DOMContentLoaded', () => {
 
-// Lắng nghe sự kiện khi toàn bộ trang đã tải xong
-window.addEventListener('load', function() {
-    const loaderOverlay = document.getElementById('loader-overlay');
-    
-    // Sử dụng setTimeout để hoãn việc ẩn loading
-    // Thời gian hoãn được tính bằng mili giây (1000ms = 1s)
-    setTimeout(function() {
-        loaderOverlay.classList.add('hidden');
-    }, 500); // Kéo dài thêm 1 giây
-});
+            // --- 1. Logic cho Loader ---
+            const loaderOverlay = document.getElementById('loader-overlay');
+            // Ẩn loader sau khi trang tải xong
+            window.addEventListener('load', () => {
+                loaderOverlay.classList.add('opacity-0');
+                // Xóa khỏi DOM sau khi hiệu ứng kết thúc
+                setTimeout(() => {
+                    loaderOverlay.style.display = 'none';
+                }, 500);
+            });
+        })

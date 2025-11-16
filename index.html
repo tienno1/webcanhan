@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Giới thiệu</title>
+    
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tải Font Awesome (cho các icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/loading.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -15,9 +21,10 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
-    <div id="loader-overlay">
-    <div class="loader"></div>
-</div>
+    <!-- Lớp phủ Loading -->
+    <div id="loader-overlay" class="fixed inset-0 bg-white z-[100] flex justify-center items-center transition-opacity duration-500">
+        <div class="loader w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
 <div class="background" id="background-slideshow"> 
     <header>
         <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
@@ -57,171 +64,190 @@
         </ul>
     </nav>
             
-
-    <div id="page-content">
-        <main>
-            <div class="bao-quanh">
-                <section id="gioi-thieu" class="fade-in-element">
-                    <h1 style="font-size: 2em;text-align: center;">Chào tất cả mọi người đã ghé thăm Website cá nhân của tôi!</h1>
-                    <p class="animated-text" style="font-size: 1.49em;text-align: center;">Đây là trang giới thiệu chung về tôi. Bạn có thể xem thêm các thông tin về tôi, mục tiêu hoặc bất cứ điều gì tôi đang và đã làm.</p>
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                        <p style="font-size: 1em; text-align: center; margin: 0;">Tôi rất vui khi bạn ghé thăm trang web của tôi.</p>
-                        <img src="img/happy.png" style="width: 50px;">
+    <div id="page-content" class="relative z-10 py-16 md:py-14">
+            <main class="max-w-4xl mx-auto px-4">
+                <section id="gioi-thieu" class="bg-white/90 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-xl text-center fade-in-element">
+                    <h1 class="text-3xl md:text-4xl font-bold text-blue-700 mb-6">Chào tất cả mọi người đã ghé thăm Website cá nhân của tôi!</h1>
+                    <p class="animated-text text-lg md:text-xl text-slate-700 mb-6">Đây là trang giới thiệu chung về tôi. Bạn có thể xem thêm các thông tin về tôi, mục tiêu hoặc bất cứ điều gì tôi đang và đã làm.</p>
+                    <div class="flex items-center justify-center gap-3 text-lg text-slate-600 mb-8">
+                        <p>Tôi rất vui khi bạn ghé thăm trang web của tôi.</p>
+                        <span>😊</span> <!-- Thay thế img bằng emoji -->
                     </div>
-                    <h1>Mục tiêu</h1>
-                    <p class="animated-text">Chia sẻ về những mục tiêu cá nhân hoặc sự nghiệp của tôi.<br>Chia sẻ những thứ tuyệt vời mà tôi có<br>Xây dựng một nơi lưu giữ lại những gì tôi đã và đang làm<br>Chia sẻ thông tin của tôi với những ai quan tâm<br>Dựng một nơi lưu giữ kỉ niệm của tôi</p>
+                    
+                    <h2 class="text-2xl font-semibold text-blue-600 mb-4">Mục tiêu</h2>
+                    <div class="animated-text text-slate-600 space-y-2">
+                        <p>Chia sẻ về những mục tiêu cá nhân hoặc sự nghiệp của tôi.</p>
+                        <p>Chia sẻ những thứ tuyệt vời mà tôi có.</p>
+                        <p>Xây dựng một nơi lưu giữ lại những gì tôi đã và đang làm.</p>
+                        <p>Chia sẻ thông tin của tôi với những ai quan tâm.</p>
+                        <p>Dựng một nơi lưu giữ kỉ niệm của tôi.</p>
+                    </div>
                 </section>
-            </div>
-        </main>
+            </main>
+        </div>
+    <!-- Nút điều khiển Slideshow -->
+        <button id="prev-background" class="slideshow-btn absolute top-1/2 left-4 -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/50 transition-colors z-20">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button id="next-background" class="slideshow-btn absolute top-1/2 right-4 -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/50 transition-colors z-20">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
     </div>
-    <button id="prev-background" class="slideshow-btn">&#10094;</button>
-    <button id="next-background" class="slideshow-btn">&#10095;</button>
-</div>
-    <div class="layout2">
-        <div class="layout-item">
-            <a href="https://www.pinterest.com/pin/119767671334591896/"><img src="https://i.pinimg.com/736x/73/71/46/737146dc45c3e0d3970c1dbd6a6dc3a0.jpg" alt="" class="layout-image" /></a>
-        </div>
-        <div class="layout-item">
-            <a href="https://www.pinterest.com/pin/703756187801855/"><img src="https://i.pinimg.com/736x/ec/b6/24/ecb624bec81a0d5b229dc2fe4ed585fd.jpg" alt="" class="layout-image" /></a>
-        </div>
-        <div class="layout-item">
-            <a href="https://www.pinterest.com/pin/3729612234654373/"><img src="https://i.pinimg.com/736x/50/83/77/508377b8b50493e682ddccbd9a6bc0fe.jpg" alt="" class="layout-image" /></a>
-        </div>
-        <div class="layout-item">
-            <a href="https://www.pinterest.com/pin/65794844548982762/"><img src="https://i.pinimg.com/736x/32/23/8e/32238e026cd71e83b8075889d61da1ce.jpg" alt="" class="layout-image" /></a>
-        </div>
-        <div class="layout-item">
-             <a href="https://www.pinterest.com/pin/10625749119122307/"><img src="https://i.pinimg.com/736x/9c/3d/27/9c3d2743e7aaed7bfe0a52dec98b7202.jpg" alt="" class="layout-image" /></a>
-        </div>
-        <div class="layout-item">
-            <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnguyendinhdang.wordpress.com%2F2012%2F11%2F12%2Fban-ve-hoi-hoa-truu-tuong%2F&psig=AOvVaw18KK7PRZPyMMnZdy37c4wn&ust=1750421306874000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOiD9tW5_Y0DFQAAAAAdAAAAABAE"><img src="https://nguyendinhdang.wordpress.com/wp-content/uploads/2012/11/kandinsky-comp-8.jpg" alt="" class="layout-image" /></a>
-        </div>
-    </div>
-    <div class="post-grid">
-        <div class="post-item">
-            <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fthethaovanhoa.vn%2Fvan-gogh-va-su-tro-ve-cua-kiet-tac-dem-day-sao-tren-song-rhone-20240604063357143.htm&psig=AOvVaw1suk5wmkUE__Sk4Wi0MNr5&ust=1750752451440000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIj42aSLh44DFQAAAAAdAAAAABAo"><img src="https://thethaovanhoa.mediacdn.vn/372676912336973824/2024/6/3/starry-night-over-rhone-1717457450761608456418.jpg" alt="" class="post-image post-image--large" /></a>
-            <div class="post-content text text--big text--gradient">
-                <h3 class="post-title is-active">Đêm đầy sao <b> (Tác giả Van Gough) </b> với phong cách chụp ảnh kết hợp hội họa</h3>
-            </div>
-        </div>
-        <div class="post-item">
-            <a href="https://pixabay.com/vi/illustrations/lo%C3%A0i-v%E1%BA%ADt-nh%E1%BB%AFng-con-m%C3%A8o-ngh%E1%BB%87-thu%E1%BA%ADt-9262355/"><img src="https://cdn.pixabay.com/photo/2024/12/12/09/50/animals-9262355_1280.jpg" alt="" class="post-image" /></a>
-        </div>
-        <div class="post-item">
-            <a href="https://pixabay.com/vi/vectors/hoa-li%E1%BB%81n-m%E1%BA%A1ch-d%E1%BB%87t-may-c%E1%BB%95-%C4%91i%E1%BB%83n-9294773/"><img src="https://cdn.pixabay.com/photo/2024/12/27/19/25/flower-9294773_1280.png" alt="" class="post-image" /></a>
-        </div>
-        <div class="post-item">
-            <a href="https://pixabay.com/vi/photos/compa-d%C3%A2y-c%C5%A9-c%E1%BB%95-%C4%91i%E1%BB%83n-n%E1%BB%81n-7592444/"><img src="https://cdn.pixabay.com/photo/2022/11/14/20/14/compass-7592444_1280.jpg" alt="" class="post-image" /></a>
-        </div>
-        <div class="post-item">
-            <a href="https://pixabay.com/vi/illustrations/b%E1%BA%A1n-b%C3%A8-b%C3%ACnh-%C4%91%E1%BA%B3ng-%C4%91a-d%E1%BA%A1ng-c%E1%BA%A7u-v%E1%BB%93ng-7822175/"><img src="https://cdn.pixabay.com/photo/2023/03/01/03/21/friends-7822175_1280.jpg" alt="" class="post-image" /></a>
+<!-- Layout 2: Grid Ảnh (Đã nâng cấp) -->
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+        <h2 class="text-3xl font-bold text-center text-slate-800 mb-6 fade-in-element">Bộ Sưu Tập</h2>
+        <div class="grid grid-cols-4 grid-rows-3 gap-4 fade-in-element">
+            <!-- h1 -->
+            <a href="https://www.pinterest.com/pin/119767671334591896/" class="block col-span-2 row-span-1 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <img src="https://i.pinimg.com/736x/73/71/46/737146dc45c3e0d3970c1dbd6a6dc3a0.jpg" alt="Ảnh 1" class="layout-image w-full h-full object-cover">
+            </a>
+            <!-- h2 -->
+            <a href="https://www.pinterest.com/pin/703756187801855/" class="block col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <img src="https://i.pinimg.com/736x/ec/b6/24/ecb624bec81a0d5b229dc2fe4ed585fd.jpg" alt="Ảnh 2" class="layout-image w-full h-full object-cover">
+            </a>
+            <!-- h3 -->
+            <a href="https://www.pinterest.com/pin/3729612234654373/" class="block col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <img src="https://i.pinimg.com/736x/50/83/77/508377b8b50493e682ddccbd9a6bc0fe.jpg" alt="Ảnh 3" class="layout-image w-full h-full object-cover">
+            </a>
+            <!-- h4 -->
+            <a href="https://www.pinterest.com/pin/65794844548982762/" class="block col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <img src="https://i.pinimg.com/736x/32/23/8e/32238e026cd71e83b8075889d61da1ce.jpg" alt="Ảnh 4" class="layout-image w-full h-full object-cover">
+            </a>
+            <!-- h5 -->
+            <a href="https://www.pinterest.com/pin/10625749119122307/" class="block col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <img src="https://i.pinimg.com/736x/9c/3d/27/9c3d2743e7aaed7bfe0a52dec98b7202.jpg" alt="Ảnh 5" class="layout-image w-full h-full object-cover">
+            </a>
+            <!-- h6 -->
+            <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnguyendinhdang.wordpress.com%2F2012%2F11%2F12%2Fban-ve-hoi-hoa-truu-tuong%2F&psig=AOvVaw18KK7PRZPyMMnZdy37c4wn&ust=1750421306874000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOiD9tW5_Y0DFQAAAAAdAAAAABAE" class="block col-span-2 row-span-1 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <img src="https://nguyendinhdang.wordpress.com/wp-content/uploads/2012/11/kandinsky-comp-8.jpg" alt="Ảnh 6" class="layout-image w-full h-full object-cover">
+            </a>
         </div>
     </div>
-    <div class="cards">
-        <div class="card">
-            <img src="https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="card-image" />
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">2020 World Champs Gaming Warzone</h3>
-                    <div class="card-user">
-                        <img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="card-user-avatar" />
-                        <div class="card-user-info">
-                            <div class="card-user-top">
-                                <h4 class="card-user-name">Tam Tran</h4>
-                                <ion-icon name="checkmark-circle"></ion-icon>
-                            </div>
-                            <div class="card-user-game">Call of duty</div>
+
+    <!-- Post Grid (Đã nâng cấp) -->
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+        <h2 class="text-3xl font-bold text-center text-slate-800 mb-6 fade-in-element">Bài Viết Nổi Bật</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px] fade-in-element">
+            <!-- h1 - Lớn -->
+            <a href="https...htm" class="post-item block col-span-1 md:col-span-2 row-span-2 rounded-xl overflow-hidden shadow-lg group relative">
+                <img src="https://thethaovanhoa.mediacdn.vn/372676912336973824/2024/6/3/starry-night-over-rhone-1717457450761608456418.jpg" alt="Đêm đầy sao" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <h3 class="post-title text-2xl font-semibold text-white">Đêm đầy sao <b> (Tác giả Van Gough) </b> với phong cách chụp ảnh kết hợp hội họa</h3>
+                </div>
+            </a>
+            <!-- h2 -->
+            <a href="https...9262355/" class="post-item block col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg group">
+                <img src="https://cdn.pixabay.com/photo/2024/12/12/09/50/animals-9262355_1280.jpg" alt="Mèo" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+            </a>
+            <!-- h3 -->
+            <a href="https...9294773/" class="post-item block col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg group">
+                <img src="https://cdn.pixabay.com/photo/2024/12/27/19/25/flower-9294773_1280.png" alt="Hoa" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+            </a>
+            <!-- h4 -->
+            <a href="https...7592444/" class="post-item block col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg group">
+                <img src="https://cdn.pixabay.com/photo/2022/11/14/20/14/compass-7592444_1280.jpg" alt="La bàn" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+            </a>
+            <!-- h5 -->
+            <a href="https...7822175/" class="post-item block col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg group">
+                <img src="https://cdn.pixabay.com/photo/2023/03/01/03/21/friends-7822175_1280.jpg" alt="Bạn bè" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+            </a>
+        </div>
+    </div>
+
+    <!-- Cards (Đã nâng cấp) -->
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+        <h2 class="text-3xl font-bold text-center text-slate-800 mb-6 fade-in-element">Kênh Trực Tuyến</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 fade-in-element">
+            <!-- Card 1 -->
+            <div class="card flex flex-col bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <img src="https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Card image" class="card-image w-full h-48 object-cover">
+                <div class="card-content p-5 flex flex-col flex-1">
+                    <h3 class="card-title text-lg font-semibold text-slate-800 mb-4 truncate">2020 World Champs Gaming Warzone</h3>
+                    <div class="card-user flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="User avatar" class="card-user-avatar w-10 h-10 rounded-full object-cover">
+                        <div class="card-user-info ml-3">
+                            <h4 class="card-user-name font-semibold text-sm text-slate-700">Tam Tran</h4>
+                            <div class="card-user-game text-xs text-slate-500">Call of duty</div>
                         </div>
                     </div>
-                </div>
-                <div class="card-bottom">
-                    <div class="card-live">
-                        <ion-icon name="wifi"></ion-icon>
-                        <span>Live</span>
+                    <div class="card-bottom mt-auto flex justify-between items-center text-sm">
+                        <div class="card-live bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-wifi text-xs"></i>
+                            <span>Live</span>
+                        </div>
+                        <div class="card-watching text-slate-500">4.2k watching</div>
                     </div>
-                    <div class="card-watching">4.2k watching</div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="card-image" />
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">2020 World Champs Gaming WarzoneGamingGamingGamingGamingGamingGamingGamingGamingGamingGamingGamingGamingGamingGamingGamingGamingGaming</h3>
-                    <div class="card-user">
-                        <img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="card-user-avatar" />
-                        <div class="card-user-info">
-                            <div class="card-user-top">
-                                <h4 class="card-user-name">Tam Tran</h4>
-                                <ion-icon name="checkmark-circle"></ion-icon>
-                            </div>
-                            <div class="card-user-game">Call of duty</div>
+            <!-- Card 2 (Nội dung dài) -->
+            <div class="card flex flex-col bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80" alt="Card image" class="card-image w-full h-48 object-cover">
+                <div class="card-content p-5 flex flex-col flex-1">
+                    <h3 class="card-title text-lg font-semibold text-slate-800 mb-4 h-14 overflow-hidden text-ellipsis">2020 World Champs Gaming WarzoneGamingGamingGamingGaming...</h3>
+                    <div class="card-user flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="User avatar" class="card-user-avatar w-10 h-10 rounded-full object-cover">
+                        <div class="card-user-info ml-3">
+                            <h4 class="card-user-name font-semibold text-sm text-slate-700">John Doe</h4>
+                            <div class="card-user-game text-xs text-slate-500">Apex Legends</div>
                         </div>
                     </div>
-                </div>
-                <div class="card-bottom">
-                    <div class="card-live">
-                        <ion-icon name="wifi"></ion-icon>
-                        <span>Live</span>
+                    <div class="card-bottom mt-auto flex justify-between items-center text-sm">
+                        <div class="card-live bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-wifi text-xs"></i>
+                            <span>Live</span>
+                        </div>
+                        <div class="card-watching text-slate-500">8.1k watching</div>
                     </div>
-                    <div class="card-watching">4.2k watching</div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="card-image" />
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">2020 World Champs Gaming Warzone 2020 World Champs Gaming Warzone</h3>
-                    <div class="card-user">
-                        <img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="card-user-avatar" />
-                        <div class="card-user-info">
-                            <div class="card-user-top">
-                                <h4 class="card-user-name">Tam Tran</h4>
-                                <ion-icon name="checkmark-circle"></ion-icon>
-                            </div>
-                            <div class="card-user-game">Call of duty</div>
+            <!-- Card 3 -->
+            <div class="card flex flex-col bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80" alt="Card image" class="card-image w-full h-48 object-cover">
+                <div class="card-content p-5 flex flex-col flex-1">
+                    <h3 class="card-title text-lg font-semibold text-slate-800 mb-4 h-14 overflow-hidden text-ellipsis">2020 World Champs Gaming Warzone 2020 World Champs Gaming Warzone</h3>
+                    <div class="card-user flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="User avatar" class="card-user-avatar w-10 h-10 rounded-full object-cover">
+                        <div class="card-user-info ml-3">
+                            <h4 class="card-user-name font-semibold text-sm text-slate-700">Jane Smith</h4>
+                            <div class="card-user-game text-xs text-slate-500">Fortnite</div>
                         </div>
                     </div>
-                </div>
-                <div class="card-bottom">
-                    <div class="card-live">
-                        <ion-icon name="wifi"></ion-icon>
-                        <span>Live</span>
+                    <div class="card-bottom mt-auto flex justify-between items-center text-sm">
+                        <div class="card-live bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-wifi text-xs"></i>
+                            <span>Live</span>
+                        </div>
+                        <div class="card-watching text-slate-500">2.3k watching</div>
                     </div>
-                    <div class="card-watching">4.2k watching</div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="card-image" />
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">2020 World Champs Gaming Warzone</h3>
-                    <div class="card-user">
-                        <img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="card-user-avatar" />
-                        <div class="card-user-info">
-                            <div class="card-user-top">
-                                <h4 class="card-user-name">Tam Tran</h4>
-                                <ion-icon name="checkmark-circle"></ion-icon>
-                            </div>
-                            <div class="card-user-game">Call of duty</div>
+            <!-- Card 4 -->
+            <div class="card flex flex-col bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ffb0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Card image" class="card-image w-full h-48 object-cover">
+                <div class="card-content p-5 flex flex-col flex-1">
+                    <h3 class="card-title text-lg font-semibold text-slate-800 mb-4 truncate">2020 World Champs Gaming Warzone</h3>
+                    <div class="card-user flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1c372c3a3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="User avatar" class="card-user-avatar w-10 h-10 rounded-full object-cover">
+                        <div class="card-user-info ml-3">
+                            <h4 class="card-user-name font-semibold text-sm text-slate-700">Mike Johnson</h4>
+                            <div class="card-user-game text-xs text-slate-500">Valorant</div>
                         </div>
                     </div>
-                </div>
-                <div class="card-bottom">
-                    <div class="card-live">
-                        <ion-icon name="wifi"></ion-icon>
-                        <span>Live</span>
+                    <div class="card-bottom mt-auto flex justify-between items-center text-sm">
+                        <div class="card-live bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-wifi text-xs"></i>
+                            <span>Live</span>
+                        </div>
+                        <div class="card-watching text-slate-500">5.0k watching</div>
                     </div>
-                    <div class="card-watching">4.2k watching</div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Phần thông tin liên hệ được cập nhật -->
         <section class="section-card fade-in-element contact-section">
-            <h2>Gửi Lời Nhắn Đến Tôi</h2>
+            <h2 class="text-3xl font-bold text-blue-700 mb-4">Gửi Lời Nhắn Đến Tôi</h2>
             <p class="contact-description">Hãy để lại thông tin của bạn. Tôi sẽ phản hồi lại sớm nhất có thể.</p>
             <form id="contactForm" class="contact-form">
                 <div class="form-group">
@@ -289,8 +315,13 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script src="js/js-code-navbar.js"></script>
     <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
-    <button id="back-to-top" title="Lên đầu trang">&#8679;</button>
-    <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
+    <!-- Nút Lên/Xuống (Đã nâng cấp) -->
+    <button id="back-to-top" title="Lên đầu trang" class="fixed bottom-28 right-5 w-12 h-12 bg-slate-700 text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-slate-800 z-50">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <button id="go-to-bottom" title="Xuống cuối trang" class="fixed bottom-14 right-5 w-12 h-12 bg-slate-700 text-white rounded-full shadow-lg transition-all duration-300 hover:bg-slate-800 z-50">
+        <i class="fa-solid fa-arrow-down"></i>
+    </button>
     <script src="js/next_tab.js"></script>
     <script src="js/mail.js"></script>
     <script src="js/loading.js"></script>

@@ -20,43 +20,46 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
-    // Back to Top & Go to Bottom Buttons
-    const backToTopBtn = document.getElementById('back-to-top');
-    const goToBottomBtn = document.getElementById('go-to-bottom');
+    // --- 3. Logic cho nút Lên/Xuống ---
+            const backToTopBtn = document.getElementById('back-to-top');
+            const goToBottomBtn = document.getElementById('go-to-bottom');
 
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const docHeight = document.body.scrollHeight;
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const docHeight = document.body.scrollHeight;
 
-        if (scrollY > 300) {
-            backToTopBtn.classList.add('show');
-        } else {
-            backToTopBtn.classList.remove('show');
-        }
+                // Nút Lên đầu trang
+                if (scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                }
 
-        if (scrollY + windowHeight >= docHeight - 100) {
-            goToBottomBtn.style.display = 'none';
-        } else {
-            goToBottomBtn.style.display = 'block';
-        }
-    });
+                // Nút Xuống cuối trang
+                if (scrollY + windowHeight >= docHeight - 100) {
+                    goToBottomBtn.style.display = 'none'; // Ẩn khi ở gần cuối
+                } else {
+                    goToBottomBtn.style.display = 'block';
+                }
+            });
 
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
 
-    goToBottomBtn.addEventListener('click', () => {
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    });
+            goToBottomBtn.addEventListener('click', () => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            });
+            
+    // --- 4. Logic cho Background Slideshow ---
+            const backgroundSlideshow = document.getElementById('background-slideshow');
+            const prevBackgroundBtn = document.getElementById('prev-background');
+            const nextBackgroundBtn = document.getElementById('next-background');
 
-    // --- Background Image Slideshow ---
-    const backgroundSlideshow = document.getElementById('background-slideshow');
-    const prevBackgroundBtn = document.getElementById('prev-background');
-    const nextBackgroundBtn = document.getElementById('next-background');
-
-    const backgroundImages = [
-        'img/nền.jpg',
+            // THAY THẾ bằng ảnh placeholder. Bạn có thể đổi lại link ảnh của mình.
+            const backgroundImages = [
+                'img/nền.jpg',
         'img/hồng.jpg',
         'img/hồng x2.jpg',
         'img/hinh nen chi trinh.jpg',
@@ -66,62 +69,40 @@ document.addEventListener('DOMContentLoaded', () => {
         'img/phong cách.jpg',
         'img/cổ trang.jpg',
         'img/biển.jpg'
-    ];
+            ];
 
-    let currentImageIndex = 0;
-    const slideshowIntervalTime = 5000; // 5 giây (5000 milliseconds) cho mỗi lần chuyển đổi tự động
+            let currentImageIndex = 0;
+            const slideshowIntervalTime = 5000; // 5 giây
+            let slideshowInterval;
 
-    let slideshowInterval; // Biến để lưu trữ ID của interval
+            function updateBackgroundImage() {
+                const nextImageUrl = backgroundImages[currentImageIndex];
+                backgroundSlideshow.style.backgroundImage = `url('${nextImageUrl}')`;
+            }
 
-    // Hàm để cập nhật ảnh nền một cách mượt mà bằng CSS transition
-    function updateBackgroundImage() {
-        const nextImageUrl = backgroundImages[currentImageIndex];
-        backgroundSlideshow.style.backgroundImage = `url('${nextImageUrl}')`;
-        // CSS transition trên .background sẽ tự động xử lý hiệu ứng fade
-    }
+            function startSlideshow() {
+                clearInterval(slideshowInterval); // Xóa interval cũ
+                slideshowInterval = setInterval(() => {
+                    currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+                    updateBackgroundImage();
+                }, slideshowIntervalTime);
+            }
 
-    // Hàm để khởi động lại interval
-    function startSlideshow() {
-        clearInterval(slideshowInterval);
-        slideshowInterval = setInterval(() => {
-            nextImageAuto();
-        }, slideshowIntervalTime);
-    }
+            prevBackgroundBtn.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + backgroundImages.length) % backgroundImages.length;
+                updateBackgroundImage();
+                startSlideshow(); // Khởi động lại timer
+            });
 
-    // Hàm chuyển ảnh tự động
-    function nextImageAuto() {
-        currentImageIndex++;
-        if (currentImageIndex >= backgroundImages.length) {
-            currentImageIndex = 0;
-        }
-        updateBackgroundImage(); // Gọi hàm cập nhật ảnh nền
-    }
+            nextBackgroundBtn.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+                updateBackgroundImage();
+                startSlideshow(); // Khởi động lại timer
+            });
 
-    // Initial background image
-    updateBackgroundImage(); // Đặt ảnh đầu tiên
-
-    // Khởi động slideshow lần đầu
-    startSlideshow();
-
-    prevBackgroundBtn.addEventListener('click', () => {
-        clearInterval(slideshowInterval); // Dừng ngay lập tức
-        currentImageIndex--;
-        if (currentImageIndex < 0) {
-            currentImageIndex = backgroundImages.length - 1;
-        }
-        updateBackgroundImage(); // Cập nhật ảnh nền
-        startSlideshow(); // Bắt đầu lại slideshow sau 5 giây
-    });
-
-    nextBackgroundBtn.addEventListener('click', () => {
-        clearInterval(slideshowInterval); // Dừng ngay lập tức
-        currentImageIndex++; // Tăng index trước khi gọi update
-        if (currentImageIndex >= backgroundImages.length) {
-            currentImageIndex = 0;
-        }
-        updateBackgroundImage(); // Cập nhật ảnh nền
-        startSlideshow(); // Bắt đầu lại slideshow sau 5 giây
-    });
+            // Khởi động slideshow
+            updateBackgroundImage();
+            startSlideshow();
 
     // Note: The gentle text movement effect (.animated-text) is handled entirely by CSS animation (@keyframes)
     // and does not require JavaScript to be triggered based on scrolling in this example.

@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Cá Nhân - Phạm Viết Tiến</title>
     <link rel="stylesheet" href="css/profile-nav.css">
-    <link rel="stylesheet" href="css/loading.css">
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tải Font Awesome (cho các icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/code_navbar.css">
     <link rel="stylesheet" href="css/profile.css">
     <!-- Font Awesome for menu icon -->
@@ -17,8 +21,9 @@
 </head>
 
 <body>
-    <div id="loader-overlay">
-        <div class="loader"></div>
+    <!-- Lớp phủ Loading -->
+    <div id="loader-overlay" class="fixed inset-0 bg-white z-[100] flex justify-center items-center transition-opacity duration-500">
+        <div class="loader w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
     <header>
         <a href="index.html"><img src="img/logo.png" alt="Logo" class="lift-on-hover"></a>
@@ -370,9 +375,13 @@
         </div>
     </div>
 
-    <!-- Nút đi lên/xuống -->
-    <button id="back-to-top" title="Lên đầu trang">&#8679;</button>
-    <button id="go-to-bottom" title="Xuống cuối trang">&#8681;</button>
+    <!-- Nút Lên/Xuống (Đã nâng cấp) -->
+    <button id="back-to-top" title="Lên đầu trang" class="fixed bottom-28 right-5 w-12 h-12 bg-slate-700 text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-slate-800 z-50">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <button id="go-to-bottom" title="Xuống cuối trang" class="fixed bottom-14 right-5 w-12 h-12 bg-slate-700 text-white rounded-full shadow-lg transition-all duration-300 hover:bg-slate-800 z-50">
+        <i class="fa-solid fa-arrow-down"></i>
+    </button>
 
     <!-- External JavaScript file -->
     <script src="js/js-code-navbar.js"></script>
