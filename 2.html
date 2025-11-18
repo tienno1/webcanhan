@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Giới thiệu - Giao diện Mới</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <style>
+        /* --- CẤU HÌNH BIẾN & FONT CHUNG --- */
+        :root {
+            --nav-bg: #2c3e50;
+            --nav-text: #ecf0f1;
+            --accent-color: #3498db;
+            --hover-bg: rgba(255, 255, 255, 0.1);
+            --sidebar-width: 280px; /* Chiều rộng cố định trên mobile */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden;
+            background-color: #f4f4f4;
+        }
+
+        /* --- LAYOUT CHÍNH --- */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Sidebar (Chỉ cho MOBILE) */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--nav-bg);
+            color: var(--nav-text);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+        }
+
+        /* Content Wrapper */
+        .main-content-wrapper {
+            width: 100%;
+            flex-grow: 1;
+            position: relative;
+            background-color: #fff;
+        }
+
+        /* --- CÁC STYLE CHO SIDEBAR (Mobile) --- */
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar-header img {
+            max-width: 100px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+        }
+        .sidebar-header h3 { margin: 0; font-size: 1.1rem; font-weight: 600; color: #fff; }
+        .nav-tabs { display: flex; background-color: rgba(0,0,0,0.2); }
+        .nav-tab-btn {
+            flex: 1; border: none; background: none; color: #95a5a6;
+            padding: 15px 0; font-size: 1.5rem; cursor: pointer;
+            transition: all 0.3s ease; border-bottom: 3px solid transparent;
+        }
+        .nav-tab-btn:hover { color: #fff; background-color: rgba(255,255,255,0.05); }
+        .nav-tab-btn.active { color: var(--accent-color); border-bottom-color: var(--accent-color); background-color: rgba(52, 152, 219, 0.1); }
+        .nav-menus { flex: 1; position: relative; overflow: hidden; }
+        .menu-list { list-style: none; padding: 0; margin: 0; display: none; animation: fadeIn 0.3s ease; }
+        .menu-list.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .menu-list li a {
+            display: flex; align-items: center; padding: 15px 25px; color: var(--nav-text);
+            text-decoration: none; transition: all 0.2s; border-left: 4px solid transparent;
+        }
+        .menu-list li a i { margin-right: 15px; width: 20px; text-align: center; }
+        .menu-list li a:hover, .menu-list li a.active {
+            background-color: var(--hover-bg); border-left-color: var(--accent-color);
+            padding-left: 30px; color: #fff;
+        }
+        .submenu { background-color: rgba(0,0,0,0.2); padding-left: 0; display: none; }
+        .has-submenu.open .submenu { display: block; }
+        .submenu li a { padding-left: 50px; font-size: 0.9rem; color: #bdc3c7; }
+        .submenu-toggle i.arrow { margin-left: auto; transition: transform 0.3s; }
+        .has-submenu.open .submenu-toggle i.arrow { transform: rotate(180deg); }
+
+        /* --- MOBILE TOGGLE BUTTON --- */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 2000;
+            background: var(--nav-bg);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* --- PC TOP NAV STYLES (Menu Ngang) --- */
+        .top-nav-pc {
+            display: none; /* Mặc định ẩn trên mobile */
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .top-nav-pc .main-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .top-nav-pc .main-menu > li {
+            position: relative;
+            padding: 15px 12px;
+        }
+
+        .top-nav-pc .main-menu > li > a, .dropdown-toggle {
+            display: block;
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            transition: color 0.2s, border-bottom 0.2s;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            background: none;
+            border: none;
+            white-space: nowrap; /* Ngăn chữ bị ngắt dòng */
+        }
+
+        .top-nav-pc .main-menu > li > a:hover, .dropdown-toggle:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .top-nav-pc a.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Dropdown PC */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            min-width: 200px;
+            z-index: 10;
+            padding: 5px 0;
+            list-style: none;
+            margin-top: 5px; /* Khoảng cách với button */
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            animation: menuFadeIn 0.3s ease;
+        }
+        .dropdown:hover .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu li a {
+            padding: 10px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f0f0f0;
+            color: var(--accent-color);
+        }
+
+        @keyframes menuFadeIn {
+            from { opacity: 0; transform: translate(-50%, -10px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        
+        /* Mobile (Màn hình nhỏ hơn hoặc bằng 768px) */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%); /* Ẩn sidebar theo mặc định */
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .mobile-menu-btn {
+                display: block; /* Hiện nút toggle */
+            }
+
+            .top-nav-pc {
+                display: none; /* ẨN NAV NGANG TRÊN MOBILE */
+            }
+        }
+
+        /* PC (Màn hình lớn hơn 768px) */
+        @media (min-width: 769px) {
+            .sidebar {
+                display: none !important; /* Dùng !important để đảm bảo ẩn */
+            }
+
+            .top-nav-pc {
+                display: block; /* HIỆN NAV NGANG TRÊN PC */
+            }
+        }
+        /* --- Các style khác giữ nguyên --- */
+        .background-container {
+            height: 40vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .background-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease;
+            opacity: 1;
+        }
+        .content-overlay {
+            position: relative;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+        }
+        .lift-on-hover { transition: transform 0.3s; }
+        .lift-on-hover:hover { transform: translateY(-5px); }
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #loader-overlay {
+            position: fixed; inset: 0; background: #fff; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s;
+        }
+        .scroll-btn {
+            position: fixed; right: 20px; width: 45px; height: 45px;
+            background: #2c3e50; color: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s; z-index: 900; opacity: 0; visibility: hidden;
+        }
+        .scroll-btn.show { opacity: 1; visibility: visible; }
+        .scroll-btn:hover { background: var(--accent-color); }
+        #back-to-top { bottom: 80px; }
+        #go-to-bottom { bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Overlay -->
+    <div id="loader-overlay">
+        <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Nút Menu Mobile (Chỉ hiện trên mobile) -->
+    <button class="mobile-menu-btn" id="mobile-toggle">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- APP CONTAINER -->
+    <div class="app-container">
+
+        <!-- SIDEBAR (MENU MOBILE: Ẩn trên PC, hiện trên Mobile) -->
+        <nav class="sidebar" id="main-sidebar">
+            <!-- Logo / User Header -->
+            <div class="sidebar-header">
+                <a href="index.html"><img src="img/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/100?text=Logo'"></a>
+                <h3>Phạm Viết Tiến</h3>
+                <p class="text-xs text-gray-400">Portfolio & Design</p>
+            </div>
+
+            <!-- 2 TAB ICONS (Chỉ dùng cho Sidebar Mobile) -->
+            <div class="nav-tabs">
+                <button class="nav-tab-btn active" onclick="switchTab('home')" title="Cá nhân">
+                    <i class="fa-solid fa-house"></i> <!-- Icon Ngôi nhà -->
+                </button>
+                <button class="nav-tab-btn" onclick="switchTab('web')" title="Website & Code">
+                    <i class="fa-solid fa-globe"></i> <!-- Icon Website -->
+                </button>
+            </div>
+
+            <!-- MENU CONTENT (Mobile) -->
+            <div class="nav-menus">
+
+                <!-- MENU 1: HOME -->
+                <ul id="menu-home" class="menu-list active">
+                    <li class="text-xs uppercase text-gray-500 font-bold px-6 py-2 mt-2">Thông tin chung</li>
+                    <li><a href="index.html" class="active"><i class="fa-solid fa-circle-info"></i> Giới thiệu</a></li>
+                    <li><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="scores.html"><i class="fa-solid fa-star"></i> Điểm Số</a></li>
+
+                    <li class="text-xs uppercase text-gray-500 font-bold px-6 py-2 mt-4">Sáng tạo</li>
+                    <li><a href="designer.html"><i class="fa-solid fa-pen-nib"></i> Design</a></li>
+                    <li><a href="drawings.html"><i class="fa-solid fa-image"></i> Ảnh Sưu Tầm</a></li>
+                    <li><a href="Portfolio/Portfolio.html"><i class="fa-solid fa-briefcase"></i> Portfolio</a></li>
+                </ul>
+
+                <!-- MENU 2: WEB -->
+                <ul id="menu-web" class="menu-list">
+                    <li class="text-xs uppercase text-gray-500 font-bold px-6 py-2 mt-2">Học Tập & Dự Án</li>
+
+                    <!-- Dropdown: Web Tiếng Anh -->
+                    <li class="has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fa-solid fa-language"></i> Web học tiếng anh
+                            <i class="fa-solid fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="web-tieng-anh/de1.html">Đề 1 - Cơ bản</a></li>
+                            <li><a href="web-tieng-anh/de2.html">Đề 2 - Nâng cao</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Dropdown: Code Website -->
+                    <li class="has-submenu">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fa-solid fa-code"></i> Code Website
+                            <i class="fa-solid fa-chevron-down arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="jalan/View.html">View Demo</a></li>
+                            <li><a href="web-old/trang-chu.html">Web học tại lớp</a></li>
+                            <li><a href="web-old/Home.html">Web kết thúc môn</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="mt-4 px-6">
+                        <div class="bg-blue-900/50 rounded-lg p-4 text-center">
+                            <p class="text-sm text-blue-200 mb-2">Đang phát triển...</p>
+                            <div class="w-full bg-gray-700 rounded-full h-1.5">
+                                <div class="bg-blue-500 h-1.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Footer nhỏ trong Sidebar -->
+            <div class="p-4 text-center text-xs text-gray-500 mt-auto border-t border-gray-700">
+                &copy; 2025 Pham Viet Tien
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT (100% Width trên PC/Mobile) -->
+        <main class="main-content-wrapper">
+
+            <!-- NAV NGANG CHO PC (Chỉ hiện trên PC, ẩn trên Mobile) -->
+            <nav class="top-nav-pc">
+                <div class="max-w-7xl mx-auto flex items-center justify-between">
+                    <!-- Logo bên trái cho PC Nav -->
+                    <div class="py-3">
+                         <h3 class="font-bold text-xl text-gray-800"><span class="text-blue-600">P.V.T</span> Portfolio</h3>
+                    </div>
+
+                    <!-- Menu chính -->
+                    <ul class="main-menu">
+                        <li><a href="index.html" class="active">Giới thiệu</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="designer.html">Design</a></li>
+                        <li><a href="scores.html">Điểm Số</a></li>
+                        <li><a href="drawings.html">Ảnh Sưu Tầm</a></li>
+                        <li><a href="Portfolio/Portfolio.html">Portfolio</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
+                                    <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle">Code Website <span class="arrow">&#9662;</span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="jalan/View.html">View</a></li>
+                                    <li><a href="web-old/trang-chu.html">web học tại lớp</a></li>
+                                    <li><a href="web-old/Home.html">web kết thúc môn học</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Hết PC Nav -->
+
+            <!-- Header Banner / Slideshow -->
+            <div class="background-container" id="bg-slideshow">
+                <div class="content-overlay z-10">
+                    <h1 class="text-4xl font-bold mb-4 lift-on-hover">Chào mừng đến với thế giới của tôi</h1>
+                    <p class="text-xl">Khám phá sự sáng tạo và đam mê</p>
+                </div>
+                <!-- Nút điều hướng slide -->
+                <button id="prev-slide" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/50 z-20"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="next-slide" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/50 z-20"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <!-- Nội dung trang (Copy từ phần main cũ) -->
+            <div class="max-w-5xl mx-auto px-6 py-12">
+
+                <section id="gioi-thieu" class="bg-white rounded-xl p-8 shadow-lg mb-12 fade-in-element border border-gray-100">
+                    <h2 class="text-3xl font-bold text-blue-700 mb-6 text-center">Mục Tiêu & Giới Thiệu</h2>
+                    <p class="text-lg text-slate-700 mb-6 text-center leading-relaxed">
+                        Đây là trang giới thiệu chung về tôi. Bạn có thể xem thêm các thông tin về tôi, mục tiêu hoặc bất cứ điều gì tôi đang và đã làm.
+                        Tôi rất vui khi bạn ghé thăm trang web của tôi. 😊
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-8">
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <h3 class="font-bold text-blue-600 mb-2">🎯 Mục tiêu</h3>
+                            <ul class="list-disc list-inside text-slate-600 space-y-2">
+                                <li>Chia sẻ về những mục tiêu cá nhân.</li>
+                                <li>Xây dựng nơi lưu giữ kỷ niệm.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-5 rounded-lg">
+                            <h3 class="font-bold text-purple-600 mb-2">💡 Chia sẻ</h3>
+                            <ul class="list-disc list-inside text-slate-600 space-y-2">
+                                <li>Chia sẻ những thứ tuyệt vời tôi có.</li>
+                                <li>Kết nối với những người cùng đam mê.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Bộ sưu tập (Layout Grid cũ) -->
+                <h2 class="text-3xl font-bold text-slate-800 mb-8 text-center fade-in-element">Bộ Sưu Tập Ảnh</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-3 gap-4 h-[500px] mb-16 fade-in-element">
+                     <div class="col-span-2 row-span-2 rounded-xl overflow-hidden shadow-lg relative group">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ffb0" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black/70 w-full text-white">Nổi bật</div>
+                     </div>
+                     <div class="col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e" class="w-full h-full object-cover hover:scale-105 transition"></div>
+                     <div class="col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg"><img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745" class="w-full h-full object-cover hover:scale-105 transition"></div>
+                     <div class="col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" class="w-full h-full object-cover hover:scale-105 transition"></div>
+                     <div class="col-span-2 row-span-1 rounded-xl overflow-hidden shadow-lg"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e" class="w-full h-full object-cover hover:scale-105 transition"></div>
+                </div>
+
+                <!-- Form liên hệ -->
+                <section class="contact-section fade-in-element bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
+                    <h2 class="text-3xl font-bold text-blue-700 mb-2 text-center">Gửi Lời Nhắn</h2>
+                    <p class="text-center text-gray-500 mb-8">Tôi sẽ phản hồi sớm nhất có thể!</p>
+                    <form id="contactForm" class="max-w-xl mx-auto space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Họ tên</label>
+                            <input type="text" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Tên của bạn">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Email</label>
+                            <input type="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="email@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Tin nhắn</label>
+                            <textarea rows="4" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition" placeholder="Nội dung..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-full shadow-lg hover:bg-blue-700 transform hover:-translate-y-1 transition duration-300">Gửi Ngay</button>
+                    </form>
+                </section>
+
+            </div>
+
+            <!-- Footer nội dung -->
+            <footer class="bg-gray-800 text-white text-center py-8">
+                <p>&copy; 2025 Phạm Viết Tiến. All rights reserved.</p>
+                <div class="mt-4 space-x-4">
+                    <a href="#" class="hover:text-blue-400 transition">Facebook</a>
+                    <a href="#" class="hover:text-blue-400 transition">Zalo</a>
+                    <a href="#" class="hover:text-blue-400 transition">Email</a>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Scroll Buttons -->
+    <button id="back-to-top" class="scroll-btn" title="Lên đầu trang"><i class="fa-solid fa-arrow-up"></i></button>
+    <button id="go-to-bottom" class="scroll-btn" title="Xuống cuối trang"><i class="fa-solid fa-arrow-down"></i></button>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- 1. Xử lý Tabs Sidebar (Mobile) ---
+        function switchTab(tabName) {
+            // 1. Reset active state for buttons
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            // 2. Hide all menus
+            document.querySelectorAll('.menu-list').forEach(menu => menu.classList.remove('active'));
+
+            // 3. Activate clicked button and corresponding menu
+            if (tabName === 'home') {
+                document.querySelector('button[onclick="switchTab(\'home\')"]').classList.add('active');
+                document.getElementById('menu-home').classList.add('active');
+            } else if (tabName === 'web') {
+                document.querySelector('button[onclick="switchTab(\'web\')"]').classList.add('active');
+                document.getElementById('menu-web').classList.add('active');
+            }
+        }
+
+        // --- 2. Xử lý Submenu (Dropdown trong Sidebar Mobile) ---
+        document.querySelectorAll('.submenu-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Chỉ mở/đóng dropdown trong Sidebar (Mobile Nav)
+                if (window.innerWidth <= 768) {
+                    const parent = this.parentElement;
+                    parent.classList.toggle('open');
+                }
+            });
+        });
+
+        // --- 3. Mobile Sidebar Toggle ---
+        const mobileBtn = document.getElementById('mobile-toggle');
+        const sidebar = document.getElementById('main-sidebar');
+
+        mobileBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            // Toggle icon
+            const icon = mobileBtn.querySelector('i');
+            if (sidebar.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Đóng sidebar khi click ra ngoài trên mobile
+        document.addEventListener('click', (e) => {
+            // Chỉ chạy logic này khi ở chế độ mobile (<= 768px)
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(e.target) && !mobileBtn.contains(e.target) && sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                    mobileBtn.querySelector('i').classList.remove('fa-xmark');
+                    mobileBtn.querySelector('i').classList.add('fa-bars');
+                }
+            }
+        });
+
+        // --- 4. Slideshow Background Logic ---
+        const slideContainer = document.getElementById('bg-slideshow');
+        const images = [
+            'img/nền.jpg',
+            'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1920&q=80'
+        ];
+        let currentIdx = 0;
+
+        function setBackground(index) {
+            const newSlide = document.createElement('div');
+            newSlide.className = 'background-slide opacity-0 transition-opacity duration-1000';
+            newSlide.style.backgroundImage = `url('${images[index]}')`;
+
+            // Thêm vào đầu container (dưới content overlay)
+            slideContainer.insertBefore(newSlide, slideContainer.firstChild);
+
+            // Xử lý hiệu ứng fade
+            setTimeout(() => {
+                newSlide.classList.remove('opacity-0');
+            }, 50); // Cho phép trình duyệt nhận ra element mới
+
+            const oldSlide = slideContainer.querySelectorAll('.background-slide');
+            if(oldSlide.length > 1) {
+                 // Xóa slide cũ (slide thứ 2 trở đi) sau khi slide mới đã hiện
+                setTimeout(() => {
+                    oldSlide[1].remove();
+                }, 1050);
+            }
+        }
+
+        document.getElementById('next-slide').addEventListener('click', () => {
+            currentIdx = (currentIdx + 1) % images.length;
+            setBackground(currentIdx);
+        });
+
+        document.getElementById('prev-slide').addEventListener('click', () => {
+            currentIdx = (currentIdx - 1 + images.length) % images.length;
+            setBackground(currentIdx);
+        });
+
+        // Init Slide
+        setBackground(0);
+
+        // --- 5. Loading & Scroll Animation ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader-overlay');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        });
+
+        // Intersection Observer for Fade-in elements
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in-element').forEach(el => observer.observe(el));
+
+        // Scroll Buttons Logic
+        const backToTop = document.getElementById('back-to-top');
+        const goToBottom = document.getElementById('go-to-bottom');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                goToBottom.classList.remove('show');
+            } else {
+                goToBottom.classList.add('show');
+            }
+        });
+
+        backToTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        goToBottom.onclick = () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+    </script>
+</body>
+</html>

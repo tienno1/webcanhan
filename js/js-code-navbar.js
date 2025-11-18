@@ -3,6 +3,31 @@ document.addEventListener('DOMContentLoaded', function () {
   const menuToggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('nav.main-nav');
 
+  // --- LOGIC TAB MOBILE (MỚI THÊM) ---
+  const sidebarTabs = document.querySelectorAll('.sidebar-tab');
+  const navPanels = document.querySelectorAll('.nav-panel');
+
+  sidebarTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      // 1. Xóa active khỏi tất cả các tab và panel
+      sidebarTabs.forEach(t => t.classList.remove('active'));
+      navPanels.forEach(p => p.classList.remove('active'));
+
+      // 2. Thêm active cho tab hiện tại
+      this.classList.add('active');
+
+      // 3. Lấy target từ attribute data-target
+      const targetId = this.getAttribute('data-target');
+      const targetPanel = document.getElementById(targetId);
+
+      // 4. Hiển thị panel tương ứng
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    });
+  });
+
+  // --- LOGIC DROPDOWN (GIỮ NGUYÊN) ---
   dropdowns.forEach(dropdown => {
     const toggleBtn = dropdown.querySelector('.dropdown-toggle');
 
