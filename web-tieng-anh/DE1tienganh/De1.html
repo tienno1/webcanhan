@@ -1,564 +1,976 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-<meta name=Generator content="Microsoft Word 15 (filtered)">
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:"Yu Mincho";}
-@font-face
-	{font-family:"Arial MT";}
-@font-face
-	{font-family:Tahoma;
-	panose-1:2 11 6 4 3 5 4 4 2 4;}
-@font-face
-	{font-family:"\@Yu Mincho";}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin-top:0cm;
-	margin-right:0cm;
-	margin-bottom:8.0pt;
-	margin-left:0cm;
-	line-height:107%;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-h2
-	{mso-style-link:"Heading 2 Char";
-	margin-top:8.0pt;
-	margin-right:0cm;
-	margin-bottom:4.0pt;
-	margin-left:0cm;
-	line-height:115%;
-	page-break-after:avoid;
-	font-size:16.0pt;
-	font-family:"Calibri Light",sans-serif;
-	color:#2F5496;
-	font-weight:normal;}
-p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
-	{mso-style-link:"Body Text Char";
-	margin:0cm;
-	text-autospace:none;
-	font-size:12.0pt;
-	font-family:"Arial MT",sans-serif;}
-span.Heading2Char
-	{mso-style-name:"Heading 2 Char";
-	mso-style-link:"Heading 2";
-	font-family:"Calibri Light",sans-serif;
-	color:#2F5496;}
-span.BodyTextChar
-	{mso-style-name:"Body Text Char";
-	mso-style-link:"Body Text";
-	font-family:"Arial MT",sans-serif;}
-.MsoChpDefault
-	{font-size:12.0pt;}
-.MsoPapDefault
-	{margin-bottom:8.0pt;
-	line-height:115%;}
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
-div.WordSection1
-	{page:WordSection1;}
--->
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Tiếng Anh - Tối Ưu Phản Hồi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            // Thiết lập Tailwind sử dụng class 'dark' để chuyển đổi theme
+            darkMode: 'class', 
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                extend: {
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    screens: {
+                        'xs': '475px', // Custom breakpoint cho mobile nhỏ
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* --- Base Light Theme (Mặc định) --- */
+        body {
+            background-color: #f0f2f5; 
+            color: #1f2937; 
+            padding-bottom: 80px; 
+            transition: background-color 0.3s, color 0.3s;
+        }
 
+        /* Header */
+        header {
+            background-color: #ffffff;
+            color: #1f2937;
+            border-bottom-color: #e5e7eb;
+        }
+        
+        /* Quiz Status Text (Header) */
+        #score-text {
+            background-color: #f3f4f6;
+            border-color: #d1d5db;
+            color: #374151;
+        }
+
+        /* Card / Question Blocks */
+        .hover-card, .modal-content {
+            background-color: #ffffff;
+            border-color: #d1d5db;
+        }
+        .hover-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Option Label */
+        .option-label {
+            background-color: #f9fafb;
+            border-color: #d1d5db;
+            color: #1f2937;
+        }
+        .option-input:checked + .option-label {
+            background-color: #e0f2fe; /* Light Blue */
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Reading Text Box */
+        #reading-part1-text, #reading-part2-container + div {
+            background-color: #f9fafb;
+            border-color: #d1d5db;
+            color: #1f2937;
+        }
+        
+        /* Select element in Reading Part 1 */
+        #reading-part1-text select {
+            background-color: #f3f4f6;
+            color: #1d4ed8;
+            border-bottom-color: #3b82f6;
+        }
+
+        /* Correct / Wrong state colors (Light) */
+        .correct-answer {
+            background-color: #dcfce7 !important; /* Light Green */
+            border-color: #10b981 !important; 
+            color: #065f46 !important;
+            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.4);
+        }
+        .wrong-answer {
+            background-color: #fee2e2 !important; /* Light Red */
+            border-color: #ef4444 !important; 
+            color: #991b1b !important;
+        }
+        .highlight-correct {
+            color: #10b981;
+        }
+
+        /* Footer / Dropdown */
+        #control-footer {
+            background-color: #ffffff;
+            border-top-color: #e5e7eb;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        }
+        #stats-panel {
+            background-color: #f3f4f6;
+            border-color: #d1d5db;
+            color: #1f2937;
+        }
+        #control-dropdown {
+            background-color: #ffffff;
+            border-color: #d1d5db;
+            color: #1f2937;
+        }
+        #control-dropdown h3, #filter-controls p {
+            color: #6b7280;
+            border-bottom-color: #e5e7eb;
+        }
+        #control-dropdown button {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        #control-dropdown button:hover {
+            background-color: #e5e7eb;
+        }
+        #filter-controls {
+            border-top-color: #e5e7eb;
+        }
+
+        /* --- Dark Theme Overrides (Khi body có class .dark) --- */
+        .dark body {
+            background-color: #0d1117; 
+            color: #c9d1d9; 
+        }
+        .dark header {
+            background-color: #101319; 
+            color: #f0f6fc;
+            border-bottom-color: #30363d;
+        }
+        .dark #score-text {
+            background-color: #21262d; 
+            border-color: #30363d; 
+            color: #8b949e;
+        }
+
+        /* Custom scrollbar for dark theme */
+        .dark ::-webkit-scrollbar-track {
+            background: #161b22; 
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #30363d; 
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #58a6ff; 
+        }
+
+        .dark .hover-card, .dark .modal-content {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+        .dark .hover-card:hover {
+            border-color: #58a6ff;
+        }
+
+        .dark .option-label {
+            background-color: #161b22;
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+        .dark .option-input:checked + .option-label {
+            background-color: #1f252c;
+            border-color: #58a6ff;
+            box-shadow: 0 4px 6px -1px rgba(88, 166, 255, 0.2);
+        }
+
+        .dark #reading-part1-text, .dark #reading-part2-container + div {
+            background-color: #21262d;
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+        .dark #reading-part1-text select {
+            background-color: #21262d;
+            color: #58a6ff;
+            border-bottom-color: #58a6ff;
+        }
+
+        /* Dark Correct / Wrong state colors (Dark) */
+        .dark .correct-answer {
+            background-color: #1f371e !important; /* Darker Green */
+            border-color: #388e3c !important; 
+            color: #b8e0b8 !important;
+            box-shadow: 0 2px 4px rgba(56, 142, 60, 0.4);
+        }
+        .dark .wrong-answer {
+            background-color: #3b2024 !important; /* Darker Red */
+            border-color: #d32f2f !important; 
+            color: #f7a0a0 !important;
+        }
+        .dark .highlight-correct {
+            color: #388e3c;
+        }
+
+        /* Dark Footer / Dropdown */
+        .dark #control-footer {
+            background-color: #101319;
+            border-top-color: #30363d;
+        }
+        .dark #stats-panel {
+            background-color: #21262d;
+            border-color: #30363d;
+            color: #f0f6fc;
+        }
+        .dark #control-dropdown {
+            background-color: #161b22;
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+        .dark #control-dropdown h3, .dark #filter-controls p {
+            color: #8b949e;
+            border-bottom-color: #30363d;
+        }
+        .dark #control-dropdown button {
+            background-color: #21262d;
+            color: #c9d1d9;
+        }
+        .dark #control-dropdown button:hover {
+            background-color: #30363d;
+        }
+        .dark #filter-controls {
+            border-top-color: #30363d;
+        }
+
+        /* Animation for result modal */
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .modal-content {
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        /* Custom Dropdown Animation */
+        .dropdown-menu {
+            transition: all 0.3s ease-out;
+            transform-origin: bottom left;
+        }
+        .dropdown-open {
+            opacity: 1;
+            transform: translateY(-10px) scale(1);
+            pointer-events: auto;
+        }
+        .dropdown-closed {
+            opacity: 0;
+            transform: translateY(10px) scale(0.95);
+            pointer-events: none;
+        }
+    </style>
 </head>
-
-<body lang=EN-US style='word-wrap:break-word'>
-
-<div class=WordSection1>
-
-<p class=MsoNormal align=center style='margin-bottom:6.0pt;text-align:center;
-line-height:normal'><b><u><span lang=PL style='font-size:13.0pt;font-family:
-"Tahoma",sans-serif'>M� &#272;&#7872; 02</span></u></b></p>
-
-<p class=MsoNormal style='margin-bottom:6.0pt;line-height:normal;background:
-white'><span style='font-size:13.0pt;font-family:"Tahoma",sans-serif'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif'>I. LISTENING (1,6 marks)</span></b></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;text-align:justify;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif'>People are talking
-about food. What are they going to eat? Listen and choose the correct answers.
-There can be more than one answer for each item.</span></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif'>&nbsp;</span></b></p>
-
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
- style='margin-left:1.4pt;border-collapse:collapse;border:none'>
- <tr>
-  <td width=302 valign=top style='width:226.55pt;border:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>1. Conversation 1.</span></b></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>A. chicken</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>B. fish</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>C. carrots</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>D. potatoes</span></p>
-  </td>
-  <td width=302 valign=top style='width:226.55pt;border:solid windowtext 1.0pt;
-  border-left:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>2. Conversation 2.</span></b></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>A. beef</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>B. corn</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>C. fish</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:0cm;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>D. eggs</span></p>
-  </td>
- </tr>
- <tr>
-  <td width=302 valign=top style='width:226.55pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>3. Conversation 3.</span></b></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>A. yogurt</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>B. milk</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>C. bananas</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>D. apples</span></p>
-  </td>
-  <td width=302 valign=top style='width:226.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>4. Conversation 4.</span></b></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>A. steak</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>B. tofu</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>C. corn</span></p>
-  <p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:
-  3.0pt;margin-left:0cm;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif'>D. tomatoes</span></p>
-  </td>
- </tr>
-</table>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><span style='font-size:13.0pt;font-family:
-"Tahoma",sans-serif'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif'>II. GRAMMAR (3,2 marks): Choose the best
-answer.</span></b></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif'>&nbsp;</span></b></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>5. Will
-you lend me �10? I promise __________ it back to you tomorrow.</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. give</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. I�m
-going to give</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. I�ll
-give</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>6.
-__________ a barbecue tomorrow. It's all planned, so I hope it won't rain.</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. We�re
-going to have</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. have</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. We�ll
-have</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>7.
-__________</span><span style='font-size:13.0pt;font-family:"Tahoma",sans-serif;
-color:black'>&nbsp;a holiday recently?</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. Did you
-have</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. Have
-you had</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. Have
-you have</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>8.
-We&nbsp;</span><span style='font-size:13.0pt;font-family:"Tahoma",sans-serif;
-color:black'>__________ </span><span style='font-size:13.0pt;font-family:"Tahoma",sans-serif;
-color:black'>last week. We&nbsp;</span><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>__________ </span><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>here for 5
-days.</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. arrived
-/ have been</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. have
-arrived / were</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. have
-arrived / have been</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal;background:white'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>9. My
-brother thinks this restaurant is __________ than that restaurant.</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. more
-worse</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. badder</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. worse</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>10. Did
-you know that crossing a busy street is __________ flying in an airplane?</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. most
-dangerous than</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. the
-more dangerous</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. more
-dangerous than</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>11. They
-__________ back to their country last month.</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. fly</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. flew</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. flies</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>12. She
-didn�t answer the phone because she __________ at home.</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. didn�t</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. weren�t</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. wasn�t</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:0cm;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>III. READING (3,2 marks)</span></b></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:0cm;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>III.1. Part 1 (1,2 marks). Read
-the text and choose the best words / utterance to complete the text.</span></b></p>
-
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
- style='margin-left:1.4pt;border-collapse:collapse;border:none'>
- <tr>
-  <td width=604 valign=top style='width:453.1pt;border:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-  <h2 style='margin:0cm;line-height:18.0pt'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif;color:black'>���� </span></h2>
-  <h2 style='margin-top:0cm;line-height:18.0pt'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif;color:black'>���� Dear<span style='letter-spacing:
-  -.4pt'> </span><span style='letter-spacing:-.1pt'>Anita,</span></span></h2>
-  <p class=MsoBodyText style='margin-top:0cm;margin-right:0cm;margin-bottom:
-  3.0pt;margin-left:19.75pt;text-align:justify;line-height:18.0pt'><span
-  style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>Last
-  week my best friend and I moved into an apartment close to our college. We�re<span
-  style='letter-spacing:-.1pt'> </span>both<span style='letter-spacing:-.2pt'> </span>very<span
-  style='letter-spacing:-.2pt'> </span>happy<span style='letter-spacing:-.25pt'>
-  </span>because<span style='letter-spacing:-.1pt'> </span>it�s<span
-  style='letter-spacing:-.25pt'> </span>a<span style='letter-spacing:-.1pt'> </span>nice
-  apartment and we can save a lot of money _____13_____.<span style='letter-spacing:
-  2.0pt'> </span>However, I want to buy a used refrigerator and a used TV so
-  _____14_____, but my friend doesn�t think this is a good idea.<span
-  style='letter-spacing:2.0pt'> </span>He thinks we _____15_____ and buy them
-  brand new, not second-hand.<span style='letter-spacing:4.0pt'> </span>Who is
-  right and who<span style='letter-spacing:2.0pt'> </span>is wrong?</span></p>
-  <p class=MsoBodyText style='margin-top:9.25pt;margin-right:0cm;margin-bottom:
-  0cm;margin-left:19.75pt;margin-bottom:.0001pt;text-align:justify;text-indent:
-  16.8pt'><b><span style='font-size:13.0pt;font-family:"Tahoma",sans-serif;
-  color:black'>&nbsp;</span></b></p>
-  </td>
- </tr>
-</table>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></b></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>13.</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. because
-it�s expensive</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. by
-sharing the rent</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. because
-we can go to our college</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>14.</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. we can
-save even more money</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. we can
-buy them</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. we can
-earn much money</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>15. </span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>A. will
-spend a little money</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>B. should
-save much money</span></p>
-
-<p class=MsoNormal style='margin-bottom:0cm;line-height:normal'><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>C. should
-spend more money </span></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:0cm;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></b></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>III.2. Part 2 (2,0 marks)</span></b></p>
-
-<p class=MsoNormal style='margin-bottom:3.0pt;line-height:normal'><b><span
-style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>Read the
-text again and decide whether the following sentences are True (T), False (F)
-or Not given (NG).</span></b></p>
-
-<p class=MsoNormal style='line-height:18.0pt'><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></p>
-
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=612
- style='width:459.0pt;border-collapse:collapse'>
- <tr>
-  <td width=300 valign=top style='width:225.15pt;border:none;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='text-align:center;line-height:18.0pt'><b><span
-  style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>My
-  Travel Page</span></b></p>
-  <p class=MsoNormal style='line-height:18.0pt'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif;color:black'>Hi. I�m Maria. I live in
-  Australia, but right now I�m travelling in Vietnam. Welcome to my Page!</span></p>
-  <p class=MsoNormal style='line-height:18.0pt'><b><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif;color:black'>Lagi Town</span></b></p>
-  <p class=MsoNormal style='text-align:justify;line-height:18.0pt'><span
-  style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>This is
-  my last day in Lagi town, Binh Thuan province! I�m on the beach now. It is
-  warm and sunny here. There was a little rain yesterday, but the weather is
-  fine today. I�ll be sorry to leave today because I�ve really enjoyed my time
-  here. People are more sociable than I�ve expected, so it�s easy for me to
-  make some friends. For me, the best things are the seafood and the
-  environment � the food is so delicious and the air is fresh. Anyway, this
-  afternoon I�m going to take a coach to Saigon � the busiest city in Vietnam.�
-  </span></p>
-  </td>
-  <td width=312 valign=top style='width:233.85pt;border:none;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='line-height:18.0pt'><b><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif;color:black'>Ho Chi Minh City</span></b></p>
-  <p class=MsoNormal style='text-align:justify;line-height:18.0pt'><span
-  style='font-size:13.0pt;font-family:"Tahoma",sans-serif;color:black'>Well,
-  I�m here in Ho Chi Minh City, which is a big city in the South. It�s the most
-  modern city I�ve ever visited, but it is more modern than Lagi town and there
-  are lots of high buildings. The air here is quite hot and polluted because
-  there are too many cars and motorbikes. I guess the people here are very
-  outgoing and helpful. This morning a taxi driver helped me to find a cheap
-  hotel near the city centre. I realise that things in Saigon are more
-  expensive than in Lagi town. I�ll have to spend my money more carefully from
-  now on�</span></p>
-  </td>
- </tr>
-</table>
-
-<p class=MsoNormal style='line-height:18.0pt'><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>�������� </span></p>
-
-<p class=MsoNormal style='line-height:18.0pt'><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>�������� 16. Maria enjoys the food
-in Lagi town.</span></p>
-
-<p class=MsoNormal style='line-height:18.0pt'><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>�������� 17. There is more rain in
-Lagi town than in Ho Chi Minh City.</span></p>
-
-<p class=MsoNormal style='line-height:18.0pt'><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>�������� 18. A helpful taxi driver
-takes Maria to Ho Chi Minh City.</span></p>
-
-<p class=MsoNormal style='line-height:18.0pt'><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>�������� 19. Saigon is the most
-modern city that Maria has ever come.</span></p>
-
-<p class=MsoNormal style='line-height:18.0pt'><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>�������� 20. Things in Lagi town
-are cheaper than in Ho Chi Minh City.</span></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></b></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>IV. WRITING (2 marks)</span></b></p>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></b></p>
-
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
- style='margin-left:1.4pt;border-collapse:collapse;border:none'>
- <tr>
-  <td width=604 valign=top style='width:453.1pt;border:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:
-  12.0pt;margin-left:0cm;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif;color:black'>You are going to meet your
-  cousin Myra. This is the first time you see her. Write an email to Myra. In
-  your email, you should:</span></p>
-  <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:
-  12.0pt;margin-left:0cm;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif;color:black'><br>
-  - describe yourself<br>
-  - ask Myra to describe herself<br>
-  - suggest a place to meet in the station.</span></p>
-  <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:
-  12.0pt;margin-left:0cm;line-height:normal'><span style='font-size:13.0pt;
-  font-family:"Tahoma",sans-serif;color:black'><br>
-  Write 25-35 words </span></p>
-  </td>
- </tr>
-</table>
-
-<p class=MsoNormal style='margin-top:0cm;margin-right:.15pt;margin-bottom:3.0pt;
-margin-left:1.4pt;line-height:normal'><b><span style='font-size:13.0pt;
-font-family:"Tahoma",sans-serif;color:black'>&nbsp;</span></b></p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-</div>
-
+<body class="min-h-screen font-sans">
+
+    <header class="p-4 shadow-xl sticky top-0 z-50 border-b transition-colors duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            
+            <h1 class="text-xl xs:text-2xl font-extrabold uppercase tracking-wider flex items-center">
+                <i class="fas fa-book-reader mr-2 text-[#3b82f6] dark:text-[#58a6ff]"></i>
+                Bài ôn tập tiếng anh Cao Đẳng
+            </h1>
+
+            <button id="theme-toggle" onclick="toggleTheme()" class="hidden md:flex items-center justify-center text-sm font-bold py-2 px-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl border border-transparent">
+                </button>
+            
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle-mobile" onclick="toggleTheme()" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-xl transition-colors duration-300 shadow-md border">
+                    <i id="theme-icon-mobile" class="fas"></i>
+                </button>
+
+                <div id="score-text" class="text-xs xs:text-sm px-3 py-1 rounded-full font-medium border transition-colors duration-300">
+                    Mã đề: 01
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-4 md:p-6 flex flex-col md:flex-row gap-6 mt-4">
+        
+        <div class="w-full">
+            <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#3b82f6] dark:border-[#58a6ff] transition-colors duration-300">
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
+                    <span class="bg-gray-100 dark:bg-[#21262d] text-[#3b82f6] dark:text-[#58a6ff] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm transition-colors duration-300">II</span>
+                    GRAMMAR <span class="text-sm font-normal text-gray-500 dark:text-[#8b949e] ml-3">3.2 marks</span>
+                </h2>
+                <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Choose the best answer.</p>
+                <div id="grammar-container" class="space-y-4">
+                    </div>
+            </div>
+
+            <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#f97316] dark:border-[#ffab70] transition-colors duration-300">
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
+                    <span class="bg-gray-100 dark:bg-[#21262d] text-[#f97316] dark:text-[#ffab70] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm transition-colors duration-300">III</span>
+                    READING - Part 1 <span class="text-sm font-normal text-gray-500 dark:text-[#8b949e] ml-3">1.2 marks</span>
+                </h2>
+                <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Read the text and choose the best words / utterance to complete the text.</p>
+                
+                <div id="reading-part1-text" class="bg-gray-100 dark:bg-[#21262d] p-4 sm:p-6 rounded-lg border border-gray-300 dark:border-[#30363d] leading-relaxed text-base relative shadow-inner transition-colors duration-300">
+                    </div>
+                <div id="reading-part1-feedback" class="mt-4 space-y-3"></div>
+            </div>
+
+            <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#10b981] dark:border-[#388e3c] transition-colors duration-300">
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
+                    <span class="bg-gray-100 dark:bg-[#21262d] text-[#10b981] dark:text-[#388e3c] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm transition-colors duration-300">IV</span>
+                    READING - Part 2 <span class="text-sm font-normal text-gray-500 dark:text-[#8b949e] ml-3">2.0 marks</span>
+                </h2>
+                <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Read the text again and decide whether the following sentences are True (T), False (F) or Not given (NG).</p>
+                
+                <div class="bg-gray-100 dark:bg-[#21262d] p-4 rounded-lg border border-gray-300 dark:border-[#30363d] mb-6 max-h-80 overflow-y-auto shadow-inner transition-colors duration-300">
+                    <h3 class="font-extrabold text-center mb-3 text-[#f97316] dark:text-[#ffab70] text-lg uppercase tracking-wider">New Year Celebrations</h3>
+                    <p class="mb-3 text-sm sm:text-base italic text-gray-600 dark:text-gray-400">People around the world celebrate New Year in many different ways. Find out how some of our readers are going to celebrate this year.</p>
+                    
+                    <p class="mb-3 text-sm sm:text-base"><strong>Robert Howard (England):</strong> To be lucky for a new year, people in Britain will welcome a young, dark-headed male to be the first guest to enter through the front door and offer gifts such as bread (to be full), salt (to be wealthy) and coal (to stay warm).</p>
+                    
+                    <p class="mb-3 text-sm sm:text-base"><strong>Mishima Yukio (Japan):</strong> On New Year Day, Japanese people will decorate the entire house as well as clean it. I’m going to prepare pine branches, plum blossoms and bamboo for the upcoming year.</p>
+                    
+                    <p class="mb-3 text-sm sm:text-base"><strong>Jonas Elmer (Denmark):</strong> To welcome the New Year, I’m going to save old dishes to break them on my friends’ front door. People in my country allow these broken dishes to pile up in order to show who has the most friends.</p>
+                    
+                    <p class="text-sm sm:text-base"><strong>Dao Hoang Long (Vietnam):</strong> I’m going to wear new clothes to welcome the New Year with a fresh start. The new clothes are not the Western style but a traditional outfit called ao dai.</p>
+                </div>
+
+                <div id="reading-part2-container" class="space-y-4">
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="control-footer" class="fixed bottom-0 left-0 right-0 z-50 p-4 border-t shadow-[0_-5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_-5px_15px_rgba(0,0,0,0.5)] transition-colors duration-300">
+        <div class="container mx-auto max-w-7xl flex justify-between items-center">
+            
+            <div class="relative flex items-center gap-3">
+                <div id="stats-panel" class="hidden p-2 rounded-lg border text-center shadow-inner text-sm font-bold min-w-[120px] transition-colors duration-300">
+                    <span class="text-[#3b82f6] dark:text-[#58a6ff] text-lg font-extrabold mr-1"><span id="score-display">0.0</span></span>
+                    / 10
+                </div>
+
+                <div class="relative" id="dropdown-control-wrapper">
+                    <button onclick="toggleDropdown()" class="group bg-gray-200 hover:bg-gray-300 dark:bg-[#30363d] dark:hover:bg-[#444c56] text-gray-800 dark:text-[#c9d1d9] font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-gray-300 dark:border-[#444c56] shadow-md flex items-center justify-center gap-2 text-sm xs:text-base">
+                        <i class="fas fa-cogs group-hover:rotate-180 transition-transform duration-500"></i>
+                        <span class="hidden sm:inline">Bảng Điều Khiển</span>
+                    </button>
+
+                    <div id="control-dropdown" class="dropdown-menu dropdown-closed absolute bottom-full mb-3 left-0 w-60 p-3 rounded-xl shadow-2xl border transition-colors duration-300 z-50">
+                        <h3 class="text-sm font-bold uppercase tracking-widest mb-2 border-b pb-1 transition-colors duration-300">Chức năng</h3>
+                        
+                        <button onclick="resetAndShuffleQuiz(); toggleDropdown()" class="group w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm mb-3">
+                            <i class="fas fa-random mr-2 group-hover:rotate-180 transition-transform duration-500 text-[#f97316] dark:text-[#ffab70]"></i> 
+                            Trộn đề & Làm lại
+                        </button>
+
+                        <div id="filter-controls" class="hidden flex-col gap-2 mt-3 pt-3 border-t transition-colors duration-300">
+                            <p class="text-xs font-bold uppercase tracking-widest mb-1">Bộ Lọc Câu Hỏi</p>
+                            <button onclick="filterQuestions('all'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="all">
+                                <i class="fas fa-list mr-2 text-[#3b82f6] dark:text-[#58a6ff]"></i> Tất cả câu hỏi
+                            </button>
+                            <button onclick="filterQuestions('wrong'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="wrong">
+                                <i class="fas fa-times-circle mr-2 text-red-500"></i> Chỉ xem câu sai
+                            </button>
+                            <button onclick="filterQuestions('correct'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="correct">
+                                <i class="fas fa-check-circle mr-2 text-green-500"></i> Chỉ xem câu đúng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span id="warning-msg" class="text-yellow-600 dark:text-[#ffab70] text-sm hidden font-bold animate-pulse bg-gray-100 dark:bg-[#21262d] px-3 py-1 rounded-lg border border-gray-300 dark:border-[#30363d] transition-colors duration-300">
+                    <i class="fas fa-exclamation-triangle mr-1"></i> Chưa làm xong!
+                </span>
+                <button id="main-submit-btn" onclick="submitQuiz()" class="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-extrabold py-3 px-8 rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center gap-2 text-base sm:text-lg dark:bg-[#58a6ff] dark:hover:bg-[#79c0ff] dark:text-[#0d1117]">
+                    <i class="fas fa-paper-plane"></i> NỘP BÀI
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="result-modal" class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="modal-content rounded-xl shadow-2xl p-6 sm:p-8 max-w-sm w-full text-center m-4 border relative overflow-hidden transition-colors duration-300">
+            <div class="relative z-10">
+                <div class="w-16 h-16 bg-[#f97316] dark:bg-[#ffab70] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <i class="fas fa-trophy text-3xl text-white dark:text-black drop-shadow-md"></i>
+                </div>
+                <h3 class="text-2xl font-black text-gray-900 dark:text-[#f0f6fc] mb-1">Kết Quả</h3>
+                <p class="text-gray-500 dark:text-[#8b949e] mb-6 font-medium text-sm">Bạn đã hoàn thành bài thi!</p>
+                
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div class="bg-gray-100 dark:bg-[#21262d] p-3 rounded-lg border border-gray-300 dark:border-[#30363d] transition-colors duration-300">
+                        <p class="text-xs text-[#10b981] dark:text-[#388e3c] font-extrabold uppercase tracking-wide mb-1">Số câu đúng</p>
+                        <p class="text-2xl font-black text-[#10b981] dark:text-[#388e3c]"><span id="modal-correct">0</span>/<span id="modal-total">0</span></p>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-[#21262d] p-3 rounded-lg border border-gray-300 dark:border-[#30363d] transition-colors duration-300">
+                        <p class="text-xs text-[#3b82f6] dark:text-[#58a6ff] font-extrabold uppercase tracking-wide mb-1">Tổng điểm</p>
+                        <p class="text-2xl font-black text-[#3b82f6] dark:text-[#58a6ff]" id="modal-score">0.0</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <button onclick="closeModal()" class="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold py-2.5 px-6 rounded-lg transition shadow-md transform hover:-translate-y-0.5 text-base dark:bg-[#58a6ff] dark:hover:bg-[#79c0ff] dark:text-[#0d1117]">
+                        Xem chi tiết bài làm
+                    </button>
+                    <button onclick="resetAndShuffleQuiz(); closeModal()" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2.5 px-6 rounded-lg transition flex items-center justify-center gap-2 text-sm dark:bg-[#30363d] dark:hover:bg-[#444c56] dark:text-[#c9d1d9]">
+                        <i class="fas fa-redo-alt text-xs"></i> Làm lại từ đầu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA SOURCE (UPDATED FROM YOUR REQUEST) ---
+        const RAW_GRAMMAR = [
+            { id: 5, q: "'I haven't got my phone.' 'That's OK. __________ you mine.", options: ["I’m going to lend", "lend", "I’ll lend"], answerIndex: 2 }, 
+            { id: 6, q: "It's Julia's birthday next week, so __________ her some flowers.", options: ["we’re going to buy", "we’ll buy", "buy"], answerIndex: 0 }, 
+            { id: 7, q: "__________ painting the bedroom yet?' 'Not yet. I'll finish it tomorrow.", options: ["Did you finish", "Will you finish", "Have you finished"], answerIndex: 2 }, 
+            { id: 8, q: "I __________ much last year, but I__________ a lot this year.", options: ["didn't earn / 've earned", "haven’t earned / earned", "will earn / won’t earn"], answerIndex: 0 }, 
+            { id: 9, q: "Australia is big, but Canada is __________ Australia.", options: ["big", "biggest", "bigger than"], answerIndex: 2 }, 
+            { id: 10, q: "I think that summer is __________ than winter.", options: ["good", "better", "the best"], answerIndex: 1 }, 
+            { id: 11, q: "My family and I __________ in London when I was young.", options: ["lived", "live", "was live"], answerIndex: 0 }, 
+            { id: 12, q: "Did you __________ lots of interesting photos on your holiday?", options: ["took", "take", "takes"], answerIndex: 1 } 
+        ];
+
+        const RAW_READING1_TEXT = `Dear Anita, <br><br> I love to go to shopping malls and department stores. I love to go with my friends from college and {13} – and I think I’m a good shopper because {14} when they are on sale. But I have a big problem: I have a credit card (I got it last month) and I spend too much money. How can I spend less money but {15}? Do you have any ideas?`;
+        
+        const RAW_READING1_QUESTIONS = [
+            { id: 13, options: ["we all have a good time", "we all don’t have a good time", "we all live near the college"], answerIndex: 0 }, 
+            { id: 14, options: ["I rarely drive a car", "I usually go to the shop", "I usually buy things"], answerIndex: 2 }, 
+            { id: 15, options: ["still go shopping with my friends", "I don’t go shopping", "they are on sale"], answerIndex: 0 } 
+        ];
+
+        const RAW_READING2 = [
+            { id: 16, q: "People will offer salt to the hosts to wish them wealth.", answer: "T" },
+            { id: 17, q: "Vietnamese people like to wear new clothes on other special occasions.", answer: "NG" },
+            { id: 18, q: "People in Denmark get angry when someone breaks old dishes on their doors.", answer: "F" },
+            { id: 19, q: "Japanese people like to keep their houses tidy on New Year Day.", answer: "T" },
+            { id: 20, q: "Yukio is going to prepare lots of food to welcome the New Year.", answer: "NG" }
+        ];
+
+        const ABC = ['A', 'B', 'C', 'D'];
+        let isSubmitted = false;
+        let isDropdownOpen = false;
+        let currentGrammar = [];
+        let currentReading1 = [];
+
+        // --- THEME SWITCHING LOGIC (ĐÃ CẬP NHẬT) ---
+
+        /**
+         * Cập nhật hiển thị icon và text của nút chuyển đổi giao diện
+         * @param {string} theme - 'light' hoặc 'dark'
+         */
+        function updateThemeButton(theme) {
+            const btnDesktop = document.getElementById('theme-toggle');
+            const btnMobile = document.getElementById('theme-toggle-mobile');
+            const iconMobile = document.getElementById('theme-icon-mobile');
+            
+            // Đặt lại các lớp mặc định cho cả hai nút
+            [btnDesktop, btnMobile].forEach(btn => {
+                if (btn) btn.className = btn.className.replace(/bg-([a-z]+)-[0-9]{1,3}|text-([a-z]+)-[0-9]{1,3}|dark:bg-\[[#0-9a-f]{6}\]|dark:hover:bg-\[[#0-9a-f]{6}\]|bg-white|text-gray-900|dark:bg-gray-700|dark:hover:bg-gray-600/g, '').trim();
+            });
+
+            if (theme === 'dark') {
+                // Chế độ Tối (Nền Đen) -> Hiển thị nút "Chuyển sang TRẮNG"
+                
+                // Desktop Button
+                btnDesktop.innerHTML = '<i class="fas fa-sun mr-2 text-yellow-500"></i> CHUYỂN SANG TRẮNG';
+                btnDesktop.classList.add('bg-white', 'text-gray-900', 'hover:bg-gray-100', 'dark:bg-gray-700', 'dark:text-white', 'dark:hover:bg-gray-600', 'border-gray-300', 'dark:border-gray-600');
+                
+                // Mobile Button
+                if (iconMobile) {
+                    iconMobile.classList.remove('fa-sun', 'text-yellow-500');
+                    iconMobile.classList.add('fa-moon', 'text-gray-300');
+                }
+                btnMobile.classList.add('bg-gray-700', 'hover:bg-gray-600', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'border-gray-600');
+
+            } else {
+                // Chế độ Sáng (Nền Trắng) -> Hiển thị nút "Chuyển sang ĐEN"
+                
+                // Desktop Button
+                btnDesktop.innerHTML = '<i class="fas fa-moon mr-2 text-gray-700"></i> CHUYỂN SANG ĐEN';
+                btnDesktop.classList.add('bg-gray-900', 'text-white', 'hover:bg-gray-700', 'border-gray-900');
+                
+                // Mobile Button
+                if (iconMobile) {
+                    iconMobile.classList.remove('fa-moon', 'text-gray-300');
+                    iconMobile.classList.add('fa-sun', 'text-yellow-500');
+                }
+                btnMobile.classList.add('bg-gray-100', 'hover:bg-gray-200', 'border-gray-300');
+            }
+        }
+
+        function setInitialTheme() {
+            // Mặc định là Light mode nếu không có gì trong localStorage HOẶC giá trị là 'light'
+            const storedTheme = localStorage.getItem('theme');
+            
+            if (storedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                updateThemeButton('dark');
+            } else {
+                // Mặc định luôn là 'light' (nền trắng)
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeButton('light');
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            const theme = isDark ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            updateThemeButton(theme);
+        }
+        // --- END THEME SWITCHING LOGIC ---
+
+
+        // --- UTILS ---
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initData() {
+            // Shuffle Grammar Options
+            currentGrammar = RAW_GRAMMAR.map(item => {
+                let opts = item.options.map((optText, index) => ({
+                    text: optText,
+                    originalIndex: index,
+                    isCorrect: index === item.answerIndex
+                }));
+                opts = shuffleArray(opts);
+                return { ...item, shuffledOptions: opts };
+            });
+
+            // Shuffle Reading 1 Options
+            currentReading1 = RAW_READING1_QUESTIONS.map(item => {
+                let opts = item.options.map((optText, index) => ({
+                    text: optText,
+                    originalIndex: index,
+                    isCorrect: index === item.answerIndex
+                }));
+                opts = shuffleArray(opts);
+                return { ...item, shuffledOptions: opts };
+            });
+        }
+
+        // --- RENDER FUNCTIONS (Cập nhật Tailwind classes cho Light/Dark mode) ---
+
+        function renderGrammar() {
+            const container = document.getElementById('grammar-container');
+            container.innerHTML = currentGrammar.map(item => `
+                <div class="question-block hover-card p-4 rounded-lg border border-gray-300 dark:border-[#30363d] transition-colors duration-300" id="q-block-${item.id}">
+                    <p class="font-semibold text-base sm:text-lg text-gray-900 dark:text-[#f0f6fc] mb-3 flex items-start">
+                        <span class="bg-blue-500 dark:bg-[#58a6ff] text-white dark:text-[#0d1117] px-2 py-0.5 rounded mr-3 shadow-md text-sm shrink-0 mt-0.5">Câu ${item.id}</span> 
+                        <span class="leading-relaxed option-text-wrap">${item.q}</span>
+                    </p>
+                    <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3">
+                        ${item.shuffledOptions.map((opt, idx) => `
+                            <div class="relative group">
+                                <input type="radio" name="g-${item.id}" id="g-${item.id}-${idx}" value="${idx}" class="option-input hidden peer" onchange="resetQuestionState(${item.id})">
+                                <label for="g-${item.id}-${idx}" class="option-label block w-full p-3 border-2 rounded-lg cursor-pointer shadow-sm relative overflow-hidden transition-colors duration-300">
+                                    <span class="font-black mr-2 text-gray-500 group-hover:text-blue-500 dark:text-[#8b949e] dark:group-hover:text-[#58a6ff] transition-colors">${ABC[idx]}</span> <span class="option-text-wrap">${opt.text}</span>
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback-msg hidden mt-3 p-3 rounded-lg text-sm font-semibold border-l-4 shadow-sm"></div>
+                </div>
+            `).join('');
+        }
+
+        function renderReading1() {
+            const container = document.getElementById('reading-part1-text');
+            let content = RAW_READING1_TEXT;
+            
+            currentReading1.forEach(q => {
+                let selectHTML = `<select id="r1-${q.id}" class="mx-1 px-1 py-1 border-b-2 border-blue-500 dark:border-[#58a6ff] bg-gray-100 dark:bg-[#21262d] text-blue-700 dark:text-[#58a6ff] font-bold focus:outline-none focus:border-blue-700 dark:focus:border-[#79c0ff] cursor-pointer rounded text-base inline-block max-w-full transition-colors duration-300" onchange="resetSelectState(${q.id})">
+                    <option value="" selected disabled>(${q.id}) ...</option>
+                    ${q.shuffledOptions.map((opt, idx) => `<option value="${idx}">${ABC[idx]}. ${opt.text}</option>`).join('')}
+                </select>`;
+                
+                content = content.replace(`{${q.id}}`, selectHTML);
+            });
+            container.innerHTML = content;
+        }
+
+        function renderReading2() {
+            const container = document.getElementById('reading-part2-container');
+            container.innerHTML = RAW_READING2.map(item => `
+                <div class="question-block hover-card p-4 rounded-lg border border-gray-300 dark:border-[#30363d] transition-colors duration-300" id="q-block-${item.id}">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div class="flex-1 flex gap-3 items-start">
+                            <span class="bg-green-500 dark:bg-[#388e3c] text-white dark:text-[#0d1117] w-6 h-6 flex items-center justify-center rounded-full font-bold shadow-md shrink-0 text-xs mt-0.5">
+                                ${item.id}
+                            </span>
+                            <span class="font-medium text-gray-900 dark:text-[#c9d1d9] text-base leading-relaxed option-text-wrap">${item.q}</span>
+                        </div>
+                        <div class="flex gap-3 bg-gray-100 dark:bg-[#21262d] p-2 rounded-lg border border-gray-300 dark:border-[#30363d] shadow-sm shrink-0 mt-2 sm:mt-0 transition-colors duration-300">
+                            ${['T', 'F', 'NG'].map(val => `
+                                <div class="flex items-center">
+                                    <input type="radio" name="r2-${item.id}" id="r2-${item.id}-${val}" value="${val}" class="w-4 h-4 text-green-600 dark:text-[#388e3c] bg-gray-50 dark:bg-[#161b22] border-gray-400 dark:border-[#444c56] focus:ring-green-500 dark:focus:ring-[#388e3c] cursor-pointer" onchange="resetQuestionState(${item.id})">
+                                    <label for="r2-${item.id}-${val}" class="ml-1 text-sm font-bold text-gray-700 dark:text-[#c9d1d9] cursor-pointer hover:text-green-500 dark:hover:text-[#388e3c] transition-colors">${val}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="feedback-msg hidden mt-3 p-1 text-right text-sm font-bold border-t border-gray-300 dark:border-[#30363d] pt-2 transition-colors duration-300"></div>
+                </div>
+            `).join('');
+        }
+
+        // --- DROPDOWN & FOOTER LOGIC ---
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('control-dropdown');
+            isDropdownOpen = !isDropdownOpen;
+
+            if (isDropdownOpen) {
+                dropdown.classList.remove('dropdown-closed');
+                dropdown.classList.add('dropdown-open');
+            } else {
+                dropdown.classList.remove('dropdown-open');
+                dropdown.classList.add('dropdown-closed');
+            }
+        }
+
+        function updateSubmitButton(correctCount = 0, totalQuestions = 0) {
+            const btn = document.getElementById('main-submit-btn');
+            const scoreTextElement = document.getElementById('score-text');
+
+            if (isSubmitted) {
+                // Change to Review mode
+                btn.onclick = () => { /* No-op */ };
+                btn.innerHTML = `<i class="fas fa-check-double"></i> Đã NỘP BÀI`;
+                btn.classList.remove('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
+                btn.classList.add('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
+                
+                // Update score text in Header
+                scoreTextElement.innerHTML = `Đúng: ${correctCount}/${totalQuestions} | Điểm: ${(correctCount / totalQuestions * 10).toFixed(1)}`;
+                scoreTextElement.classList.add('correct-answer');
+                scoreTextElement.classList.remove('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
+
+                // Show detailed score panel in footer
+                document.getElementById('stats-panel').classList.remove('hidden');
+
+                // Show filter controls in dropdown
+                document.getElementById('filter-controls').classList.replace('hidden', 'flex');
+
+            } else {
+                // Change to Submit mode
+                btn.onclick = submitQuiz;
+                btn.innerHTML = `<i class="fas fa-paper-plane"></i> NỘP BÀI`;
+                btn.classList.remove('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
+                btn.classList.add('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
+
+                // Reset score text in Header
+                scoreTextElement.innerHTML = `Mã đề: 02`;
+                scoreTextElement.classList.remove('correct-answer');
+                scoreTextElement.classList.add('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
+
+                // Hide detailed score panel in footer
+                document.getElementById('stats-panel').classList.add('hidden');
+                
+                // Hide filter controls in dropdown
+                document.getElementById('filter-controls').classList.replace('flex', 'hidden');
+                
+                // Close dropdown if open
+                if (isDropdownOpen) toggleDropdown();
+            }
+        }
+
+        // --- LOGIC FUNCTIONS (Giữ nguyên logic kiểm tra đáp án) ---
+
+        function submitQuiz() {
+            if (isSubmitted) return;
+
+            let score = 0;
+            let totalQuestions = 0;
+            let correctCount = 0;
+            let unAnswered = false;
+
+            // 1. Check Grammar
+            currentGrammar.forEach(q => {
+                totalQuestions++;
+                const selectedInput = document.querySelector(`input[name="g-${q.id}"]:checked`);
+                const block = document.getElementById(`q-block-${q.id}`);
+                const feedback = block.querySelector('.feedback-msg');
+                
+                block.classList.remove('border-gray-300', 'dark:border-[#30363d]'); 
+                feedback.classList.remove('hidden');
+
+                const correctShuffledIndex = q.shuffledOptions.findIndex(opt => opt.isCorrect);
+                const correctLabelId = `g-${q.id}-${correctShuffledIndex}`;
+                const correctLabel = document.querySelector(`label[for="${correctLabelId}"]`);
+                
+                // Clear all previous results/styles on options
+                document.querySelectorAll(`label[for^="g-${q.id}-"]`).forEach(label => {
+                    label.classList.remove('correct-answer', 'wrong-answer');
+                    label.querySelectorAll('.fa-check-circle, .fa-times-circle, span').forEach(el => {
+                        if (el.textContent.includes('Đáp án đúng')) el.remove();
+                        if (el.classList.contains('fa-check-circle') || el.classList.contains('fa-times-circle')) el.remove();
+                    });
+                });
+
+                if (selectedInput) {
+                    const selectedIdx = parseInt(selectedInput.value);
+                    const selectedOption = q.shuffledOptions[selectedIdx];
+                    const selectedLabel = document.querySelector(`label[for="${selectedInput.id}"]`);
+
+                    if (selectedOption.isCorrect) {
+                        score += 0.4; // 3.2 / 8 = 0.4
+                        correctCount++;
+                        block.dataset.status = "correct";
+                        selectedLabel.classList.add('correct-answer');
+                        selectedLabel.innerHTML += ' <i class="fas fa-check-circle text-green-600 dark:text-[#b8e0b8] float-right text-base mt-0.5"></i>';
+                        block.classList.add('border-l-4', 'border-green-600', 'bg-green-50/50', 'dark:bg-[#1f371e]/30');
+                        feedback.classList.add('hidden'); // Hide generic feedback if correct
+                    } else {
+                        block.dataset.status = "wrong";
+                        selectedLabel.classList.add('wrong-answer');
+                        selectedLabel.innerHTML += ' <i class="fas fa-times-circle text-red-600 dark:text-[#f7a0a0] float-right text-base mt-0.5"></i>';
+                        block.classList.add('border-l-4', 'border-red-600', 'bg-red-50/50', 'dark:bg-[#3b2024]/30');
+                        
+                        correctLabel.classList.add('correct-answer');
+                        correctLabel.innerHTML += ' <span class="float-right text-xs font-bold uppercase bg-green-600 dark:bg-[#388e3c] text-white px-1.5 py-0.5 rounded ml-2 shadow-sm">Đáp án đúng</span>';
+                        
+                        feedback.classList.remove('hidden');
+                        feedback.classList.add('bg-gray-100', 'text-red-600', 'border-red-600', 'border-l-4', 'dark:bg-[#21262d]', 'dark:text-[#f7a0a0]');
+                        feedback.innerHTML = `<i class="fas fa-info-circle mr-2"></i> Rất tiếc! Bạn đã chọn sai.`;
+                    }
+                } else {
+                    unAnswered = true;
+                    block.dataset.status = "wrong";
+                    block.classList.add('border-l-4', 'border-red-600', 'bg-red-50/50', 'dark:bg-[#3b2024]/30');
+                    
+                    correctLabel.classList.add('correct-answer');
+                    correctLabel.innerHTML += ' <span class="float-right text-xs font-bold uppercase bg-green-600 dark:bg-[#388e3c] text-white px-1.5 py-0.5 rounded ml-2 shadow-sm">Đáp án đúng</span>';
+                    
+                    feedback.classList.remove('hidden');
+                    feedback.classList.add('bg-gray-100', 'text-yellow-600', 'border-red-600', 'border-l-4', 'dark:bg-[#21262d]', 'dark:text-[#ffab70]');
+                    feedback.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i> Bạn chưa làm câu này.`;
+                }
+            });
+
+            // 2. Check Reading 1 (1.2 marks / 3 questions = 0.4 per question)
+            const feedbackContainer = document.getElementById('reading-part1-feedback');
+            feedbackContainer.innerHTML = '';
+            
+            currentReading1.forEach(q => {
+                totalQuestions++;
+                const select = document.getElementById(`r1-${q.id}`);
+                const val = select.value;
+                
+                const fbDiv = document.createElement('div');
+                fbDiv.className = "p-3 rounded-lg text-sm flex justify-between items-center border hover-card transition-colors duration-300";
+                fbDiv.id = `q-block-${q.id}`; 
+
+                const correctOptionText = q.shuffledOptions.find(o => o.isCorrect).text;
+
+                // Reset select styling
+                select.className = select.className.replace(/bg-(green|red|yellow)-[0-9]{1,3}|text-(green|red|yellow)-[0-9]{1,3}|border-(green|red)-[0-9]{1,3}|line-through|!important/g, '').trim();
+                select.classList.remove('border-red-600');
+                
+                if (val !== "") {
+                    const selectedIdx = parseInt(val);
+                    if (q.shuffledOptions[selectedIdx].isCorrect) {
+                        score += 0.4;
+                        correctCount++;
+                        select.classList.add('bg-green-100', 'text-green-800', 'border-green-500', 'font-bold', 'dark:bg-[#1f371e]', 'dark:text-[#b8e0b8]', 'dark:border-[#388e3c]');
+                        fbDiv.classList.add('bg-green-50/50', 'border-green-500', 'text-green-700', 'border-l-4', 'dark:bg-[#1f371e]/30', 'dark:border-[#388e3c]', 'dark:text-[#b8e0b8]');
+                        fbDiv.innerHTML = `<div class="flex items-center"><span class="bg-green-600 dark:bg-[#388e3c] text-white dark:text-[#0d1117] w-5 h-5 rounded-full flex items-center justify-center mr-2 font-bold text-xs">${q.id}</span><span>Chính xác!</span></div> <i class="fas fa-check-circle text-xl"></i>`;
+                        fbDiv.dataset.status = "correct";
+                    } else {
+                        select.classList.add('bg-red-100', 'text-red-800', 'border-red-500', 'line-through', 'dark:bg-[#3b2024]', 'dark:text-[#f7a0a0]', 'dark:border-[#d32f2f]');
+                        fbDiv.classList.add('bg-red-50/50', 'border-red-500', 'text-red-700', 'border-l-4', 'dark:bg-[#3b2024]/30', 'dark:border-[#d32f2f]', 'dark:text-[#f7a0a0]');
+                        fbDiv.innerHTML = `<div class="flex flex-col items-start"><div class="flex items-center mb-1"><span class="bg-red-600 dark:bg-[#d32f2f] text-white dark:text-[#0d1117] w-5 h-5 rounded-full flex items-center justify-center mr-2 font-bold text-xs">${q.id}</span><span>Sai.</span></div> Đáp án đúng: <span class="highlight-correct text-base">${correctOptionText}</span></div> <i class="fas fa-times-circle text-xl shrink-0"></i>`;
+                        fbDiv.dataset.status = "wrong";
+                    }
+                } else {
+                     unAnswered = true;
+                     select.classList.add('border-red-600');
+                     fbDiv.classList.add('bg-red-50/50', 'border-red-500', 'text-yellow-600', 'border-l-4', 'dark:bg-[#3b2024]/30', 'dark:border-[#d32f2f]', 'dark:text-[#ffab70]');
+                     fbDiv.innerHTML = `<div class="flex flex-col items-start"><div class="flex items-center mb-1"><span class="bg-red-600 dark:bg-[#d32f2f] text-white dark:text-[#0d1117] w-5 h-5 rounded-full flex items-center justify-center mr-2 font-bold text-xs">${q.id}</span><span>Chưa làm.</span></div> Đáp án đúng: <span class="highlight-correct text-base">${correctOptionText}</span></div> <i class="fas fa-exclamation-circle text-xl shrink-0"></i>`;
+                     fbDiv.dataset.status = "wrong";
+                }
+                feedbackContainer.appendChild(fbDiv);
+            });
+
+            // 3. Check Reading 2 (2.0 marks / 5 questions = 0.4 per question)
+            RAW_READING2.forEach(q => {
+                totalQuestions++;
+                const selected = document.querySelector(`input[name="r2-${q.id}"]:checked`);
+                const block = document.getElementById(`q-block-${q.id}`);
+                const feedback = block.querySelector('.feedback-msg');
+                
+                block.classList.remove('border-gray-300', 'dark:border-[#30363d]');
+                feedback.classList.remove('hidden');
+
+                if (selected) {
+                    if (selected.value === q.answer) {
+                        score += 0.4;
+                        correctCount++;
+                        block.dataset.status = "correct";
+                        block.classList.add('bg-green-50/50', 'border-l-4', 'border-green-600', 'dark:bg-[#1f371e]/30', 'dark:border-green-600');
+                        feedback.innerHTML = `<span class="text-green-600 dark:text-[#b8e0b8] font-bold flex items-center justify-end gap-2"><i class="fas fa-check-circle"></i> Chính xác</span>`;
+                    } else {
+                        block.dataset.status = "wrong";
+                        block.classList.add('bg-red-50/50', 'border-l-4', 'border-red-600', 'dark:bg-[#3b2024]/30', 'dark:border-red-600');
+                        feedback.innerHTML = `<span class="text-red-600 dark:text-[#f7a0a0] font-bold flex items-center justify-end gap-2"><i class="fas fa-times-circle"></i> Sai. Đáp án đúng: <span class="text-base border border-red-600 dark:border-[#d32f2f] px-2 rounded bg-gray-100 dark:bg-[#21262d] text-yellow-600 dark:text-[#ffab70]">${q.answer}</span></span>`;
+                    }
+                } else {
+                    unAnswered = true;
+                    block.dataset.status = "wrong";
+                    block.classList.add('bg-red-50/50', 'border-l-4', 'border-red-600', 'dark:bg-[#3b2024]/30', 'dark:border-red-600');
+                    feedback.innerHTML = `<span class="text-yellow-600 dark:text-[#ffab70] font-bold flex items-center justify-end gap-2"><i class="fas fa-exclamation-circle"></i> Chưa chọn. Đáp án đúng: <span class="text-base border border-red-600 dark:border-[#d32f2f] px-2 rounded bg-gray-100 dark:bg-[#21262d] text-yellow-600 dark:text-[#ffab70]">${q.answer}</span></span>`;
+                }
+            });
+
+            if(unAnswered) {
+                document.getElementById('warning-msg').classList.remove('hidden');
+                setTimeout(() => document.getElementById('warning-msg').classList.add('hidden'), 5000);
+            }
+
+            // Update UI States
+            isSubmitted = true;
+            updateSubmitButton(correctCount, totalQuestions);
+            
+            // Update score in footer stats panel
+            document.getElementById('score-display').innerText = score.toFixed(1);
+            
+            // Show Modal
+            document.getElementById('modal-correct').innerText = correctCount;
+            document.getElementById('modal-total').innerText = totalQuestions;
+            document.getElementById('modal-score').innerText = score.toFixed(1);
+            document.getElementById('result-modal').classList.remove('hidden');
+
+            filterQuestions('all'); // Reset filter view to show all questions with feedback
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top after submission
+        }
+
+        function resetAndShuffleQuiz() {
+            initData();
+            isSubmitted = false;
+            
+            // Re-render (This will re-render with light/dark classes defined)
+            renderGrammar();
+            renderReading1();
+            renderReading2();
+
+            // Reset UI states
+            document.getElementById('warning-msg').classList.add('hidden');
+            document.getElementById('reading-part1-feedback').innerHTML = '';
+            updateSubmitButton(); // Reset button and controls
+
+            // Reset filters state in dropdown
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                 btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9] shadow-sm";
+                 if(btn.dataset.filter === 'all') btn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]'); 
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterQuestions(type) {
+            if (!isSubmitted) return;
+
+            // Get all question containers, including the feedback divs for Reading Part 1
+            const questions = document.querySelectorAll('.question-block, #reading-part1-feedback > div');
+            
+            questions.forEach(q => {
+                if (type === 'all') {
+                    q.classList.remove('hidden');
+                } else if (type === 'wrong') {
+                    if (q.dataset.status === 'wrong') q.classList.remove('hidden');
+                    else q.classList.add('hidden');
+                } else if (type === 'correct') {
+                    if (q.dataset.status === 'correct') q.classList.remove('hidden');
+                    else q.classList.add('hidden');
+                }
+            });
+
+            // Styling for active filter buttons in dropdown (Cập nhật dark mode classes)
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9] shadow-sm";
+                
+                if (btn.dataset.filter === type) {
+                    if(type === 'all') btn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]');
+                    if(type === 'wrong') btn.classList.add('bg-red-100', 'border-red-500', 'text-red-700', 'dark:bg-[#3b2024]', 'dark:border-red-600', 'dark:text-red-500');
+                    if(type === 'correct') btn.classList.add('bg-green-100', 'border-green-500', 'text-green-700', 'dark:bg-[#1f371e]', 'dark:border-green-600', 'dark:text-green-500');
+                }
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').classList.add('hidden');
+        }
+        
+        function resetQuestionState(id) {
+            const block = document.getElementById(`q-block-${id}`);
+            if(block && isSubmitted) {
+                // Remove submission styles
+                block.classList.remove('border-l-4', 'border-green-600', 'border-red-600', 'bg-green-50/50', 'bg-red-50/50', 'dark:bg-[#1f371e]/30', 'dark:bg-[#3b2024]/30');
+                
+                // Reset radio button label styles (complex due to custom radio)
+                document.querySelectorAll(`label[for^="g-${id}-"]`).forEach(label => {
+                    label.classList.remove('correct-answer', 'wrong-answer');
+                    label.querySelectorAll('.fa-check-circle, .fa-times-circle, span').forEach(el => {
+                        if (el.textContent.includes('Đáp án đúng')) el.remove();
+                        if (el.classList.contains('fa-check-circle') || el.classList.contains('fa-times-circle')) el.remove();
+                    });
+                });
+
+                // Hide feedback message
+                const feedback = block.querySelector('.feedback-msg');
+                if(feedback) feedback.classList.add('hidden');
+                
+                // Set isSubmitted to false to allow re-submission check
+                isSubmitted = false;
+                updateSubmitButton();
+            }
+        }
+        
+        function resetSelectState(id) {
+            const select = document.getElementById(`r1-${id}`);
+            if(select && isSubmitted) {
+                // Remove submission styles on select
+                select.className = select.className.replace(/bg-(green|red|yellow)-[0-9]{1,3}|text-(green|red|yellow)-[0-9]{1,3}|border-(green|red)-[0-9]{1,3}|line-through|!important|dark:bg-\[[#0-9a-f]{6}\]|dark:text-\[[#0-9a-f]{6}\]|dark:border-\[[#0-9a-f]{6}\]/g, '').trim();
+                
+                // Reset to default light/dark classes for select
+                select.classList.add('bg-gray-100', 'dark:bg-[#21262d]', 'text-blue-700', 'dark:text-[#58a6ff]', 'border-b-2', 'border-blue-500', 'dark:border-[#58a6ff]', 'font-bold');
+                
+                // Remove feedback message for reading part 1
+                const feedbackContainer = document.getElementById('reading-part1-feedback');
+                feedbackContainer.innerHTML = '';
+
+                // Set isSubmitted to false to allow re-submission check
+                isSubmitted = false;
+                updateSubmitButton();
+            }
+        }
+
+        // Initialize
+        window.onload = function() {
+            setInitialTheme(); // Đảm bảo mặc định là Light Mode (Trắng)
+            initData();
+            renderGrammar();
+            renderReading1();
+            renderReading2();
+            updateSubmitButton(); // Set initial button state (Submit mode)
+            
+            // Set initial filter style to 'all' (visually, if filter controls were visible)
+            const allFilterBtn = document.querySelector('.filter-btn[data-filter="all"]');
+            if(allFilterBtn) {
+                allFilterBtn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]');
+            }
+        }
+
+    </script>
 </body>
-
 </html>
