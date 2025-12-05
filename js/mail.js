@@ -1,24 +1,34 @@
 // mail.js
-// Khởi tạo EmailJS với Public Key của bạn.
-// Đây là chìa khóa công khai (Public Key) của bạn.
-// VUI LÒNG THAY THẾ "YOUR_PUBLIC_KEY" BẰNG KHÓA CÔNG KHAI THỰC TẾ CỦA BẠN TỪ BẢNG ĐIỀU KHIỂN EMAILJS.
-// Public Key mới của bạn là "X0dHr4HpO2r71CjtJ".
-// Vui lòng truy cập https://dashboard.emailjs.com/admin/account để lấy khóa chính xác.
-document.addEventListener('DOMContentLoaded', () => {
 
-    // Khởi tạo EmailJS với Public Key của bạn.
+// 1. Khởi tạo EmailJS ngay bên ngoài để đảm bảo nó sẵn sàng
+// Đảm bảo bạn đã cài đặt đúng Service ID và Template ID của chính mình
+const PUBLIC_KEY = "X0dHr4HpO2r71CjtJ"; // Public Key của bạn
+const SERVICE_ID = "service_piwyyzm";   // Service ID của bạn
+const TEMPLATE_ID = "template_t6ikeuu"; // Template ID của bạn
+
+(function() {
+    // Kiểm tra xem thư viện đã load chưa
+    if (typeof emailjs === "undefined") {
+        console.error("Lỗi: Thư viện EmailJS chưa được tải. Hãy kiểm tra lại kết mạng hoặc AdBlock.");
+        return;
+    }
     emailjs.init({
-        publicKey: "X0dHr4HpO2r71CjtJ", 
+        publicKey: PUBLIC_KEY,
     });
+    console.log("EmailJS đã được khởi tạo!");
+})();
 
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contactForm');
     const formModal = document.getElementById('form-modal');
     const formModalMessage = document.getElementById('form-modal-message');
     const formModalClose = document.getElementById('form-modal-close');
+    const submitButton = form.querySelector('button[type="submit"]'); // Lấy nút gửi
 
-    // Chức năng hiển thị và ẩn modal
-    const showFormModal = (message) => {
+    // Chức năng hiển thị modal
+    const showFormModal = (message, isError = false) => {
         formModalMessage.textContent = message;
+        formModalMessage.style.color = isError ? 'red' : 'green'; // Đổi màu chữ tùy trạng thái
         formModal.style.display = 'flex';
     };
 
@@ -26,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formModal.style.display = 'none';
     };
 
-    formModalClose.onclick = closeFormModal;
+    if (formModalClose) formModalClose.onclick = closeFormModal;
 
     window.onclick = (event) => {
         if (event.target === formModal) {
@@ -35,22 +45,45 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Lắng nghe sự kiện gửi form
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Ngăn form gửi đi theo cách truyền thống
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Ngăn form load lại trang
 
-        // Gửi email bằng EmailJS, sử dụng sendForm để gửi toàn bộ dữ liệu form
-        emailjs.sendForm("service_piwyyzm", "template_t6ikeuu", form)
-        .then(() => {
-            showFormModal('Lời nhắn của bạn đã được gửi thành công!');
-            form.reset();
-            console.log('Thành công!');
-        }, (error) => {
-            console.error('Gửi thất bại:', error);
-            showFormModal('Rất tiếc, đã có lỗi xảy ra. Vui lòng thử lại sau.');
+            // Đổi trạng thái nút để người dùng biết đang gửi
+            const originalBtnText = submitButton.innerText;
+            submitButton.innerText = "Đang gửi...";
+            submitButton.disabled = true;
+
+            // Gửi email
+            emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
+                .then(() => {
+                    showFormModal('✅ Lời nhắn của bạn đã được gửi thành công!');
+                    form.reset(); // Xóa dữ liệu trong form
+                    console.log('Gửi mail thành công!');
+                })
+                .catch((error) => {
+                    console.error('Gửi thất bại. Chi tiết lỗi:', error);
+                    // Hiển thị lỗi chi tiết hơn nếu có (thường là lỗi 400 hoặc 412)
+                    let errorMsg = 'Rất tiếc, đã có lỗi xảy ra. ';
+                    if (error.status === 412) {
+                        errorMsg += 'Sai Public Key hoặc chưa lưu thay đổi trên Dashboard.';
+                    } else if (error.text) {
+                        errorMsg += error.text;
+                    }
+                    showFormModal(errorMsg, true);
+                })
+                .finally(() => {
+                    // Khôi phục nút gửi dù thành công hay thất bại
+                    submitButton.innerText = originalBtnText;
+                    submitButton.disabled = false;
+                });
         });
-    });
+    } else {
+        console.error("Không tìm thấy form có id='contactForm'");
+    }
 
-    // Các phần code khác...
+    // --- Phần code cũ của bạn (giữ nguyên) ---
+    
     const welcomeModal = document.getElementById('welcome-modal');
     if (welcomeModal) {
         welcomeModal.querySelector('.close-button').addEventListener('click', () => {
@@ -68,18 +101,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const backToTopButton = document.getElementById('back-to-top');
     const goToBottomButton = document.getElementById('go-to-bottom');
 
-    window.onscroll = () => {
+    window.addEventListener('scroll', () => {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            if (backToTopButton) backToTopButton.style.display = "block";
+            if (backToTopButton) {
+                backToTopButton.style.opacity = "1";
+                backToTopButton.style.visibility = "visible";
+            }
         } else {
-            if (backToTopButton) backToTopButton.style.display = "none";
+            if (backToTopButton) {
+                backToTopButton.style.opacity = "0";
+                backToTopButton.style.visibility = "hidden";
+            }
         }
-    };
+    });
 
     if (backToTopButton) {
         backToTopButton.addEventListener('click', () => {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
