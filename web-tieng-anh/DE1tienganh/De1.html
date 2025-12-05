@@ -2,8 +2,10 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <!-- Đảm bảo giao diện co giãn theo chiều rộng màn hình thiết bị -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Tập Tiếng Anh - Tối Ưu Phản Hồi</title>
+    <title>Bài Tập Tiếng Anh - Mã Đề 01</title>
+    <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -264,18 +266,22 @@
 </head>
 <body class="min-h-screen font-sans">
 
+    <!-- Header (Simple and fixed on top) -->
     <header class="p-4 shadow-xl sticky top-0 z-50 border-b transition-colors duration-300">
         <div class="container mx-auto flex justify-between items-center">
             
             <h1 class="text-xl xs:text-2xl font-extrabold uppercase tracking-wider flex items-center">
                 <i class="fas fa-book-reader mr-2 text-[#3b82f6] dark:text-[#58a6ff]"></i>
-                Ôn tập tiếng anh
+                ôn tập tiếng anh
             </h1>
 
+            <!-- Nút chuyển đổi giao diện (Đã di chuyển ra giữa Header) -->
             <button id="theme-toggle" onclick="toggleTheme()" class="hidden md:flex items-center justify-center text-sm font-bold py-2 px-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl border border-transparent">
-                </button>
+                <!-- Nội dung nút sẽ được JS cập nhật -->
+            </button>
             
             <div class="flex items-center gap-3">
+                <!-- Nút chuyển đổi giao diện (Dành cho Mobile) -->
                 <button id="theme-toggle-mobile" onclick="toggleTheme()" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-xl transition-colors duration-300 shadow-md border">
                     <i id="theme-icon-mobile" class="fas"></i>
                 </button>
@@ -287,8 +293,10 @@
         </div>
     </header>
 
+    <!-- Main Content Area -->
     <div class="container mx-auto p-4 md:p-6 flex flex-col md:flex-row gap-6 mt-4">
         
+        <!-- I. GRAMMAR -->
         <div class="w-full">
             <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#3b82f6] dark:border-[#58a6ff] transition-colors duration-300">
                 <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
@@ -297,9 +305,11 @@
                 </h2>
                 <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Choose the best answer.</p>
                 <div id="grammar-container" class="space-y-4">
-                    </div>
+                    <!-- Grammar questions will be injected here -->
+                </div>
             </div>
 
+            <!-- II. READING Part 1 -->
             <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#f97316] dark:border-[#ffab70] transition-colors duration-300">
                 <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
                     <span class="bg-gray-100 dark:bg-[#21262d] text-[#f97316] dark:text-[#ffab70] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm transition-colors duration-300">III</span>
@@ -308,10 +318,13 @@
                 <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Read the text and choose the best words / utterance to complete the text.</p>
                 
                 <div id="reading-part1-text" class="bg-gray-100 dark:bg-[#21262d] p-4 sm:p-6 rounded-lg border border-gray-300 dark:border-[#30363d] leading-relaxed text-base relative shadow-inner transition-colors duration-300">
-                    </div>
+                    <!-- Text with selects will be injected here -->
+                </div>
+                <!-- Feedback area for Reading Part 1 -->
                 <div id="reading-part1-feedback" class="mt-4 space-y-3"></div>
             </div>
 
+            <!-- III. READING Part 2 -->
             <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#10b981] dark:border-[#388e3c] transition-colors duration-300">
                 <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
                     <span class="bg-gray-100 dark:bg-[#21262d] text-[#10b981] dark:text-[#388e3c] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm transition-colors duration-300">IV</span>
@@ -333,35 +346,42 @@
                 </div>
 
                 <div id="reading-part2-container" class="space-y-4">
-                    </div>
+                    <!-- T/F/NG questions injected here -->
+                </div>
             </div>
         </div>
 
     </div>
 
+    <!-- Submit Button & Control Footer (FIXED at Bottom Left) -->
     <div id="control-footer" class="fixed bottom-0 left-0 right-0 z-50 p-4 border-t shadow-[0_-5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_-5px_15px_rgba(0,0,0,0.5)] transition-colors duration-300">
         <div class="container mx-auto max-w-7xl flex justify-between items-center">
             
+            <!-- Left Side: Dropdown Controls -->
             <div class="relative flex items-center gap-3">
                 <div id="stats-panel" class="hidden p-2 rounded-lg border text-center shadow-inner text-sm font-bold min-w-[120px] transition-colors duration-300">
                     <span class="text-[#3b82f6] dark:text-[#58a6ff] text-lg font-extrabold mr-1"><span id="score-display">0.0</span></span>
                     / 10
                 </div>
 
+                <!-- Dropdown for Controls -->
                 <div class="relative" id="dropdown-control-wrapper">
                     <button onclick="toggleDropdown()" class="group bg-gray-200 hover:bg-gray-300 dark:bg-[#30363d] dark:hover:bg-[#444c56] text-gray-800 dark:text-[#c9d1d9] font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-gray-300 dark:border-[#444c56] shadow-md flex items-center justify-center gap-2 text-sm xs:text-base">
                         <i class="fas fa-cogs group-hover:rotate-180 transition-transform duration-500"></i>
                         <span class="hidden sm:inline">Bảng Điều Khiển</span>
                     </button>
 
+                    <!-- Dropdown Menu -->
                     <div id="control-dropdown" class="dropdown-menu dropdown-closed absolute bottom-full mb-3 left-0 w-60 p-3 rounded-xl shadow-2xl border transition-colors duration-300 z-50">
                         <h3 class="text-sm font-bold uppercase tracking-widest mb-2 border-b pb-1 transition-colors duration-300">Chức năng</h3>
                         
+                        <!-- Trộn đề & Làm lại -->
                         <button onclick="resetAndShuffleQuiz(); toggleDropdown()" class="group w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm mb-3">
                             <i class="fas fa-random mr-2 group-hover:rotate-180 transition-transform duration-500 text-[#f97316] dark:text-[#ffab70]"></i> 
                             Trộn đề & Làm lại
                         </button>
 
+                        <!-- Filter Controls (Hidden until submitted) -->
                         <div id="filter-controls" class="hidden flex-col gap-2 mt-3 pt-3 border-t transition-colors duration-300">
                             <p class="text-xs font-bold uppercase tracking-widest mb-1">Bộ Lọc Câu Hỏi</p>
                             <button onclick="filterQuestions('all'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="all">
@@ -378,6 +398,7 @@
                 </div>
             </div>
 
+            <!-- Right Side: Submit/Review Button -->
             <div class="flex items-center gap-3">
                 <span id="warning-msg" class="text-yellow-600 dark:text-[#ffab70] text-sm hidden font-bold animate-pulse bg-gray-100 dark:bg-[#21262d] px-3 py-1 rounded-lg border border-gray-300 dark:border-[#30363d] transition-colors duration-300">
                     <i class="fas fa-exclamation-triangle mr-1"></i> Chưa làm xong!
@@ -390,6 +411,7 @@
     </div>
 
 
+    <!-- Result Modal -->
     <div id="result-modal" class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="modal-content rounded-xl shadow-2xl p-6 sm:p-8 max-w-sm w-full text-center m-4 border relative overflow-hidden transition-colors duration-300">
             <div class="relative z-10">
@@ -423,7 +445,7 @@
     </div>
 
     <script>
-        // --- DATA SOURCE (UPDATED FROM YOUR REQUEST) ---
+        // --- DATA SOURCE (Content from your previous message) ---
         const RAW_GRAMMAR = [
             { id: 5, q: "'I haven't got my phone.' 'That's OK. __________ you mine.", options: ["I’m going to lend", "lend", "I’ll lend"], answerIndex: 2 }, 
             { id: 6, q: "It's Julia's birthday next week, so __________ her some flowers.", options: ["we’re going to buy", "we’ll buy", "buy"], answerIndex: 0 }, 
@@ -457,7 +479,7 @@
         let currentGrammar = [];
         let currentReading1 = [];
 
-        // --- THEME SWITCHING LOGIC (ĐÃ CẬP NHẬT) ---
+        // --- THEME SWITCHING LOGIC ---
 
         /**
          * Cập nhật hiển thị icon và text của nút chuyển đổi giao diện
@@ -560,7 +582,7 @@
             });
         }
 
-        // --- RENDER FUNCTIONS (Cập nhật Tailwind classes cho Light/Dark mode) ---
+        // --- RENDER FUNCTIONS ---
 
         function renderGrammar() {
             const container = document.getElementById('grammar-container');
@@ -651,7 +673,7 @@
                 btn.classList.remove('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
                 btn.classList.add('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
                 
-                // Update score text in Header
+                // Update score text in Header (Updated to display "Mã đề: 01" logic)
                 scoreTextElement.innerHTML = `Đúng: ${correctCount}/${totalQuestions} | Điểm: ${(correctCount / totalQuestions * 10).toFixed(1)}`;
                 scoreTextElement.classList.add('correct-answer');
                 scoreTextElement.classList.remove('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
@@ -669,8 +691,8 @@
                 btn.classList.remove('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
                 btn.classList.add('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
 
-                // Reset score text in Header
-                scoreTextElement.innerHTML = `Mã đề: 02`;
+                // Reset score text in Header (Updated to "Mã đề: 01")
+                scoreTextElement.innerHTML = `Mã đề: 01`;
                 scoreTextElement.classList.remove('correct-answer');
                 scoreTextElement.classList.add('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
 
@@ -685,7 +707,7 @@
             }
         }
 
-        // --- LOGIC FUNCTIONS (Giữ nguyên logic kiểm tra đáp án) ---
+        // --- LOGIC FUNCTIONS (Checking answers) ---
 
         function submitQuiz() {
             if (isSubmitted) return;
