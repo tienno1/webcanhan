@@ -2,80 +2,92 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <!-- Đảm bảo giao diện co giãn theo chiều rộng màn hình thiết bị -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Tập Tiếng Anh - Mã Đề 02</title>
+    <title>Bài Tập Tiếng Anh - Tối Ưu Phản Hồi</title>
+    <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 fontFamily: {
-                    sans: ['Nunito', 'sans-serif'],
+                    sans: ['Inter', 'sans-serif'],
                 },
                 extend: {
                     animation: {
                         'bounce-slow': 'bounce 3s infinite',
                         'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    screens: {
+                        'xs': '475px', // Custom breakpoint cho mobile nhỏ
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom scrollbar */
+        /* Dark Theme Styling Enhancements */
+        body {
+            background-color: #0d1117; 
+            color: #c9d1d9; 
+            /* Thêm padding dưới cùng để tránh bị thanh footer cố định che mất nội dung */
+            padding-bottom: 80px; 
+        }
+
+        /* Custom scrollbar for dark theme */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #e0e7ff; 
+            background: #161b22; 
         }
         ::-webkit-scrollbar-thumb {
-            background: #6366f1; 
-            border-radius: 5px;
+            background: #30363d; 
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #4f46e5; 
+            background: #58a6ff; 
         }
         
+        /* State colors for dark theme */
         .correct-answer {
-            background-color: #dcfce7 !important; /* green-100 */
-            border-color: #16a34a !important; /* green-600 */
-            color: #14532d !important;
-            box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.2);
+            background-color: #1f371e !important; /* Darker Green */
+            border-color: #388e3c !important; 
+            color: #b8e0b8 !important;
+            box-shadow: 0 2px 4px rgba(56, 142, 60, 0.4);
         }
         
         .wrong-answer {
-            background-color: #fee2e2 !important; /* red-100 */
-            border-color: #dc2626 !important; /* red-600 */
-            color: #7f1d1d !important;
+            background-color: #3b2024 !important; /* Darker Red */
+            border-color: #d32f2f !important; 
+            color: #f7a0a0 !important;
         }
 
         .option-label {
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #161b22;
+            border-color: #30363d;
+            color: #c9d1d9;
         }
         .option-input:checked + .option-label {
-            background-color: #eff6ff;
-            border-color: #3b82f6;
+            background-color: #1f252c;
+            border-color: #58a6ff;
             font-weight: 700;
             transform: scale(1.02);
-            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
-        }
-
-        /* Glassmorphism effect for sticky header */
-        .glass-header {
-            background: rgba(30, 64, 175, 0.95);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(88, 166, 255, 0.2);
         }
 
         /* Card Hover Effect */
         .hover-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            background-color: #161b22;
         }
         .hover-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: #6366f1;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            border-color: #58a6ff;
         }
 
         /* Animation for result modal */
@@ -89,108 +101,94 @@
         
         .highlight-correct {
             font-weight: 800;
-            color: #16a34a;
+            color: #388e3c;
             text-decoration: underline;
+        }
+
+        /* Ensure text in options is always wide enough */
+        .option-text-wrap {
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        /* Custom Dropdown Animation */
+        .dropdown-menu {
+            transition: all 0.3s ease-out;
+            transform-origin: bottom left;
+        }
+        .dropdown-open {
+            opacity: 1;
+            transform: translateY(-10px) scale(1);
+            pointer-events: auto;
+        }
+        .dropdown-closed {
+            opacity: 0;
+            transform: translateY(10px) scale(0.95);
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 text-slate-800 font-sans min-h-screen">
+<body class="min-h-screen font-sans">
 
-    <!-- Header -->
-    <header class="glass-header text-white p-4 shadow-lg sticky top-0 z-50 border-b border-blue-400">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-            <h1 class="text-2xl md:text-3xl font-extrabold uppercase tracking-wide flex items-center">
-                <i class="fas fa-graduation-cap mr-3 text-yellow-300 animate-bounce-slow"></i>
-                Ôn tập tiếng anh
+    <!-- Header (Simple and fixed on top) -->
+    <header class="bg-[#101319] text-white p-4 shadow-xl sticky top-0 z-50 border-b border-[#30363d]">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl xs:text-2xl font-extrabold uppercase tracking-wider flex items-center">
+                <i class="fas fa-book-reader mr-2 text-[#58a6ff]"></i>
+                Quiz App
             </h1>
-            <div class="text-sm md:text-base bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full font-semibold border border-white/30 shadow-inner">
-                <i class="fas fa-code-branch mr-1"></i> Mã đề: 02
+            <div id="score-text" class="text-xs xs:text-sm bg-[#21262d] px-3 py-1 rounded-full font-medium border border-[#30363d]">
+                Mã đề: 02
             </div>
         </div>
     </header>
 
-    <div class="container mx-auto p-4 flex flex-col md:flex-row gap-8 mt-6">
+    <!-- Main Content Area -->
+    <div class="container mx-auto p-4 md:p-6 flex flex-col md:flex-row gap-6 mt-4">
         
-        <!-- Left Sidebar (Control Panel) -->
-        <aside class="w-full md:w-1/4 flex flex-col gap-6">
-            <div class="bg-white p-6 rounded-2xl shadow-xl sticky top-28 border border-slate-100">
-                <h2 class="text-xl font-extrabold mb-6 text-slate-700 border-b-2 border-indigo-100 pb-3 flex items-center">
-                    <i class="fas fa-cogs mr-2 text-indigo-500"></i> Bảng Điều Khiển
-                </h2>
-                
-                <!-- Stats (Hidden initially) -->
-                <div id="stats-panel" class="hidden mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 text-center shadow-inner">
-                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Điểm số của bạn</p>
-                    <div class="text-5xl font-extrabold text-blue-600 my-2 drop-shadow-sm"><span id="score-display">0</span></div>
-                    <p class="text-sm font-bold text-slate-600 bg-white inline-block px-3 py-1 rounded-full shadow-sm" id="score-text">Chưa nộp bài</p>
-                </div>
-
-                <!-- Action Buttons -->
-                <button onclick="resetAndShuffleQuiz()" class="group w-full bg-white hover:bg-indigo-50 text-indigo-600 hover:text-indigo-700 font-bold py-3 px-4 rounded-xl mb-4 transition-all duration-300 border-2 border-indigo-200 hover:border-indigo-400 flex items-center justify-center gap-3 shadow-sm hover:shadow-md">
-                    <i class="fas fa-random group-hover:rotate-180 transition-transform duration-500"></i> Trộn đề & Làm lại
-                </button>
-
-                <div id="filter-controls" class="hidden flex-col gap-3 mt-2">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Bộ Lọc Câu Hỏi</p>
-                    <button onclick="filterQuestions('all')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold hover:bg-blue-50 border-l-4 border-transparent hover:border-blue-500 transition-all duration-200 filter-btn active-filter shadow-sm bg-white" data-filter="all">
-                        <i class="fas fa-list mr-3 text-blue-500"></i> Tất cả câu hỏi
-                    </button>
-                    <button onclick="filterQuestions('wrong')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold hover:bg-red-50 border-l-4 border-transparent hover:border-red-500 transition-all duration-200 filter-btn shadow-sm bg-white" data-filter="wrong">
-                        <i class="fas fa-times-circle mr-3 text-red-500"></i> Chỉ xem câu sai
-                    </button>
-                    <button onclick="filterQuestions('correct')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold hover:bg-green-50 border-l-4 border-transparent hover:border-green-500 transition-all duration-200 filter-btn shadow-sm bg-white" data-filter="correct">
-                        <i class="fas fa-check-circle mr-3 text-green-500"></i> Chỉ xem câu đúng
-                    </button>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content (Quiz Area) -->
-        <main class="w-full md:w-3/4">
+        <!-- Không còn Sidebar bên trái, nội dung chính chiếm toàn bộ chiều rộng -->
+        <main class="w-full">
             
             <!-- II. GRAMMAR -->
-            <div class="bg-white p-8 rounded-2xl shadow-xl mb-8 border border-slate-100 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-blue-400 to-blue-600"></div>
-                <h2 class="text-2xl font-extrabold text-slate-800 mb-2 flex items-center">
-                    <span class="bg-blue-100 text-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 text-lg shadow-sm">II</span>
-                    GRAMMAR <span class="text-sm font-normal text-slate-400 ml-3 bg-slate-100 px-2 py-1 rounded">3.2 marks</span>
+            <div class="bg-[#161b22] p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#58a6ff]">
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#f0f6fc] mb-3 flex items-center">
+                    <span class="bg-[#21262d] text-[#58a6ff] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm">II</span>
+                    GRAMMAR <span class="text-sm font-normal text-[#8b949e] ml-3">3.2 marks</span>
                 </h2>
-                <p class="text-slate-500 mb-6 ml-14">Choose the best answer.</p>
-                <div id="grammar-container" class="space-y-6">
+                <p class="text-sm text-[#8b949e] mb-4 md:ml-10">Choose the best answer.</p>
+                <div id="grammar-container" class="space-y-4">
                     <!-- Grammar questions will be injected here -->
                 </div>
             </div>
 
             <!-- III. READING Part 1 -->
-            <div class="bg-white p-8 rounded-2xl shadow-xl mb-8 border border-slate-100 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-purple-400 to-purple-600"></div>
-                <h2 class="text-2xl font-extrabold text-slate-800 mb-2 flex items-center">
-                    <span class="bg-purple-100 text-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 text-lg shadow-sm">III</span>
-                    READING - Part 1 <span class="text-sm font-normal text-slate-400 ml-3 bg-slate-100 px-2 py-1 rounded">1.2 marks</span>
+            <div class="bg-[#161b22] p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#ffab70]">
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#f0f6fc] mb-3 flex items-center">
+                    <span class="bg-[#21262d] text-[#ffab70] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm">III</span>
+                    READING - Part 1 <span class="text-sm font-normal text-[#8b949e] ml-3">1.2 marks</span>
                 </h2>
-                <p class="text-slate-500 mb-6 ml-14">Read the text and choose the best words / utterance to complete the text.</p>
+                <p class="text-sm text-[#8b949e] mb-4 md:ml-10">Read the text and choose the best words / utterance to complete the text.</p>
                 
-                <div class="bg-gradient-to-br from-slate-50 to-white p-8 rounded-xl border border-slate-200 leading-loose text-justify text-lg relative shadow-inner text-slate-700 font-medium" id="reading-part1-text">
+                <div class="bg-[#21262d] p-4 sm:p-6 rounded-lg border border-[#30363d] leading-relaxed text-base relative shadow-inner text-[#c9d1d9]" id="reading-part1-text">
                     <!-- Text with selects will be injected here -->
                 </div>
                 <!-- Feedback area for Reading Part 1 -->
-                <div id="reading-part1-feedback" class="mt-6 grid grid-cols-1 gap-3"></div>
+                <div id="reading-part1-feedback" class="mt-4 space-y-3"></div>
             </div>
 
             <!-- III. READING Part 2 -->
-            <div class="bg-white p-8 rounded-2xl shadow-xl mb-8 border border-slate-100 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-emerald-400 to-emerald-600"></div>
-                <h2 class="text-2xl font-extrabold text-slate-800 mb-2 flex items-center">
-                    <span class="bg-emerald-100 text-emerald-600 w-10 h-10 rounded-lg flex items-center justify-center mr-3 text-lg shadow-sm">IV</span>
-                    READING - Part 2 <span class="text-sm font-normal text-slate-400 ml-3 bg-slate-100 px-2 py-1 rounded">2.0 marks</span>
+            <div class="bg-[#161b22] p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#388e3c]">
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#f0f6fc] mb-3 flex items-center">
+                    <span class="bg-[#21262d] text-[#388e3c] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm">IV</span>
+                    READING - Part 2 <span class="text-sm font-normal text-[#8b949e] ml-3">2.0 marks</span>
                 </h2>
-                <p class="text-slate-500 mb-6 ml-14">Read the text again and decide whether the following sentences are True (T), False (F) or Not given (NG).</p>
+                <p class="text-sm text-[#8b949e] mb-4 md:ml-10">Read the text again and decide whether the following sentences are True (T), False (F) or Not given (NG).</p>
                 
-                <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100 mb-8 text-slate-700 max-h-80 overflow-y-auto shadow-inner custom-scroll">
-                    <h3 class="font-extrabold text-center mb-4 text-indigo-700 text-xl uppercase tracking-wider">My Travel Page</h3>
-                    <p class="mb-3"><strong>Hi. I’m Maria.</strong> I live in Australia, but right now I’m travelling in Vietnam. Welcome to my Page!</p>
-                    <p class="mb-3"><strong>Lagi Town:</strong> This is my last day in Lagi town, Binh Thuan province! I’m on the beach now. It is warm and sunny here. There was a little rain yesterday, but the weather is fine today. I’ll be sorry to leave today because I’ve really enjoyed my time here. People are more sociable than I’ve expected, so it’s easy for me to make some friends. For me, the best things are the seafood and the environment – the food is so delicious and the air is fresh. Anyway, this afternoon I’m going to take a coach to Saigon – the busiest city in Vietnam.</p>
-                    <p><strong>Ho Chi Minh City:</strong> Well, I’m here in Ho Chi Minh City, which is a big city in the South. It’s the most modern city I’ve ever visited, but it is more modern than Lagi town and there are lots of high buildings. The air here is quite hot and polluted because there are too many cars and motorbikes. I guess the people here are very outgoing and helpful. This morning a taxi driver helped me to find a cheap hotel near the city centre. I realise that things in Saigon are more expensive than in Lagi town. I’ll have to spend my money more carefully from now on…</p>
+                <div class="bg-[#21262d] p-4 rounded-lg border border-[#30363d] mb-6 text-[#c9d1d9] max-h-72 overflow-y-auto shadow-inner">
+                    <h3 class="font-extrabold text-center mb-3 text-[#ffab70] text-lg uppercase tracking-wider">My Travel Page</h3>
+                    <p class="mb-2 text-sm sm:text-base"><strong>Hi. I’m Maria.</strong> I live in Australia, but right now I’m travelling in Vietnam. Welcome to my Page!</p>
+                    <p class="mb-2 text-sm sm:text-base"><strong>Lagi Town:</strong> This is my last day in Lagi town, Binh Thuan province! I’m on the beach now. It is warm and sunny here. There was a little rain yesterday, but the weather is fine today. I’ll be sorry to leave today because I’ve really enjoyed my time here. People are more sociable than I’ve expected, so it’s easy for me to make some friends. For me, the best things are the seafood and the environment – the food is so delicious and the air is fresh. Anyway, this afternoon I’m going to take a coach to Saigon – the busiest city in Vietnam.</p>
+                    <p class="text-sm sm:text-base"><strong>Ho Chi Minh City:</strong> Well, I’m here in Ho Chi Minh City, which is a big city in the South. It’s the most modern city I’ve ever visited, but it is more modern than Lagi town and there are lots of high buildings. The air here is quite hot and polluted because there are too many cars and motorbikes. I guess the people here are very outgoing and helpful. This morning a taxi driver helped me to find a cheap hotel near the city centre. I realise that things in Saigon are more expensive than in Lagi town. I’ll have to spend my money more carefully from now on…</p>
                 </div>
 
                 <div id="reading-part2-container" class="space-y-4">
@@ -198,52 +196,95 @@
                 </div>
             </div>
 
-            <!-- Submit Button Area -->
-            <div class="sticky bottom-6 flex justify-end items-center gap-6 z-40 pointer-events-none">
-                <div class="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-4 pointer-events-auto transform transition hover:scale-105">
-                    <span id="warning-msg" class="text-red-500 text-sm hidden font-bold animate-pulse bg-red-50 px-3 py-1 rounded-lg border border-red-100">
-                        <i class="fas fa-exclamation-triangle mr-1"></i> Chưa làm xong!
-                    </span>
-                    <button onclick="submitQuiz()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold py-3 px-10 rounded-xl shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center gap-2 text-lg">
-                        <i class="fas fa-paper-plane"></i> NỘP BÀI
-                    </button>
-                </div>
-            </div>
-
         </main>
     </div>
 
-    <!-- Result Modal -->
-    <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="modal-content bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full text-center m-4 border border-white/20 relative overflow-hidden">
-            <!-- Decorative circles -->
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-
-            <div class="relative z-10">
-                <div class="w-24 h-24 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-yellow-500/30">
-                    <i class="fas fa-trophy text-5xl text-white drop-shadow-md"></i>
+    <!-- Submit Button & Control Footer (FIXED at Bottom Left) -->
+    <!-- Thêm mx-auto và max-w-7xl để căn giữa trên màn hình lớn và giới hạn chiều rộng -->
+    <div id="control-footer" class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-[#101319] border-t border-[#30363d] shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
+        <div class="container mx-auto max-w-7xl flex justify-between items-center">
+            
+            <!-- Left Side: Dropdown Controls -->
+            <div class="relative flex items-center gap-3">
+                <div id="stats-panel" class="hidden bg-[#21262d] p-2 rounded-lg border border-[#30363d] text-center shadow-inner text-sm font-bold text-[#f0f6fc] min-w-[120px]">
+                    <span class="text-[#58a6ff] text-lg font-extrabold mr-1"><span id="score-display">0.0</span></span>
+                    / 10
                 </div>
-                <h3 class="text-3xl font-black text-slate-800 mb-2">Kết Quả</h3>
-                <p class="text-slate-500 mb-8 font-medium">Bạn đã nỗ lực hết mình! Dưới đây là kết quả:</p>
-                
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    <div class="bg-green-50 p-4 rounded-2xl border border-green-100">
-                        <p class="text-xs text-green-600 font-extrabold uppercase tracking-wide mb-1">Số câu đúng</p>
-                        <p class="text-3xl font-black text-green-600"><span id="modal-correct">0</span>/<span id="modal-total">0</span></p>
+
+                <!-- Dropdown for Controls -->
+                <div class="relative" id="dropdown-control-wrapper">
+                    <button onclick="toggleDropdown()" class="group bg-[#30363d] hover:bg-[#444c56] text-[#c9d1d9] font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-[#444c56] shadow-md flex items-center justify-center gap-2 text-sm xs:text-base">
+                        <i class="fas fa-cogs group-hover:rotate-180 transition-transform duration-500"></i>
+                        <span class="hidden sm:inline">Bảng Điều Khiển</span>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div id="control-dropdown" class="dropdown-menu dropdown-closed absolute bottom-full mb-3 left-0 w-60 bg-[#161b22] p-3 rounded-xl shadow-2xl border border-[#30363d] z-50">
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-[#8b949e] mb-2 border-b border-[#30363d] pb-1">Chức năng</h3>
+                        
+                        <!-- Trộn đề & Làm lại -->
+                        <button onclick="resetAndShuffleQuiz(); toggleDropdown()" class="group w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] shadow-sm mb-3">
+                            <i class="fas fa-random mr-2 group-hover:rotate-180 transition-transform duration-500 text-[#ffab70]"></i> 
+                            Trộn đề & Làm lại
+                        </button>
+
+                        <!-- Filter Controls (Hidden until submitted) -->
+                        <div id="filter-controls" class="hidden flex-col gap-2 mt-3 pt-3 border-t border-[#30363d]">
+                            <p class="text-xs font-bold uppercase tracking-widest text-[#8b949e] mb-1">Bộ Lọc Câu Hỏi</p>
+                            <button onclick="filterQuestions('all'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn active-filter bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] shadow-sm" data-filter="all">
+                                <i class="fas fa-list mr-2 text-[#58a6ff]"></i> Tất cả câu hỏi
+                            </button>
+                            <button onclick="filterQuestions('wrong'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] shadow-sm" data-filter="wrong">
+                                <i class="fas fa-times-circle mr-2 text-[#f85149]"></i> Chỉ xem câu sai
+                            </button>
+                            <button onclick="filterQuestions('correct'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] shadow-sm" data-filter="correct">
+                                <i class="fas fa-check-circle mr-2 text-[#388e3c]"></i> Chỉ xem câu đúng
+                            </button>
+                        </div>
                     </div>
-                    <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
-                        <p class="text-xs text-blue-600 font-extrabold uppercase tracking-wide mb-1">Tổng điểm</p>
-                        <p class="text-3xl font-black text-blue-600" id="modal-score">0.0</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Submit/Review Button -->
+            <div class="flex items-center gap-3">
+                <span id="warning-msg" class="text-[#ffab70] text-sm hidden font-bold animate-pulse bg-[#21262d] px-3 py-1 rounded-lg border border-[#30363d]">
+                    <i class="fas fa-exclamation-triangle mr-1"></i> Chưa làm xong!
+                </span>
+                <button id="main-submit-btn" onclick="submitQuiz()" class="bg-[#58a6ff] hover:bg-[#79c0ff] text-[#0d1117] font-extrabold py-3 px-8 rounded-lg shadow-lg hover:shadow-[#58a6ff]/30 transition-all duration-300 flex items-center gap-2 text-base sm:text-lg">
+                    <i class="fas fa-paper-plane"></i> NỘP BÀI
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="modal-content bg-[#161b22] rounded-xl shadow-2xl p-6 sm:p-8 max-w-sm w-full text-center m-4 border border-[#30363d] relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="w-16 h-16 bg-[#ffab70] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <i class="fas fa-trophy text-3xl text-black drop-shadow-md"></i>
+                </div>
+                <h3 class="text-2xl font-black text-[#f0f6fc] mb-1">Kết Quả</h3>
+                <p class="text-[#8b949e] mb-6 font-medium text-sm">Bạn đã hoàn thành bài thi!</p>
+                
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div class="bg-[#21262d] p-3 rounded-lg border border-[#30363d]">
+                        <p class="text-xs text-[#388e3c] font-extrabold uppercase tracking-wide mb-1">Số câu đúng</p>
+                        <p class="text-2xl font-black text-[#388e3c]"><span id="modal-correct">0</span>/<span id="modal-total">0</span></p>
+                    </div>
+                    <div class="bg-[#21262d] p-3 rounded-lg border border-[#30363d]">
+                        <p class="text-xs text-[#58a6ff] font-extrabold uppercase tracking-wide mb-1">Tổng điểm</p>
+                        <p class="text-2xl font-black text-[#58a6ff]" id="modal-score">0.0</p>
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-3">
-                    <button onclick="closeModal()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <button onclick="closeModal()" class="w-full bg-[#58a6ff] hover:bg-[#79c0ff] text-[#0d1117] font-bold py-2.5 px-6 rounded-lg transition shadow-md transform hover:-translate-y-0.5 text-base">
                         Xem chi tiết bài làm
                     </button>
-                    <button onclick="resetAndShuffleQuiz(); closeModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2">
-                        <i class="fas fa-redo-alt text-sm"></i> Làm lại từ đầu
+                    <button onclick="resetAndShuffleQuiz(); closeModal()" class="w-full bg-[#30363d] hover:bg-[#444c56] text-[#c9d1d9] font-bold py-2.5 px-6 rounded-lg transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fas fa-redo-alt text-xs"></i> Làm lại từ đầu
                     </button>
                 </div>
             </div>
@@ -251,7 +292,7 @@
     </div>
 
     <script>
-        // --- DATA SOURCE (From File Word) ---
+        // --- DATA SOURCE (Using data from test 2.docx) ---
         const RAW_GRAMMAR = [
             { id: 5, q: "Will you lend me £10? I promise __________ it back to you tomorrow.", options: ["give", "I’m going to give", "I’ll give"], answerIndex: 2 }, 
             { id: 6, q: "__________ a barbecue tomorrow. It's all planned, so I hope it won't rain.", options: ["We’re going to have", "have", "We’ll have"], answerIndex: 0 }, 
@@ -281,6 +322,7 @@
 
         const ABC = ['A', 'B', 'C', 'D'];
         let isSubmitted = false;
+        let isDropdownOpen = false;
         let currentGrammar = [];
         let currentReading1 = [];
 
@@ -294,6 +336,7 @@
         }
 
         function initData() {
+            // Shuffle Grammar Options
             currentGrammar = RAW_GRAMMAR.map(item => {
                 let opts = item.options.map((optText, index) => ({
                     text: optText,
@@ -304,6 +347,7 @@
                 return { ...item, shuffledOptions: opts };
             });
 
+            // Shuffle Reading 1 Options
             currentReading1 = RAW_READING1_QUESTIONS.map(item => {
                 let opts = item.options.map((optText, index) => ({
                     text: optText,
@@ -320,23 +364,22 @@
         function renderGrammar() {
             const container = document.getElementById('grammar-container');
             container.innerHTML = currentGrammar.map(item => `
-                <div class="question-block p-6 border-2 border-transparent rounded-xl bg-slate-50 hover-card" id="q-block-${item.id}">
-                    <p class="font-bold text-lg text-slate-800 mb-4 flex items-start">
-                        <span class="bg-blue-600 text-white px-3 py-1 rounded-lg mr-3 shadow-md text-sm shrink-0 mt-0.5">Câu ${item.id}</span> 
-                        <span class="leading-relaxed">${item.q}</span>
+                <div class="question-block hover-card p-4 rounded-lg border border-[#30363d]" id="q-block-${item.id}">
+                    <p class="font-semibold text-base sm:text-lg text-[#f0f6fc] mb-3 flex items-start">
+                        <span class="bg-[#58a6ff] text-[#0d1117] px-2 py-0.5 rounded mr-3 shadow-md text-sm shrink-0 mt-0.5">Câu ${item.id}</span> 
+                        <span class="leading-relaxed option-text-wrap">${item.q}</span>
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3">
                         ${item.shuffledOptions.map((opt, idx) => `
                             <div class="relative group">
                                 <input type="radio" name="g-${item.id}" id="g-${item.id}-${idx}" value="${idx}" class="option-input hidden peer" onchange="resetQuestionState(${item.id})">
-                                <label for="g-${item.id}-${idx}" class="option-label block w-full p-4 border-2 border-slate-200 rounded-xl cursor-pointer bg-white text-slate-600 hover:border-blue-300 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-700 shadow-sm relative overflow-hidden">
-                                    <span class="font-black mr-2 text-slate-400 group-hover:text-blue-400 transition-colors">${ABC[idx]}</span> ${opt.text}
-                                    <div class="absolute inset-0 bg-blue-500 opacity-0 peer-checked:opacity-5 transition-opacity"></div>
+                                <label for="g-${item.id}-${idx}" class="option-label block w-full p-3 border-2 rounded-lg cursor-pointer shadow-sm relative overflow-hidden">
+                                    <span class="font-black mr-2 text-[#8b949e] group-hover:text-[#58a6ff] transition-colors">${ABC[idx]}</span> <span class="option-text-wrap">${opt.text}</span>
                                 </label>
                             </div>
                         `).join('')}
                     </div>
-                    <div class="feedback-msg hidden mt-4 p-4 rounded-xl text-sm font-semibold border-l-4 shadow-sm animate-popIn"></div>
+                    <div class="feedback-msg hidden mt-3 p-3 rounded-lg text-sm font-semibold border-l-4 shadow-sm"></div>
                 </div>
             `).join('');
         }
@@ -346,7 +389,8 @@
             let content = RAW_READING1_TEXT;
             
             currentReading1.forEach(q => {
-                let selectHTML = `<select id="r1-${q.id}" class="mx-2 px-2 py-1 border-b-2 border-indigo-400 bg-indigo-50/50 text-indigo-900 font-bold focus:outline-none focus:border-indigo-700 cursor-pointer rounded hover:bg-indigo-100 transition-colors" onchange="resetSelectState(${q.id})">
+                // FIX: Added 'inline-block max-w-full' to prevent select element from overflowing its container
+                let selectHTML = `<select id="r1-${q.id}" class="mx-1 px-1 py-1 border-b-2 border-[#58a6ff] bg-[#21262d] text-[#58a6ff] font-bold focus:outline-none focus:border-[#79c0ff] cursor-pointer rounded text-base inline-block max-w-full" onchange="resetSelectState(${q.id})">
                     <option value="" selected disabled>(${q.id}) ...</option>
                     ${q.shuffledOptions.map((opt, idx) => `<option value="${idx}">${ABC[idx]}. ${opt.text}</option>`).join('')}
                 </select>`;
@@ -359,24 +403,83 @@
         function renderReading2() {
             const container = document.getElementById('reading-part2-container');
             container.innerHTML = RAW_READING2.map(item => `
-                <div class="question-block p-5 border-2 border-transparent rounded-xl bg-slate-50 hover-card" id="q-block-${item.id}">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                        <div class="flex-1 flex gap-3">
-                            <span class="bg-emerald-600 text-white w-8 h-8 flex items-center justify-center rounded-full font-bold shadow-md shrink-0">${item.id}</span>
-                            <span class="font-medium text-slate-700 text-lg leading-relaxed">${item.q}</span>
+                <div class="question-block hover-card p-4 rounded-lg border border-[#30363d]" id="q-block-${item.id}">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div class="flex-1 flex gap-3 items-start">
+                            <span class="bg-[#388e3c] text-[#0d1117] w-6 h-6 flex items-center justify-center rounded-full font-bold shadow-md shrink-0 text-xs mt-0.5">${item.id}</span>
+                            <span class="font-medium text-[#c9d1d9] text-base leading-relaxed option-text-wrap">${item.q}</span>
                         </div>
-                        <div class="flex gap-4 bg-white p-2 rounded-lg border border-slate-200 shadow-sm shrink-0">
+                        <div class="flex gap-3 bg-[#21262d] p-2 rounded-lg border border-[#30363d] shadow-sm shrink-0 mt-2 sm:mt-0">
                             ${['T', 'F', 'NG'].map(val => `
                                 <div class="flex items-center">
-                                    <input type="radio" name="r2-${item.id}" id="r2-${item.id}-${val}" value="${val}" class="w-5 h-5 text-emerald-600 focus:ring-emerald-500 cursor-pointer" onchange="resetQuestionState(${item.id})">
-                                    <label for="r2-${item.id}-${val}" class="ml-2 text-base font-bold text-slate-600 cursor-pointer hover:text-emerald-600 transition-colors">${val}</label>
+                                    <input type="radio" name="r2-${item.id}" id="r2-${item.id}-${val}" value="${val}" class="w-4 h-4 text-[#388e3c] bg-[#161b22] border-[#444c56] focus:ring-[#388e3c] cursor-pointer" onchange="resetQuestionState(${item.id})">
+                                    <label for="r2-${item.id}-${val}" class="ml-1 text-sm font-bold text-[#c9d1d9] cursor-pointer hover:text-[#388e3c] transition-colors">${val}</label>
                                 </div>
                             `).join('')}
                         </div>
                     </div>
-                    <div class="feedback-msg hidden mt-3 p-3 text-right text-sm font-bold border-t border-slate-200 pt-3"></div>
+                    <div class="feedback-msg hidden mt-3 p-1 text-right text-sm font-bold border-t border-[#30363d] pt-2"></div>
                 </div>
             `).join('');
+        }
+
+        // --- DROPDOWN & FOOTER LOGIC ---
+        function toggleDropdown() {
+            const dropdown = document.getElementById('control-dropdown');
+            isDropdownOpen = !isDropdownOpen;
+
+            if (isDropdownOpen) {
+                dropdown.classList.remove('dropdown-closed');
+                dropdown.classList.add('dropdown-open');
+            } else {
+                dropdown.classList.remove('dropdown-open');
+                dropdown.classList.add('dropdown-closed');
+            }
+        }
+
+        function updateSubmitButton(correctCount = 0, totalQuestions = 0) {
+            const btn = document.getElementById('main-submit-btn');
+            const scoreTextElement = document.getElementById('score-text');
+
+            if (isSubmitted) {
+                // Change to Review mode
+                btn.onclick = () => { /* Prevent default action if needed, but here we just keep the status quo */ };
+                btn.innerHTML = `<i class="fas fa-check-double"></i> Đã NỘP BÀI`;
+                btn.classList.remove('bg-[#58a6ff]', 'hover:bg-[#79c0ff]');
+                btn.classList.add('bg-[#388e3c]', 'hover:bg-[#43a047]', 'cursor-default');
+                
+                // Update score text in Header
+                scoreTextElement.innerHTML = `Đúng: ${correctCount}/${totalQuestions} | Điểm: ${(correctCount / totalQuestions * 10).toFixed(1)}`;
+                scoreTextElement.classList.add('correct-answer');
+                scoreTextElement.classList.remove('bg-[#21262d]', 'border-[#30363d]');
+
+                // Show detailed score panel in footer
+                document.getElementById('stats-panel').classList.remove('hidden');
+
+                // Show filter controls in dropdown
+                document.getElementById('filter-controls').classList.replace('hidden', 'flex');
+
+            } else {
+                // Change to Submit mode
+                btn.onclick = submitQuiz;
+                btn.innerHTML = `<i class="fas fa-paper-plane"></i> NỘP BÀI`;
+                btn.classList.remove('bg-[#388e3c]', 'hover:bg-[#43a047]', 'cursor-default');
+                btn.classList.add('bg-[#58a6ff]', 'hover:bg-[#79c0ff]');
+
+                // Reset score text in Header
+                scoreTextElement.innerHTML = `Mã đề: 02`;
+                scoreTextElement.classList.remove('correct-answer');
+                scoreTextElement.classList.add('bg-[#21262d]', 'border-[#30363d]');
+
+                // Hide detailed score panel in footer
+                document.getElementById('stats-panel').classList.add('hidden');
+                
+                // Hide filter controls in dropdown
+                document.getElementById('filter-controls').classList.replace('flex', 'hidden');
+                
+                // Close dropdown if open
+                if (isDropdownOpen) toggleDropdown();
+            }
         }
 
         // --- LOGIC FUNCTIONS ---
@@ -396,11 +499,22 @@
                 const block = document.getElementById(`q-block-${q.id}`);
                 const feedback = block.querySelector('.feedback-msg');
                 
-                block.classList.remove('bg-slate-50'); // Remove default bg
-                feedback.classList.remove('hidden', 'text-green-800', 'text-red-800', 'bg-green-100', 'bg-red-100', 'border-green-500', 'border-red-500');
+                block.classList.remove('border-[#30363d]'); 
+                feedback.classList.remove('hidden');
 
                 const correctShuffledIndex = q.shuffledOptions.findIndex(opt => opt.isCorrect);
                 const correctLabelId = `g-${q.id}-${correctShuffledIndex}`;
+                const correctLabel = document.querySelector(`label[for="${correctLabelId}"]`);
+                
+                // Clear all previous results/styles on options
+                document.querySelectorAll(`label[for^="g-${q.id}-"]`).forEach(label => {
+                    label.classList.remove('correct-answer', 'wrong-answer');
+                    // Remove feedback icons/text previously added
+                    label.querySelectorAll('.fa-check-circle, .fa-times-circle, span').forEach(el => {
+                        if (el.textContent.includes('Đáp án đúng')) el.remove();
+                        if (el.classList.contains('fa-check-circle') || el.classList.contains('fa-times-circle')) el.remove();
+                    });
+                });
 
                 if (selectedInput) {
                     const selectedIdx = parseInt(selectedInput.value);
@@ -408,41 +522,41 @@
                     const selectedLabel = document.querySelector(`label[for="${selectedInput.id}"]`);
 
                     if (selectedOption.isCorrect) {
-                        score++;
+                        score += 0.4; // 3.2 / 8 = 0.4
                         correctCount++;
                         block.dataset.status = "correct";
                         selectedLabel.classList.add('correct-answer');
-                        selectedLabel.innerHTML += ' <i class="fas fa-check-circle text-green-600 float-right text-xl"></i>';
-                        block.classList.add('border-green-200', 'bg-green-50/30');
+                        selectedLabel.innerHTML += ' <i class="fas fa-check-circle text-[#b8e0b8] float-right text-base mt-0.5"></i>';
+                        block.classList.add('border-l-4', 'border-green-600', 'bg-[#1f371e]/30');
+                        feedback.classList.add('hidden'); // Hide generic feedback if correct
                     } else {
                         block.dataset.status = "wrong";
                         selectedLabel.classList.add('wrong-answer');
-                        selectedLabel.innerHTML += ' <i class="fas fa-times-circle text-red-600 float-right text-xl"></i>';
-                        block.classList.add('border-red-200', 'bg-red-50/30');
+                        selectedLabel.innerHTML += ' <i class="fas fa-times-circle text-[#f7a0a0] float-right text-base mt-0.5"></i>';
+                        block.classList.add('border-l-4', 'border-red-600', 'bg-[#3b2024]/30');
                         
-                        const correctLabel = document.querySelector(`label[for="${correctLabelId}"]`);
                         correctLabel.classList.add('correct-answer');
-                        correctLabel.innerHTML += ' <span class="float-right text-xs font-bold uppercase bg-green-200 text-green-800 px-2 py-1 rounded ml-2 shadow-sm">Đáp án đúng</span>';
+                        correctLabel.innerHTML += ' <span class="float-right text-xs font-bold uppercase bg-[#388e3c] text-white px-1.5 py-0.5 rounded ml-2 shadow-sm">Đáp án đúng</span>';
                         
                         feedback.classList.remove('hidden');
-                        feedback.classList.add('bg-red-50', 'text-red-800', 'border-red-400');
+                        feedback.classList.add('bg-[#21262d]', 'text-[#f7a0a0]', 'border-red-600', 'border-l-4');
                         feedback.innerHTML = `<i class="fas fa-info-circle mr-2"></i> Rất tiếc! Bạn đã chọn sai.`;
                     }
                 } else {
                     unAnswered = true;
                     block.dataset.status = "wrong";
-                    block.classList.add('border-red-200', 'bg-red-50/30');
-                    const correctLabel = document.querySelector(`label[for="${correctLabelId}"]`);
+                    block.classList.add('border-l-4', 'border-red-600', 'bg-[#3b2024]/30');
+                    
                     correctLabel.classList.add('correct-answer');
-                    correctLabel.innerHTML += ' <span class="float-right text-xs font-bold uppercase bg-green-200 text-green-800 px-2 py-1 rounded ml-2 shadow-sm">Đáp án đúng</span>';
+                    correctLabel.innerHTML += ' <span class="float-right text-xs font-bold uppercase bg-[#388e3c] text-white px-1.5 py-0.5 rounded ml-2 shadow-sm">Đáp án đúng</span>';
                     
                     feedback.classList.remove('hidden');
-                    feedback.classList.add('bg-red-50', 'text-red-800', 'border-red-400');
+                    feedback.classList.add('bg-[#21262d]', 'text-[#ffab70]', 'border-red-600', 'border-l-4');
                     feedback.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i> Bạn chưa làm câu này.`;
                 }
             });
 
-            // 2. Check Reading 1
+            // 2. Check Reading 1 (1.2 marks / 3 questions = 0.4 per question)
             const feedbackContainer = document.getElementById('reading-part1-feedback');
             feedbackContainer.innerHTML = '';
             
@@ -452,63 +566,67 @@
                 const val = select.value;
                 
                 const fbDiv = document.createElement('div');
-                fbDiv.className = "p-4 rounded-xl text-sm flex justify-between items-center border shadow-sm";
+                fbDiv.className = "p-3 rounded-lg text-sm flex justify-between items-center border hover-card";
                 fbDiv.id = `q-block-${q.id}`; 
 
                 const correctOptionText = q.shuffledOptions.find(o => o.isCorrect).text;
 
+                // Reset select styling
+                select.className = select.className.replace(/bg-(green|red)-100|text-(green|red)-800|border-(green|red)-500|line-through/g, '').trim();
+                select.classList.remove('border-red-600');
+                
                 if (val !== "") {
                     const selectedIdx = parseInt(val);
                     if (q.shuffledOptions[selectedIdx].isCorrect) {
-                        score++;
+                        score += 0.4;
                         correctCount++;
-                        select.classList.add('bg-green-100', 'text-green-800', 'border-green-500', 'font-bold');
-                        fbDiv.classList.add('bg-green-50', 'border-green-200', 'text-green-800');
-                        fbDiv.innerHTML = `<div class="flex items-center"><span class="bg-green-200 text-green-800 w-6 h-6 rounded-full flex items-center justify-center mr-3 font-bold text-xs">${q.id}</span><span>Chính xác!</span></div> <i class="fas fa-check-circle text-xl"></i>`;
+                        select.classList.add('bg-[#1f371e]', 'text-[#b8e0b8]', 'border-[#388e3c]', 'font-bold');
+                        fbDiv.classList.add('bg-[#1f371e]/30', 'border-[#388e3c]', 'text-[#b8e0b8]', 'border-l-4');
+                        fbDiv.innerHTML = `<div class="flex items-center"><span class="bg-[#388e3c] text-[#0d1117] w-5 h-5 rounded-full flex items-center justify-center mr-2 font-bold text-xs">${q.id}</span><span>Chính xác!</span></div> <i class="fas fa-check-circle text-xl"></i>`;
                         fbDiv.dataset.status = "correct";
                     } else {
-                        select.classList.add('bg-red-100', 'text-red-800', 'border-red-500', 'line-through');
-                        fbDiv.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
-                        fbDiv.innerHTML = `<div class="flex items-center"><span class="bg-red-200 text-red-800 w-6 h-6 rounded-full flex items-center justify-center mr-3 font-bold text-xs">${q.id}</span><span>Sai. Đáp án đúng: <span class="highlight-correct text-base">${correctOptionText}</span></span></div> <i class="fas fa-times-circle text-xl"></i>`;
+                        select.classList.add('bg-[#3b2024]', 'text-[#f7a0a0]', 'border-[#d32f2f]', 'line-through');
+                        fbDiv.classList.add('bg-[#3b2024]/30', 'border-[#d32f2f]', 'text-[#f7a0a0]', 'border-l-4');
+                        fbDiv.innerHTML = `<div class="flex flex-col items-start"><div class="flex items-center mb-1"><span class="bg-[#d32f2f] text-[#0d1117] w-5 h-5 rounded-full flex items-center justify-center mr-2 font-bold text-xs">${q.id}</span><span>Sai.</span></div> Đáp án đúng: <span class="highlight-correct text-base">${correctOptionText}</span></div> <i class="fas fa-times-circle text-xl shrink-0"></i>`;
                         fbDiv.dataset.status = "wrong";
                     }
                 } else {
                      unAnswered = true;
-                     select.classList.add('border-red-500');
-                     fbDiv.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
-                     fbDiv.innerHTML = `<div class="flex items-center"><span class="bg-red-200 text-red-800 w-6 h-6 rounded-full flex items-center justify-center mr-3 font-bold text-xs">${q.id}</span><span>Chưa làm. Đáp án đúng: <span class="highlight-correct text-base">${correctOptionText}</span></span></div>`;
+                     select.classList.add('border-red-600');
+                     fbDiv.classList.add('bg-[#3b2024]/30', 'border-[#d32f2f]', 'text-[#ffab70]', 'border-l-4');
+                     fbDiv.innerHTML = `<div class="flex flex-col items-start"><div class="flex items-center mb-1"><span class="bg-[#d32f2f] text-[#0d1117] w-5 h-5 rounded-full flex items-center justify-center mr-2 font-bold text-xs">${q.id}</span><span>Chưa làm.</span></div> Đáp án đúng: <span class="highlight-correct text-base">${correctOptionText}</span></div> <i class="fas fa-exclamation-circle text-xl shrink-0"></i>`;
                      fbDiv.dataset.status = "wrong";
                 }
                 feedbackContainer.appendChild(fbDiv);
             });
 
-            // 3. Check Reading 2
+            // 3. Check Reading 2 (2.0 marks / 5 questions = 0.4 per question)
             RAW_READING2.forEach(q => {
                 totalQuestions++;
                 const selected = document.querySelector(`input[name="r2-${q.id}"]:checked`);
                 const block = document.getElementById(`q-block-${q.id}`);
                 const feedback = block.querySelector('.feedback-msg');
                 
-                block.classList.remove('bg-slate-50');
+                block.classList.remove('border-[#30363d]');
                 feedback.classList.remove('hidden');
 
                 if (selected) {
                     if (selected.value === q.answer) {
-                        score++;
+                        score += 0.4;
                         correctCount++;
                         block.dataset.status = "correct";
-                        block.classList.add('bg-green-50', 'border-green-200');
-                        feedback.innerHTML = `<span class="text-green-600 font-bold flex items-center justify-end gap-2"><i class="fas fa-check-circle"></i> Chính xác</span>`;
+                        block.classList.add('bg-[#1f371e]/30', 'border-l-4', 'border-green-600');
+                        feedback.innerHTML = `<span class="text-[#b8e0b8] font-bold flex items-center justify-end gap-2"><i class="fas fa-check-circle"></i> Chính xác</span>`;
                     } else {
                         block.dataset.status = "wrong";
-                        block.classList.add('bg-red-50', 'border-red-200');
-                        feedback.innerHTML = `<span class="text-red-600 font-bold flex items-center justify-end gap-2"><i class="fas fa-times-circle"></i> Sai. Đáp án đúng: <span class="text-lg border border-red-300 px-2 rounded bg-white">${q.answer}</span></span>`;
+                        block.classList.add('bg-[#3b2024]/30', 'border-l-4', 'border-red-600');
+                        feedback.innerHTML = `<span class="text-[#f7a0a0] font-bold flex items-center justify-end gap-2"><i class="fas fa-times-circle"></i> Sai. Đáp án đúng: <span class="text-base border border-[#d32f2f] px-2 rounded bg-[#21262d] text-[#ffab70]">${q.answer}</span></span>`;
                     }
                 } else {
                     unAnswered = true;
                     block.dataset.status = "wrong";
-                    block.classList.add('bg-red-50', 'border-red-200');
-                    feedback.innerHTML = `<span class="text-red-600 font-bold flex items-center justify-end gap-2"><i class="fas fa-exclamation-circle"></i> Chưa chọn. Đáp án đúng: <span class="text-lg border border-red-300 px-2 rounded bg-white">${q.answer}</span></span>`;
+                    block.classList.add('bg-[#3b2024]/30', 'border-l-4', 'border-red-600');
+                    feedback.innerHTML = `<span class="text-[#ffab70] font-bold flex items-center justify-end gap-2"><i class="fas fa-exclamation-circle"></i> Chưa chọn. Đáp án đúng: <span class="text-base border border-[#d32f2f] px-2 rounded bg-[#21262d] text-[#ffab70]">${q.answer}</span></span>`;
                 }
             });
 
@@ -517,21 +635,21 @@
                 setTimeout(() => document.getElementById('warning-msg').classList.add('hidden'), 5000);
             }
 
-            // Update UI Stats
-            const finalScore = (score / totalQuestions * 10).toFixed(1);
+            // Update UI States
+            isSubmitted = true;
+            updateSubmitButton(correctCount, totalQuestions);
             
-            document.getElementById('score-display').innerText = finalScore;
-            document.getElementById('score-text').innerText = `Đúng ${correctCount}/${totalQuestions} câu`;
-            document.getElementById('stats-panel').classList.remove('hidden');
-            document.getElementById('filter-controls').classList.replace('hidden', 'flex');
-
+            // Update score in footer stats panel
+            document.getElementById('score-display').innerText = score.toFixed(1);
+            
             // Show Modal
             document.getElementById('modal-correct').innerText = correctCount;
             document.getElementById('modal-total').innerText = totalQuestions;
-            document.getElementById('modal-score').innerText = finalScore;
+            document.getElementById('modal-score').innerText = score.toFixed(1);
             document.getElementById('result-modal').classList.remove('hidden');
 
-            isSubmitted = true;
+            filterQuestions('all'); // Reset filter view to show all questions with feedback
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top after submission
         }
 
         function resetAndShuffleQuiz() {
@@ -544,15 +662,14 @@
             renderReading2();
 
             // Reset UI states
-            document.getElementById('stats-panel').classList.add('hidden');
-            document.getElementById('filter-controls').classList.replace('flex', 'hidden');
             document.getElementById('warning-msg').classList.add('hidden');
             document.getElementById('reading-part1-feedback').innerHTML = '';
+            updateSubmitButton(); // Reset button and controls
 
-            // Reset filters
+            // Reset filters state in dropdown
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                 btn.classList.remove('bg-blue-100', 'text-blue-700', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
-                 if(btn.dataset.filter === 'all') btn.classList.add('bg-blue-100', 'text-blue-700'); 
+                 btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] shadow-sm";
+                 if(btn.dataset.filter === 'all') btn.classList.add('bg-[#21262d]', 'border-[#58a6ff]', 'text-[#58a6ff]'); 
             });
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -561,6 +678,7 @@
         function filterQuestions(type) {
             if (!isSubmitted) return;
 
+            // Get all question containers, including the feedback divs for Reading Part 1
             const questions = document.querySelectorAll('.question-block, #reading-part1-feedback > div');
             
             questions.forEach(q => {
@@ -575,14 +693,14 @@
                 }
             });
 
-            // Styling for active filter
+            // Styling for active filter buttons in dropdown
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.className = "w-full text-left px-4 py-3 rounded-xl text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn shadow-sm bg-white hover:bg-slate-50";
+                btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-[#21262d] hover:bg-[#30363d] text-[#c9d1d9] shadow-sm";
                 
                 if (btn.dataset.filter === type) {
-                    if(type === 'all') btn.classList.add('bg-blue-50', 'border-blue-500', 'text-blue-700');
-                    if(type === 'wrong') btn.classList.add('bg-red-50', 'border-red-500', 'text-red-700');
-                    if(type === 'correct') btn.classList.add('bg-green-50', 'border-green-500', 'text-green-700');
+                    if(type === 'all') btn.classList.add('bg-[#21262d]', 'border-[#58a6ff]', 'text-[#58a6ff]');
+                    if(type === 'wrong') btn.classList.add('bg-[#3b2024]', 'border-red-600', 'text-[#f85149]');
+                    if(type === 'correct') btn.classList.add('bg-[#1f371e]', 'border-green-600', 'text-[#388e3c]');
                 }
             });
         }
@@ -590,9 +708,49 @@
         function closeModal() {
             document.getElementById('result-modal').classList.add('hidden');
         }
+        
+        // These reset functions are used to clear styling immediately upon user selection before submission
+        function resetQuestionState(id) {
+            const block = document.getElementById(`q-block-${id}`);
+            if(block && isSubmitted) {
+                // Remove submission styles
+                block.classList.remove('border-l-4', 'border-green-600', 'border-red-600', 'bg-[#1f371e]/30', 'bg-[#3b2024]/30');
+                
+                // Reset radio button label styles (complex due to custom radio)
+                document.querySelectorAll(`label[for^="g-${id}-"]`).forEach(label => {
+                    label.classList.remove('correct-answer', 'wrong-answer');
+                    // Remove feedback icons/text previously added
+                    label.querySelectorAll('.fa-check-circle, .fa-times-circle, span').forEach(el => {
+                        if (el.textContent.includes('Đáp án đúng')) el.remove();
+                        if (el.classList.contains('fa-check-circle') || el.classList.contains('fa-times-circle')) el.remove();
+                    });
+                });
 
-        function resetQuestionState(id) {}
-        function resetSelectState(id) {}
+                // Hide feedback message
+                const feedback = block.querySelector('.feedback-msg');
+                if(feedback) feedback.classList.add('hidden');
+                
+                // Set isSubmitted to false to allow re-submission check
+                isSubmitted = false;
+                updateSubmitButton();
+            }
+        }
+        
+        function resetSelectState(id) {
+            const select = document.getElementById(`r1-${id}`);
+            if(select && isSubmitted) {
+                // Remove submission styles on select
+                select.className = select.className.replace(/bg-(green|red|red)-100|text-(green|red|red)-800|border-(green|red|red)-500|line-through/g, '').trim();
+                
+                // Remove feedback message for reading part 1
+                const feedbackContainer = document.getElementById('reading-part1-feedback');
+                feedbackContainer.innerHTML = '';
+
+                // Set isSubmitted to false to allow re-submission check
+                isSubmitted = false;
+                updateSubmitButton();
+            }
+        }
 
         // Initialize
         window.onload = function() {
@@ -600,6 +758,10 @@
             renderGrammar();
             renderReading1();
             renderReading2();
+            updateSubmitButton(); // Set initial button state (Submit mode)
+            
+            // Set initial filter style to 'all' (visually, if filter controls were visible)
+            document.querySelector('.filter-btn[data-filter="all"]').classList.add('bg-[#21262d]', 'border-[#58a6ff]', 'text-[#58a6ff]');
         }
 
     </script>
