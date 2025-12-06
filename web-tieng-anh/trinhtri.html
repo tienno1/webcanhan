@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Giáo Dục Chính Trị</title>
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                extend: {
+                    screens: {
+                        'xs': '475px',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* --- Base Styles --- */
+        body {
+            background-color: #f0f2f5; 
+            color: #1f2937; 
+            padding-bottom: 80px; 
+            transition: background-color 0.3s, color 0.3s;
+            scroll-behavior: smooth;
+        }
+        header {
+            background-color: #ffffff;
+            color: #1f2937;
+            border-bottom-color: #e5e7eb;
+        }
+        #score-text {
+            background-color: #f3f4f6;
+            border-color: #d1d5db;
+            color: #374151;
+        }
+        .hover-card, .modal-content {
+            background-color: #ffffff;
+            border-color: #d1d5db;
+        }
+        .hover-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .option-label {
+            background-color: #f9fafb;
+            border-color: #d1d5db;
+            color: #1f2937;
+        }
+        /* Style cho đáp án đang được chọn */
+        .option-input:checked + .option-label {
+            background-color: #e0f2fe;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+        }
+        .correct-answer {
+            background-color: #dcfce7 !important;
+            border-color: #10b981 !important; 
+            color: #065f46 !important;
+            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.4);
+        }
+        .wrong-answer {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important; 
+            color: #991b1b !important;
+        }
+        #control-footer {
+            background-color: #ffffff;
+            border-top-color: #e5e7eb;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        }
+        #control-dropdown {
+            background-color: #ffffff;
+            border-color: #d1d5db;
+            color: #1f2937;
+        }
+        #control-dropdown button:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* --- Dark Theme --- */
+        .dark body { background-color: #0d1117; color: #c9d1d9; }
+        .dark header { background-color: #101319; color: #f0f6fc; border-bottom-color: #30363d; }
+        .dark #score-text { background-color: #21262d; border-color: #30363d; color: #8b949e; }
+        .dark .hover-card, .dark .modal-content { background-color: #161b22; border-color: #30363d; }
+        .dark .hover-card:hover { border-color: #58a6ff; }
+        .dark .option-label { background-color: #161b22; border-color: #30363d; color: #c9d1d9; }
+        .dark .option-input:checked + .option-label { background-color: #1f252c; border-color: #58a6ff; box-shadow: 0 4px 6px -1px rgba(88, 166, 255, 0.2); }
+        .dark .correct-answer { background-color: #1f371e !important; border-color: #388e3c !important; color: #b8e0b8 !important; }
+        .dark .wrong-answer { background-color: #3b2024 !important; border-color: #d32f2f !important; color: #f7a0a0 !important; }
+        .dark #control-footer { background-color: #101319; border-top-color: #30363d; }
+        .dark #control-dropdown { background-color: #161b22; border-color: #30363d; color: #c9d1d9; }
+        .dark #control-dropdown button:hover { background-color: #30363d; }
+
+        /* --- Sidebar Navigator Styles --- */
+        #navigator-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px; /* Độ rộng sidebar */
+            height: 100%;
+            background-color: #ffffff;
+            border-left: 1px solid #d1d5db;
+            transform: translateX(100%); /* Ẩn mặc định bằng transform */
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 60; 
+            padding-top: 70px; 
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+            /* Bỏ display: none ở đây để control bằng transform */
+            display: block; 
+        }
+        .dark #navigator-sidebar {
+            background-color: #0d1117;
+            border-left: 1px solid #30363d;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+        }
+        #navigator-sidebar.open {
+            transform: translateX(0); /* Hiện sidebar */
+        }
+        
+        /* Overlay backdrop cho mobile */
+        #sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 59;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(2px);
+        }
+        #sidebar-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #navigator-toggle-btn {
+            position: fixed;
+            bottom: 120px;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 12px 0 0 12px;
+            box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.2);
+            z-index: 55;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .dark #navigator-toggle-btn {
+            background-color: #58a6ff;
+            color: #0d1117;
+        }
+        #navigator-toggle-btn:hover {
+            width: 55px;
+            background-color: #2563eb;
+        }
+        #navigator-toggle-btn.open {
+            right: 300px; /* Di chuyển cùng sidebar */
+            border-radius: 50%; /* Biến thành nút tròn khi mở */
+            width: 40px;
+            height: 40px;
+            transform: translateX(50%);
+            border: 2px solid white;
+        }
+        #navigator-toggle-btn i {
+            transition: transform 0.4s ease-in-out;
+        }
+        #navigator-toggle-btn.open i {
+            transform: rotate(180deg);
+        }
+
+        /* --- Button colors in sidebar --- */
+        .q-nav-btn {
+            @apply w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center transition-all duration-200 shadow-sm border-2 border-transparent;
+        }
+        
+        /* Câu đã làm: Viền xanh bao quanh, nền nhạt */
+        .q-nav-btn.answered {
+            background-color: #f0fdf4 !important; 
+            border-color: #22c55e !important; 
+            color: #15803d !important; 
+            box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
+        }
+        .dark .q-nav-btn.answered {
+            background-color: #064e3b !important;
+            border-color: #4ade80 !important;
+            color: #4ade80 !important;
+        }
+
+        .q-nav-btn.unanswered {
+            @apply bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-[#21262d] dark:text-[#8b949e] dark:hover:bg-[#30363d];
+        }
+
+        /* --- Hiệu ứng Focus Highlight cho câu hỏi --- */
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); border-color: #3b82f6; transform: scale(1); }
+            50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.1); border-color: #3b82f6; transform: scale(1.01); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); transform: scale(1); }
+        }
+        
+        .target-highlight {
+            animation: glowPulse 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border-color: #3b82f6 !important;
+            z-index: 10;
+            position: relative;
+        }
+        .dark .target-highlight {
+            border-color: #58a6ff !important;
+        }
+
+        /* Animations */
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .modal-content { animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .dropdown-menu { transition: all 0.3s ease-out; transform-origin: bottom left; }
+        .dropdown-open { opacity: 1; transform: translateY(-10px) scale(1); pointer-events: auto; }
+        .dropdown-closed { opacity: 0; transform: translateY(10px) scale(0.95); pointer-events: none; }
+    </style>
+</head>
+<body class="min-h-screen font-sans">
+
+    <!-- Header -->
+    <header class="p-4 shadow-md sticky top-0 z-50 border-b transition-colors duration-300 backdrop-blur-md bg-white/90 dark:bg-[#101319]/90">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl xs:text-2xl font-extrabold uppercase tracking-wider flex items-center">
+                <i class="fas fa-landmark mr-2 text-[#3b82f6] dark:text-[#58a6ff]"></i>
+                <span class="hidden xs:inline">ÔN TẬP GDCT</span>
+                <span class="xs:hidden">GDCT</span>
+            </h1>
+
+            <button id="theme-toggle" onclick="toggleTheme()" class="hidden md:flex items-center justify-center text-sm font-bold py-2 px-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl border border-transparent"></button>
+            
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle-mobile" onclick="toggleTheme()" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-xl transition-colors duration-300 shadow-md border"><i id="theme-icon-mobile" class="fas"></i></button>
+                <div id="score-text" class="text-xs xs:text-sm px-3 py-1 rounded-full font-medium border transition-colors duration-300">Mã đề: 01</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-4 md:p-6 mt-4 max-w-4xl">
+        <!-- Question Section -->
+        <div class="w-full">
+            <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#3b82f6] dark:border-[#58a6ff] transition-colors duration-300">
+                <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
+                    <span class="bg-gray-100 dark:bg-[#21262d] text-[#3b82f6] dark:text-[#58a6ff] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm transition-colors duration-300"><i class="fas fa-list-ol"></i></span>
+                    TRẮC NGHIỆM <span class="text-sm font-normal text-gray-500 dark:text-[#8b949e] ml-3">84 câu hỏi</span>
+                </h2>
+                <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Chọn đáp án đúng nhất cho các câu hỏi. Điểm tính theo thang 10.</p>
+                <div id="quiz-container" class="space-y-6">
+                    <!-- Questions injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div id="sidebar-overlay" onclick="toggleNavigatorSidebar()"></div>
+
+    <!-- Sidebar Navigator -->
+    <!-- Sửa lỗi: Đã xóa class 'md:block hidden' để luôn tồn tại trong DOM và xử lý hiển thị bằng CSS/JS -->
+    <div id="navigator-sidebar" class="bg-white dark:bg-[#0d1117]">
+        <div class="p-4 sm:p-6 h-full overflow-y-auto custom-scrollbar">
+            <h3 class="text-base font-extrabold uppercase tracking-wide mb-4 text-[#3b82f6] dark:text-[#58a6ff] sticky top-0 bg-white dark:bg-[#0d1117] pt-1 pb-2 border-b dark:border-[#30363d] transition-colors duration-300 flex justify-between items-center">
+                <span><i class="fas fa-compass mr-2"></i> Câu hỏi</span>
+                <span class="text-xs font-normal text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">Click để đến câu</span>
+            </h3>
+            <div id="question-navigator-grid" class="grid grid-cols-5 gap-3 pb-20">
+                <!-- Question buttons injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar Toggle Button -->
+    <!-- Sửa lỗi: Đã xóa 'hidden' và 'md:flex' để nút luôn hiện thị trên mọi thiết bị -->
+    <div id="navigator-toggle-btn" class="flex group" onclick="toggleNavigatorSidebar()">
+        <i class="fas fa-th-list"></i>
+    </div>
+
+    <!-- Footer Controls -->
+    <div id="control-footer" class="fixed bottom-0 left-0 right-0 z-50 p-4 border-t shadow-[0_-5px_15px_rgba(0,0,0,0.1)] dark:shadow-[0_-5px_15px_rgba(0,0,0,0.5)] transition-colors duration-300 bg-white/95 dark:bg-[#101319]/95 backdrop-blur">
+        <div class="container mx-auto max-w-7xl flex justify-between items-center">
+            <div class="relative flex items-center gap-3">
+                <div id="stats-panel" class="hidden p-2 rounded-lg border text-center shadow-inner text-sm font-bold min-w-[120px] transition-colors duration-300">
+                    <span class="text-[#3b82f6] dark:text-[#58a6ff] text-lg font-extrabold mr-1"><span id="score-display">0.0</span></span> / 10
+                </div>
+                <div class="relative">
+                    <button onclick="toggleDropdown()" class="group bg-gray-100 hover:bg-gray-200 dark:bg-[#30363d] dark:hover:bg-[#444c56] text-gray-800 dark:text-[#c9d1d9] font-bold py-2 px-3 sm:px-4 rounded-lg transition-all duration-300 border border-gray-300 dark:border-[#444c56] shadow-sm flex items-center justify-center gap-2 text-sm xs:text-base">
+                        <i class="fas fa-sliders-h group-hover:text-blue-500"></i>
+                        <span class="hidden sm:inline">Công cụ</span>
+                    </button>
+                    <div id="control-dropdown" class="dropdown-menu dropdown-closed absolute bottom-full mb-3 left-0 w-60 p-3 rounded-xl shadow-2xl border transition-colors duration-300 z-50 bg-white dark:bg-[#161b22]">
+                        <h3 class="text-sm font-bold uppercase tracking-widest mb-2 border-b pb-1 transition-colors duration-300 text-gray-500">Menu</h3>
+                        <button onclick="resetAndShuffleQuiz(); toggleDropdown()" class="group w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm mb-3 bg-orange-50 hover:bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400">
+                            <i class="fas fa-random mr-2 group-hover:rotate-180 transition-transform duration-500"></i> Trộn đề & Làm lại
+                        </button>
+                        <div id="filter-controls" class="hidden flex-col gap-2 mt-3 pt-3 border-t transition-colors duration-300">
+                            <p class="text-xs font-bold uppercase tracking-widest mb-1 text-gray-400">Xem lại bài</p>
+                            <button onclick="filterQuestions('all'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="all"><i class="fas fa-list mr-2 text-[#3b82f6]"></i> Tất cả</button>
+                            <button onclick="filterQuestions('wrong'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="wrong"><i class="fas fa-times-circle mr-2 text-red-500"></i> Câu sai</button>
+                            <button onclick="filterQuestions('correct'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="correct"><i class="fas fa-check-circle mr-2 text-green-500"></i> Câu đúng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="warning-msg" class="text-yellow-600 dark:text-[#ffab70] text-sm hidden font-bold animate-pulse bg-yellow-50 dark:bg-[#21262d] px-3 py-2 rounded-lg border border-yellow-200 dark:border-yellow-900 transition-colors duration-300 absolute bottom-16 right-0 w-max shadow-lg"><i class="fas fa-exclamation-triangle mr-1"></i> Chưa hoàn thành!</span>
+                <button id="main-submit-btn" onclick="submitQuiz()" class="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-extrabold py-3 px-6 sm:px-8 rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center gap-2 text-base sm:text-lg dark:bg-[#58a6ff] dark:hover:bg-[#79c0ff] dark:text-[#0d1117] active:scale-95 transform">
+                    <span class="hidden xs:inline">NỘP BÀI</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="modal-content rounded-2xl shadow-2xl p-6 sm:p-8 max-w-sm w-full text-center m-4 border relative overflow-hidden transition-colors duration-300">
+            <div class="relative z-10">
+                <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl ring-4 ring-orange-100 dark:ring-orange-900/30"><i class="fas fa-trophy text-4xl text-white drop-shadow-md"></i></div>
+                <h3 class="text-2xl font-black text-gray-900 dark:text-[#f0f6fc] mb-2">KẾT QUẢ</h3>
+                <p class="text-gray-500 dark:text-[#8b949e] mb-6 font-medium">Bạn đã hoàn thành bài thi!</p>
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="bg-green-50 dark:bg-[#1f371e] p-4 rounded-xl border border-green-100 dark:border-green-900/50">
+                        <p class="text-xs text-[#10b981] dark:text-[#388e3c] font-extrabold uppercase tracking-wide mb-1">Số câu đúng</p>
+                        <p class="text-3xl font-black text-[#10b981] dark:text-[#388e3c]"><span id="modal-correct">0</span><span class="text-sm text-gray-400 font-normal">/</span><span id="modal-total" class="text-lg text-gray-400 font-bold">0</span></p>
+                    </div>
+                    <div class="bg-blue-50 dark:bg-[#161b22] p-4 rounded-xl border border-blue-100 dark:border-blue-900/50">
+                        <p class="text-xs text-[#3b82f6] dark:text-[#58a6ff] font-extrabold uppercase tracking-wide mb-1">Tổng điểm</p>
+                        <p class="text-3xl font-black text-[#3b82f6] dark:text-[#58a6ff]" id="modal-score">0.0</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <button onclick="closeModalAndShowReview()" class="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold py-3 px-6 rounded-xl transition shadow-lg hover:shadow-xl text-base dark:bg-[#58a6ff] dark:hover:bg-[#79c0ff] dark:text-[#0d1117]">Xem chi tiết bài làm</button>
+                    <button onclick="resetAndShuffleQuiz(); closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 text-sm dark:bg-[#30363d] dark:hover:bg-[#444c56] dark:text-[#c9d1d9]"><i class="fas fa-redo-alt text-xs"></i> Làm lại đề mới</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* --- DỮ LIỆU CÂU HỎI TỪ FILE WORD --- */
+        const RAW_QUESTIONS = [
+            { id: 1, q: "Theo quan niệm của Chủ nghĩa duy vật biện chứng, bản chất của thế giới là gì?", options: ["Ý thức", "Ý niệm tuyệt đối", "Cảm giác của con người", "Vật chất"], answerIndex: 3 },
+            { id: 2, q: "Vấn đề cơ bản của triết học là?", options: ["Vật chất và ý thức", "Khả năng nhận thức của con người", "Mối quan hệ giữa Vật chất và ý thức", "Lý luận và thực tiễn"], answerIndex: 2 },
+            { id: 3, q: "Vật chất có trước, ý thức có sau, vật chất quyết định ý thức, đây là quan điểm?", options: ["Duy vật", "Nhất nguyên", "Nhị nguyên", "Duy tâm"], answerIndex: 0 },
+            { id: 4, q: "“Vật chất là một phạm trù triết học dùng để chỉ thực tại khách quan được đem lại cho con người trong cảm giác...” Người đưa ra định nghĩa này là ai?", options: ["Các Mác", "Lênin", "Ph.Ăngghen", "Đêmôcrít"], answerIndex: 1 },
+            { id: 5, q: "Phạm trù triết học nào trực tiếp làm sáng tỏ sự tồn tại của vật chất?", options: ["Vận động", "Không gian và thời gian", "Vận động, Không gian, thời gian", "Vận động và đứng im"], answerIndex: 0 },
+            { id: 6, q: "Vận động là phương thức tồn tại của?", options: ["Vật chất", "Ý thức", "Cảm giác", "Tri giác"], answerIndex: 0 },
+            { id: 7, q: "Vật chất có những hình thức vận động cơ bản nào?", options: ["Vận động cơ học; Vận động vật lý; Vận động hóa học", "Cơ học; Vật lý; Hóa học; Sinh học; Xã hội", "Vận động xã hội; Văn học; Hóa học; Sinh học; Vật lý", "Vận động quang học; Hóa học; Sinh học; Xã hội"], answerIndex: 1 },
+            { id: 8, q: "Ý thức được ra đời từ những nguồn gốc nào?", options: ["Bộ óc", "Thế giới khách quan", "Lao động và ngôn ngữ", "Tất cả các phương án trên"], answerIndex: 3 },
+            { id: 9, q: "Bản chất của ý thức là gì?", options: ["Hoạt động thực tiễn", "Phản ánh", "Hiện thực khách quan", "Hình ảnh chủ quan của thế giới khách quan"], answerIndex: 3 },
+            { id: 10, q: "Trong mối quan hệ giữa vật chất và ý thức thì yếu tố nào đóng vai trò quyết định?", options: ["Ý thức", "Cả hai đều quyết định lẫn nhau", "Vật chất", "Không có yếu tố nào quyết định yếu tố nào"], answerIndex: 2 },
+            { id: 11, q: "Mối liên hệ phổ biến là gì?", options: ["Là chỉ sự quy định, tác động qua lại, và chuyển hoá lẫn nhau giữa các sự vật, hiện tượng", "Giữa các mặt của một sự vật, của một hiện tượng trong thế giới", "Cả a, b đều đúng", "Cả a, b đều sai"], answerIndex: 0 },
+            { id: 12, q: "Sự phát triển là gì?", options: ["Là quá trình vận động tiến lên từ thấp đến cao", "Từ đơn giản đến phức tạp", "Từ kém hoàn thiện đến hoàn thiện hơn của sự vật", "Tất cả các phương án trên"], answerIndex: 3 },
+            { id: 13, q: "Quan điểm toàn diện, lịch sử cụ thể và phát triển được rút ra từ nguyên lý nào?", options: ["Nguyên lý mối liên hệ", "Nguyên lý về mối liên hệ phổ biến và Nguyên lý về sự phát triển", "Nguyên lý sự tiến lên", "Nguyên lý về mối liên hệ và Nguyên lý về sự tiến lên"], answerIndex: 1 },
+            { id: 14, q: "Câu thành ngữ “Bứt cây động rừng” cho thấy người Việt Nam từ rất xưa đã:", options: ["Thấy sự tác động, liên hệ giữa các sự vật, hiện tượng", "Thấy sự phát triển của sự vật", "Thấy sự giao động của các sự vật, hiện tượng", "Tất cả các phương án trên"], answerIndex: 0 },
+            { id: 15, q: "Mối liên hệ của các sự vật hiện tượng thể hiện:", options: ["Sự vật này liên hệ khăng khít với sự vật, hiện tượng khác", "Các yếu tố, bộ phận cấu thành sự vật cũng có mối liên hệ với nhau", "Giữa các thời kỳ của một giai đoạn hay giữa các giai đoạn cũng có mối liên hệ với nhau", "Tất cả các phương án trên"], answerIndex: 3 },
+            { id: 16, q: "Các sự vật hiện tượng trong thế giới luôn:", options: ["Đứng im", "Thụt lùi", "Vận động và phát triển không ngừng", "Vừa đứng im vừa vận động"], answerIndex: 2 },
+            { id: 17, q: "Sự phát triển là khuynh hướng chung và phổ biến của:", options: ["Tự nhiên", "Xã hội", "Tư duy của con người", "Tất cả các phương án trên"], answerIndex: 3 },
+            { id: 18, q: "Quy luật nào vạch ra nguồn gốc, động lực của sự phát triển?", options: ["Quy luật thống nhất và đấu tranh của các mặt đối lập", "Quy luật Lượng - Chất", "Quy luật phủ định của phủ định", "Quy luật về QHSX và LLSX"], answerIndex: 0 },
+            { id: 19, q: "Quy luật nào chỉ ra cách thức sự vận động và phát triển của sự vật?", options: ["Quy luật mâu thuẫn", "Quy luật từ thay đổi về lượng dẫn đến thay đổi về chất và ngược lại", "Quy luật phủ định của phủ định", "Quy luật QHSX phù hợp LLSX"], answerIndex: 1 },
+            { id: 20, q: "Quy luật nào vạch ra khuynh hướng của sự vận động, phát triển?", options: ["Quy luật mâu thuẫn", "Quy luật Lượng - Chất", "Quy luật phủ định của phủ định", "Quy luật QHSX phù hợp LLSX"], answerIndex: 2 },
+            { id: 21, q: "Mặt đối lập là gì?", options: ["Là mặt có khuynh hướng biến đổi trái ngược nhau", "Là những mặt, những thuộc tính biến đổi không giống nhau", "Là những mặt, đặc điểm, thuộc tính có khuynh hướng biến đổi trái ngược nhau", "Là những mặt có quá trình biến đổi trái ngược nhau"], answerIndex: 2 },
+            { id: 22, q: "Thống nhất của các mặt đối lập là gì?", options: ["Là sự liên hệ, ràng buộc, nương tựa, quy định lẫn nhau, làm tiền đề tồn tại cho nhau", "Là sự thống nhất của các mặt đối lập không đối kháng nhau", "Là sự thống nhất giữa các mặt, các quá trình của các mặt đối lập", "Là sự thống nhất giữa các mặt của các đặc điểm của các mặt đối lập"], answerIndex: 0 },
+            { id: 23, q: "Đấu tranh của các mặt đối lập là gì?", options: ["Là các mặt đối lập đấu tranh với nhau, loại bỏ nhau", "Là chỉ sự tác động qua lại theo xu hướng bài trừ, phủ định, loại bỏ lẫn nhau", "Là sự thống nhất giữa các mặt, các quá trình của các mặt đối lập", "Là sự chống đối lẫn nhau nhưng lại thống nhất với nhau"], answerIndex: 1 },
+            { id: 24, q: "Phạm trù chỉ tính quy định khách quan vốn có, sự thống nhất hữu cơ của thuộc tính làm cho nó là nó?", options: ["Phạm trù Chất", "Phạm trù Lượng", "Phạm trù Độ", "Phạm trù Bước nhảy"], answerIndex: 0 },
+            { id: 25, q: "Phạm trù chỉ tính quy định khách quan vốn có về mặt số lượng, quy mô, trình độ?", options: ["Phạm trù Chất", "Phạm trù Lượng", "Phạm trù Độ", "Phạm trù Bước nhảy"], answerIndex: 1 },
+            { id: 26, q: "Sự thống nhất giữa Lượng và Chất được thể hiện qua phạm trù nào?", options: ["Phạm trù Độ", "Phạm trù Điểm nút", "Phạm trù Bước nhảy", "Phạm trù Chất"], answerIndex: 0 },
+            { id: 27, q: "Độ là gì?", options: ["Là giới hạn mà trong đó đã có sự biến đổi về Lượng", "Là giới hạn mà trong đó đã có sự biến đổi về Chất", "Là giới hạn có biến đổi về Chất nhưng chưa có biến đổi về Lượng", "Là giới hạn mà trong đó sự biến đổi về Lượng chưa dẫn tới sự biến đổi về Chất"], answerIndex: 3 },
+            { id: 28, q: "Thời điểm tại đó Lượng đổi dẫn đến Chất đổi được gọi là gì?", options: ["Độ cũ", "Bước nhảy", "Điểm nút", "Chất mới"], answerIndex: 2 },
+            { id: 29, q: "Điểm nút là gì?", options: ["Là điểm xẩy ra sự biến đổi về Chất", "Là điểm xẩy ra sự biến đổi về Lượng, Độ cũ bị phá vỡ", "Là thời điểm Độ cũ bị phá vỡ", "Là điểm xẩy ra sự biến đổi về Chất, là thơì điểm Độ cũ bị phá vỡ"], answerIndex: 3 },
+            { id: 30, q: "Khi Chất đổi thì sự vật biến đổi, một sự vật mới ra đời sẽ thông qua?", options: ["Phá vỡ độ cũ", "Điểm nút", "Bước nhảy", "Kết thúc một giai đoạn phát triển"], answerIndex: 2 },
+            { id: 31, q: "Bước nhảy là gì?", options: ["Là phạm trù chỉ sự thay đổi về chất của sự vật", "Là sự kết thúc một giai đoạn phát triển của sự vật", "Là điểm khởi đầu một giai đoạn phát triển mới của sự vật", "Tất cả các phương án trên"], answerIndex: 3 },
+            { id: 32, q: "Chất mới của sự vật hay sự vật mới có thể xuất hiện khi?", options: ["Có sự thay đổi về Lượng đạt tới điểm nút và phá vỡ độ cũ", "Thông qua bước nhảy", "Phá vỡ độ cũ và thông qua bước nhảy", "Sự thay đổi về Lượng của sự vật đạt tới điểm nút và thông qua bước nhảy"], answerIndex: 3 },
+            { id: 33, q: "Căn cứ vào quy mô xác định bước nhảy gồm?", options: ["Bước nhảy toàn bộ", "Bước nhảy đột biến", "Bước nhảy dần dần và đột biến", "Bước nhảy toàn bộ và Bước nhảy cục bộ"], answerIndex: 3 },
+            { id: 34, q: "Căn cứ vào thời gian thì có bước nhảy nào?", options: ["Bước nhảy dần dần", "Bước nhảy toàn bộ", "Bước nhảy dần dần và bước nhảy đột biến", "Bước nhảy toàn bộ và Bước nhảy cục bộ"], answerIndex: 2 },
+            { id: 35, q: "Quá trình chuyển hóa từ vượn người thành người là quá trình thực hiện:", options: ["Bước nhảy dần dần", "Bước nhảy toàn bộ", "Bước nhảy đột biến", "Bước nhảy cục bộ"], answerIndex: 0 },
+            { id: 36, q: "“Tích tiểu thành đại”, “Năng nhặt chặt bị” thể hiện quy luật nào?", options: ["Quy luật lượng chất", "Quy luật mâu thuẫn", "Quy luật phủ định", "Quy luật nhân quả"], answerIndex: 0 },
+            { id: 37, q: "Thế nào là sự phủ định?", options: ["Sự vật cũ mất đi", "Sự vật mới ra đời", "Sự thay thế", "Sự vật cũ mất đi được thay thế bằng một sự vật mới"], answerIndex: 3 },
+            { id: 38, q: "Phủ định biện chứng là gì?", options: ["Tự thân phủ định, gắn liền phát triển, phủ định sạch trơn", "Tự thân phủ định, gắn liền phát triển, tạo điều kiện, tiền đề cho phát triển", "Tác động từ bên ngoài làm phá hủy thủ tiêu sự vật", "Tác động từ bên ngoài, chấm dứt sự phát triển, phủ định sạch trơn"], answerIndex: 1 },
+            { id: 39, q: "Thế nào là phủ định siêu hình?", options: ["Tự thân phủ định, gắn liền phát triển, phủ định sạch trơn", "Tự thân phủ định, tạo tiền đề cho phát triển", "Tác động bên ngoài làm phá hủy thủ tiêu sự vật gắn liền vận động", "Tác động từ bên ngoài làm phá hủy, thủ tiêu, chấm dứt phát triển, phủ định sạch trơn"], answerIndex: 3 },
+            { id: 40, q: "“Hạt thóc xay ra thành hạt gạo”. Hãy xác định đây là phủ định gì?", options: ["Phủ định siêu hình", "Phủ định biện chứng", "Phủ định kế thừa", "Phủ định sạch trơn"], answerIndex: 0 },
+            { id: 41, q: "Chu kỳ của sự phát triển là gì?", options: ["Từ điểm xuất phát, sự vật dường như quay trở lại điểm xuất phát", "Từ điểm xuất phát, qua một số lần phủ định, quay trở lại điểm xuất phát", "Từ điểm xuất phát qua một số lần phủ định, dường như quay trở lại điểm xuất phát nhưng trên cơ sở cao hơn", "Từ điểm xuất phát, dường như quay trở lại điểm xuất phát nhưng trên cơ sở cao hơn"], answerIndex: 2 },
+            { id: 42, q: "Phủ định lần thứ nhất là:", options: ["Chuyển cái phủ định thành cái khẳng định", "Chuyển cái khẳng định thành cái phủ định", "Phủ định của phủ định", "Chuyển khẳng định thành khẳng định nhưng trên cơ sở cao hơn"], answerIndex: 1 },
+            { id: 43, q: "Phủ định lần thứ hai là:", options: ["Chuyển cái phủ định thành cái khẳng định", "Chuyển cái khẳng định thành cái phủ định", "Phủ định của phủ định", "Chuyển khẳng định thành khẳng định nhưng trên cơ sở cao hơn"], answerIndex: 3 },
+            { id: 44, q: "Khuynh hướng của sự phát triển là?", options: ["Theo hình thức xoáy ốc", "Theo hình thức tiến thẳng", "Theo hình thức tiến lên", "Theo hình thức khúc khuỷu"], answerIndex: 0 },
+            { id: 45, q: "Quá trình nhận thức của con người qua các giai đoạn nào?", options: ["Trực quan sinh động", "Từ trực quan sinh động đến tư duy trừu tượng", "Cảm giác", "Tri giác"], answerIndex: 1 },
+            { id: 46, q: "Nhận thức cảm tính bao gồm các hình thức nào?", options: ["Cảm giác, suy luận và biểu tượng", "Tri giác, biểu tượng và khái niệm", "Khái niệm, Phán đoán và Suy luận", "Cảm giác, Tri giác và Biểu tượng"], answerIndex: 3 },
+            { id: 47, q: "Nhận thức lý tính bao gồm các hình thức nào?", options: ["Cảm giác, suy luận và biểu tượng", "Tri giác, biểu tượng và khái niệm", "Biểu tượng và Phán đoán", "Khái niệm, Phán đoán và Suy lý"], answerIndex: 3 },
+            { id: 48, q: "Phương thức sản xuất là gì?", options: ["Hình thức sản xuất trong một giai đoạn nhất định", "Cách tạo ra vật chất trong một giai đoạn nhất định", "Cách thức tiến hành sản xuất vật chất trong một giai đoạn lịch sử nhất định", "Cách thức tiến hành làm việc trong một giai đoạn nhất định"], answerIndex: 2 },
+            { id: 49, q: "Lực lượng sản xuất là gì?", options: ["Mối quan hệ giữa người với người", "Quan hệ giữa con người với tự nhiên", "Mối quan hệ giữa con người với giới tự nhiên, là trình độ chinh phục tự nhiên", "Tất cả các phương án trên"], answerIndex: 2 },
+            { id: 50, q: "Quan hệ sản xuất là gì?", options: ["Mối quan hệ giữa người với người", "Quan hệ giữa con người với giới tự nhiên", "Mối quan hệ giữa người với người trong quá trình sản xuất", "Tất cả đều sai"], answerIndex: 2 },
+            { id: 51, q: "Trong quan hệ sản xuất, yếu tố nào giữ vai trò quan trọng?", options: ["Quan hệ tổ chức - quản lý", "Quan hệ phân phối sản phẩm", "Quan hệ thống trị", "Quan hệ sở hữu về Tư liệu sản xuất"], answerIndex: 3 },
+            { id: 52, q: "Mối quan hệ giữa Lực lượng sản xuất (LLSX) và Quan hệ sản xuất (QHSX) thể hiện thế nào?", options: ["LLSX quyết định", "QHSX quyết định", "Cả hai quyết định lẫn nhau", "LLSX quyết định QHSX và QHSX tác động trở lại LLSX"], answerIndex: 3 },
+            { id: 53, q: "Quan hệ sản xuất tác động trở lại Lực lượng sản xuất như thế nào?", options: ["Phù hợp thì thúc đẩy phát triển", "Lỗi thời, lạc hậu sẽ kìm hãm, phá vỡ", "Cả a và b đều đúng", "Cả a và b đều sai"], answerIndex: 2 },
+            { id: 54, q: "Cơ sở hạ tầng là gì?", options: ["Toàn bộ quan hệ sản xuất của một hình thái kinh tế - xã hội nhất định", "Toàn bộ những QHSX phù hợp cơ cấu kinh tế của một hình thái KT-XH nhất định", "Toàn bộ những quan hệ sản xuất phù hợp cơ cấu kinh tế", "Hình thái kinh tế - xã hội nhất định"], answerIndex: 1 },
+            { id: 55, q: "Cơ sở hạ tầng của một xã hội cụ thể bao gồm?", options: ["Quan hệ sản xuất thống trị", "Quan hệ sản xuất tàn dư của xã hội cũ", "Quan hệ sản xuất mầm mống của xã hội tương lai", "Tất cả các phương án trên"], answerIndex: 3 },
+            { id: 56, q: "Quan điểm, tư tưởng của xã hội là yếu tố thuộc phạm trù nào?", options: ["Kiến trúc thượng tầng", "Quan hệ sản xuất", "Cơ sở hạ tầng", "Tồn tại xã hội"], answerIndex: 0 },
+            { id: 57, q: "Đường lối và chính sách của Đảng ta thuộc?", options: ["Cơ sở hạ tầng", "Kiến trúc thượng tầng", "Quan hệ sản xuất", "Lực lượng sản xuất"], answerIndex: 1 },
+            { id: 58, q: "Mối quan hệ giữa Cơ sở hạ tầng và Kiến trúc thượng tầng?", options: ["Kiến trúc thượng tầng quyết định", "Cơ sở hạ tầng quyết định", "Cả hai quyết định lẫn nhau", "Cơ sở hạ tầng quyết định KTTT và KTTT tác động trở lại CSHT"], answerIndex: 3 },
+            { id: 59, q: "Hàng hóa là gì?", options: ["Sản phẩm của lao động thông qua trao đổi mua bán", "Sản phẩm để trao đổi mua bán trên thị trường", "Sản phẩm để thoả mãn nhu cầu nào đó, mua bán trên thị trường", "Sản phẩm của lao động, có thể thoả mãn nhu cầu nào đó, thông qua trao đổi mua bán"], answerIndex: 3 },
+            { id: 60, q: "Hàng hóa có những thuộc tính nào?", options: ["Giá cả và giá trị", "Giá cả và giá trị sử dụng", "Giá trị sử dụng và giá trị", "Giá trị sử dụng và giá trị trao đổi"], answerIndex: 2 },
+            { id: 61, q: "Giá trị sử dụng của hàng hóa là?", options: ["Giá trị của hàng hóa có thể thỏa mãn nhu cầu nào đó", "Lao động xã hội cần thiết kết tinh trong hàng hóa", "Công dụng của hàng hóa có thể thỏa mãn nhu cầu nào đó của con người", "Giá trị của hàng hóa mà người ta trao đổi mua bán"], answerIndex: 2 },
+            { id: 62, q: "Giá trị hàng hóa là?", options: ["Lao động xã hội cần thiết của người sản xuất hàng hóa kết tinh trong hàng hóa", "Giá cả người mua phải trả", "Là giá trị sử dụng của nó", "Tất cả đều đúng"], answerIndex: 0 },
+            { id: 63, q: "Để tiền chuyển thành tư bản thì nó phải vận động theo công thức nào?", options: ["H-T-H’", "T-H-T’", "H-H-T’", "T-T-H’"], answerIndex: 1 },
+            { id: 64, q: "Tiền tệ chỉ trở thành tư bản khi nào?", options: ["Khi được dùng để mang lại giá trị thặng dư cho nhà tư bản", "Khi được dùng để trao đổi", "Khi được dùng làm phương tiện thanh toán và tiền tệ thế giới", "Tất cả các phương án trên"], answerIndex: 0 },
+            { id: 65, q: "Quy luật cơ bản của sản xuất hàng hóa là?", options: ["Quy luật giá trị", "Quy luật cung cầu", "Quy luật cạnh tranh", "Quy luật giá trị thặng dư"], answerIndex: 0 },
+            { id: 66, q: "Quy luật giá trị có tác dụng gì?", options: ["Điều tiết sản xuất và lưu thông hàng hóa", "Kích thích cải tiến kỹ thuật, tăng năng suất lao động", "Phân hóa người sản xuất thành kẻ giàu, người nghèo", "Tất cả các phương án trên"], answerIndex: 3 },
+            { id: 67, q: "Sức lao động là?", options: ["Tất cả những cá nhân đang làm việc và đang kiếm việc làm", "Toàn bộ thể lực và trí lực tồn tại trong một con người", "Toàn bộ lực lượng lao động của xã hội", "Hoạt động có mục đích, có ý thức của con người"], answerIndex: 1 },
+            { id: 68, q: "Hàng hóa sức lao động có những thuộc tính nào?", options: ["Giá trị và giá trị sử dụng", "Giá trị sử dụng và giá trị trao đổi", "Giá cả và giá trị", "Giá cả và giá trị trao đổi"], answerIndex: 0 },
+            { id: 69, q: "Giá trị sử dụng của hàng hóa sức lao động đặc biệt ở chỗ?", options: ["Thỏa mãn nhu cầu nào đó của con người", "Khi sử dụng sẽ tạo ra giá trị mới lớn hơn giá trị bản thân nó", "Thỏa mãn nhu cầu của nhà tư bản", "Thỏa mãn nhu cầu tiêu dùng"], answerIndex: 1 },
+            { id: 70, q: "Điểm khác nhau giữa hàng hóa sức lao động với hàng hóa thông thường khi sử dụng?", options: ["Không tạo ra giá trị mới lớn hơn", "Có khả năng tạo ra một lượng giá trị mới lớn hơn giá trị của bản thân nó", "Có nhiều hàng hóa mới lớn hơn", "Tạo ra một hàng hóa mới"], answerIndex: 1 },
+            { id: 71, q: "Quy luật kinh tế nào quyết định sự diệt vong hay tồn tại của Chủ nghĩa tư bản?", options: ["Quy luật giá trị thặng dư", "Quy luật cung cầu", "Quy luật cạnh tranh", "Quy luật giá trị"], answerIndex: 0 },
+            { id: 72, q: "Phần giá trị dôi ra ngoài giá trị hàng hoá sức lao động trong nền sản xuất TBCN gọi là?", options: ["Lợi nhuận", "Chi phí sản xuất", "Chi phí lưu thông", "Giá trị thặng dư"], answerIndex: 3 },
+            { id: 73, q: "Giá trị thặng dư là gì?", options: ["Là giá trị mang lại giá trị thặng dư", "Là giá trị sức lao động của người công nhân làm thuê", "Là phần giá trị dôi ra ngoài giá trị SLĐ do công nhân tạo ra và bị nhà tư bản chiếm không", "Tất cả các phương án trên"], answerIndex: 2 },
+            { id: 74, q: "Có mấy phương pháp sản xuất ra giá trị thăng dư?", options: ["2 phương pháp", "3 phương pháp", "4 phương pháp", "5 phương pháp"], answerIndex: 0 },
+            { id: 75, q: "Giá trị thặng dư tuyệt đối là?", options: ["Thu được do rút ngắn thời gian lao động tất yếu", "Do kéo dài ngày lao động trên cơ sở tăng năng suất", "Do rút ngắn thời gian lao động tất yếu khi đk khác không đổi", "Thu được do kéo dài ngày lao động vượt quá thời gian lao động tất yếu"], answerIndex: 3 },
+            { id: 76, q: "Giá trị thặng dư tương đối là?", options: ["Do kéo dài ngày lao động vượt quá thời gian tất yếu", "Do rút ngắn thời gian lđ tất yếu trên cơ sở tăng năng suất lđ xã hội", "Do rút ngắn thời gian lđ tất yếu khi điều kiện khác không đổi", "Do kéo dài ngày lao động khi điều kiện khác không đổi"], answerIndex: 1 },
+            { id: 77, q: "Nguồn gốc duy nhất tạo ra giá trị thặng dư cho nhà tư bản là?", options: ["Lao động của người công nhân", "Máy móc thiết bị", "Người công nhân và máy móc", "Tất cả đều sai"], answerIndex: 0 },
+            { id: 78, q: "Bản chất của chủ nghĩa tư bản là gì?", options: ["Quan hệ bóc lột của tư bản đối với công nhân làm thuê dưới hình thức GTTD", "Quan hệ hợp tác", "Quan hệ đôi bên cùng có lợi", "Tất cả các phương án trên"], answerIndex: 0 },
+            { id: 79, q: "Giai cấp công nhân là giai cấp triệt để cách mạng bởi vì:", options: ["Là giai cấp nghèo nhất", "Là giai cấp không có tài sản", "Là giai cấp thực hiện xóa bỏ chế độ tư hữu", "Tất cả các phương án trên"], answerIndex: 2 },
+            { id: 80, q: "Điều kiện khách quan quyết định sứ mệnh lịch sử của giai cấp công nhân là gì?", options: ["Đông về số lượng", "Tạo ra của cải làm giàu cho xã hội", "Gắn liền với lực lượng sản xuất tiên tiến", "Bị bóc lột nặng nề nhất"], answerIndex: 2 },
+            { id: 81, q: "Xét vị trí trong QHSX tư bản, giai cấp công nhân có đặc trưng cơ bản gì?", options: ["Chiếm số đông, không có tài sản", "Trực tiếp tạo ra của cải vật chất", "Không có tư liệu sản xuất, đi làm thuê, bị bóc lột giá trị thặng dư", "Tất cả đều đúng"], answerIndex: 2 },
+            { id: 82, q: "Để xây dựng Chủ nghĩa xã hội phải trải qua một thời kỳ lịch sử đặc biệt, đó là?", options: ["Thời kỳ quá độ", "Quá độ", "Bỏ qua giai đoạn", "Đốt cháy giai đoạn"], answerIndex: 0 },
+            { id: 83, q: "Thời kỳ quá độ là gì?", options: ["Cải tạo xã hội cũ sang xã hội mới", "Đốt cháy giai đoạn chuyển sang xã hội mới", "Cải biến cách mạng sâu sắc, triệt để, toàn diện từ xã hội cũ sang xã hội mới", "Cải cách toàn diện từ xã hội cũ sang xã hội mới"], answerIndex: 2 },
+            { id: 84, q: "Khi nói “Quá độ lên CNXH bỏ qua chế độ TBCN\" thì bỏ qua yếu tố nào?", options: ["Bỏ qua các yếu tố kinh tế gắn với CNTB", "Bỏ qua việc xác lập vị trí thống trị của QHSX và KTTT TBCN", "Bỏ qua các yếu tố chính trị và văn hóa", "Tất cả các phương án trên"], answerIndex: 1 }
+        ];
+
+        const ABC = ['A', 'B', 'C', 'D'];
+        let isSubmitted = false;
+        let isDropdownOpen = false;
+        let isNavigatorOpen = false;
+        let currentQuestions = [];
+        const TOTAL_QUESTIONS = RAW_QUESTIONS.length;
+        const POINT_PER_QUESTION = 10 / TOTAL_QUESTIONS;
+
+        /* --- LOGIC XỬ LÝ CHUNG --- */
+        
+        function updateThemeButton(theme) {
+            const btnDesktop = document.getElementById('theme-toggle');
+            const btnMobile = document.getElementById('theme-toggle-mobile');
+            const iconMobile = document.getElementById('theme-icon-mobile');
+            
+            [btnDesktop, btnMobile].forEach(btn => {
+                if (btn) btn.className = btn.className.replace(/bg-([a-z]+)-[0-9]{1,3}|text-([a-z]+)-[0-9]{1,3}|dark:bg-\[[#0-9a-f]{6}\]|dark:hover:bg-\[[#0-9a-f]{6}\]|bg-white|text-gray-900|dark:bg-gray-700|dark:hover:bg-gray-600/g, '').trim();
+            });
+
+            if (theme === 'dark') {
+                btnDesktop.innerHTML = '<i class="fas fa-sun mr-2 text-yellow-500"></i> GIAO DIỆN SÁNG';
+                btnDesktop.classList.add('bg-white', 'text-gray-900', 'hover:bg-gray-100', 'dark:bg-gray-700', 'dark:text-white', 'dark:hover:bg-gray-600', 'border-gray-300', 'dark:border-gray-600');
+                if (iconMobile) { iconMobile.classList.remove('fa-sun', 'text-yellow-500'); iconMobile.classList.add('fa-moon', 'text-gray-300'); }
+                btnMobile.classList.add('bg-gray-700', 'hover:bg-gray-600', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'border-gray-600');
+            } else {
+                btnDesktop.innerHTML = '<i class="fas fa-moon mr-2 text-gray-700"></i> GIAO DIỆN TỐI';
+                btnDesktop.classList.add('bg-gray-900', 'text-white', 'hover:bg-gray-700', 'border-gray-900');
+                if (iconMobile) { iconMobile.classList.remove('fa-moon', 'text-gray-300'); iconMobile.classList.add('fa-sun', 'text-yellow-500'); }
+                btnMobile.classList.add('bg-gray-100', 'hover:bg-gray-200', 'border-gray-300');
+            }
+        }
+
+        function setInitialTheme() {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                updateThemeButton('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeButton('light');
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            const theme = isDark ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            updateThemeButton(theme);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /* --- LOGIC KHỞI TẠO DỮ LIỆU --- */
+
+        function initData() {
+            // 1. Trộn thứ tự câu hỏi
+            let questionsToShuffle = [...RAW_QUESTIONS];
+            questionsToShuffle = shuffleArray(questionsToShuffle);
+
+            // 2. Trộn thứ tự đáp án trong mỗi câu
+            currentQuestions = questionsToShuffle.map((item, index) => {
+                let opts = item.options.map((optText, index) => ({
+                    text: optText,
+                    originalIndex: index,
+                    isCorrect: index === item.answerIndex
+                }));
+                // Xáo trộn đáp án
+                opts = shuffleArray(opts);
+                return { 
+                    ...item, 
+                    displayIndex: index + 1, // Thứ tự hiển thị sau khi trộn (1 - 84)
+                    shuffledOptions: opts 
+                };
+            });
+        }
+
+        /* --- LOGIC RENDER VÀ CẬP NHẬT GIAO DIỆN --- */
+
+        function renderQuestions() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = currentQuestions.map((item, index) => `
+                <div class="question-block hover-card p-4 rounded-xl border border-gray-300 dark:border-[#30363d] transition-all duration-300" id="q-block-${item.id}" data-display-index="${item.displayIndex}">
+                    <p class="font-bold text-base sm:text-lg text-gray-900 dark:text-[#f0f6fc] mb-4 flex items-start" id="q-${item.displayIndex}">
+                        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-3 py-1 rounded-full mr-3 text-sm shrink-0 font-extrabold shadow-sm border border-blue-200 dark:border-blue-800">Câu ${item.displayIndex}</span> 
+                        <span class="leading-relaxed option-text-wrap pt-0.5">${item.q}</span>
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        ${item.shuffledOptions.map((opt, idx) => `
+                            <div class="relative group">
+                                <input type="radio" name="q-${item.id}" id="q-${item.id}-${idx}" value="${idx}" class="option-input hidden peer" onchange="handleAnswerChange(${item.id}, ${item.displayIndex})">
+                                <label for="q-${item.id}-${idx}" class="option-label block w-full p-4 border-2 rounded-xl cursor-pointer shadow-sm relative overflow-hidden transition-all duration-200 hover:bg-gray-50 dark:hover:bg-[#1c2128]">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mr-3 font-bold text-gray-600 dark:text-gray-300 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors">${ABC[idx]}</div>
+                                        <span class="option-text-wrap font-medium pt-1">${opt.text}</span>
+                                    </div>
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback-msg hidden mt-4 p-4 rounded-xl text-sm font-semibold border-l-4 shadow-sm animate-pulse"></div>
+                </div>
+            `).join('');
+            
+            renderNavigator();
+        }
+
+        function renderNavigator() {
+            const grid = document.getElementById('question-navigator-grid');
+            if (!grid) return;
+
+            const sortedQuestions = [...currentQuestions].sort((a, b) => a.displayIndex - b.displayIndex);
+
+            grid.innerHTML = sortedQuestions.map(q => {
+                const isAnswered = document.querySelector(`input[name="q-${q.id}"]:checked`);
+                const statusClass = isAnswered ? 'answered' : 'unanswered';
+                
+                return `
+                    <button id="nav-btn-${q.displayIndex}" 
+                            onclick="scrollToQuestion(${q.displayIndex})" 
+                            class="q-nav-btn ${statusClass}">
+                        ${q.displayIndex}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function handleAnswerChange(questionId, displayIndex) {
+            // Cập nhật trạng thái của nút điều hướng NGAY LẬP TỨC
+            const navBtn = document.getElementById(`nav-btn-${displayIndex}`);
+            if (navBtn) {
+                // Thêm class answered để có viền xanh lá
+                navBtn.classList.add('answered');
+                navBtn.classList.remove('unanswered');
+            }
+            
+            // Highlight số câu trên sidebar một chút để user thấy phản hồi
+            if(navBtn) {
+                navBtn.classList.add('scale-110');
+                setTimeout(() => navBtn.classList.remove('scale-110'), 200);
+            }
+
+            resetQuestionState(questionId);
+        }
+
+        function scrollToQuestion(displayIndex) {
+            const targetElement = document.getElementById(`q-block-${currentQuestions.find(q => q.displayIndex === displayIndex).id}`);
+            if (targetElement) {
+                // Scroll mượt mà
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // --- ADDED: Hiệu ứng sáng lên (Highlight) ---
+                // Xóa class highlight cũ nếu có để reset animation
+                document.querySelectorAll('.target-highlight').forEach(el => el.classList.remove('target-highlight'));
+                
+                // Thêm class highlight mới
+                targetElement.classList.add('target-highlight');
+                
+                // Tự động tắt highlight sau khi animation chạy xong (1.5s)
+                setTimeout(() => {
+                    targetElement.classList.remove('target-highlight');
+                }, 1500);
+
+                // Tự động đóng sidebar sau khi chọn trên mobile/tablet
+                if (window.innerWidth < 768 && isNavigatorOpen) {
+                    toggleNavigatorSidebar();
+                }
+            }
+        }
+
+        function toggleNavigatorSidebar() {
+            const sidebar = document.getElementById('navigator-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const toggleBtn = document.getElementById('navigator-toggle-btn');
+            
+            isNavigatorOpen = !isNavigatorOpen;
+
+            if (isNavigatorOpen) {
+                sidebar.classList.add('open');
+                overlay.classList.add('open');
+                toggleBtn.classList.add('open');
+            } else {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+                toggleBtn.classList.remove('open');
+            }
+        }
+
+        function toggleDropdown(forceOpen = false) {
+            const dropdown = document.getElementById('control-dropdown');
+            if (forceOpen) {
+                isDropdownOpen = true;
+            } else {
+                isDropdownOpen = !isDropdownOpen;
+            }
+            
+            if (isDropdownOpen) {
+                dropdown.classList.remove('dropdown-closed');
+                dropdown.classList.add('dropdown-open');
+            } else {
+                dropdown.classList.remove('dropdown-open');
+                dropdown.classList.add('dropdown-closed');
+            }
+        }
+
+        function updateSubmitButton(correctCount = 0) {
+            const btn = document.getElementById('main-submit-btn');
+            const scoreTextElement = document.getElementById('score-text');
+            const filterControls = document.getElementById('filter-controls');
+
+            if (isSubmitted) {
+                btn.onclick = () => { /* No-op */ };
+                btn.innerHTML = `<i class="fas fa-check-double mr-2"></i> ĐÃ HOÀN THÀNH`;
+                btn.classList.remove('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
+                btn.classList.add('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
+                
+                const score = (correctCount * POINT_PER_QUESTION).toFixed(1);
+                scoreTextElement.innerHTML = `Đúng: ${correctCount}/${TOTAL_QUESTIONS} | Điểm: ${score}`;
+                scoreTextElement.classList.add('correct-answer');
+                scoreTextElement.classList.remove('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
+
+                document.getElementById('stats-panel').classList.remove('hidden');
+                document.getElementById('score-display').innerText = score;
+                filterControls.classList.replace('hidden', 'flex');
+
+            } else {
+                btn.onclick = submitQuiz;
+                btn.innerHTML = `<span class="hidden xs:inline">NỘP BÀI</span><i class="fas fa-paper-plane ml-2"></i>`;
+                btn.classList.remove('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
+                btn.classList.add('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
+
+                scoreTextElement.innerHTML = `Mã đề: 01`;
+                scoreTextElement.classList.remove('correct-answer');
+                scoreTextElement.classList.add('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
+
+                document.getElementById('stats-panel').classList.add('hidden');
+                filterControls.classList.replace('flex', 'hidden');
+                if (isDropdownOpen) toggleDropdown();
+            }
+        }
+
+        function submitQuiz() {
+            if (isSubmitted) return;
+
+            let correctCount = 0;
+            let unAnswered = false;
+
+            currentQuestions.forEach(q => {
+                const selectedInput = document.querySelector(`input[name="q-${q.id}"]:checked`);
+                const block = document.getElementById(`q-block-${q.id}`);
+                const feedback = block.querySelector('.feedback-msg');
+                const navBtn = document.getElementById(`nav-btn-${q.displayIndex}`);
+                
+                block.classList.remove('border-gray-300', 'dark:border-[#30363d]', 'border-l-4', 'border-green-600', 'border-red-600', 'bg-green-50/50', 'bg-red-50/50', 'dark:bg-[#1f371e]/30', 'dark:bg-[#3b2024]/30');
+                feedback.classList.remove('hidden');
+
+                const correctShuffledIndex = q.shuffledOptions.findIndex(opt => opt.isCorrect);
+                const correctLabelId = `q-${q.id}-${correctShuffledIndex}`;
+                const correctLabel = document.querySelector(`label[for="${correctLabelId}"]`);
+                
+                document.querySelectorAll(`label[for^="q-${q.id}-"]`).forEach(label => {
+                    label.classList.remove('correct-answer', 'wrong-answer');
+                    label.querySelectorAll('.fa-check-circle, .fa-times-circle').forEach(el => el.remove());
+                    const correctTag = label.querySelector('.correct-tag');
+                    if(correctTag) correctTag.remove();
+                });
+                
+                // Reset style nút điều hướng trước khi set màu kết quả
+                if (navBtn) {
+                    navBtn.classList.remove('answered', 'unanswered', 'bg-red-500', 'bg-green-500', 'text-white');
+                    // Xóa style viền xanh lúc đang làm
+                    navBtn.style.borderColor = ""; 
+                    navBtn.style.backgroundColor = "";
+                    navBtn.style.color = "";
+                }
+
+                if (selectedInput) {
+                    const selectedIdx = parseInt(selectedInput.value);
+                    const selectedOption = q.shuffledOptions[selectedIdx];
+                    const selectedLabel = document.querySelector(`label[for="${selectedInput.id}"]`);
+
+                    if (selectedOption.isCorrect) {
+                        correctCount++;
+                        block.dataset.status = "correct";
+                        selectedLabel.classList.add('correct-answer');
+                        selectedLabel.querySelector('.option-text-wrap').innerHTML += ' <i class="fas fa-check-circle text-green-600 dark:text-[#b8e0b8] float-right text-base mt-0.5"></i>';
+                        block.classList.add('border-l-4', 'border-green-600', 'bg-green-50/50', 'dark:bg-[#1f371e]/30');
+                        feedback.classList.add('hidden');
+                        if (navBtn) {
+                            navBtn.classList.add('bg-green-500', 'text-white', 'hover:bg-green-600', 'border-green-600'); 
+                            // Ghi đè style answered cũ
+                            navBtn.setAttribute('style', 'background-color: #22c55e !important; color: white !important; border-color: transparent !important;');
+                        }
+                    } else {
+                        block.dataset.status = "wrong";
+                        selectedLabel.classList.add('wrong-answer');
+                        selectedLabel.querySelector('.option-text-wrap').innerHTML += ' <i class="fas fa-times-circle text-red-600 dark:text-[#f7a0a0] float-right text-base mt-0.5"></i>';
+                        block.classList.add('border-l-4', 'border-red-600', 'bg-red-50/50', 'dark:bg-[#3b2024]/30');
+                        
+                        correctLabel.classList.add('correct-answer');
+                        correctLabel.querySelector('.option-text-wrap').innerHTML += ' <span class="correct-tag float-right text-xs font-bold uppercase bg-green-600 dark:bg-[#388e3c] text-white px-2 py-0.5 rounded-full ml-2 shadow-sm">Đáp án đúng</span>';
+                        
+                        feedback.classList.remove('hidden');
+                        feedback.classList.add('bg-gray-100', 'text-red-600', 'border-red-600', 'border-l-4', 'dark:bg-[#21262d]', 'dark:text-[#f7a0a0]');
+                        feedback.innerHTML = `<i class="fas fa-info-circle mr-2"></i> Rất tiếc! Bạn đã chọn sai.`;
+                        if (navBtn) {
+                            navBtn.classList.add('bg-red-500', 'text-white', 'hover:bg-red-600');
+                            navBtn.setAttribute('style', 'background-color: #ef4444 !important; color: white !important; border-color: transparent !important;');
+                        }
+                    }
+                } else {
+                    unAnswered = true;
+                    block.dataset.status = "wrong"; 
+                    block.classList.add('border-l-4', 'border-red-600', 'bg-red-50/50', 'dark:bg-[#3b2024]/30');
+                    
+                    correctLabel.classList.add('correct-answer');
+                    correctLabel.querySelector('.option-text-wrap').innerHTML += ' <span class="correct-tag float-right text-xs font-bold uppercase bg-green-600 dark:bg-[#388e3c] text-white px-2 py-0.5 rounded-full ml-2 shadow-sm">Đáp án đúng</span>';
+                    
+                    feedback.classList.remove('hidden');
+                    feedback.classList.add('bg-gray-100', 'text-yellow-600', 'border-red-600', 'border-l-4', 'dark:bg-[#21262d]', 'dark:text-[#ffab70]');
+                    feedback.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i> Bạn chưa làm câu này.`;
+                    if (navBtn) {
+                        navBtn.classList.add('bg-red-500', 'text-white', 'hover:bg-red-600');
+                        navBtn.setAttribute('style', 'background-color: #ef4444 !important; color: white !important; border-color: transparent !important;');
+                    }
+                }
+            });
+
+            if(unAnswered) {
+                document.getElementById('warning-msg').classList.remove('hidden');
+                setTimeout(() => document.getElementById('warning-msg').classList.add('hidden'), 5000);
+            }
+
+            isSubmitted = true;
+            updateSubmitButton(correctCount);
+            
+            const finalScore = (correctCount * POINT_PER_QUESTION).toFixed(1);
+            
+            document.getElementById('modal-correct').innerText = correctCount;
+            document.getElementById('modal-total').innerText = TOTAL_QUESTIONS;
+            document.getElementById('modal-score').innerText = finalScore;
+            document.getElementById('result-modal').classList.remove('hidden');
+
+            filterQuestions('all'); 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function closeModalAndShowReview() {
+            closeModal();
+            document.getElementById('filter-controls').classList.replace('hidden', 'flex');
+            toggleDropdown(true);
+            filterQuestions('all'); 
+        }
+
+        function resetAndShuffleQuiz() {
+            initData();
+            isSubmitted = false;
+            renderQuestions();
+            document.getElementById('warning-msg').classList.add('hidden');
+            updateSubmitButton();
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                 btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9] shadow-sm";
+                 if(btn.dataset.filter === 'all') btn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]'); 
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterQuestions(type) {
+            const questions = document.querySelectorAll('.question-block');
+            questions.forEach(q => {
+                if (type === 'all') {
+                    q.classList.remove('hidden');
+                } else if (type === 'wrong') {
+                    if (q.dataset.status === 'wrong') q.classList.remove('hidden'); else q.classList.add('hidden');
+                } else if (type === 'correct') {
+                    if (q.dataset.status === 'correct') q.classList.remove('hidden'); else q.classList.add('hidden');
+                }
+            });
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9] shadow-sm";
+                if (btn.dataset.filter === type) {
+                    if(type === 'all') btn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]');
+                    if(type === 'wrong') btn.classList.add('bg-red-100', 'border-red-500', 'text-red-700', 'dark:bg-[#3b2024]', 'dark:border-red-600', 'dark:text-red-500');
+                    if(type === 'correct') btn.classList.add('bg-green-100', 'border-green-500', 'text-green-700', 'dark:bg-[#1f371e]', 'dark:border-green-600', 'dark:text-green-500');
+                }
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').classList.add('hidden');
+        }
+        
+        function resetQuestionState(id) {
+            const block = document.getElementById(`q-block-${id}`);
+            if(block && isSubmitted) {
+                block.classList.remove('border-l-4', 'border-green-600', 'border-red-600', 'bg-green-50/50', 'bg-red-50/50', 'dark:bg-[#1f371e]/30', 'dark:bg-[#3b2024]/30');
+                block.classList.add('border-gray-300', 'dark:border-[#30363d]');
+
+                document.querySelectorAll(`label[for^="q-${id}-"]`).forEach(label => {
+                    label.classList.remove('correct-answer', 'wrong-answer');
+                    label.querySelectorAll('.fa-check-circle, .fa-times-circle').forEach(el => el.remove());
+                    const correctTag = label.querySelector('.correct-tag');
+                    if(correctTag) correctTag.remove();
+                });
+
+                const feedback = block.querySelector('.feedback-msg');
+                if(feedback) feedback.classList.add('hidden');
+                
+                isSubmitted = false;
+                updateSubmitButton();
+            }
+        }
+
+        window.onload = function() {
+            setInitialTheme();
+            initData();
+            renderQuestions();
+            updateSubmitButton();
+            const allFilterBtn = document.querySelector('.filter-btn[data-filter="all"]');
+            if(allFilterBtn) allFilterBtn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]');
+        }
+    </script>
+</body>
+</html>
