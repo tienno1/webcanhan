@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- Đảm bảo giao diện co giãn theo chiều rộng màn hình thiết bị -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài Tập Tiếng Anh - Tối Ưu Phản Hồi</title>
+    <title>Bài Tập Tiếng Anh - Mã Đề 02</title>
     <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -272,7 +272,7 @@
             
             <h1 class="text-xl xs:text-2xl font-extrabold uppercase tracking-wider flex items-center">
                 <i class="fas fa-book-reader mr-2 text-[#3b82f6] dark:text-[#58a6ff]"></i>
-                Ôn tập tiếng anh
+                ôn tập tiếng anh
             </h1>
 
             <!-- Nút chuyển đổi giao diện (Đã di chuyển ra giữa Header) -->
@@ -285,9 +285,17 @@
                 <button id="theme-toggle-mobile" onclick="toggleTheme()" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-xl transition-colors duration-300 shadow-md border">
                     <i id="theme-icon-mobile" class="fas"></i>
                 </button>
-
-                <div id="score-text" class="text-xs xs:text-sm px-3 py-1 rounded-full font-medium border transition-colors duration-300">
-                    Mã đề: 02
+                <!-- Thanh chọn đề (Dropdown) -->
+                <div class="relative group">
+                    <select onchange="if(this.value) window.location.href=this.value" class="appearance-none bg-gray-100 dark:bg-[#21262d] text-gray-700 dark:text-[#c9d1d9] text-xs xs:text-sm font-bold py-1.5 pl-3 pr-8 rounded-full border border-gray-300 dark:border-[#30363d] focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-colors duration-300 cursor-pointer">
+                        <option value="../DE1tienganh/De1.html">Mã đề: 01</option>
+                        <option value="../DE2tienganh/De2.html" selected>Mã đề: 02</option>
+                        <option value="../DE3tienganh/De3.html" >Mã đề: 03</option>
+                        <option value="../DE4tienganh/De4.html">Mã đề: 04</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -332,7 +340,7 @@
                 </h2>
                 <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Read the text again and decide whether the following sentences are True (T), False (F) or Not given (NG).</p>
                 
-                <div class="bg-gray-100 dark:bg-[#21262d] p-4 rounded-lg border border-gray-300 dark:border-[#30363d] mb-6 max-h-72 overflow-y-auto shadow-inner transition-colors duration-300">
+                <div class="bg-gray-100 dark:bg-[#21262d] p-4 rounded-lg border border-gray-300 dark:border-[#30363d] mb-6 max-h-80 overflow-y-auto shadow-inner transition-colors duration-300">
                     <h3 class="font-extrabold text-center mb-3 text-[#f97316] dark:text-[#ffab70] text-lg uppercase tracking-wider">My Travel Page</h3>
                     <p class="mb-2 text-sm sm:text-base"><strong>Hi. I’m Maria.</strong> I live in Australia, but right now I’m travelling in Vietnam. Welcome to my Page!</p>
                     <p class="mb-2 text-sm sm:text-base"><strong>Lagi Town:</strong> This is my last day in Lagi town, Binh Thuan province! I’m on the beach now. It is warm and sunny here. There was a little rain yesterday, but the weather is fine today. I’ll be sorry to leave today because I’ve really enjoyed my time here. People are more sociable than I’ve expected, so it’s easy for me to make some friends. For me, the best things are the seafood and the environment – the food is so delicious and the air is fresh. Anyway, this afternoon I’m going to take a coach to Saigon – the busiest city in Vietnam.</p>
@@ -353,6 +361,7 @@
             
             <!-- Left Side: Dropdown Controls -->
             <div class="relative flex items-center gap-3">
+                <!-- Điểm số (Được khôi phục) -->
                 <div id="stats-panel" class="hidden p-2 rounded-lg border text-center shadow-inner text-sm font-bold min-w-[120px] transition-colors duration-300">
                     <span class="text-[#3b82f6] dark:text-[#58a6ff] text-lg font-extrabold mr-1"><span id="score-display">0.0</span></span>
                     / 10
@@ -360,7 +369,7 @@
 
                 <!-- Dropdown for Controls -->
                 <div class="relative" id="dropdown-control-wrapper">
-                    <button onclick="toggleDropdown()" class="group bg-gray-200 hover:bg-gray-300 dark:bg-[#30363d] dark:hover:bg-[#444c56] text-gray-800 dark:text-[#c9d1d9] font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-gray-300 dark:border-[#444c56] shadow-md flex items-center justify-center gap-2 text-sm xs:text-base">
+                    <button id="gear-btn" onclick="toggleDropdown(event)" class="group bg-gray-200 hover:bg-gray-300 dark:bg-[#30363d] dark:hover:bg-[#444c56] text-gray-800 dark:text-[#c9d1d9] font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-gray-300 dark:border-[#444c56] shadow-md flex items-center justify-center gap-2 text-sm xs:text-base">
                         <i class="fas fa-cogs group-hover:rotate-180 transition-transform duration-500"></i>
                         <span class="hidden sm:inline">Bảng Điều Khiển</span>
                     </button>
@@ -378,13 +387,13 @@
                         <!-- Filter Controls (Hidden until submitted) -->
                         <div id="filter-controls" class="hidden flex-col gap-2 mt-3 pt-3 border-t transition-colors duration-300">
                             <p class="text-xs font-bold uppercase tracking-widest mb-1">Bộ Lọc Câu Hỏi</p>
-                            <button onclick="filterQuestions('all'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="all">
+                            <button onclick="filterQuestions('all');" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="all">
                                 <i class="fas fa-list mr-2 text-[#3b82f6] dark:text-[#58a6ff]"></i> Tất cả câu hỏi
                             </button>
-                            <button onclick="filterQuestions('wrong'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="wrong">
+                            <button onclick="filterQuestions('wrong');" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="wrong">
                                 <i class="fas fa-times-circle mr-2 text-red-500"></i> Chỉ xem câu sai
                             </button>
-                            <button onclick="filterQuestions('correct'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="correct">
+                            <button onclick="filterQuestions('correct');" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="correct">
                                 <i class="fas fa-check-circle mr-2 text-green-500"></i> Chỉ xem câu đúng
                             </button>
                         </div>
@@ -394,10 +403,7 @@
 
             <!-- Right Side: Submit/Review Button -->
             <div class="flex items-center gap-3">
-                <span id="warning-msg" class="text-yellow-600 dark:text-[#ffab70] text-sm hidden font-bold animate-pulse bg-gray-100 dark:bg-[#21262d] px-3 py-1 rounded-lg border border-gray-300 dark:border-[#30363d] transition-colors duration-300">
-                    <i class="fas fa-exclamation-triangle mr-1"></i> Chưa làm xong!
-                </span>
-                <button id="main-submit-btn" onclick="submitQuiz()" class="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-extrabold py-3 px-8 rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center gap-2 text-base sm:text-lg dark:bg-[#58a6ff] dark:hover:bg-[#79c0ff] dark:text-[#0d1117]">
+                <button id="main-submit-btn" onclick="submitQuiz(event)" class="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-extrabold py-3 px-8 rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all duration-300 flex items-center gap-2 text-base sm:text-lg dark:bg-[#58a6ff] dark:hover:bg-[#79c0ff] dark:text-[#0d1117]">
                     <i class="fas fa-paper-plane"></i> NỘP BÀI
                 </button>
             </div>
@@ -439,14 +445,14 @@
     </div>
 
     <script>
-        // --- DATA SOURCE (Using data from test 2.docx) ---
+        // --- DATA SOURCE (Content from De2.html) ---
         const RAW_GRAMMAR = [
             { id: 5, q: "Will you lend me £10? I promise __________ it back to you tomorrow.", options: ["give", "I’m going to give", "I’ll give"], answerIndex: 2 }, 
             { id: 6, q: "__________ a barbecue tomorrow. It's all planned, so I hope it won't rain.", options: ["We’re going to have", "have", "We’ll have"], answerIndex: 0 }, 
             { id: 7, q: "__________ a holiday recently?", options: ["Did you have", "Have you had", "Have you have"], answerIndex: 1 }, 
             { id: 8, q: "We __________ last week. We __________ here for 5 days.", options: ["arrived / have been", "have arrived / were", "have arrived / have been"], answerIndex: 0 }, 
             { id: 9, q: "My brother thinks this restaurant is __________ than that restaurant.", options: ["more worse", "badder", "worse"], answerIndex: 2 }, 
-            { id: 10, q: "Did you know that crossing a busy street is __________ flying in an airplane?", options: ["most dangerous than", "the more dangerous", "C. more dangerous than"], answerIndex: 2 }, 
+            { id: 10, q: "Did you know that crossing a busy street is __________ flying in an airplane?", options: ["most dangerous than", "the more dangerous", "more dangerous than"], answerIndex: 2 }, 
             { id: 11, q: "They __________ back to their country last month.", options: ["fly", "flew", "flies"], answerIndex: 1 }, 
             { id: 12, q: "She didn’t answer the phone because she __________ at home.", options: ["didn’t", "weren’t", "wasn’t"], answerIndex: 2 } 
         ];
@@ -473,30 +479,21 @@
         let currentGrammar = [];
         let currentReading1 = [];
 
-        // --- THEME SWITCHING LOGIC (ĐÃ CẬP NHẬT) ---
+        // --- THEME SWITCHING LOGIC ---
 
-        /**
-         * Cập nhật hiển thị icon và text của nút chuyển đổi giao diện
-         * @param {string} theme - 'light' hoặc 'dark'
-         */
         function updateThemeButton(theme) {
             const btnDesktop = document.getElementById('theme-toggle');
             const btnMobile = document.getElementById('theme-toggle-mobile');
             const iconMobile = document.getElementById('theme-icon-mobile');
             
-            // Đặt lại các lớp mặc định cho cả hai nút
             [btnDesktop, btnMobile].forEach(btn => {
                 if (btn) btn.className = btn.className.replace(/bg-([a-z]+)-[0-9]{1,3}|text-([a-z]+)-[0-9]{1,3}|dark:bg-\[[#0-9a-f]{6}\]|dark:hover:bg-\[[#0-9a-f]{6}\]|bg-white|text-gray-900|dark:bg-gray-700|dark:hover:bg-gray-600/g, '').trim();
             });
 
             if (theme === 'dark') {
-                // Chế độ Tối (Nền Đen) -> Hiển thị nút "Chuyển sang TRẮNG"
-                
-                // Desktop Button
                 btnDesktop.innerHTML = '<i class="fas fa-sun mr-2 text-yellow-500"></i> CHUYỂN SANG TRẮNG';
                 btnDesktop.classList.add('bg-white', 'text-gray-900', 'hover:bg-gray-100', 'dark:bg-gray-700', 'dark:text-white', 'dark:hover:bg-gray-600', 'border-gray-300', 'dark:border-gray-600');
                 
-                // Mobile Button
                 if (iconMobile) {
                     iconMobile.classList.remove('fa-sun', 'text-yellow-500');
                     iconMobile.classList.add('fa-moon', 'text-gray-300');
@@ -504,13 +501,9 @@
                 btnMobile.classList.add('bg-gray-700', 'hover:bg-gray-600', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'border-gray-600');
 
             } else {
-                // Chế độ Sáng (Nền Trắng) -> Hiển thị nút "Chuyển sang ĐEN"
-                
-                // Desktop Button
                 btnDesktop.innerHTML = '<i class="fas fa-moon mr-2 text-gray-700"></i> CHUYỂN SANG ĐEN';
                 btnDesktop.classList.add('bg-gray-900', 'text-white', 'hover:bg-gray-700', 'border-gray-900');
                 
-                // Mobile Button
                 if (iconMobile) {
                     iconMobile.classList.remove('fa-moon', 'text-gray-300');
                     iconMobile.classList.add('fa-sun', 'text-yellow-500');
@@ -520,14 +513,11 @@
         }
 
         function setInitialTheme() {
-            // Mặc định là Light mode nếu không có gì trong localStorage HOẶC giá trị là 'light'
             const storedTheme = localStorage.getItem('theme');
-            
             if (storedTheme === 'dark') {
                 document.documentElement.classList.add('dark');
                 updateThemeButton('dark');
             } else {
-                // Mặc định luôn là 'light' (nền trắng)
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('theme', 'light');
                 updateThemeButton('light');
@@ -540,8 +530,6 @@
             localStorage.setItem('theme', theme);
             updateThemeButton(theme);
         }
-        // --- END THEME SWITCHING LOGIC ---
-
 
         // --- UTILS ---
         function shuffleArray(array) {
@@ -553,7 +541,6 @@
         }
 
         function initData() {
-            // Shuffle Grammar Options
             currentGrammar = RAW_GRAMMAR.map(item => {
                 let opts = item.options.map((optText, index) => ({
                     text: optText,
@@ -564,7 +551,6 @@
                 return { ...item, shuffledOptions: opts };
             });
 
-            // Shuffle Reading 1 Options
             currentReading1 = RAW_READING1_QUESTIONS.map(item => {
                 let opts = item.options.map((optText, index) => ({
                     text: optText,
@@ -576,7 +562,7 @@
             });
         }
 
-        // --- RENDER FUNCTIONS (Cập nhật Tailwind classes cho Light/Dark mode) ---
+        // --- RENDER FUNCTIONS ---
 
         function renderGrammar() {
             const container = document.getElementById('grammar-container');
@@ -643,7 +629,10 @@
 
         // --- DROPDOWN & FOOTER LOGIC ---
 
-        function toggleDropdown() {
+        function toggleDropdown(event) {
+            // Ngăn chặn sự kiện click lan ra ngoài (nếu được gọi từ nút click)
+            if(event) event.stopPropagation();
+
             const dropdown = document.getElementById('control-dropdown');
             isDropdownOpen = !isDropdownOpen;
 
@@ -656,9 +645,33 @@
             }
         }
 
+        // Tự động đóng dropdown khi click ra ngoài
+        document.addEventListener('click', function(event) {
+            const dropdownWrapper = document.getElementById('dropdown-control-wrapper');
+            const dropdown = document.getElementById('control-dropdown');
+            
+            // Nếu dropdown đang mở VÀ click không nằm trong wrapper của dropdown
+            if (isDropdownOpen && dropdownWrapper && !dropdownWrapper.contains(event.target)) {
+                // Đóng dropdown
+                isDropdownOpen = false;
+                dropdown.classList.remove('dropdown-open');
+                dropdown.classList.add('dropdown-closed');
+            }
+        });
+
+        // Tự động đóng dropdown khi cuộn trang
+        window.addEventListener('scroll', function() {
+            const dropdown = document.getElementById('control-dropdown');
+            if (isDropdownOpen) {
+                isDropdownOpen = false;
+                dropdown.classList.remove('dropdown-open');
+                dropdown.classList.add('dropdown-closed');
+            }
+        });
+
+
         function updateSubmitButton(correctCount = 0, totalQuestions = 0) {
             const btn = document.getElementById('main-submit-btn');
-            const scoreTextElement = document.getElementById('score-text');
 
             if (isSubmitted) {
                 // Change to Review mode
@@ -666,11 +679,6 @@
                 btn.innerHTML = `<i class="fas fa-check-double"></i> Đã NỘP BÀI`;
                 btn.classList.remove('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
                 btn.classList.add('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
-                
-                // Update score text in Header
-                scoreTextElement.innerHTML = `Đúng: ${correctCount}/${totalQuestions} | Điểm: ${(correctCount / totalQuestions * 10).toFixed(1)}`;
-                scoreTextElement.classList.add('correct-answer');
-                scoreTextElement.classList.remove('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
 
                 // Show detailed score panel in footer
                 document.getElementById('stats-panel').classList.remove('hidden');
@@ -680,19 +688,14 @@
 
             } else {
                 // Change to Submit mode
-                btn.onclick = submitQuiz;
+                btn.onclick = (event) => submitQuiz(event);
                 btn.innerHTML = `<i class="fas fa-paper-plane"></i> NỘP BÀI`;
                 btn.classList.remove('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
                 btn.classList.add('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
-
-                // Reset score text in Header
-                scoreTextElement.innerHTML = `Mã đề: 02`;
-                scoreTextElement.classList.remove('correct-answer');
-                scoreTextElement.classList.add('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
-
+                
                 // Hide detailed score panel in footer
                 document.getElementById('stats-panel').classList.add('hidden');
-                
+
                 // Hide filter controls in dropdown
                 document.getElementById('filter-controls').classList.replace('flex', 'hidden');
                 
@@ -701,9 +704,12 @@
             }
         }
 
-        // --- LOGIC FUNCTIONS (Giữ nguyên logic kiểm tra đáp án) ---
+        // --- LOGIC FUNCTIONS (Checking answers) ---
 
-        function submitQuiz() {
+        function submitQuiz(event) {
+            // Ngăn chặn sự kiện click nộp bài lan ra window làm đóng dropdown ngay lập tức
+            if (event) event.stopPropagation();
+
             if (isSubmitted) return;
 
             let score = 0;
@@ -725,7 +731,6 @@
                 const correctLabelId = `g-${q.id}-${correctShuffledIndex}`;
                 const correctLabel = document.querySelector(`label[for="${correctLabelId}"]`);
                 
-                // Clear all previous results/styles on options
                 document.querySelectorAll(`label[for^="g-${q.id}-"]`).forEach(label => {
                     label.classList.remove('correct-answer', 'wrong-answer');
                     label.querySelectorAll('.fa-check-circle, .fa-times-circle, span').forEach(el => {
@@ -740,13 +745,13 @@
                     const selectedLabel = document.querySelector(`label[for="${selectedInput.id}"]`);
 
                     if (selectedOption.isCorrect) {
-                        score += 0.4; // 3.2 / 8 = 0.4
+                        score += 0.4;
                         correctCount++;
                         block.dataset.status = "correct";
                         selectedLabel.classList.add('correct-answer');
                         selectedLabel.innerHTML += ' <i class="fas fa-check-circle text-green-600 dark:text-[#b8e0b8] float-right text-base mt-0.5"></i>';
                         block.classList.add('border-l-4', 'border-green-600', 'bg-green-50/50', 'dark:bg-[#1f371e]/30');
-                        feedback.classList.add('hidden'); // Hide generic feedback if correct
+                        feedback.classList.add('hidden');
                     } else {
                         block.dataset.status = "wrong";
                         selectedLabel.classList.add('wrong-answer');
@@ -774,7 +779,7 @@
                 }
             });
 
-            // 2. Check Reading 1 (1.2 marks / 3 questions = 0.4 per question)
+            // 2. Check Reading 1
             const feedbackContainer = document.getElementById('reading-part1-feedback');
             feedbackContainer.innerHTML = '';
             
@@ -789,7 +794,6 @@
 
                 const correctOptionText = q.shuffledOptions.find(o => o.isCorrect).text;
 
-                // Reset select styling
                 select.className = select.className.replace(/bg-(green|red|yellow)-[0-9]{1,3}|text-(green|red|yellow)-[0-9]{1,3}|border-(green|red)-[0-9]{1,3}|line-through|!important/g, '').trim();
                 select.classList.remove('border-red-600');
                 
@@ -818,7 +822,7 @@
                 feedbackContainer.appendChild(fbDiv);
             });
 
-            // 3. Check Reading 2 (2.0 marks / 5 questions = 0.4 per question)
+            // 3. Check Reading 2
             RAW_READING2.forEach(q => {
                 totalQuestions++;
                 const selected = document.querySelector(`input[name="r2-${q.id}"]:checked`);
@@ -848,17 +852,9 @@
                 }
             });
 
-            if(unAnswered) {
-                document.getElementById('warning-msg').classList.remove('hidden');
-                setTimeout(() => document.getElementById('warning-msg').classList.add('hidden'), 5000);
-            }
-
             // Update UI States
             isSubmitted = true;
             updateSubmitButton(correctCount, totalQuestions);
-            
-            // Update score in footer stats panel
-            document.getElementById('score-display').innerText = score.toFixed(1);
             
             // Show Modal
             document.getElementById('modal-correct').innerText = correctCount;
@@ -866,25 +862,26 @@
             document.getElementById('modal-score').innerText = score.toFixed(1);
             document.getElementById('result-modal').classList.remove('hidden');
 
-            filterQuestions('all'); // Reset filter view to show all questions with feedback
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top after submission
+            // Tự động mở dropdown để hiện công cụ lọc
+            if (!isDropdownOpen) {
+                toggleDropdown();
+            }
+
+            filterQuestions('all'); 
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
         }
 
         function resetAndShuffleQuiz() {
             initData();
             isSubmitted = false;
             
-            // Re-render (This will re-render with light/dark classes defined)
             renderGrammar();
             renderReading1();
             renderReading2();
 
-            // Reset UI states
-            document.getElementById('warning-msg').classList.add('hidden');
             document.getElementById('reading-part1-feedback').innerHTML = '';
-            updateSubmitButton(); // Reset button and controls
+            updateSubmitButton(); 
 
-            // Reset filters state in dropdown
             document.querySelectorAll('.filter-btn').forEach(btn => {
                  btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9] shadow-sm";
                  if(btn.dataset.filter === 'all') btn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]'); 
@@ -896,7 +893,6 @@
         function filterQuestions(type) {
             if (!isSubmitted) return;
 
-            // Get all question containers, including the feedback divs for Reading Part 1
             const questions = document.querySelectorAll('.question-block, #reading-part1-feedback > div');
             
             questions.forEach(q => {
@@ -911,7 +907,6 @@
                 }
             });
 
-            // Styling for active filter buttons in dropdown (Cập nhật dark mode classes)
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9] shadow-sm";
                 
@@ -930,10 +925,8 @@
         function resetQuestionState(id) {
             const block = document.getElementById(`q-block-${id}`);
             if(block && isSubmitted) {
-                // Remove submission styles
                 block.classList.remove('border-l-4', 'border-green-600', 'border-red-600', 'bg-green-50/50', 'bg-red-50/50', 'dark:bg-[#1f371e]/30', 'dark:bg-[#3b2024]/30');
                 
-                // Reset radio button label styles (complex due to custom radio)
                 document.querySelectorAll(`label[for^="g-${id}-"]`).forEach(label => {
                     label.classList.remove('correct-answer', 'wrong-answer');
                     label.querySelectorAll('.fa-check-circle, .fa-times-circle, span').forEach(el => {
@@ -942,11 +935,9 @@
                     });
                 });
 
-                // Hide feedback message
                 const feedback = block.querySelector('.feedback-msg');
                 if(feedback) feedback.classList.add('hidden');
                 
-                // Set isSubmitted to false to allow re-submission check
                 isSubmitted = false;
                 updateSubmitButton();
             }
@@ -955,32 +946,26 @@
         function resetSelectState(id) {
             const select = document.getElementById(`r1-${id}`);
             if(select && isSubmitted) {
-                // Remove submission styles on select
                 select.className = select.className.replace(/bg-(green|red|yellow)-[0-9]{1,3}|text-(green|red|yellow)-[0-9]{1,3}|border-(green|red)-[0-9]{1,3}|line-through|!important|dark:bg-\[[#0-9a-f]{6}\]|dark:text-\[[#0-9a-f]{6}\]|dark:border-\[[#0-9a-f]{6}\]/g, '').trim();
                 
-                // Reset to default light/dark classes for select
                 select.classList.add('bg-gray-100', 'dark:bg-[#21262d]', 'text-blue-700', 'dark:text-[#58a6ff]', 'border-b-2', 'border-blue-500', 'dark:border-[#58a6ff]', 'font-bold');
                 
-                // Remove feedback message for reading part 1
                 const feedbackContainer = document.getElementById('reading-part1-feedback');
                 feedbackContainer.innerHTML = '';
 
-                // Set isSubmitted to false to allow re-submission check
                 isSubmitted = false;
                 updateSubmitButton();
             }
         }
 
-        // Initialize
         window.onload = function() {
-            setInitialTheme(); // Đảm bảo mặc định là Light Mode (Trắng)
+            setInitialTheme(); 
             initData();
             renderGrammar();
             renderReading1();
             renderReading2();
-            updateSubmitButton(); // Set initial button state (Submit mode)
+            updateSubmitButton(); 
             
-            // Set initial filter style to 'all' (visually, if filter controls were visible)
             const allFilterBtn = document.querySelector('.filter-btn[data-filter="all"]');
             if(allFilterBtn) {
                 allFilterBtn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]');

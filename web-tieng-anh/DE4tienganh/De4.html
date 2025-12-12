@@ -288,10 +288,10 @@
                 <!-- Thanh chọn đề (Dropdown) -->
                 <div class="relative group">
                     <select onchange="if(this.value) window.location.href=this.value" class="appearance-none bg-gray-100 dark:bg-[#21262d] text-gray-700 dark:text-[#c9d1d9] text-xs xs:text-sm font-bold py-1.5 pl-3 pr-8 rounded-full border border-gray-300 dark:border-[#30363d] focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-colors duration-300 cursor-pointer">
-                        <option value="../DE1tienganh/De1.html" selected>Mã đề: 01</option>
+                        <option value="../DE1tienganh/De1.html" >Mã đề: 01</option>
                         <option value="../DE2tienganh/De2.html">Mã đề: 02</option>
                         <option value="../DE3tienganh/De3.html" >Mã đề: 03</option>
-                        <option value="../DE4tienganh/De4.html">Mã đề: 04</option>
+                        <option value="../DE4tienganh/De4.html" selected>Mã đề: 04</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
                         <i class="fas fa-chevron-down text-xs"></i>
@@ -453,30 +453,30 @@
     <script>
         // --- DATA SOURCE (Content from your previous message) ---
         const RAW_GRAMMAR = [
-            { id: 5, q: "'I haven't got my phone.' 'That's OK. __________ you mine.", options: ["I’m going to lend", "lend", "I’ll lend"], answerIndex: 2 }, 
-            { id: 6, q: "It's Julia's birthday next week, so __________ her some flowers.", options: ["we’re going to buy", "we’ll buy", "buy"], answerIndex: 0 }, 
-            { id: 7, q: "__________ painting the bedroom yet?' 'Not yet. I'll finish it tomorrow.", options: ["Did you finish", "Will you finish", "Have you finished"], answerIndex: 2 }, 
-            { id: 8, q: "I __________ much last year, but I__________ a lot this year.", options: ["didn't earn / 've earned", "haven’t earned / earned", "will earn / won’t earn"], answerIndex: 0 }, 
-            { id: 9, q: "Australia is big, but Canada is __________ Australia.", options: ["big", "biggest", "bigger than"], answerIndex: 2 }, 
-            { id: 10, q: "I think that summer is __________ than winter.", options: ["good", "better", "the best"], answerIndex: 1 }, 
-            { id: 11, q: "My family and I __________ in London when I was young.", options: ["lived", "live", "was live"], answerIndex: 0 }, 
-            { id: 12, q: "Did you __________ lots of interesting photos on your holiday?", options: ["took", "take", "takes"], answerIndex: 1 } 
+            { id: 5, q: "Do you think they __________ the presents we got for them?", options: ["'re going to like", "to like", "'ll like"], answerIndex: 2 },
+            { id: 6, q: "Look! The coach __________! Run or we'll miss it.", options: ["is going to leave", "will leave", "going to leave"], answerIndex: 0 },
+            { id: 7, q: "I __________ him behave like this before.", options: ["see", "never saw", "'ve never seen"], answerIndex: 2 },
+            { id: 8, q: "My mother __________ in Scotland in 1986.", options: ["grows", "has grown up", "grew up"], answerIndex: 2 },
+            { id: 9, q: "Saturdays __________ Mondays because I don't have to go to school.", options: ["are nicer than", "is nicer than", "are the nicest"], answerIndex: 0 },
+            { id: 10, q: "Asian elephants are heavy, but African elephants are even __________", options: ["heavy", "heavier", "heavier than"], answerIndex: 1 },
+            { id: 11, q: "They wanted to __________ a movie but there were no more tickets.", options: ["see", "saw", "seeing"], answerIndex: 0 },
+            { id: 12, q: "Why __________ you finish your math homework last week?", options: ["didn't", "wasn't", "weren't"], answerIndex: 0 }
         ];
 
-        const RAW_READING1_TEXT = `Dear Anita, <br><br> I love to go to shopping malls and department stores. I love to go with my friends from college and {13} – and I think I’m a good shopper because {14} when they are on sale. But I have a big problem: I have a credit card (I got it last month) and I spend too much money. How can I spend less money but {15}? Do you have any ideas?`;
+        const RAW_READING1_TEXT = `Dear Anita, <br><br> I bought my first laptop last week and {13}. Anita, I have a friend who knows a lot about computers and {14} – but another friend says I shouldn’t do this. It’s not legal, and {15}. I don’t know what to do.`;
         
         const RAW_READING1_QUESTIONS = [
-            { id: 13, options: ["we all have a good time", "we all don’t have a good time", "we all live near the college"], answerIndex: 0 }, 
-            { id: 14, options: ["I rarely drive a car", "I usually go to the shop", "I usually buy things"], answerIndex: 2 }, 
-            { id: 15, options: ["still go shopping with my friends", "I don’t go shopping", "they are on sale"], answerIndex: 0 } 
+            { id: 13, options: ["I need a bag and a mouse.", "I need computer software.", "I don't like it so much."], answerIndex: 1 },
+            { id: 14, options: ["he can get me computer software for free.", "he can buy it to me.", "he can buy me computer."], answerIndex: 0 },
+            { id: 15, options: ["it is good for everyone.", "people can surf all programs.", "it’s the same as stealing."], answerIndex: 2 }
         ];
 
         const RAW_READING2 = [
-            { id: 16, q: "People will offer salt to the hosts to wish them wealth.", answer: "T" },
-            { id: 17, q: "Vietnamese people like to wear new clothes on other special occasions.", answer: "NG" },
-            { id: 18, q: "People in Denmark get angry when someone breaks old dishes on their doors.", answer: "F" },
-            { id: 19, q: "Japanese people like to keep their houses tidy on New Year Day.", answer: "T" },
-            { id: 20, q: "Yukio is going to prepare lots of food to welcome the New Year.", answer: "NG" }
+            { id: 16, q: "Susan usually goes shopping on Saturdays and Sundays.", answer: "F" },
+            { id: 17, q: "Susan usually buys necessary things for each day.", answer: "F" },
+            { id: 18, q: "The supermarket near her house is very big.", answer: "NG" },
+            { id: 19, q: "Coffee is her father’s favourite drink.", answer: "T" },
+            { id: 20, q: "Susan has bought a lot of vegetables.", answer: "F" }
         ];
 
         const ABC = ['A', 'B', 'C', 'D'];

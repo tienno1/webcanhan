@@ -288,9 +288,9 @@
                 <!-- Thanh chọn đề (Dropdown) -->
                 <div class="relative group">
                     <select onchange="if(this.value) window.location.href=this.value" class="appearance-none bg-gray-100 dark:bg-[#21262d] text-gray-700 dark:text-[#c9d1d9] text-xs xs:text-sm font-bold py-1.5 pl-3 pr-8 rounded-full border border-gray-300 dark:border-[#30363d] focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-colors duration-300 cursor-pointer">
-                        <option value="../DE1tienganh/De1.html" selected>Mã đề: 01</option>
+                        <option value="../DE1tienganh/De1.html" >Mã đề: 01</option>
                         <option value="../DE2tienganh/De2.html">Mã đề: 02</option>
-                        <option value="../DE3tienganh/De3.html" >Mã đề: 03</option>
+                        <option value="../DE3tienganh/De3.html" selected>Mã đề: 03</option>
                         <option value="../DE4tienganh/De4.html">Mã đề: 04</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
@@ -453,30 +453,30 @@
     <script>
         // --- DATA SOURCE (Content from your previous message) ---
         const RAW_GRAMMAR = [
-            { id: 5, q: "'I haven't got my phone.' 'That's OK. __________ you mine.", options: ["I’m going to lend", "lend", "I’ll lend"], answerIndex: 2 }, 
-            { id: 6, q: "It's Julia's birthday next week, so __________ her some flowers.", options: ["we’re going to buy", "we’ll buy", "buy"], answerIndex: 0 }, 
-            { id: 7, q: "__________ painting the bedroom yet?' 'Not yet. I'll finish it tomorrow.", options: ["Did you finish", "Will you finish", "Have you finished"], answerIndex: 2 }, 
-            { id: 8, q: "I __________ much last year, but I__________ a lot this year.", options: ["didn't earn / 've earned", "haven’t earned / earned", "will earn / won’t earn"], answerIndex: 0 }, 
-            { id: 9, q: "Australia is big, but Canada is __________ Australia.", options: ["big", "biggest", "bigger than"], answerIndex: 2 }, 
-            { id: 10, q: "I think that summer is __________ than winter.", options: ["good", "better", "the best"], answerIndex: 1 }, 
-            { id: 11, q: "My family and I __________ in London when I was young.", options: ["lived", "live", "was live"], answerIndex: 0 }, 
-            { id: 12, q: "Did you __________ lots of interesting photos on your holiday?", options: ["took", "take", "takes"], answerIndex: 1 } 
+            { id: 5, q: "'Jim's starting university tomorrow.' 'What __________ study?'", options: ["is he going to", "will he", "do you"], answerIndex: 0 },
+            { id: 6, q: "You __________ that film. It's very frightening. Let's choose another one.", options: ["to like", "aren’t going to like", "won’t like"], answerIndex: 2 },
+            { id: 7, q: "Mr. Barnes is very important in this company. He __________ here for 30 years.", options: ["worked", "didn’t work", "has worked"], answerIndex: 2 },
+            { id: 8, q: "He loves gardening. He __________ a gardener all his life.", options: ["was", "has been", "is"], answerIndex: 1 },
+            { id: 9, q: "Reading a book with a nice, hot cup of tea __________ than doing exercise.", options: ["is the most relaxing", "is more relaxing", "more relaxing"], answerIndex: 1 },
+            { id: 10, q: "Taking a taxi to work __________ than taking a bus to work.", options: ["expensive", "more expensive", "is more expensive"], answerIndex: 2 },
+            { id: 11, q: "He didn’t __________ me because I was behind the tree.", options: ["saw", "see", "sees"], answerIndex: 1 },
+            { id: 12, q: "I wanted to __________, but I couldn’t. I had to stay and help my friend.", options: ["went", "go", "going"], answerIndex: 1 }
         ];
 
-        const RAW_READING1_TEXT = `Dear Anita, <br><br> I love to go to shopping malls and department stores. I love to go with my friends from college and {13} – and I think I’m a good shopper because {14} when they are on sale. But I have a big problem: I have a credit card (I got it last month) and I spend too much money. How can I spend less money but {15}? Do you have any ideas?`;
+        const RAW_READING1_TEXT = `Dear Anita, <br><br> Every morning I go to work, sit down and log on to my computer. {13}. But I have a problem. I love to go on Facebook when I think my boss isn’t looking and find out what my friends are doing. I also spend about an hour at work each day chatting with friends on-line. Anita, {14} if she finds out that I waste so much time. {15}. What can I do?`;
         
         const RAW_READING1_QUESTIONS = [
-            { id: 13, options: ["we all have a good time", "we all don’t have a good time", "we all live near the college"], answerIndex: 0 }, 
-            { id: 14, options: ["I rarely drive a car", "I usually go to the shop", "I usually buy things"], answerIndex: 2 }, 
-            { id: 15, options: ["still go shopping with my friends", "I don’t go shopping", "they are on sale"], answerIndex: 0 } 
+            { id: 13, options: ["I need my computer to do my job.", "I don’t need a computer any more.", "I sold my computer last week."], answerIndex: 0 },
+            { id: 14, options: ["will chat with me every day", "my friend will be happy", "my boss will be very angry"], answerIndex: 2 },
+            { id: 15, options: ["But sometimes my job is boring.", "So I love my job so much.", "But I still go to the office every day."], answerIndex: 0 }
         ];
 
         const RAW_READING2 = [
-            { id: 16, q: "People will offer salt to the hosts to wish them wealth.", answer: "T" },
-            { id: 17, q: "Vietnamese people like to wear new clothes on other special occasions.", answer: "NG" },
-            { id: 18, q: "People in Denmark get angry when someone breaks old dishes on their doors.", answer: "F" },
-            { id: 19, q: "Japanese people like to keep their houses tidy on New Year Day.", answer: "T" },
-            { id: 20, q: "Yukio is going to prepare lots of food to welcome the New Year.", answer: "NG" }
+            { id: 16, q: "Physical items with songs or movies on them have been outdated.", answer: "T" },
+            { id: 17, q: "People today find it convenient to build a collection of music and films on CDs or DVDs.", answer: "F" },
+            { id: 18, q: "Smartphone is an example of a modern mobile device.", answer: "T" },
+            { id: 19, q: "A smartphone or tablet cannot be used to take photos.", answer: "F" },
+            { id: 20, q: "Downloading music and movies is an important function of a mobile device.", answer: "NG" }
         ];
 
         const ABC = ['A', 'B', 'C', 'D'];
@@ -484,6 +484,7 @@
         let isDropdownOpen = false;
         let currentGrammar = [];
         let currentReading1 = [];
+
 
         // --- THEME SWITCHING LOGIC ---
 
