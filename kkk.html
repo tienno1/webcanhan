@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - Graphic Design Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-color: #ccff00;
+            --secondary-color: #888888;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        h1, h2, h3, .display-text { font-family: 'Syne', sans-serif; }
+
+        /* Hiệu ứng chuyển trang */
+        #page-content {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        #page-content.fade-in { opacity: 1; transform: translateY(0); }
+        #page-content.fade-out { opacity: 0; transform: translateY(-10px); }
+
+        /* Custom Scrollbar, Cursor & Noise (Giữ nguyên từ index) */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent-color); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.5); transition: width 0.2s, height 0.2s; }
+
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9000; opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Form Styling */
+        .input-field {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: var(--accent-color);
+            background: rgba(255,255,255,0.07);
+            outline: none;
+        }
+
+        /* Modal Styles (Khớp với mail.js) */
+        .modal {
+            display: none; position: fixed; z-index: 100002; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.95);
+            align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: #111; padding: 40px; border: 1px solid #333;
+            max-width: 500px; width: 90%; text-align: center; position: relative;
+        }
+        .close-button {
+            position: absolute; right: 20px; top: 10px; color: #fff;
+            font-size: 30px; cursor: pointer;
+        }
+
+        /* Mobile Nav (Kế thừa index.html) */
+        @media (max-width: 767px) {
+            .menu-toggle { display: block; }
+            nav.main-nav {
+                position: fixed; top: 0; right: -70%; width: 70%; height: 100vh;
+                background-color: #000; z-index: 1000000; padding-top: 80px;
+                transition: right 0.4s ease;
+            }
+            nav.main-nav.open { right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="noise-overlay"></div>
+
+    <header id="header" class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
+        <div class="logo-container z-[1000002]">
+            <a href="index.html" class="text-2xl font-bold tracking-tighter">PORTFOLIO.</a>
+        </div>
+        <button class="menu-toggle md:hidden" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="main-nav hidden md:block">
+            <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center">
+                <li><a href="index.html" class="hover:text-[#ccff00] transition-colors">Giới thiệu</a></li>
+                <li><a href="profile.html" class="hover:text-[#ccff00] transition-colors">Profile</a></li>
+                <li><a href="designer.html" class="hover:text-[#ccff00] transition-colors">Design</a></li>
+                <li><a href="#" class="active text-[#ccff00]">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="page-content" class="relative z-10 pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-12">
+                <p class="text-[#ccff00] text-sm uppercase tracking-[0.5em] mb-4">Contact Me</p>
+                <h1 class="text-5xl md:text-7xl font-bold uppercase italic">Bắt đầu <span class="text-outline" style="-webkit-text-stroke: 1px white; color: transparent;">Dự án</span></h1>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div>
+                    <form id="contactForm" class="flex flex-col gap-6">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500">Tên của bạn</label>
+                            <input type="text" name="user_name" required placeholder="Nguyễn Văn A" 
+                                   class="input-field p-4 text-white">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500">Email liên hệ</label>
+                            <input type="email" name="user_email" required placeholder="email@example.com" 
+                                   class="input-field p-4 text-white">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500">Nội dung</label>
+                            <textarea name="message" required rows="5" placeholder="Tôi muốn hợp tác về..." 
+                                      class="input-field p-4 text-white"></textarea>
+                        </div>
+                        <button type="submit" class="bg-[#ccff00] text-black font-bold py-4 px-8 uppercase tracking-widest hover:bg-white transition-all duration-300">
+                            Gửi yêu cầu
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex flex-col justify-between border-l border-gray-900 pl-0 md:pl-16">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 uppercase">Thông tin trực tiếp</h3>
+                        <p class="text-gray-400 mb-2">Email của tôi:</p>
+                        <p class="text-[#ccff00] text-lg font-bold mb-8">contact@yourdomain.com</p>
+                        
+                        <p class="text-gray-400 mb-2">Địa chỉ:</p>
+                        <p class="text-white">TP. Hồ Chí Minh, Việt Nam</p>
+                    </div>
+                    
+                    <div class="mt-12 md:mt-0">
+                        <h3 class="text-xl font-bold mb-4 uppercase">Socials</h3>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-10 h-10 border border-gray-800 flex items-center justify-center hover:bg-[#ccff00] hover:text-black transition-all">FB</a>
+                            <a href="#" class="w-10 h-10 border border-gray-800 flex items-center justify-center hover:bg-[#ccff00] hover:text-black transition-all">IG</a>
+                            <a href="#" class="w-10 h-10 border border-gray-800 flex items-center justify-center hover:bg-[#ccff00] hover:text-black transition-all">BE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="form-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="form-modal-close">&times;</span>
+            <p id="form-modal-message" class="text-lg font-bold uppercase"></p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/mail.js"></script>
+    
+    <script>
+        // 1. Hiệu ứng chuyển trang (Của bạn)
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.target === '_blank' || this.href.startsWith('http') || this.href.includes('#')) return;
+                e.preventDefault();
+                const pageContent = document.getElementById('page-content');
+                if (pageContent) {
+                    pageContent.classList.add('fade-out');
+                    setTimeout(() => { window.location = this.href; }, 400);
+                } else {
+                    window.location = this.href;
+                }
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const pageContent = document.getElementById('page-content');
+            if (pageContent) pageContent.classList.add('fade-in');
+        });
+
+        // 2. Cursor (Giống index.html)
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+
+        // 3. Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav.main-nav');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                nav.classList.toggle('open');
+                menuToggle.querySelector('i').classList.toggle('fa-bars');
+                menuToggle.querySelector('i').classList.toggle('fa-times');
+            });
+        }
+    </script>
+</body>
+</html>

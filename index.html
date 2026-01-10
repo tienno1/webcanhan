@@ -3,354 +3,801 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Giới thiệu</title>
+    <title>Graphic Design Portfolio - Upgrade Version</title>
     
-    <!-- Tải Tailwind CSS -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tải Font Awesome (cho các icon) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/loading.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="css/code_navbar.css">
-    <!-- EmailJS CDN -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-        // Cấu hình Tailwind
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        // Sử dụng font Inter làm font chính
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    transitionDuration: {
-                        '1000': '1000ms',
-                    },
-                    keyframes: {
-                        gentleMove: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-5px)' },
-                        }
-                    },
-                    animation: {
-                        'gentle-move': 'gentleMove 3s ease-in-out infinite',
-                    }
-                },
-            },
+    <!-- Google Fonts: Syne (Artistic) & Inter (Clean) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Menu Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Three.js & GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-color: #ccff00; /* Neon Lime */
+            --secondary-color: #888888;
         }
-    </script>
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Typography Customization */
+        h1, h2, h3, .display-text {
+            font-family: 'Syne', sans-serif;
+            line-height: 0.9;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        /* Image Reveal Effect */
+        .reveal-img {
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .reveal-img.active {
+            clip-path: inset(0 0 0 0);
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Text Effects */
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+            color: transparent;
+            transition: all 0.5s ease;
+        }
+        .text-outline:hover {
+            color: var(--accent-color);
+            -webkit-text-stroke: 0px;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        /* Lift on Hover Effect for Logo */
+        .lift-on-hover {
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        .lift-on-hover:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =========================================
+           MOBILE NAVIGATION INTEGRATION (From your files)
+           ========================================= */
+        
+        /* Menu Toggle Button Styles */
+        .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: none; /* Hidden by default on desktop */
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000001; /* Above everything */
+            padding: 10px;
+        }
+
+        .menu-toggle i {
+            color: #ffffff;
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: center center;
+        }
+
+        .menu-toggle.scrolled i {
+            color: #ffffff; /* Keep white on dark bg */
+        }
+
+        .menu-toggle.nav-open i {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle.rotated i {
+            transform: rotate(90deg);
+        }
+
+        /* Navigation Styles */
+        nav.main-nav {
+            background-color: #000;
+            /* Desktop defaults handled by Tailwind, but we ensure specificity here */
+        }
+        
+        nav.main-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #000;
+            border: 1px solid #333;
+            min-width: 200px;
+            z-index: 1000;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        /* Desktop Dropdown Hover */
+        @media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            .dropdown:hover .dropdown-toggle {
+                color: var(--accent-color);
+            }
+        }
+
+        /* --- MOBILE SPECIFIC STYLES --- */
+        @media (max-width: 767px) {
+            .menu-toggle {
+                display: block; /* Show hamburger on mobile */
+            }
+
+            /* Main Nav Mobile Canvas */
+            nav.main-nav {
+                display: block !important; /* Override Tailwind hidden */
+                position: fixed;
+                top: 0;
+                right: -70%; /* Hide off-screen */
+                width: 70%;
+                height: 100vh;
+                background-color: #000000; /* Solid Black Background */
+                border-left: 1px solid #222; /* Subtle border */
+                z-index: 1000000;
+                padding-top: 80px;
+                overflow-y: auto;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.9);
+            }
+
+            nav.main-nav.open {
+                right: 0; /* Slide in */
+            }
+
+            nav.main-nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0 20px;
+                width: 100%;
+            }
+
+            nav.main-nav ul li {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            nav.main-nav ul li a,
+            nav.main-nav ul li .dropdown-toggle {
+                font-size: 1.1rem;
+                display: block;
+                width: 100%;
+                padding: 12px 15px; /* Tăng padding để dễ bấm */
+                border-radius: 4px;
+                color: #fff;
+                transition: all 0.3s;
+                background-color: rgba(0, 0, 0, 0.03); /* Slight bg for items */
+            }
+            
+            /* Active State Styling */
+            nav.main-nav ul li a.active {
+                background-color: rgba(204, 255, 0, 0.15); /* Subtle highlight */
+                color: var(--accent-color);
+                border-left: 3px solid var(--accent-color);
+            }
+
+            nav.main-nav ul li .dropdown-menu {
+                position: static;
+                visibility: visible; /* Controlled by height/display in JS */
+                opacity: 1;
+                transform: none;
+                background: rgba(30, 30, 30, 0.5); /* Distinct background for submenu */
+                border: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease, margin-top 0.3s ease;
+                width: 100%;
+                margin-top: 0;
+                border-radius: 4px;
+            }
+
+            /* FIX: Selector này đã được sửa. Bỏ khoảng trắng giữa li và .dropdown vì li chính là .dropdown */
+            nav.main-nav ul li.dropdown.open .dropdown-menu {
+                max-height: 500px; /* Expand */
+                padding-bottom: 10px;
+                margin-top: 5px;
+            }
+            
+            .arrow {
+                transition: transform 0.3s;
+                float: right; /* Đẩy mũi tên sang phải */
+            }
+            
+            /* FIX: Selector này cũng được sửa tương tự */
+            nav.main-nav ul li.dropdown.open .arrow {
+                transform: rotate(180deg);
+                color: var(--accent-color);
+            }
+        }
+
+        
+    </style>
 </head>
 <body>
-    <!-- Lớp phủ Loading -->
-    <div id="loader-overlay" class="fixed inset-0 bg-white z-[100] flex justify-center items-center transition-opacity duration-500">
-        <div class="loader w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-    </div>
-<div class="background" id="background-slideshow"> 
-    <header>
-        <a href="index.html"><img src="img/logo.png" alt="none" class="lift-on-hover"></a>
-            <p>Phần giới thiệu của tôi</p>
-        <button aria-label="Menu" class="menu-toggle">
-            <i class="fa-solid fa-bars fa-2xl"></i>
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Noise Texture -->
+    <div class="noise-overlay"></div>
+
+    <!-- HEADER UPDATED -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
+        
+        <!-- LOGO -->
+        <div class="logo-container z-[1000002]">
+            <a href="index.html">
+                <img src="img/logo.png" alt="Logo" class="lift-on-hover h-12 w-auto object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-2xl font-bold tracking-tighter\'>PORTFOLIO.</span>'">
+            </a>
+        </div>
+
+        <!-- MENU TOGGLE BUTTON (Added for Mobile) -->
+        <button class="menu-toggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
         </button>
+
+        <!-- NAVIGATION -->
+        <!-- Note: Removed 'hidden md:block' to let CSS handle visibility for slide-out menu -->
+        <nav class="main-nav hidden md:block">
+            <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center md:items-center">
+                
+                <!-- Item 1: Giới thiệu (Active Page) -->
+                <li><a href="index.html" class="active hover:text-[#ccff00] transition-colors text-[#ccff00]">Giới thiệu</a></li>
+                
+                <li><a href="profile.html" class="hover:text-[#ccff00] transition-colors">Profile</a></li>
+                <li><a href="designer.html" class="hover:text-[#ccff00] transition-colors">Design</a></li>
+                <li><a href="scores.html" class="hover:text-[#ccff00] transition-colors">Điểm Số</a></li>
+                <li><a href="drawings.html" class="hover:text-[#ccff00] transition-colors">Ảnh Sưu Tầm</a></li>
+                <li><a href="Portfolio/Portfolio.html" class="hover:text-[#ccff00] transition-colors">Portfolio</a></li>
+                
+                <!-- Dropdown: Web học tiếng anh -->
+                <li class="relative dropdown group">
+                    <div class="dropdown-toggle hover:text-[#ccff00] transition-colors py-2 flex justify-between md:justify-start w-full">
+                        <span>Web học tiếng anh</span> 
+                        <span class="arrow ml-1 text-[10px]">&#9662;</span>
+                    </div>
+                    <!-- Dropdown Menu -->
+                    <ul class="dropdown-menu">
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-tieng-anh/de1.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Đề 1</a>
+                        </li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-tieng-anh/de2.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Đề 2</a>
+                        </li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-tieng-anh/DE2tienganh/De2.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">TA Cao Đẳng Đề 2</a>
+                        </li>
+                        <li>
+                            <a href="web-tieng-anh/DE1tienganh/De1.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">TA Cao Đẳng Đề 1</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Dropdown: Code Website -->
+                <li class="relative dropdown group">
+                    <div class="dropdown-toggle hover:text-[#ccff00] transition-colors py-2 flex justify-between md:justify-start w-full">
+                        <span>Code Website</span> 
+                        <span class="arrow ml-1 text-[10px]">&#9662;</span>
+                    </div>
+                    <!-- Dropdown Menu -->
+                    <ul class="dropdown-menu md:right-0 md:left-auto">
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="jalan/View.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">View</a>
+                        </li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web học tại lớp</a>
+                        </li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web kết thúc môn</a>
+                        </li>
+                        <li>
+                            <a href="web-tieng-anh/trinhtri.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web làm bài Chính Trị</a>
+                        </li>
+                    </ul>
+                </li> 
+            </ul>
+        </nav>
     </header>
 
-    <nav class="main-nav">
-        <ul>
-            <li><a href="index.html" class="active">Giới thiệu</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="designer.html">Design</a></li>
-            <li><a href="scores.html">Điểm Số</a></li>
-            <li><a href="drawings.html">Ảnh Sưu Tầm</a></li>
-            <li><a href="Portfolio/Portfolio.html">Portfolio</a></li>
-            <li>
-            <div class="dropdown">
-                <button class="dropdown-toggle">Web học tiếng anh <span class="arrow">&#9662;</span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="web-tieng-anh/de1.html">Đề 1 </a></li>
-                    <li><a href="web-tieng-anh/de2.html">Đề 2 </a></li>    
-                    <li><a href="web-tieng-anh/DE2tienganh/De2.html">TA Cao Đẳng Đề 2 </a></li>
-                    <li><a href="web-tieng-anh/DE1tienganh/De1.html">TA Cao Đẳng Đề 1 </a></li>
-                    </ul>
-            </div>
-            </li>
-            <li>
-            <div class="dropdown">
-                <button class="dropdown-toggle">Code Website <span class="arrow">&#9662;</span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="jalan/View.html">View</a></li>
-                        <li><a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html">web học tại lớp</a></li>
-                        <li><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html">web kết thúc môn học</a></li>
-                        <li><a href="web-tieng-anh/trinhtri.html">web làm bài trính Trị</a></li>
-                    </ul>
-            </div>
-            </li>   
-        </ul>
-    </nav>
+    <main id="page-content" class="relative z-10">
+
+        <!-- SECTION 1: HERO - 3D INTERACTIVE -->
+        <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+            <!-- 3D Canvas Container -->
+            <div id="canvas-container" class="absolute inset-0 z-0"></div>
             
-    <div id="page-content" class="relative z-10 py-16 md:py-14">
-            <main class="max-w-4xl mx-auto px-4">
-                <section id="gioi-thieu" class="bg-white/90 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-xl text-center fade-in-element">
-                    <h1 class="text-3xl md:text-4xl font-bold text-blue-700 mb-6">Chào tất cả mọi người đã ghé thăm Website cá nhân của tôi!</h1>
-                    <p class="animated-text text-lg md:text-xl text-slate-700 mb-6">Đây là trang giới thiệu chung về tôi. Bạn có thể xem thêm các thông tin về tôi, mục tiêu hoặc bất cứ điều gì tôi đang và đã làm.</p>
-                    <div class="flex items-center justify-center gap-3 text-lg text-slate-600 mb-8">
-                        <p>Tôi rất vui khi bạn ghé thăm trang web của tôi.</p>
-                        <span>😊</span> <!-- Thay thế img bằng emoji -->
-                    </div>
-                    
-                    <h2 class="text-2xl font-semibold text-blue-600 mb-4">Mục tiêu</h2>
-                    <div class="animated-text text-slate-600 space-y-2">
-                        <p>Chia sẻ về những mục tiêu cá nhân hoặc sự nghiệp của tôi.</p>
-                        <p>Chia sẻ những thứ tuyệt vời mà tôi có.</p>
-                        <p>Xây dựng một nơi lưu giữ lại những gì tôi đã và đang làm.</p>
-                        <p>Chia sẻ thông tin của tôi với những ai quan tâm.</p>
-                        <p>Dựng một nơi lưu giữ kỉ niệm của tôi.</p>
-                    </div>
-                </section>
-            </main>
-        </div>
-    <!-- Nút điều khiển Slideshow -->
-        <button id="prev-background" class="slideshow-btn absolute top-1/2 left-4 -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/50 transition-colors z-20">
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <button id="next-background" class="slideshow-btn absolute top-1/2 right-4 -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/50 transition-colors z-20">
-            <i class="fa-solid fa-chevron-right"></i>
-        </button>
-    </div>
-<!-- Layout 2: Grid Ảnh (Đã nâng cấp) -->
-    <div class="max-w-7xl mx-auto p-4 md:p-8">
-        <h2 class="text-3xl font-bold text-center text-slate-800 mb-6 fade-in-element">Bộ Sưu Tập</h2>
-        <div class="grid grid-cols-4 grid-rows-3 gap-4 fade-in-element">
-            <!-- h1 -->
-            <a href="https://www.pinterest.com/pin/119767671334591896/" class="block col-span-2 row-span-1 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
-                <img src="https://i.pinimg.com/736x/73/71/46/737146dc45c3e0d3970c1dbd6a6dc3a0.jpg" alt="Ảnh 1" class="layout-image w-full h-full object-cover">
-            </a>
-            <!-- h2 -->
-            <a href="https://www.pinterest.com/pin/703756187801855/" class="block col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
-                <img src="https://i.pinimg.com/736x/ec/b6/24/ecb624bec81a0d5b229dc2fe4ed585fd.jpg" alt="Ảnh 2" class="layout-image w-full h-full object-cover">
-            </a>
-            <!-- h3 -->
-            <a href="https://www.pinterest.com/pin/3729612234654373/" class="block col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
-                <img src="https://i.pinimg.com/736x/50/83/77/508377b8b50493e682ddccbd9a6bc0fe.jpg" alt="Ảnh 3" class="layout-image w-full h-full object-cover">
-            </a>
-            <!-- h4 -->
-            <a href="https://www.pinterest.com/pin/65794844548982762/" class="block col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
-                <img src="https://i.pinimg.com/736x/32/23/8e/32238e026cd71e83b8075889d61da1ce.jpg" alt="Ảnh 4" class="layout-image w-full h-full object-cover">
-            </a>
-            <!-- h5 -->
-            <a href="https://www.pinterest.com/pin/10625749119122307/" class="block col-span-1 row-span-2 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
-                <img src="https://i.pinimg.com/736x/9c/3d/27/9c3d2743e7aaed7bfe0a52dec98b7202.jpg" alt="Ảnh 5" class="layout-image w-full h-full object-cover">
-            </a>
-            <!-- h6 -->
-            <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnguyendinhdang.wordpress.com%2F2012%2F11%2F12%2Fban-ve-hoi-hoa-truu-tuong%2F&psig=AOvVaw18KK7PRZPyMMnZdy37c4wn&ust=1750421306874000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOiD9tW5_Y0DFQAAAAAdAAAAABAE" class="block col-span-2 row-span-1 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105">
-                <img src="https://nguyendinhdang.wordpress.com/wp-content/uploads/2012/11/kandinsky-comp-8.jpg" alt="Ảnh 6" class="layout-image w-full h-full object-cover">
-            </a>
-        </div>
-    </div>
+            <div class="relative z-10 text-center pointer-events-none px-4">
+                <p class="text-[#ccff00] text-sm md:text-base uppercase tracking-[0.5em] mb-4 animate-fade-in-up">Graphic Designer</p>
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tighter mix-blend-exclusion">
+                    <span class="block transform hover:skew-x-6 transition-transform duration-500">Sáng Tạo</span>
+                    <span class="block text-outline transform hover:-skew-x-6 transition-transform duration-500">Vô Tận</span>
+                </h1>
+                <p class="mt-8 text-gray-400 max-w-md mx-auto text-sm md:text-lg font-light">
+                    Biến những ý tưởng điên rồ nhất thành trải nghiệm thị giác.
+                </p>
+            </div>
 
-    <!-- Post Grid (Đã nâng cấp) -->
-    <div class="max-w-7xl mx-auto p-4 md:p-8">
-        <h2 class="text-3xl font-bold text-center text-slate-800 mb-6 fade-in-element">Bài Viết Nổi Bật</h2>
-        <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px] fade-in-element">
-            <!-- h1 - Lớn -->
-            <a href="https...htm" class="post-item block col-span-1 md:col-span-2 row-span-2 rounded-xl overflow-hidden shadow-lg group relative">
-                <img src="https://thethaovanhoa.mediacdn.vn/372676912336973824/2024/6/3/starry-night-over-rhone-1717457450761608456418.jpg" alt="Đêm đầy sao" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div class="absolute bottom-0 left-0 p-6">
-                    <h3 class="post-title text-2xl font-semibold text-white">Đêm đầy sao <b> (Tác giả Van Gough) </b> với phong cách chụp ảnh kết hợp hội họa</h3>
-                </div>
-            </a>
-            <!-- h2 -->
-            <a href="https...9262355/" class="post-item block col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg group">
-                <img src="https://cdn.pixabay.com/photo/2024/12/12/09/50/animals-9262355_1280.jpg" alt="Mèo" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-            </a>
-            <!-- h3 -->
-            <a href="https...9294773/" class="post-item block col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg group">
-                <img src="https://cdn.pixabay.com/photo/2024/12/27/19/25/flower-9294773_1280.png" alt="Hoa" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-            </a>
-            <!-- h4 -->
-            <a href="https...7592444/" class="post-item block col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg group">
-                <img src="https://cdn.pixabay.com/photo/2022/11/14/20/14/compass-7592444_1280.jpg" alt="La bàn" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-            </a>
-            <!-- h5 -->
-            <a href="https...7822175/" class="post-item block col-span-1 row-span-1 rounded-xl overflow-hidden shadow-lg group">
-                <img src="https://cdn.pixabay.com/photo/2023/03/01/03/21/friends-7822175_1280.jpg" alt="Bạn bè" class="post-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-            </a>
-        </div>
-    </div>
-
-    <!-- Cards (Đã nâng cấp) -->
-    <div class="max-w-7xl mx-auto p-4 md:p-8">
-        <h2 class="text-3xl font-bold text-center text-slate-800 mb-6 fade-in-element">Kênh Trực Tuyến</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 fade-in-element">
-            <!-- Card 1 -->
-            <div class="card flex flex-col bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <img src="https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Card image" class="card-image w-full h-48 object-cover">
-                <div class="card-content p-5 flex flex-col flex-1">
-                    <h3 class="card-title text-lg font-semibold text-slate-800 mb-4 truncate">2020 World Champs Gaming Warzone</h3>
-                    <div class="card-user flex items-center mb-6">
-                        <img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="User avatar" class="card-user-avatar w-10 h-10 rounded-full object-cover">
-                        <div class="card-user-info ml-3">
-                            <h4 class="card-user-name font-semibold text-sm text-slate-700">Tam Tran</h4>
-                            <div class="card-user-game text-xs text-slate-500">Call of duty</div>
-                        </div>
-                    </div>
-                    <div class="card-bottom mt-auto flex justify-between items-center text-sm">
-                        <div class="card-live bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
-                            <i class="fa-solid fa-wifi text-xs"></i>
-                            <span>Live</span>
-                        </div>
-                        <div class="card-watching text-slate-500">4.2k watching</div>
-                    </div>
-                </div>
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+                <span class="text-[10px] uppercase tracking-widest text-gray-500">Cuộn xuống</span>
+                <div class="w-[1px] h-12 bg-gradient-to-b from-[#ccff00] to-transparent"></div>
             </div>
-            <!-- Card 2 (Nội dung dài) -->
-            <div class="card flex flex-col bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80" alt="Card image" class="card-image w-full h-48 object-cover">
-                <div class="card-content p-5 flex flex-col flex-1">
-                    <h3 class="card-title text-lg font-semibold text-slate-800 mb-4 h-14 overflow-hidden text-ellipsis">2020 World Champs Gaming WarzoneGamingGamingGamingGaming...</h3>
-                    <div class="card-user flex items-center mb-6">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="User avatar" class="card-user-avatar w-10 h-10 rounded-full object-cover">
-                        <div class="card-user-info ml-3">
-                            <h4 class="card-user-name font-semibold text-sm text-slate-700">John Doe</h4>
-                            <div class="card-user-game text-xs text-slate-500">Apex Legends</div>
-                        </div>
-                    </div>
-                    <div class="card-bottom mt-auto flex justify-between items-center text-sm">
-                        <div class="card-live bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
-                            <i class="fa-solid fa-wifi text-xs"></i>
-                            <span>Live</span>
-                        </div>
-                        <div class="card-watching text-slate-500">8.1k watching</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="card flex flex-col bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80" alt="Card image" class="card-image w-full h-48 object-cover">
-                <div class="card-content p-5 flex flex-col flex-1">
-                    <h3 class="card-title text-lg font-semibold text-slate-800 mb-4 h-14 overflow-hidden text-ellipsis">2020 World Champs Gaming Warzone 2020 World Champs Gaming Warzone</h3>
-                    <div class="card-user flex items-center mb-6">
-                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="User avatar" class="card-user-avatar w-10 h-10 rounded-full object-cover">
-                        <div class="card-user-info ml-3">
-                            <h4 class="card-user-name font-semibold text-sm text-slate-700">Jane Smith</h4>
-                            <div class="card-user-game text-xs text-slate-500">Fortnite</div>
-                        </div>
-                    </div>
-                    <div class="card-bottom mt-auto flex justify-between items-center text-sm">
-                        <div class="card-live bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
-                            <i class="fa-solid fa-wifi text-xs"></i>
-                            <span>Live</span>
-                        </div>
-                        <div class="card-watching text-slate-500">2.3k watching</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="card flex flex-col bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ffb0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Card image" class="card-image w-full h-48 object-cover">
-                <div class="card-content p-5 flex flex-col flex-1">
-                    <h3 class="card-title text-lg font-semibold text-slate-800 mb-4 truncate">2020 World Champs Gaming Warzone</h3>
-                    <div class="card-user flex items-center mb-6">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1c372c3a3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="User avatar" class="card-user-avatar w-10 h-10 rounded-full object-cover">
-                        <div class="card-user-info ml-3">
-                            <h4 class="card-user-name font-semibold text-sm text-slate-700">Mike Johnson</h4>
-                            <div class="card-user-game text-xs text-slate-500">Valorant</div>
-                        </div>
-                    </div>
-                    <div class="card-bottom mt-auto flex justify-between items-center text-sm">
-                        <div class="card-live bg-red-500 text-white px-3 py-1 rounded-full flex items-center gap-1">
-                            <i class="fa-solid fa-wifi text-xs"></i>
-                            <span>Live</span>
-                        </div>
-                        <div class="card-watching text-slate-500">5.0k watching</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Phần thông tin liên hệ được cập nhật -->
-        <section class="section-card fade-in-element contact-section">
-            <h2 class="text-3xl font-bold text-blue-700 mb-4">Gửi Lời Nhắn Đến Tôi</h2>
-            <p class="contact-description">Hãy để lại thông tin của bạn. Tôi sẽ phản hồi lại sớm nhất có thể.</p>
-            <form id="contactForm" class="contact-form">
-                <div class="form-group">
-                    <label for="name">Họ và Tên</label>
-                    <input type="text" id="name" name="from_name" required placeholder="Nhập họ và tên của bạn...">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="from_email" required placeholder="Nhập email của bạn...">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Số điện thoại</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn...">
-                </div>
-                <div class="form-group">
-                    <label for="message">Nội dung</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Nội dung lời nhắn của bạn..."></textarea>
-                </div>
-                <button type="submit" class="submit-button lift-on-hover">Gửi ngay</button>
-            </form>
-            <p class="form-note">
-                <i class="fa-solid fa-circle-info"></i>
-                Khi bạn nhấn nút "Gửi ngay", form sẽ gửi email trực tiếp.
-            </p>
         </section>
-    <footer>
-        <p>&copy; 2025 Phạm Viết Tiến. Mọi quyền được bảo lưu.</p>
-        <div class="social-links">
-            <a href="https://www.facebook.com/hai.trinhthi.3110" class="lift-on-hover">Facebook</a> | <a href="https://zalo.me/0329240391" class="lift-on-hover">zalo</a> | <a href="http://tiendepzai0908@gmail.com/" class="lift-on-hover">Mail</a>
-        </div>
-    </footer>
 
-    <script src="js/index_animation.js"></script>
+        <!-- SECTION 2: MARQUEE TEXT -->
+        <section class="py-12 border-t border-b border-gray-900 bg-[#0a0a0a] overflow-hidden">
+            <div class="whitespace-nowrap flex gap-8 animate-marquee">
+                <div class="flex gap-8 text-4xl md:text-6xl font-bold text-gray-800 uppercase italic font-syne select-none">
+                    <span>Branding</span> <span>•</span> 
+                    <span class="text-[#ccff00]">UI/UX Design</span> <span>•</span> 
+                    <span>Motion Graphics</span> <span>•</span> 
+                    <span>3D Modeling</span> <span>•</span> 
+                    <span>Packaging</span> <span>•</span>
+                    <span>Branding</span> <span>•</span> 
+                    <span class="text-[#ccff00]">UI/UX Design</span> <span>•</span> 
+                    <span>Motion Graphics</span> <span>•</span> 
+                    <span>3D Modeling</span> <span>•</span> 
+                    <span>Packaging</span> <span>•</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SELECTED WORKS -->
+        <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <h2 class="text-5xl md:text-7xl font-bold uppercase">Dự án <br><span class="text-[#ccff00]">Tiêu biểu</span></h2>
+                <p class="text-gray-400 max-w-sm text-right mt-6 md:mt-0">
+                    Tuyển tập những tác phẩm tâm đắc nhất, nơi kỹ thuật gặp gỡ cảm xúc.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+                
+                <!-- Project 1 -->
+                <div class="gallery-item group cursor-pointer mt-0 md:mt-12">
+                    <div class="overflow-hidden rounded-sm relative aspect-[4/5] bg-gray-900">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop" 
+                             alt="Project 1" 
+                             class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="mt-6 flex justify-between items-start border-b border-gray-800 pb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Cyber Punk Editorial</h3>
+                            <p class="text-sm text-gray-500">Art Direction / Layout</p>
+                        </div>
+                        <span class="text-xl group-hover:rotate-45 transition-transform duration-300">↗</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="gallery-item group cursor-pointer">
+                    <div class="overflow-hidden rounded-sm relative aspect-[4/5] bg-gray-900">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" 
+                             alt="Project 2" 
+                             class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start border-b border-gray-800 pb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Neon Future UI</h3>
+                            <p class="text-sm text-gray-500">Web Design / Interface</p>
+                        </div>
+                        <span class="text-xl group-hover:rotate-45 transition-transform duration-300">↗</span>
+                    </div>
+                </div>
+
+                 <!-- Project 3 -->
+                 <div class="gallery-item group cursor-pointer mt-0 md:mt-12">
+                    <div class="overflow-hidden rounded-sm relative aspect-[16/9] bg-gray-900">
+                        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2000&auto=format&fit=crop" 
+                             alt="Project 3" 
+                             class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start border-b border-gray-800 pb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Liquid Motion</h3>
+                            <p class="text-sm text-gray-500">3D Abstract / Animation</p>
+                        </div>
+                        <span class="text-xl group-hover:rotate-45 transition-transform duration-300">↗</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="gallery-item group cursor-pointer flex flex-col justify-center">
+                    <div class="p-8 border border-gray-800 hover:border-[#ccff00] transition-colors h-full flex flex-col justify-center items-center text-center rounded-sm">
+                        <h3 class="text-3xl font-bold mb-4">Xem tất cả dự án</h3>
+                        <p class="text-gray-500 mb-6">Khám phá kho tàng thiết kế đầy đủ của tôi.</p>
+                        <a href="#" class="px-8 py-3 bg-white text-black font-bold hover:bg-[#ccff00] transition-colors uppercase text-sm tracking-widest">
+                            Portfolio Full
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: SERVICES -->
+        <section class="py-24 relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#ccff00] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                <div class="mb-12">
+                    <span class="text-[#ccff00] uppercase tracking-widest text-sm">Chuyên môn</span>
+                    <h2 class="text-4xl md:text-6xl font-bold mt-2">Tôi có thể giúp gì?</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-8 border border-gray-800 bg-gray-900/50 backdrop-blur-sm hover:border-[#ccff00] transition-all duration-300 group">
+                        <div class="text-4xl mb-6 text-gray-600 group-hover:text-[#ccff00] transition-colors">01.</div>
+                        <h3 class="text-xl font-bold uppercase mb-4">Thương hiệu</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Xây dựng bộ nhận diện thương hiệu mạnh mẽ, từ Logo đến hệ thống Visual Key, giúp doanh nghiệp nổi bật giữa đám đông.
+                        </p>
+                    </div>
+
+                    <div class="p-8 border border-gray-800 bg-gray-900/50 backdrop-blur-sm hover:border-[#ccff00] transition-all duration-300 group">
+                        <div class="text-4xl mb-6 text-gray-600 group-hover:text-[#ccff00] transition-colors">02.</div>
+                        <h3 class="text-xl font-bold uppercase mb-4">Digital Design</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Thiết kế giao diện Website và App tập trung vào trải nghiệm người dùng (UX) và tính thẩm mỹ hiện đại (UI).
+                        </p>
+                    </div>
+
+                    <div class="p-8 border border-gray-800 bg-gray-900/50 backdrop-blur-sm hover:border-[#ccff00] transition-all duration-300 group">
+                        <div class="text-4xl mb-6 text-gray-600 group-hover:text-[#ccff00] transition-colors">03.</div>
+                        <h3 class="text-xl font-bold uppercase mb-4">Art Direction</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Định hướng phong cách nghệ thuật cho các chiến dịch quảng cáo, chụp ảnh sản phẩm và biên tập tạp chí.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CTA -->
+        <section class="py-32 px-6 text-center bg-[#ccff00] text-black">
+            <h2 class="text-4xl md:text-7xl font-bold uppercase mb-8 leading-none tracking-tight">
+                Sẵn sàng tạo ra <br>sự khác biệt?
+            </h2>
+            <p class="text-lg md:text-xl font-medium mb-10 max-w-2xl mx-auto opacity-80">
+                Hãy cùng nhau biến ý tưởng của bạn thành một tác phẩm nghệ thuật kỹ thuật số.
+            </p>
+            <a href="#contact" class="inline-block border-2 border-black px-10 py-4 text-lg font-bold uppercase tracking-widest hover:bg-black hover:text-[#ccff00] transition-all">
+                Liên hệ ngay
+            </a>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <section id="contact" class="py-20 bg-black text-white px-8 border-t border-gray-800">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-gray-500 uppercase tracking-widest mb-4">Thông tin liên hệ</p>
+            <h3 class="text-3xl font-bold">email@example.com</h3>
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Nếu là link ngoài thì bỏ qua
-                if (this.target === '_blank' || this.href.startsWith('http')) return;
-                e.preventDefault();
-                const pageContent = document.getElementById('page-content');
-                if (pageContent) {
-                    pageContent.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location = this.href;
-                    }, 400); // Thời gian khớp với transition trong CSS
-                } else {
-                    window.location = this.href;
+        // 1. MOBILE MENU LOGIC (INTEGRATED)
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav.main-nav');
+            const menuIcon = menuToggle.querySelector('i');
+
+            // --- LOGIC DROPDOWN (Click for Mobile / Hover for Desktop via CSS) ---
+            dropdowns.forEach(dropdown => {
+                const toggleBtn = dropdown.querySelector('.dropdown-toggle');
+                
+                // Only for mobile click interaction or fallback
+                if(toggleBtn) {
+                    toggleBtn.addEventListener('click', function (e) {
+                        // Check if we are on mobile (using width or class check)
+                        if (window.innerWidth < 768) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            dropdown.classList.toggle('open');
+                            
+                            // Close other dropdowns
+                            dropdowns.forEach(other => {
+                                if (other !== dropdown && other.classList.contains('open')) {
+                                    other.classList.remove('open');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!nav.contains(e.target)) {
+                    dropdowns.forEach(d => d.classList.remove('open'));
+                    if(nav.classList.contains('open') && !menuToggle.contains(e.target)) {
+                        // Optional: Close nav if clicking outside on mobile
+                         nav.classList.remove('open');
+                         menuToggle.classList.remove('nav-open');
+                         menuToggle.classList.remove('rotated');
+                         menuIcon.classList.remove('fa-times');
+                         menuIcon.classList.add('fa-bars');
+                    }
+                }
+            });
+
+            // Mobile Menu Toggle
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    nav.classList.toggle('open');
+                    menuToggle.classList.toggle('nav-open');
+                    menuToggle.classList.toggle('rotated');
+                    
+                    // Switch Icon
+                    if (nav.classList.contains('open')) {
+                         menuIcon.classList.remove('fa-bars');
+                         menuIcon.classList.add('fa-times');
+                    } else {
+                         menuIcon.classList.remove('fa-times');
+                         menuIcon.classList.add('fa-bars');
+                    }
+                });
+            }
+        });
+
+        // 2. CUSTOM CURSOR
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with delay (using animate for smooth follow)
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Add hover effect to links and buttons
+        const hoverables = document.querySelectorAll('a, button, .gallery-item, .dropdown-toggle');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(2)';
+                cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // 3. THREE.JS BACKGROUND ANIMATION
+        const initThreeJS = () => {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x050505, 0.002);
+
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Geometry - A morphing wireframe shape
+            const geometry = new THREE.IcosahedronGeometry(2, 2);
+            const material = new THREE.MeshBasicMaterial({ 
+                color: 0x888888, 
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3
+            });
+            
+            const sphere = new THREE.Mesh(geometry, material);
+            scene.add(sphere);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            let time = 0;
+            const originalPositions = geometry.attributes.position.array.slice();
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+                time += 0.005;
+
+                sphere.rotation.x += 0.001;
+                sphere.rotation.y += 0.002;
+
+                const positions = geometry.attributes.position.array;
+                
+                for (let i = 0; i < positions.length; i += 3) {
+                    const x = originalPositions[i];
+                    const y = originalPositions[i + 1];
+                    const z = originalPositions[i + 2];
+
+                    const perlin = Math.sin(x * 2 + time * 3) * Math.cos(y * 1.5 + time) * 0.5;
+                    const vector = new THREE.Vector3(x, y, z).normalize();
+                    
+                    positions[i] = originalPositions[i] + vector.x * perlin;
+                    positions[i+1] = originalPositions[i+1] + vector.y * perlin;
+                    positions[i+2] = originalPositions[i+2] + vector.z * perlin;
+                }
+                
+                geometry.attributes.position.needsUpdate = true;
+                renderer.render(scene, camera);
+            };
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            let mouseX = 0;
+            let mouseY = 0;
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) / 100;
+                mouseY = (event.clientY - window.innerHeight / 2) / 100;
+            });
+            
+            const updateCamera = () => {
+                camera.position.x += (mouseX - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+                requestAnimationFrame(updateCamera);
+            };
+            updateCamera();
+        };
+
+        initThreeJS();
+
+        // 4. GSAP SCROLL ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to(".animate-marquee", {
+            xPercent: -50,
+            ease: "none",
+            duration: 20,
+            repeat: -1
+        });
+
+        const images = document.querySelectorAll('.reveal-img');
+        images.forEach(img => {
+            gsap.to(img, {
+                scrollTrigger: {
+                    trigger: img,
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleClass: "active",
+                    once: true
                 }
             });
         });
-        window.addEventListener('DOMContentLoaded', function() {
-            const pageContent = document.getElementById('page-content');
-            if (pageContent) pageContent.classList.add('fade-in');
+
+        const sections = document.querySelectorAll('section');
+        sections.forEach(sec => {
+            const headings = sec.querySelectorAll('h2, h3');
+            if(headings.length > 0) {
+                gsap.from(headings, {
+                    scrollTrigger: {
+                        trigger: sec,
+                        start: "top 75%",
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    stagger: 0.2,
+                    ease: "power3.out"
+                });
+            }
         });
     </script>
-
-        <!-- Modal thông báo tùy chỉnh cho form -->
-    <div id="form-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" id="form-modal-close">&times;</span>
-            <p id="form-modal-message"></p>
-        </div>
-    </div>
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="js/js-code-navbar.js"></script>
-    <script src="https://kit.fontawesome.com/64dda980b3.js" crossorigin="anonymous"></script>
-    <!-- Nút Lên/Xuống (Đã nâng cấp) -->
-    <button id="back-to-top" title="Lên đầu trang" class="fixed bottom-28 right-5 w-12 h-12 bg-slate-700 text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-slate-800 z-50">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
-    <button id="go-to-bottom" title="Xuống cuối trang" class="fixed bottom-14 right-5 w-12 h-12 bg-slate-700 text-white rounded-full shadow-lg transition-all duration-300 hover:bg-slate-800 z-50">
-        <i class="fa-solid fa-arrow-down"></i>
-    </button>
-    <script src="js/next_tab.js"></script>
-    <script src="js/mail.js"></script>
-    <script src="js/loading.js"></script>
 </body>
 </html>
