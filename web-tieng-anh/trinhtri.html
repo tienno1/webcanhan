@@ -117,7 +117,6 @@
             z-index: 60; 
             padding-top: 70px; 
             box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
-            /* Bỏ display: none ở đây để control bằng transform */
             display: block; 
         }
         .dark #navigator-sidebar {
@@ -191,7 +190,6 @@
             @apply w-10 h-10 rounded-lg text-sm font-bold flex items-center justify-center transition-all duration-200 shadow-sm border-2 border-transparent;
         }
         
-        /* Câu đã làm: Viền xanh bao quanh, nền nhạt */
         .q-nav-btn.answered {
             background-color: #f0fdf4 !important; 
             border-color: #22c55e !important; 
@@ -248,7 +246,7 @@
             
             <div class="flex items-center gap-3">
                 <button id="theme-toggle-mobile" onclick="toggleTheme()" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-xl transition-colors duration-300 shadow-md border"><i id="theme-icon-mobile" class="fas"></i></button>
-                <div id="score-text" class="text-xs xs:text-sm px-3 py-1 rounded-full font-medium border transition-colors duration-300">Mã đề: 01</div>
+                <div id="score-text" class="text-xs xs:text-sm px-3 py-1 rounded-full font-medium border transition-colors duration-300">Mã đề: 02 (Full)</div>
             </div>
         </div>
     </header>
@@ -260,7 +258,7 @@
             <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#3b82f6] dark:border-[#58a6ff] transition-colors duration-300">
                 <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
                     <span class="bg-gray-100 dark:bg-[#21262d] text-[#3b82f6] dark:text-[#58a6ff] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm transition-colors duration-300"><i class="fas fa-list-ol"></i></span>
-                    TRẮC NGHIỆM <span class="text-sm font-normal text-gray-500 dark:text-[#8b949e] ml-3">84 câu hỏi</span>
+                    TRẮC NGHIỆM <span class="text-sm font-normal text-gray-500 dark:text-[#8b949e] ml-3">152 câu hỏi</span>
                 </h2>
                 <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Chọn đáp án đúng nhất cho các câu hỏi. Điểm tính theo thang 10.</p>
                 <div id="quiz-container" class="space-y-6">
@@ -274,7 +272,6 @@
     <div id="sidebar-overlay" onclick="toggleNavigatorSidebar()"></div>
 
     <!-- Sidebar Navigator -->
-    <!-- Sửa lỗi: Đã xóa class 'md:block hidden' để luôn tồn tại trong DOM và xử lý hiển thị bằng CSS/JS -->
     <div id="navigator-sidebar" class="bg-white dark:bg-[#0d1117]">
         <div class="p-4 sm:p-6 h-full overflow-y-auto custom-scrollbar">
             <h3 class="text-base font-extrabold uppercase tracking-wide mb-4 text-[#3b82f6] dark:text-[#58a6ff] sticky top-0 bg-white dark:bg-[#0d1117] pt-1 pb-2 border-b dark:border-[#30363d] transition-colors duration-300 flex justify-between items-center">
@@ -288,7 +285,6 @@
     </div>
     
     <!-- Sidebar Toggle Button -->
-    <!-- Sửa lỗi: Đã xóa 'hidden' và 'md:flex' để nút luôn hiện thị trên mọi thiết bị -->
     <div id="navigator-toggle-btn" class="flex group" onclick="toggleNavigatorSidebar()">
         <i class="fas fa-th-list"></i>
     </div>
@@ -440,7 +436,77 @@
             { id: 81, q: "Xét vị trí trong QHSX tư bản, giai cấp công nhân có đặc trưng cơ bản gì?", options: ["Chiếm số đông, không có tài sản", "Trực tiếp tạo ra của cải vật chất", "Không có tư liệu sản xuất, đi làm thuê, bị bóc lột giá trị thặng dư", "Tất cả đều đúng"], answerIndex: 2 },
             { id: 82, q: "Để xây dựng Chủ nghĩa xã hội phải trải qua một thời kỳ lịch sử đặc biệt, đó là?", options: ["Thời kỳ quá độ", "Quá độ", "Bỏ qua giai đoạn", "Đốt cháy giai đoạn"], answerIndex: 0 },
             { id: 83, q: "Thời kỳ quá độ là gì?", options: ["Cải tạo xã hội cũ sang xã hội mới", "Đốt cháy giai đoạn chuyển sang xã hội mới", "Cải biến cách mạng sâu sắc, triệt để, toàn diện từ xã hội cũ sang xã hội mới", "Cải cách toàn diện từ xã hội cũ sang xã hội mới"], answerIndex: 2 },
-            { id: 84, q: "Khi nói “Quá độ lên CNXH bỏ qua chế độ TBCN\" thì bỏ qua yếu tố nào?", options: ["Bỏ qua các yếu tố kinh tế gắn với CNTB", "Bỏ qua việc xác lập vị trí thống trị của QHSX và KTTT TBCN", "Bỏ qua các yếu tố chính trị và văn hóa", "Tất cả các phương án trên"], answerIndex: 1 }
+            { id: 84, q: "Khi nói “Quá độ lên CNXH bỏ qua chế độ TBCN\" thì bỏ qua yếu tố nào?", options: ["Bỏ qua các yếu tố kinh tế gắn với CNTB", "Bỏ qua việc xác lập vị trí thống trị của QHSX và KTTT TBCN", "Bỏ qua các yếu tố chính trị và văn hóa", "Tất cả các phương án trên"], answerIndex: 1 },
+            
+            /* --- CÂU HỎI MỚI CẬP NHẬT (TỪ 85 TRỞ ĐI) --- */
+            { id: 85, q: "Đặc trưng của xã hội Xã hội chủ nghĩa mà nhân dân ta xây dựng được thể hiện trong văn kiện nào của Đảng Cộng sản Việt Nam?", options: ["Văn kiện Đại hội Đảng toàn quốc lần thứ VI (12/1986)", "Văn kiện Đại hội Đảng toàn quốc lần thứ VII (6/1991)", "Văn kiện Đại hội Đảng toàn quốc lần thứ IX (4/2001)", "Cương lĩnh xây dựng đất nước trong thời kỳ quá độ lên Chủ nghĩa xã hội (1991) và được bổ sung tại Văn kiện Đại hội Đảng toàn quốc lần thứ X (2006) (Bổ sung 2011)"], answerIndex: 3 },
+            { id: 86, q: "Chủ nghĩa xã hội mà nước ta đang xây dựng có mấy đặc trưng cơ bản?", options: ["Bốn đặc trưng", "Sáu đặc trưng", "Tám đặc trưng", "Mười đặc trưng"], answerIndex: 2 },
+            { id: 87, q: "Đặc trưng nào thể hiện mục tiêu xây dựng Chủ nghĩa xã hội ở Việt Nam?", options: ["Dân giàu, nước mạnh, dân chủ, công bằng, văn minh", "Do nhân dân làm chủ", "Có nền văn hóa tiên tiến, đậm đà bản sắc dân tộc", "Có quan hệ hữu nghị và hợp tác với các nước trên thế giới"], answerIndex: 0 },
+            { id: 88, q: "“Có nền kinh tế phát triển cao, dựa trên lực lượng sản xuất hiện đại và quan hệ sản xuất phù hợp.” Hãy xác định đây là?", options: ["Một đặc trưng của Chủ nghĩa xã hội ở Việt Nam", "Một phương hướng cơ bản của Chủ nghĩa xã hội", "Một quan điểm của Chủ nghĩa xã hội", "Một chủ trương khi kết thúc Thời kỳ quá độ ở Việt Nam"], answerIndex: 0 },
+            { id: 89, q: "Nội dung nào dưới đây là đặc trưng về kinh tế của Chủ nghĩa xã hội ở nước ta?", options: ["Dân giàu, nước mạnh, dân chủ, công bằng, văn minh", "Có nền Kinh tế phát triển cao dựa trên lực lượng sản xuất hiện đại và quan hệ sản xuất tiến bộ, phù hợp", "Do nhân dân làm chủ", "Con người có cuộc sống ấm no, tự do, hạnh phúc, có điều kiện phát triển toàn diện"], answerIndex: 1 },
+            { id: 90, q: "Đặc trưng trên lĩnh vực văn hóa ở xã hội chủ nghĩa mà nhân dân ta đang xây dựng là gì?", options: ["Nền văn hóa kế thừa những truyền thống dân tộc", "Nền văn hóa tiến bộ", "Nền văn hóa tiên tiến, đậm đà bản sắc dân tộc", "Nền văn hóa đậm đà bản sắc dân tộc"], answerIndex: 2 },
+            { id: 91, q: "Chủ trương “Hòa nhập nhưng không hòa tan” trong tiến trình hội nhập với văn hóa thế giới thể hiện đặc trưng cơ bản nào dưới đây của chủ nghĩa xã hội ở nước ta?", options: ["Dân giàu, nước mạnh, dân chủ, công bằng, văn minh", "Do nhân dân làm chủ", "Có nền văn hóa tiên tiến, đậm đà bản sắc dân tộc", "Có quan hệ hữu nghị và hợp tác với các nước trên thế giới"], answerIndex: 2 },
+            { id: 92, q: "Nội dung nào dưới đây là đặc trưng cơ bản về chính trị của Chủ nghĩa xã hội ở nước ta?", options: ["Dân giàu, nước mạnh, dân chủ, công bằng, văn minh", "Do nhân dân làm chủ", "Có nền văn hóa tiên tiến, đậm đà bản sắc dân tộc", "Con người được giải phóng khỏi áp bức, bất công"], answerIndex: 1 },
+            { id: 93, q: "Các dân tộc trong cộng đồng Việt Nam bình đẳng, đoàn kết, tương trợ và giúp đỡ lẫn nhau cùng tiến bộ là:", options: ["Đặc trưng cơ bản của chủ nghĩa xã hội ở Việt Nam", "Điểm mới trong xã hội Việt Nam", "Biểu hiện của sự phát triển các dân tộc", "Đặc điểm quan trọng của đất nước"], answerIndex: 0 },
+            { id: 94, q: "“Con người có cuộc sống ấm no, tự do, hạnh phúc, có điều kiện phát triển toàn diện.” Hãy xác định đây là?", options: ["Một phương hướng của Chủ nghĩa xã hội", "Một đặc trưng của Chủ nghĩa xã hội ở Việt Nam", "Một quan điểm của Chủ nghĩa xã hội", "Một giải pháp phải đạt tới của Chủ nghĩa xã hội"], answerIndex: 1 },
+            { id: 95, q: "“Xây dựng nền văn hoá tiên tiến, đậm đà bản sắc dân tộc; xây dựng con người, nâng cao đời sống nhân dân, thực hiện tiến bộ và công bằng xã hội.” Hãy xác định đây là?", options: ["Một đặc trưng của Chủ nghĩa xã hội ở Việt Nam", "Một phương hướng cơ bản của Chủ nghĩa xã hội", "Một quan điểm của Chủ nghĩa xã hội", "Một mục tiêu của Chủ nghĩa xã hội ở Việt Nam"], answerIndex: 1 },
+            { id: 96, q: "Phương châm “Dân biết, dân bàn, dân làm, dân kiểm tra” được đề ra trong phương hướng nào?", options: ["Xây dựng Đảng trong sạch, vững mạnh", "Xây dựng nền dân chủ xã hội chủ nghĩa, thực hiện đại đoàn kết dân tộc, tăng cường và mở rộng mặt trận dân tộc thống nhất", "Thực hiện đường lối đối ngoại độc lập, tự chủ, hòa bình, hữu nghị, hợp tác và phát triển", "Phát triển nền kinh tế thị trường định hướng Xã hội chủ nghĩa"], answerIndex: 1 },
+            { id: 97, q: "Phương hướng nào nhấn mạnh vai trò của nhiệm vụ Bảo vệ Tổ quốc Việt Nam Xã hội chủ nghĩa?", options: ["Đảm bảo vững chắc quốc phòng, an ninh quốc gia, trật tự, an toàn xã hội", "Thực hiện đường lối đối ngoại độc lập, tự chủ...", "Xây dựng nền văn hoá tiên tiến...", "Phát triển nền kinh tế thị trường định hướng Xã hội chủ nghĩa"], answerIndex: 0 },
+            { id: 98, q: "Phương hướng nào thể hiện rõ quan điểm đối ngoại của Đảng và Nhà nước ta hiện nay?", options: ["Đảm bảo vững chắc quốc phòng...", "Thực hiện đường lối đối ngoại độc lập, tự chủ, hòa bình, hữu nghị, hợp tác và phát triển; chủ động và tích cực hội nhập quốc tế", "Xây dựng nền văn hoá tiên tiến...", "Phát triển nền kinh tế thị trường định hướng Xã hội chủ nghĩa"], answerIndex: 1 },
+            { id: 99, q: "Nền dân chủ xã hội chủ nghĩa ở nước ta là nền dân chủ của?", options: ["Nhân dân lao động", "Những người lãnh đạo", "Những người có địa vị xã hội", "Giai cấp tiểu tư sản"], answerIndex: 0 },
+            { id: 100, q: "Quốc phòng là gì?", options: ["Là những công việc, hoạt động nhằm phục vụ việc gìn giữ và bảo vệ độc lập, chủ quyền và toàn vẹn lãnh thổ", "Là những công việc, hoạt động nhằm đảm bảo sự ổn định chính trị", "Cả a và b đều đúng", "Cả a và b đều sai"], answerIndex: 0 },
+            { id: 101, q: "An ninh là gì?", options: ["Là những công việc, hoạt động nhằm phục vụ việc gìn giữ và bảo vệ độc lập", "Là những công việc, hoạt động nhằm đảm bảo sự ổn định chính trị, trật tự và an toàn xã hội...", "Là những công việc, hoạt động nhằm bảo vệ quốc gia", "Cả a, b và c đều đúng"], answerIndex: 1 },
+            { id: 102, q: "Quốc phòng và an ninh có vai trò như thế nào?", options: ["Trực tiếp giữ gìn và xây dựng vững chắc Tổ quốc", "Trực tiếp giữ gìn và bảo vệ vững chắc Tổ quốc Việt Nam xã hội chủ nghĩa", "Trực tiếp giữ gìn vững chắc Tổ quốc", "Trực tiếp bảo vệ vững chắc Tổ quốc"], answerIndex: 1 },
+            { id: 103, q: "Một trong những nhiệm vụ của quốc phòng và an ninh là?", options: ["Phát huy sức mạnh của nhân dân", "Phát huy sức mạnh của Nhà nước", "Phát huy sức mạnh của khối đại đoàn kết toàn dân tộc", "Phát huy sức mạnh của Đảng"], answerIndex: 2 },
+            { id: 104, q: "Trong điều kiện hoà bình, vai trò chủ yếu của quốc phòng là?", options: ["Xây dựng và bảo vệ đất nước", "Bảo vệ vững chắc Tổ quốc Việt Nam xã hội chủ nghĩa", "Giữ gìn trật tự, an toàn xã hội", "Giữ gìn an ninh kinh tế"], answerIndex: 0 },
+            { id: 105, q: "Củng cố quốc phòng, bảo vệ an ninh quốc gia là nhiệm vụ của ai?", options: ["Công an nhân dân", "Toàn dân", "Quân đội nhân dân", "Công dân"], answerIndex: 1 },
+            { id: 106, q: "Sở dĩ chúng ta phải kết hợp kinh tế - xã hội và quốc phòng an ninh là vì?", options: ["Chúng ta đang thực hiện đồng thời hai nhiệm vụ chiến lược xây dựng và bảo vệ Tổ quốc", "Các thế lực thù địch luôn tìm cách phá hoại", "Chúng ta đang xây dựng Chủ nghĩa xã hội", "Các thế lực thù địch đang thực hiện âm mưu diễn biến hòa bình"], answerIndex: 0 },
+            { id: 107, q: "Chiến lược phát triển kinh tế phải gắn liền với chiến lược quốc phòng và an ninh phục vụ cho chiến lược phát triển Kinh tế - Xã hội là biểu hiện của?", options: ["Kết hợp kinh tế với an ninh", "Kết hợp kinh tế với quốc phòng", "Kết hợp kinh tế với quốc phòng và an ninh", "Kết hợp quốc phòng và an ninh"], answerIndex: 2 },
+            { id: 108, q: "Trong tình hình hiện nay, việc xây dựng Quân đội nhân dân và Công an nhân dân trở thành lực lượng chính quy, tinh nhuệ, từng bước hiện đại là?", options: ["Nhu cầu của QĐND và CAND", "Nhu cầu riêng của CAND", "Nhu cầu riêng của QĐND", "Đòi hỏi khách quan của sự nghiệp cách mạng nước ta"], answerIndex: 3 },
+            { id: 109, q: "Việc làm nào dưới đây không thực hiện đúng nghĩa vụ bảo vệ Tổ Quốc?", options: ["Đăng kí nghĩa vụ khi đến tuổi", "Không chấp hành lệnh gọi nhập ngũ", "Tham gia huấn luyện quân sự ở trường học", "Tham gia tuần tra ban đêm ở địa bàn dân cư"], answerIndex: 1 },
+            { id: 110, q: "Chủ trương trong quan hệ quốc tế của Việt Nam là?", options: ["Việt Nam sẵn sàng là bạn của các nước", "Việt Nam muốn là bạn, là đối tác của các nước", "Việt Nam sẵn sàng là bạn, là đối tác tin cậy của các nước trong cộng đồng quốc tế", "Việt Nam sẵn sàng là bạn tin cậy của các nước"], answerIndex: 2 },
+            { id: 111, q: "Nguyên tắc của công tác đối ngoại của Đảng ta là gì?", options: ["Bình đẳng và cùng có lợi...", "Không dùng vũ lực hoặc đe dọa dùng vũ lực...", "Giữ vững độc lập, chủ quyền dân tộc...", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 112, q: "Hình thức chủ yếu của Kinh tế đối ngoại là gì?", options: ["Hợp tác sản xuất, khoa học– công nghệ", "Hợp tác tín dụng quốc tế", "Ngoại thương", "Cả a, b, c đều đúng"], answerIndex: 2 },
+            { id: 113, q: "Toàn cầu hóa về kinh tế là một xu hướng bắt nguồn từ các nhân tố khách quan nào sau đây?", options: ["Sự phát triển của Sản xuất hàng hóa, Khoa học công nghệ và hợp tác phân công Lao động quốc tế", "Sự phát triển của khoa học và công nghệ", "Sự phát triển của hợp tác và phân công lao động trên phạm vi quốc tế", "Sự phát triển của các công ty trách nhiệm hữu hạn"], answerIndex: 0 },
+            { id: 114, q: "Trong Hội nhập Kinh tế quốc tế thì hình thức nào quan trọng hơn?", options: ["Hình thức đa phương có vị trí quan trọng hơn hình thức song phương", "Cả hình thức đa phương và song phương đều quan trọng như nhau", "Hình thức song phương quan trọng hơn hình thức đa phương", "Có lúc hình thức đa phương quan trọng hơn, lại có lúc song phương quan trọng hơn"], answerIndex: 1 },
+            { id: 115, q: "Hội nhập Kinh tế quốc tế tạo cơ hội cho nền Kinh tế nước ta có bước phát triển về các mặt nào sau đây?", options: ["Tiếp nhận được thành quả khoa học, công nghệ", "Góp phần đào tạo mới và đào tạo lại cán bộ", "Sức cạnh tranh được nâng lên đáng kể", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 116, q: "Trong quá trình hội nhập kinh tế quốc tế chúng ta đã bộc lộ những yếu kém nào?", options: ["Chính sách thương mại chưa hoàn chỉnh...", "Khả năng hội nhập và cạnh tranh còn yếu kém", "Tư tưởng bảo hộ còn nặng...", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 117, q: "Hãy tìm câu có nội dung sai: Độc lập tự chủ về kinh tế trong điều kiện hiện nay có nghĩa là?", options: ["Không bị lệ thuộc vào đường lối kinh tế của nước khác", "Không cần phải hội nhập với nền kinh tế thế giới", "Không bị lệ thuộc vào các điều kiện kinh tế- chính trị bất lợi do đối tác áp đặt", "Về cơ bản giữ được sự ổn định của nền kinh tế quốc gia..."], answerIndex: 1 },
+            { id: 118, q: "Hãy chọn 1 câu có nội dung đúng nhất về toàn cầu hóa?", options: ["Toàn cầu hóa kinh tế phục vụ đông đảo người nghèo, nước nghèo", "Tự do hóa thương mại thì các nước chậm phát triển ở thế mạnh hơn", "Toàn cầu hóa kinh tế làm cho giá thành sản xuất tăng lên", "Tự do hóa đầu tư làm cho các nước chậm phát triển tiếp cận được dòng đầu tư nước ngoài (ODA và FDI)"], answerIndex: 3 },
+            { id: 119, q: "Quan điểm của nước ta trong thực hiện chính sách đối ngoại là:", options: ["Bảo đảm lợi ích dân tộc chân chính", "Giữ vững độc lập tự chủ, tự cường", "Giữ vững ổn định chính trị, kinh tế- xã hội", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 120, q: "Nhà nước là?", options: ["Một tổ chức xã hội có giai cấp", "Một tổ chức Xã hội có chủ quyền quốc gia", "Một tổ chức Xã hội có luật lệ", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 121, q: "Lịch sử xã hội loài người đã tồn tại các kiểu nhà nước nào?", options: ["Chủ nô- Phong kiến- Tư hữu– Xã hội chủ nghĩa", "Chủ nô- Phiếm hữu nô lệ- Tư bản- Xã hội chủ nghĩa", "Chủ nô- Phong kiến- Tư sản- Xã hội chủ nghĩa", "Địa chủ- Nông nô, phong kiến- Tư bản- Xã hội chủ nghĩa"], answerIndex: 2 },
+            { id: 122, q: "Trong lịch sử của dân tộc ta, nhà nước đầu tiên được thành lập là nhà nước nào?", options: ["Âu Lạc", "Văn Lang", "Cộng hòa Xã hội Chủ nghĩa Việt Nam", "Đại Cồ Việt"], answerIndex: 1 },
+            { id: 123, q: "Nhà nước pháp quyền là?", options: ["Quyền lực thuộc về nhân dân", "Pháp luật chủ đạo", "Mọi người phải thực hiện đúng pháp luật, tuân thủ pháp luật", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 124, q: "Nhà nước pháp quyền Xã hội chủ nghĩa là?", options: ["Nhà nước của dân, do dân, vì dân", "Pháp luât chủ đạo để quản lý xã hội, mọi người phải tuân thủ", "Dưới sự lãnh đạo của Đảng cộng sản", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 125, q: "Một trong những đặc trưng của Nhà nước pháp quyền Xã hội chủ nghĩa Việt Nam là?", options: ["Nhà nước của dân, do dân, vì dân, tất cả quyền lực thuộc về nhân dân", "Nhà nước của giai cấp tư sản", "Nhà nước của giai cấp công nhân", "Nhà nước của giai cấp nông dân"], answerIndex: 0 },
+            { id: 126, q: "Điền từ: “Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam... quản lý mọi mặt của đời sống xã hội bằng...”", options: ["Kinh tế", "Pháp luật", "Chính trị", "Văn hóa"], answerIndex: 1 },
+            { id: 127, q: "Công cụ nào hữu hiệu nhất được nhà nước sử dụng để quản lý xã hội?", options: ["Chủ trương", "Chính sách", "Kế hoạch", "Pháp luật"], answerIndex: 3 },
+            { id: 128, q: "Nhà nước pháp quyền xã hội chủ nghĩa là nhà nước:", options: ["Của nhân dân, do nhân dân, vì nhân dân", "Của riêng giai cấp lãnh đạo", "Của riêng những người lao động nghèo", "Của riêng tầng lớp trí thức"], answerIndex: 0 },
+            { id: 129, q: "Nhà nước thể hiện ý chí, lợi ích và nguyện vọng của nhân dân là nói đến đặc điểm nào dưới đây?", options: ["Tính xã hội", "Tính nhân dân", "Tính nhân văn", "Tính giai cấp"], answerIndex: 1 },
+            { id: 130, q: "Nhà nước pháp quyền Xã hội chủ nghĩa Việt Nam thực hiện ý chí và lợi ích của?", options: ["Giai cấp công nhân", "Nhân dân lao động", "Toàn dân tộc", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 131, q: "Tính nhân dân của Nhà nước pháp quyền Xã hội chủ nghĩa Việt Nam được thể hiện?", options: ["Nhà nước của dân, do nhân dân lập nên...", "Nhà nước thể hiện ý chí, lợi ích và nguyện vọng của nhân dân", "Nhà nước là công cụ chủ yếu để nhân dân thực hiện quyền làm chủ", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 132, q: "Tính dân tộc của Nhà nước pháp quyền Xã hội chủ nghĩa Việt Nam được thể hiện?", options: ["Kế thừa và phát huy những truyền thống, bản sắc tốt đẹp của dân tộc", "Có chính sách dân tộc đúng đắn, chăm lo lợi ích mọi mặt của các dân tộc...", "Cả a và b đều đúng", "Cả a và b đều sai"], answerIndex: 2 },
+            { id: 133, q: "Trong Bộ máy nhà nước cộng hòa Xã hội chủ nghĩa Việt Nam cơ quan nhà nước nào có quyền lực cao nhất?", options: ["Chính phủ", "Đảng Cộng sản Việt Nam", "Tòa án Nhân dân Tối cao", "Quốc hội"], answerIndex: 3 },
+            { id: 134, q: "Nhà nước pháp quyền Xã hội chủ nghĩa Việt Nam mang bản chất của giai cấp nào?", options: ["Nông dân", "Công nhân", "Tư sản", "Trí thức"], answerIndex: 1 },
+            { id: 135, q: "Chủ quyền quốc gia là?", options: ["Quyền độc lập tự quyết của quốc gia trong lĩnh vực đối nội", "Quyền ban hành văn bản pháp luật", "Quyền độc lập tự quyết của quốc gia trong lĩnh vực đối ngoại", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 136, q: "Nhà nước pháp quyền Xã hội chủ nghĩa Việt Nam có mấy đặc trưng cơ bản?", options: ["3 đặc trưng", "4 đặc trưng", "5 đặc trưng", "6 đặc trưng"], answerIndex: 3 },
+            { id: 137, q: "Nhà nước có những chức năng cơ bản nào?", options: ["Chức năng đối nội và quản lý xã hội", "Chức năng đối ngoại và phát triển kinh tế", "Chức năng đối nội và Chức năng đối ngoại", "Chức năng quản lý xã hội"], answerIndex: 2 },
+            { id: 138, q: "Đoàn kết toàn dân tộc có vai trò như thế nào đối với cách mạng Việt Nam?", options: ["Đoàn kết là truyền thống quý báu, có ý nghĩa chiến lược", "Là nguồn sức mạnh, động lực to lớn", "Là cái gốc quan trọng dẫn đến thắng lợi", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 139, q: "Chủ tịch Hồ Chí Minh khẳng định vai trò và sức mạnh của đoàn kết là?", options: ["“Đoàn kết, đoàn kết, đại đoàn kết. Thành công, thành công, đại thành công”", "“Đoàn kết là sức mạnh của quyền lực”", "“Dễ mười lần không dân cũng chịu...”", "“Chở thuyền là dân, làm lật thuyền cũng là dân”"], answerIndex: 0 },
+            { id: 140, q: "Nhiệm vụ chiến lược xuyên suốt cuộc cách mạng xã hội chủ nghĩa là:", options: ["Đoàn kết dân tộc, đoàn kết giai cấp, đoàn kết quốc tế", "Đoàn kết giữa các nước cùng châu lục", "Đoàn kết giữa các nước có quan hệ ngoại giao", "Đoàn kết giữa Nhân dân các nước thuộc địa"], answerIndex: 0 },
+            { id: 141, q: "Trong câu “Đại gia đình các dân tộc Việt Nam hiện có 54 dân tộc anh em”, vì sao nói: “Đại gia đình... ” và “54 dân tộc anh em”?", options: ["54 dân tộc Việt Nam đều là công dân nước CHXHCN Việt Nam", "Cùng nhau xây dựng “đại gia đình...” đậm đà bản sắc dân tộc", "Các dân tộc đều được bình đẳng trước Pháp luật", "Cả a, b, c đều đúng"], answerIndex: 3 },
+            { id: 142, q: "Đoàn kết toàn dân tộc phải lấy lực lượng nào làm quân chủ lực?", options: ["Công nhân", "Công nông", "Nông dân", "Quân đội"], answerIndex: 1 },
+            { id: 143, q: "Đoàn kết trong Đảng là?", options: ["Hạt nhân cho đại đoàn kết dân tộc", "Đoàn kết quốc tế", "Đoàn kết cách mạng", "Đoàn kết trong nội bộ"], answerIndex: 0 },
+            { id: 144, q: "Mục tiêu chung của nhân dân thế giới hiện nay là?", options: ["Dân giàu, nước mạnh, xã hội công bằng, dân chủ, văn minh", "Vì chủ nghĩa xã hội", "Vì hòa bình, độc lập dân tộc, dân chủ và tiến bộ xã hội", "Hội nhập và phát triển"], answerIndex: 2 },
+            { id: 145, q: "Chủ nghĩa Mác– Lênin chỉ rõ: Cơ sở để xây dựng đoàn kết dân tộc là sự thống nhất về:", options: ["Lợi ích căn bản giữa các dân tộc, giai cấp, tầng lớp trong xã hội", "Địa vị xã hội giống nhau của các giai cấp", "Mục đích đấu tranh giống nhau giữa các giai cấp", "Sự giống nhau về đặc điểm kinh tế, văn hóa"], answerIndex: 0 },
+            { id: 146, q: "Lực lượng đoàn kết dân tộc theo quan điểm của Chủ nghĩa Mác– Lênin là:", options: ["Mọi thành viên trong xã hội không phân biệt dân tộc, tôn giáo, giai cấp...", "Chỉ các giai cấp, tầng lớp cùng địa vị xã hội", "Có sự phân biệt giới tính, tầng lớp", "Có sự phân biệt tôn giáo, dân tộc"], answerIndex: 0 },
+            { id: 147, q: "Bản chất âm mưu “Diễn biến hòa bình” của Chủ nghĩa đế quốc và các thế lực thù địch là:", options: ["Triệt để lợi dụng vấn đề dân tộc, tôn giáo, dân chủ, nhân quyền…để kích động, chia rẽ", "Thực thi mưu đồ bá chủ thế giới", "Chống phá bằng bạo lực có tổ chức", "Răn đe quân sự đối với các nước phát triển"], answerIndex: 0 },
+            { id: 148, q: "Theo quan điểm của chủ nghĩa Mác– Lênin: Cách mạng là sự nghiệp của:", options: ["Giai cấp thống trị", "Quần chúng", "Tầng lớp tiểu tư sản", "Giai cấp bị bóc lột"], answerIndex: 1 },
+            { id: 149, q: "Đảng chỉ rõ: vấn đề dân tộc và khối đại đoàn kết toàn dân tộc là:", options: ["Vấn đề quan trọng của cách mạng Việt Nam", "Vấn đề chiến lược cơ bản lâu dài của cách mạng Việt Nam", "Vấn đề cấp bách trước mắt của cách mạng Việt Nam", "Vừa là chiến lược cơ bản lâu dài, vừa là vấn đề cấp bách của cách mạng Việt Nam"], answerIndex: 3 },
+            { id: 150, q: "Để phát huy khối đại đoàn kết dân tộc, Đảng và Nhà nước ta luôn:", options: ["Tôn trọng những điểm khác biệt không trái với lợi ích chung của quốc gia - dân tộc", "Yêu cầu các dân tộc phải xóa bỏ những điểm khác biệt", "Chỉ phát huy đoàn kết giữa các dân tộc có nhiều điểm chung", "Chỉ phát huy đoàn kết giữa các dân tộc trên lãnh thổ Việt Nam"], answerIndex: 0 },
+            { id: 151, q: "Xây dựng và phát huy sức mạnh đại đoàn kết dân tộc là sự nghiệp của:", options: ["Toàn dân tộc, cả hệ thống chính trị", "Giai cấp công nhân", "Của bộ máy Nhà nước", "Của Đảng Cộng sản Việt Nam"], answerIndex: 0 },
+            { id: 152, q: "Sức mạnh của khối đại đoàn kết toàn dân tộc là sức mạnh của:", options: ["Cả cộng đồng các dân tộc Việt Nam", "Giai cấp công nhân", "Của bộ máy Nhà nước", "Của Đảng Cộng sản Việt Nam"], answerIndex: 0 }
         ];
 
         const ABC = ['A', 'B', 'C', 'D'];
@@ -520,7 +586,7 @@
                 opts = shuffleArray(opts);
                 return { 
                     ...item, 
-                    displayIndex: index + 1, // Thứ tự hiển thị sau khi trộn (1 - 84)
+                    displayIndex: index + 1, // Thứ tự hiển thị sau khi trộn (1 - 152)
                     shuffledOptions: opts 
                 };
             });
@@ -680,7 +746,7 @@
                 btn.classList.remove('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
                 btn.classList.add('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
 
-                scoreTextElement.innerHTML = `Mã đề: 01`;
+                scoreTextElement.innerHTML = `Mã đề: 02 (Full)`;
                 scoreTextElement.classList.remove('correct-answer');
                 scoreTextElement.classList.add('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
 
