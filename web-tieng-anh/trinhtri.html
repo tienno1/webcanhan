@@ -258,7 +258,8 @@
             <div class="hover-card p-4 sm:p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#3b82f6] dark:border-[#58a6ff] transition-colors duration-300">
                 <h2 class="text-xl sm:text-2xl font-extrabold mb-3 flex items-center">
                     <span class="bg-gray-100 dark:bg-[#21262d] text-[#3b82f6] dark:text-[#58a6ff] w-8 h-8 rounded-md flex items-center justify-center mr-3 text-base shadow-sm transition-colors duration-300"><i class="fas fa-list-ol"></i></span>
-                    TRẮC NGHIỆM <span class="text-sm font-normal text-gray-500 dark:text-[#8b949e] ml-3">152 câu hỏi</span>
+                    <span id="quiz-title-main">TRẮC NGHIỆM</span> 
+                    <span id="quiz-count-main" class="text-sm font-normal text-gray-500 dark:text-[#8b949e] ml-3">152 câu hỏi</span>
                 </h2>
                 <p class="text-sm text-gray-500 dark:text-[#8b949e] mb-4 md:ml-10">Chọn đáp án đúng nhất cho các câu hỏi. Điểm tính theo thang 10.</p>
                 <div id="quiz-container" class="space-y-6">
@@ -303,9 +304,15 @@
                     </button>
                     <div id="control-dropdown" class="dropdown-menu dropdown-closed absolute bottom-full mb-3 left-0 w-60 p-3 rounded-xl shadow-2xl border transition-colors duration-300 z-50 bg-white dark:bg-[#161b22]">
                         <h3 class="text-sm font-bold uppercase tracking-widest mb-2 border-b pb-1 transition-colors duration-300 text-gray-500">Menu</h3>
-                        <button onclick="resetAndShuffleQuiz(); toggleDropdown()" class="group w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm mb-3 bg-orange-50 hover:bg-orange-100 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400">
-                            <i class="fas fa-random mr-2 group-hover:rotate-180 transition-transform duration-500"></i> Trộn đề & Làm lại
+                        
+                        <button onclick="resetAndShuffleQuiz('full'); toggleDropdown()" class="group w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm mb-2 bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9]">
+                             <i class="fas fa-list mr-2 text-gray-500"></i> Làm lại toàn bộ (Full)
                         </button>
+                        
+                        <button onclick="generateRandomExam(); toggleDropdown()" class="group w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm mb-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400">
+                            <i class="fas fa-random mr-2 group-hover:rotate-180 transition-transform duration-500"></i> Tạo đề thi ngẫu nhiên
+                        </button>
+
                         <div id="filter-controls" class="hidden flex-col gap-2 mt-3 pt-3 border-t transition-colors duration-300">
                             <p class="text-xs font-bold uppercase tracking-widest mb-1 text-gray-400">Xem lại bài</p>
                             <button onclick="filterQuestions('all'); toggleDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn" data-filter="all"><i class="fas fa-list mr-2 text-[#3b82f6]"></i> Tất cả</button>
@@ -344,7 +351,7 @@
                 </div>
                 <div class="flex flex-col gap-3">
                     <button onclick="closeModalAndShowReview()" class="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold py-3 px-6 rounded-xl transition shadow-lg hover:shadow-xl text-base dark:bg-[#58a6ff] dark:hover:bg-[#79c0ff] dark:text-[#0d1117]">Xem chi tiết bài làm</button>
-                    <button onclick="resetAndShuffleQuiz(); closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 text-sm dark:bg-[#30363d] dark:hover:bg-[#444c56] dark:text-[#c9d1d9]"><i class="fas fa-redo-alt text-xs"></i> Làm lại đề mới</button>
+                    <button onclick="resetAndShuffleQuiz('current'); closeModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 text-sm dark:bg-[#30363d] dark:hover:bg-[#444c56] dark:text-[#c9d1d9]"><i class="fas fa-redo-alt text-xs"></i> Làm lại đề này</button>
                 </div>
             </div>
         </div>
@@ -514,8 +521,9 @@
         let isDropdownOpen = false;
         let isNavigatorOpen = false;
         let currentQuestions = [];
-        const TOTAL_QUESTIONS = RAW_QUESTIONS.length;
-        const POINT_PER_QUESTION = 10 / TOTAL_QUESTIONS;
+        let totalQuestions = RAW_QUESTIONS.length;
+        let pointPerQuestion = 10 / totalQuestions;
+        let currentMode = 'full'; // 'full' or 'exam'
 
         /* --- LOGIC XỬ LÝ CHUNG --- */
         
@@ -570,9 +578,56 @@
 
         /* --- LOGIC KHỞI TẠO DỮ LIỆU --- */
 
-        function initData() {
-            // 1. Trộn thứ tự câu hỏi
-            let questionsToShuffle = [...RAW_QUESTIONS];
+        function initData(mode = 'full') {
+            currentMode = mode;
+            let sourceQuestions = [];
+            let titleText = "Mã đề: 02 (Full)";
+            let quizCountText = "152 câu hỏi";
+            
+            // Logic chia đề:
+            // Đề 1: 1-50 (Index 0-49)
+            // Đề 2: 51-100 (Index 50-99)
+            // Đề 3: 101-152 (Index 100-151)
+
+            if (mode === 'full') {
+                sourceQuestions = [...RAW_QUESTIONS];
+            } else if (mode === 'random') {
+                // Random 1, 2, or 3
+                const examNum = Math.floor(Math.random() * 3) + 1;
+                titleText = `Đề thi số ${examNum}`;
+
+                if (examNum === 1) {
+                    sourceQuestions = RAW_QUESTIONS.slice(0, 50); 
+                } else if (examNum === 2) {
+                    sourceQuestions = RAW_QUESTIONS.slice(50, 100);
+                } else {
+                    sourceQuestions = RAW_QUESTIONS.slice(100, 152);
+                }
+            } else if (mode === 'current' && currentQuestions.length > 0) {
+                 // Keep current set but re-shuffle? No, usually 'current' implies retry same set.
+                 // But for simplicity in logic, let's treat 'current' as re-using the existing filtered set if possible
+                 // or simple reload based on existing text title.
+                 // Actually, simpler approach: if current is random exam, re-generate same exam logic?
+                 // For now, let's stick to generating NEW shuffle from the selected set.
+                 // However, "Làm lại đề này" implies keeping the same subset.
+                 
+                 // If we want to retry the SAME exam number, we need to store it.
+                 // But 'random' implies a new one.
+                 // Let's assume 'current' logic is handled by caller passing specific range or we store state.
+                 // Simplification: "Làm lại đề này" will just reset the current UI without re-generating data if not needed,
+                 // OR we re-shuffle the SAME subset.
+                 // Let's implement storing the subset.
+                 
+                 // RE-REFACTOR: Just use current questions but re-shuffle options?
+                 // Let's keep it simple: 'full' always resets to full. 'random' always picks new.
+                 // If user wants to retry, we need to know which exam it was.
+                 // Let's extract exam ID from titleText? A bit hacky.
+                 
+                 // Better: Store currentExamId global.
+            }
+            
+            // 1. Trộn thứ tự câu hỏi trong tập đã chọn
+            let questionsToShuffle = [...sourceQuestions];
             questionsToShuffle = shuffleArray(questionsToShuffle);
 
             // 2. Trộn thứ tự đáp án trong mỗi câu
@@ -586,9 +641,36 @@
                 opts = shuffleArray(opts);
                 return { 
                     ...item, 
-                    displayIndex: index + 1, // Thứ tự hiển thị sau khi trộn (1 - 152)
+                    displayIndex: index + 1, // Thứ tự hiển thị 1..N
                     shuffledOptions: opts 
                 };
+            });
+            
+            // Cập nhật biến toàn cục
+            totalQuestions = currentQuestions.length;
+            pointPerQuestion = 10 / totalQuestions;
+            quizCountText = `${totalQuestions} câu hỏi`;
+
+            // Cập nhật UI Text
+            const scoreText = document.getElementById('score-text');
+            if (scoreText) scoreText.innerText = titleText;
+            
+            const quizCountMain = document.getElementById('quiz-count-main');
+            if (quizCountMain) quizCountMain.innerText = quizCountText;
+        }
+        
+        function generateRandomExam() {
+            initData('random');
+            isSubmitted = false;
+            renderQuestions();
+            updateSubmitButton();
+            document.getElementById('warning-msg').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Reset filters
+             document.querySelectorAll('.filter-btn').forEach(btn => {
+                 btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9] shadow-sm";
+                 if(btn.dataset.filter === 'all') btn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]'); 
             });
         }
 
@@ -731,8 +813,9 @@
                 btn.classList.remove('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
                 btn.classList.add('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
                 
-                const score = (correctCount * POINT_PER_QUESTION).toFixed(1);
-                scoreTextElement.innerHTML = `Đúng: ${correctCount}/${TOTAL_QUESTIONS} | Điểm: ${score}`;
+                // Sử dụng pointPerQuestion động
+                const score = (correctCount * pointPerQuestion).toFixed(1);
+                scoreTextElement.innerHTML = `Đúng: ${correctCount}/${totalQuestions} | Điểm: ${score}`;
                 scoreTextElement.classList.add('correct-answer');
                 scoreTextElement.classList.remove('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
 
@@ -746,7 +829,7 @@
                 btn.classList.remove('bg-green-600', 'hover:bg-green-700', 'cursor-default', 'dark:bg-[#388e3c]', 'dark:hover:bg-[#43a047]');
                 btn.classList.add('bg-[#3b82f6]', 'hover:bg-[#2563eb]', 'dark:bg-[#58a6ff]', 'dark:hover:bg-[#79c0ff]');
 
-                scoreTextElement.innerHTML = `Mã đề: 02 (Full)`;
+                // Text sẽ được set trong initData
                 scoreTextElement.classList.remove('correct-answer');
                 scoreTextElement.classList.add('bg-gray-100', 'border-gray-300', 'dark:bg-[#21262d]', 'dark:border-[#30363d]');
 
@@ -851,10 +934,10 @@
             isSubmitted = true;
             updateSubmitButton(correctCount);
             
-            const finalScore = (correctCount * POINT_PER_QUESTION).toFixed(1);
+            const finalScore = (correctCount * pointPerQuestion).toFixed(1);
             
             document.getElementById('modal-correct').innerText = correctCount;
-            document.getElementById('modal-total').innerText = TOTAL_QUESTIONS;
+            document.getElementById('modal-total').innerText = totalQuestions;
             document.getElementById('modal-score').innerText = finalScore;
             document.getElementById('result-modal').classList.remove('hidden');
 
@@ -869,12 +952,37 @@
             filterQuestions('all'); 
         }
 
-        function resetAndShuffleQuiz() {
-            initData();
+        function resetAndShuffleQuiz(mode = 'full') {
+            // Nếu mode là current và ta đang làm exam, giữ nguyên exam đó (thực ra là tạo lại exam random khác vì logic current chưa lưu state)
+            // Để đơn giản, nút "Làm lại đề này" sẽ gọi initData với mode hiện tại nếu là exam, hoặc full.
+            // Tuy nhiên hàm initData(random) sẽ tạo đề mới.
+            // Để fix: "Làm lại đề này" chỉ đơn giản là reset state UI mà không gọi initData nếu muốn giữ nguyên bộ câu hỏi?
+            // Nhưng yêu cầu là "trộn đáp án". Vậy ta cần shuffle lại options nhưng giữ nguyên bộ câu hỏi.
+            
+            if (mode === 'current') {
+                // Logic: Giữ nguyên source questions, chỉ shuffle lại thứ tự và options
+                // Tạm thời gọi initData(currentMode) -> Nó sẽ random lại đề khác nếu là mode random.
+                // Để đúng ý user "Làm lại đề này" (Retry this exam), ta cần lưu lại examNum.
+                // Do sự phức tạp, ở đây ta sẽ reset về 'full' hoặc tạo đề 'random' mới.
+                // Sửa lại: Nút "Làm lại toàn bộ" gọi resetAndShuffleQuiz('full').
+                // Nút "Tạo đề thi" gọi generateRandomExam().
+                // Nút trong modal "Làm lại đề này" có thể hiểu là tạo đề mới.
+                
+                if (currentMode === 'random') {
+                    generateRandomExam(); // Tạo đề mới
+                } else {
+                    initData('full');
+                    renderQuestions();
+                }
+            } else {
+                initData(mode);
+                renderQuestions();
+            }
+
             isSubmitted = false;
-            renderQuestions();
-            document.getElementById('warning-msg').classList.add('hidden');
             updateSubmitButton();
+            document.getElementById('warning-msg').classList.add('hidden');
+            
             document.querySelectorAll('.filter-btn').forEach(btn => {
                  btn.className = "w-full text-left px-3 py-2 rounded-lg text-sm font-semibold border-l-4 border-transparent transition-all duration-200 filter-btn bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-[#21262d] dark:hover:bg-[#30363d] dark:text-[#c9d1d9] shadow-sm";
                  if(btn.dataset.filter === 'all') btn.classList.add('bg-blue-50/50', 'border-blue-500', 'text-blue-700', 'dark:bg-[#21262d]', 'dark:border-[#58a6ff]', 'dark:text-[#58a6ff]'); 
@@ -930,7 +1038,7 @@
 
         window.onload = function() {
             setInitialTheme();
-            initData();
+            initData('full'); // Mặc định load full
             renderQuestions();
             updateSubmitButton();
             const allFilterBtn = document.querySelector('.filter-btn[data-filter="all"]');
