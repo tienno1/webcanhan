@@ -423,16 +423,16 @@
         <section class="py-12 border-t border-b border-gray-900 bg-[#0a0a0a] overflow-hidden">
             <div class="whitespace-nowrap flex gap-8 animate-marquee">
                 <div class="flex gap-8 text-4xl md:text-6xl font-bold text-gray-800 uppercase italic font-syne select-none">
-                    <span>Branding</span> <span>•</span> 
-                    <span class="text-[#ccff00]">UI/UX Design</span> <span>•</span> 
-                    <span>Motion Graphics</span> <span>•</span> 
+                    <span>Poster</span> <span>•</span> 
+                    <span class="text-[#ccff00]">Branding</span> <span>•</span> 
+                    <span>Banner design</span> <span>•</span> 
                     <span>3D Modeling</span> <span>•</span> 
-                    <span>Packaging</span> <span>•</span>
+                    <span>Catalog</span> <span>•</span>
                     <span>Branding</span> <span>•</span> 
-                    <span class="text-[#ccff00]">UI/UX Design</span> <span>•</span> 
-                    <span>Motion Graphics</span> <span>•</span> 
+                    <span class="text-[#ccff00]">Branding</span> <span>•</span> 
+                    <span>Banner design</span> <span>•</span> 
                     <span>3D Modeling</span> <span>•</span> 
-                    <span>Packaging</span> <span>•</span>
+                    <span>Catalog</span> <span>•</span>
                 </div>
             </div>
         </section>
@@ -450,24 +450,24 @@
                 
                 <!-- Project 1 -->
                 <div class="gallery-item group cursor-pointer mt-0 md:mt-12">
-                    <div class="overflow-hidden rounded-sm relative aspect-[4/5] bg-gray-900">
-                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop" 
+                    <div class="overflow-hidden rounded-sm relative aspect-[3/5] bg-gray-900">
+                        <img src="img/hình new final/file FINAL_trang bìa .jpg" 
                              alt="Project 1" 
                              class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                     </div>
                     <div class="mt-6 flex justify-between items-start border-b border-gray-800 pb-4">
                         <div>
-                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Cyber Punk Editorial</h3>
-                            <p class="text-sm text-gray-500">Art Direction / Layout</p>
+                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Cuốn cẩm nang giới thiệu ngành thiết kế đồ họa tại trường BCtech</h3>
+                            <p class="text-sm text-gray-500">Catalog / design</p>
                         </div>
-                        <span class="text-xl group-hover:rotate-45 transition-transform duration-300">↗</span>
+                        <span class="text-xl group-hover:rotate-45 transition-transform duration-300"><a href="designer.html?page=2#design-catalog" target="_blank">↗</a> </span>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
                 <div class="gallery-item group cursor-pointer">
-                    <div class="overflow-hidden rounded-sm relative aspect-[4/5] bg-gray-900">
+                    <div class="overflow-hidden rounded-sm relative aspect-[3/5] bg-gray-900">
                         <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" 
                              alt="Project 2" 
                              class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
@@ -557,7 +557,7 @@
             <p class="text-lg md:text-xl font-medium mb-10 max-w-2xl mx-auto opacity-80">
                 Hãy cùng nhau biến ý tưởng của bạn thành một tác phẩm nghệ thuật kỹ thuật số.
             </p>
-            <a href="#contact" class="inline-block border-2 border-black px-10 py-4 text-lg font-bold uppercase tracking-widest hover:bg-black hover:text-[#ccff00] transition-all">
+            <a href="profile.html#contact" class="inline-block border-2 border-black px-10 py-4 text-lg font-bold uppercase tracking-widest hover:bg-black hover:text-[#ccff00] transition-all">
                 Liên hệ ngay
             </a>
         </section>
@@ -568,11 +568,27 @@
     <section id="contact" class="py-20 bg-black text-white px-8 border-t border-gray-800">
         <div class="max-w-4xl mx-auto text-center">
             <p class="text-gray-500 uppercase tracking-widest mb-4">Thông tin liên hệ</p>
-            <h3 class="text-3xl font-bold">email@example.com</h3>
+            <h3 class="text-3xl font-bold">Tiendepzai0908@gmail.com  /  STĐ : 0329240391</h3>
         </div>
     </section>
 
     <!-- JAVASCRIPT LOGIC -->
+     <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const backToNormalButton = document.getElementById('back-to-normal-button');
+
+      if (backToNormalButton) {
+        backToNormalButton.addEventListener('click', () => {
+          console.log('Nút "Trở về chế độ bình thường" đã được click.');
+          sessionStorage.removeItem('hasShownWelcomeModal_profile');
+          console.log('Đã xóa hasShownWelcomeModal_profile từ sessionStorage.');
+          window.location.href = 'profile.html';
+        });
+      } else {
+        console.error('Lỗi: Không tìm thấy nút "back-to-normal-button".');
+      }
+    });
+  </script>
     <script>
         // 1. MOBILE MENU LOGIC (INTEGRATED)
         document.addEventListener('DOMContentLoaded', function () {
