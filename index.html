@@ -131,31 +131,21 @@
            MOBILE NAVIGATION INTEGRATION (From your files)
            ========================================= */
         
-        /* Menu Toggle Button Styles */
+        /* Menu Toggle Button Styles - Refined */
         .menu-toggle {
             background: none;
             border: none;
             cursor: pointer;
-            display: none; /* Hidden by default on desktop */
-            flex-direction: column;
-            gap: 15px;
             z-index: 1000001; /* Above everything */
-            padding: 10px;
         }
 
         .menu-toggle i {
-            color: #ffffff;
-            font-size: 1.5rem;
             transition: color 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             transform-origin: center center;
         }
 
-        .menu-toggle.scrolled i {
-            color: #ffffff; /* Keep white on dark bg */
-        }
-
         .menu-toggle.nav-open i {
-            color: var(--accent-color);
+            color: var(--accent-color) !important;
         }
 
         .menu-toggle.rotated i {
@@ -165,7 +155,6 @@
         /* Navigation Styles */
         nav.main-nav {
             background-color: #000;
-            /* Desktop defaults handled by Tailwind, but we ensure specificity here */
         }
         
         nav.main-nav ul {
@@ -215,10 +204,6 @@
 
         /* --- MOBILE SPECIFIC STYLES --- */
         @media (max-width: 767px) {
-            .menu-toggle {
-                display: block; /* Show hamburger on mobile */
-            }
-
             /* Main Nav Mobile Canvas */
             nav.main-nav {
                 display: block !important; /* Override Tailwind hidden */
@@ -233,6 +218,7 @@
                 padding-top: 80px;
                 overflow-y: auto;
                 box-shadow: -10px 0 30px rgba(0,0,0,0.9);
+                transition: right 0.4s ease;
             }
 
             nav.main-nav.open {
@@ -285,7 +271,6 @@
                 border-radius: 4px;
             }
 
-            /* FIX: Selector này đã được sửa. Bỏ khoảng trắng giữa li và .dropdown vì li chính là .dropdown */
             nav.main-nav ul li.dropdown.open .dropdown-menu {
                 max-height: 500px; /* Expand */
                 padding-bottom: 10px;
@@ -297,7 +282,6 @@
                 float: right; /* Đẩy mũi tên sang phải */
             }
             
-            /* FIX: Selector này cũng được sửa tương tự */
             nav.main-nav ul li.dropdown.open .arrow {
                 transform: rotate(180deg);
                 color: var(--accent-color);
@@ -306,10 +290,10 @@
 
         /* Hiệu ứng phát sáng khi được nhắm tới */
         .gallery-item:target {
-        border-color: #ff4757; /* Màu viền khi phát sáng */
-        box-shadow: 0 0 25px rgba(255, 71, 87, 0.7); /* Đổ bóng hào quang */
-        transform: scale(1.05); /* Phóng to nhẹ một chút cho nổi bật */
-        z-index: 10; /* Đảm bảo item này nằm trên các item khác khi phóng to */
+            border-color: #ff4757; /* Màu viền khi phát sáng */
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.7); /* Đổ bóng hào quang */
+            transform: scale(1.05); /* Phóng to nhẹ một chút cho nổi bật */
+            z-index: 10; /* Đảm bảo item này nằm trên các item khác khi phóng to */
         }
 
         
@@ -325,22 +309,21 @@
     <div class="noise-overlay"></div>
 
     <!-- HEADER UPDATED -->
-    <header id="header" class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
+    <header id="header" class="fixed top-0 left-0 w-full z-50 px-6 md:px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
         
         <!-- LOGO -->
         <div class="logo-container z-[1000002]">
             <a href="index.html">
-                <img src="img/logo.png" alt="Logo" class="lift-on-hover h-12 w-auto object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-2xl font-bold tracking-tighter\'>PORTFOLIO.</span>'">
+                <img src="img/logo.png" alt="Logo" class="lift-on-hover h-10 md:h-12 w-auto object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-2xl font-bold tracking-tighter\'>PORTFOLIO.</span>'">
             </a>
         </div>
 
-        <!-- MENU TOGGLE BUTTON (Added for Mobile) -->
-        <button class="menu-toggle" aria-label="Toggle Menu">
-            <i class="fas fa-bars"></i>
+        <!-- MENU TOGGLE BUTTON (Tailwind driven for stability) -->
+        <button class="menu-toggle flex md:hidden p-2 items-center justify-center text-white focus:outline-none" aria-label="Toggle Menu">
+            <i class="fas fa-bars text-2xl"></i>
         </button>
 
         <!-- NAVIGATION -->
-        <!-- Note: Removed 'hidden md:block' to let CSS handle visibility for slide-out menu -->
         <nav class="main-nav hidden md:block">
             <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center md:items-center">
                 
@@ -409,13 +392,17 @@
             <!-- 3D Canvas Container -->
             <div id="canvas-container" class="absolute inset-0 z-0"></div>
             
-            <div class="relative z-10 text-center pointer-events-none px-4">
-                <p class="text-[#ccff00] text-sm md:text-base uppercase tracking-[0.5em] mb-4 animate-fade-in-up">Graphic Designer</p>
-                <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tighter mix-blend-exclusion">
-                    <span class="block transform hover:skew-x-6 transition-transform duration-500">Sáng Tạo</span>
-                    <span class="block text-outline transform hover:-skew-x-6 transition-transform duration-500">Vô Tận</span>
+            <div class="relative z-10 w-full text-center pointer-events-none px-2">
+                
+                <p class="text-[#ccff00] text-[10px] sm:text-sm md:text-base uppercase tracking-[0.5em] mb-4 md:mb-6 animate-fade-in-up">Graphic Designer</p>
+                
+                <!-- Sử dụng text-[12.5vw] để đảm bảo tỷ lệ vừa khít màn hình Mobile không bị rớt dòng -->
+                <h1 class="font-bold uppercase tracking-tighter mix-blend-exclusion flex flex-col items-center justify-center">
+                    <span class="block whitespace-nowrap text-[12.5vw] leading-none sm:text-7xl md:text-8xl lg:text-9xl transform hover:skew-x-6 transition-transform duration-500">Sáng Tạo</span>
+                    <span class="block whitespace-nowrap text-[12.5vw] leading-none sm:text-7xl md:text-8xl lg:text-9xl text-outline transform hover:-skew-x-6 transition-transform duration-500">Vô Tận</span>
                 </h1>
-                <p class="mt-8 text-gray-400 max-w-md mx-auto text-sm md:text-lg font-light">
+                
+                <p class="mt-6 md:mt-8 text-gray-400 max-w-[280px] md:max-w-md mx-auto text-xs md:text-lg font-light leading-relaxed">
                     Biến những ý tưởng điên rồ nhất thành trải nghiệm thị giác.
                 </p>
             </div>
@@ -592,8 +579,6 @@
           console.log('Đã xóa hasShownWelcomeModal_profile từ sessionStorage.');
           window.location.href = 'profile.html';
         });
-      } else {
-        console.error('Lỗi: Không tìm thấy nút "back-to-normal-button".');
       }
     });
   </script>
@@ -635,7 +620,6 @@
                 if (!nav.contains(e.target)) {
                     dropdowns.forEach(d => d.classList.remove('open'));
                     if(nav.classList.contains('open') && !menuToggle.contains(e.target)) {
-                        // Optional: Close nav if clicking outside on mobile
                          nav.classList.remove('open');
                          menuToggle.classList.remove('nav-open');
                          menuToggle.classList.remove('rotated');
