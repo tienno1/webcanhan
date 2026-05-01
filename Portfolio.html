@@ -263,10 +263,26 @@
         <!-- FILTERS -->
         <div class="flex justify-center flex-wrap gap-3 md:gap-4 mb-16 px-4 fade-in-up font-inter text-sm md:text-base" style="animation-delay: 0.4s;">
             <button class="filter-btn active px-6 py-2.5 rounded-full border border-gray-700 text-white transition-all duration-300" data-filter="all">Tất cả</button>
+            <button class="filter-btn px-6 py-2.5 rounded-full border border-gray-700 text-white hover:border-[#ccff00] hover:text-[#ccff00] transition-all duration-300" data-filter="camnang">Cẩm Nang</button>
             <button class="filter-btn px-6 py-2.5 rounded-full border border-gray-700 text-white hover:border-[#ccff00] hover:text-[#ccff00] transition-all duration-300" data-filter="branding">Nhận Diện & Mỹ Phẩm</button>
             <button class="filter-btn px-6 py-2.5 rounded-full border border-gray-700 text-white hover:border-[#ccff00] hover:text-[#ccff00] transition-all duration-300" data-filter="event">Quốc Khánh 2/9</button>
             <button class="filter-btn px-6 py-2.5 rounded-full border border-gray-700 text-white hover:border-[#ccff00] hover:text-[#ccff00] transition-all duration-300" data-filter="poster">Poster & Bài Tập</button>
             <button class="filter-btn px-6 py-2.5 rounded-full border border-gray-700 text-white hover:border-[#ccff00] hover:text-[#ccff00] transition-all duration-300" data-filter="typo">Typography</button>
+        </div>
+
+        <!-- ===================== CẨM NANG (FULL WIDTH AREA) ===================== -->
+        <div class="gallery-item camnang w-full px-6 md:px-12 max-w-[1800px] mx-auto mb-12 fade-in-up" style="animation-delay: 0.45s;">
+            <div class="relative w-full h-[60vh] md:h-[85vh] rounded-xl overflow-hidden bg-gray-900 border border-gray-800 shadow-2xl">
+
+                <!-- Floating Note thông báo lật trang (Đã dời xuống dưới) -->
+                <div class="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 bg-black/80 backdrop-blur-md border border-[#ccff00]/60 text-[#ccff00] text-xs md:text-sm font-medium px-4 py-2.5 rounded-full shadow-[0_0_20px_rgba(204,255,0,0.2)] flex items-center gap-2 pointer-events-none">
+                    <i class="fa-solid fa-hand-pointer animate-bounce"></i>
+                    Nhấn hoặc kéo chuột để lật trang
+                </div>
+
+                <!-- Iframe Cẩm nang -->
+                <iframe allowfullscreen="true" scrolling="no" class="w-full h-full border-none relative z-0" src="https://heyzine.com/flip-book/2839cf2fdd.html"></iframe>
+            </div>
         </div>
 
         <!-- MASONRY GALLERY GRID -->
@@ -275,7 +291,7 @@
             <!-- ===================== MỸ PHẨM & BRANDING ===================== -->
             <!-- Cosmetic 1-10 -->
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (1).jpg" loading="lazy" alt="Cosmetic 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (1).jpg" loading="lazy" alt="Cosmetic 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 1</h3>
@@ -283,7 +299,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (2).jpg" loading="lazy" alt="Cosmetic 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (2).jpg" loading="lazy" alt="Cosmetic 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 2</h3>
@@ -291,7 +307,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (3).jpg" loading="lazy" alt="Cosmetic 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (3).jpg" loading="lazy" alt="Cosmetic 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 3</h3>
@@ -299,7 +315,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (4).jpg" loading="lazy" alt="Cosmetic 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (4).jpg" loading="lazy" alt="Cosmetic 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Nhận diện Mỹ Phẩm Cao Cấp</h3>
@@ -307,7 +323,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (5).jpg" loading="lazy" alt="Cosmetic 5" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (5).jpg" loading="lazy" alt="Cosmetic 5" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 5</h3>
@@ -315,7 +331,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (6).jpg" loading="lazy" alt="Cosmetic 6" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (6).jpg" loading="lazy" alt="Cosmetic 6" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 6</h3>
@@ -323,7 +339,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (7).jpg" loading="lazy" alt="Cosmetic 7" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (7).jpg" loading="lazy" alt="Cosmetic 7" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 7</h3>
@@ -331,7 +347,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (8).jpg" loading="lazy" alt="Cosmetic 8" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (8).jpg" loading="lazy" alt="Cosmetic 8" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 8</h3>
@@ -339,7 +355,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (9).jpg" loading="lazy" alt="Cosmetic 9" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (9).jpg" loading="lazy" alt="Cosmetic 9" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 9</h3>
@@ -347,7 +363,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/My-pham/my pham (10).jpg" loading="lazy" alt="Cosmetic 10" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/My-pham/my pham (10).jpg" loading="lazy" alt="Cosmetic 10" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Mỹ Phẩm / Branding</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Concept Mỹ Phẩm 10</h3>
@@ -357,7 +373,7 @@
 
             <!-- Logo -->
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/Logo/1-01.jpg" loading="lazy" alt="Logo 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/Logo/1-01.jpg" loading="lazy" alt="Logo 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Logo & Identity</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Logo Concept 1</h3>
@@ -365,7 +381,7 @@
                 </div>
             </div>
             <div class="gallery-item branding group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/Logo/2-01.jpg" loading="lazy" alt="Logo 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/Logo/2-01.jpg" loading="lazy" alt="Logo 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Logo & Identity</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Logo Concept 2</h3>
@@ -376,8 +392,8 @@
 
             <!-- ===================== QUỐC KHÁNH 2/9 (EVENT) ===================== -->
             <!-- QK 1-12 -->
-            <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/1.jpg" loading="lazy" alt="Quoc khanh 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
+            <div id="2/9" class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
+                <img src="img/portfolio/QUOC KHANH/1.jpg" loading="lazy" alt="Quoc khanh 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Photoshop / Illustrator</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Banner Sự kiện 2/9</h3>
@@ -385,7 +401,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/2.jpg" loading="lazy" alt="Quoc khanh 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/2.jpg" loading="lazy" alt="Quoc khanh 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Social Media</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Bài đăng Kỷ Niệm 2/9</h3>
@@ -393,7 +409,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/3.jpg" loading="lazy" alt="Quoc khanh 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/3.jpg" loading="lazy" alt="Quoc khanh 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Social Media</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Thiết Kế Chào Mừng</h3>
@@ -401,7 +417,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/4.jpg" loading="lazy" alt="Quoc khanh 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/4.jpg" loading="lazy" alt="Quoc khanh 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Event Banner</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Quốc Khánh Poster</h3>
@@ -409,7 +425,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/5.jpg" loading="lazy" alt="Quoc khanh 5" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/5.jpg" loading="lazy" alt="Quoc khanh 5" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Event Banner</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Quốc Khánh Poster 2</h3>
@@ -417,7 +433,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/6.jpg" loading="lazy" alt="Quoc khanh 6" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/6.jpg" loading="lazy" alt="Quoc khanh 6" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Thiết Kế Kỷ Niệm</h3>
@@ -425,7 +441,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/7.png" loading="lazy" alt="Quoc khanh 7" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/7.png" loading="lazy" alt="Quoc khanh 7" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Tự Hào Việt Nam</h3>
@@ -433,7 +449,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/8.jpg" loading="lazy" alt="Quoc khanh 8" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/8.jpg" loading="lazy" alt="Quoc khanh 8" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Tự Hào Việt Nam 2</h3>
@@ -441,7 +457,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/9.jpg" loading="lazy" alt="Quoc khanh 9" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/9.jpg" loading="lazy" alt="Quoc khanh 9" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Event Banner</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Chào Mừng</h3>
@@ -449,7 +465,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/10.jpg" loading="lazy" alt="Quoc khanh 10" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/10.jpg" loading="lazy" alt="Quoc khanh 10" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Event Banner</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Mừng Lễ</h3>
@@ -457,7 +473,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/11.jpg" loading="lazy" alt="Quoc khanh 11" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/11.jpg" loading="lazy" alt="Quoc khanh 11" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Social Media</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Bài Đăng Lễ Quốc Khánh</h3>
@@ -465,7 +481,7 @@
                 </div>
             </div>
             <div class="gallery-item event group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/QUOC KHANH/12.jpg" loading="lazy" alt="Quoc khanh 12" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/QUOC KHANH/12.jpg" loading="lazy" alt="Quoc khanh 12" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Social Media</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Social Content 2/9</h3>
@@ -476,7 +492,7 @@
             <!-- ===================== TEXT EFFECT (TYPO) ===================== -->
             <!-- Typo 1-4 -->
             <div class="gallery-item typo group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/text effect/1-01.jpg" loading="lazy" alt="Typo 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/text effect/1-01.jpg" loading="lazy" alt="Typo 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Typography</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Hiệu Ứng Chữ 3D Hiện Đại</h3>
@@ -484,7 +500,7 @@
                 </div>
             </div>
             <div class="gallery-item typo group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/text effect/2.png" loading="lazy" alt="Typo 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/text effect/2.png" loading="lazy" alt="Typo 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Typography</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Hiệu Ứng Neon Độc Đáo</h3>
@@ -492,7 +508,7 @@
                 </div>
             </div>
             <div class="gallery-item typo group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/text effect/3-01.jpg" loading="lazy" alt="Typo 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/text effect/3-01.jpg" loading="lazy" alt="Typo 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Typography</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Style Chữ Sáng Tạo</h3>
@@ -500,7 +516,7 @@
                 </div>
             </div>
             <div class="gallery-item typo group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/text effect/4.png" loading="lazy" alt="Typo 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/text effect/4.png" loading="lazy" alt="Typo 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Typography</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Text Effect Chuyên Nghiệp</h3>
@@ -510,16 +526,16 @@
 
             <!-- ===================== XUẤT HÌNH / BÀI TẬP (POSTER) ===================== -->
             <!-- Bài tập 1-13 -->
-            <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/1.jpg" loading="lazy" alt="Bai tap 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
+            <div id="face" class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
+                <img src="img/face.jpg" loading="lazy" alt="Bai tap 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                    <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
-                    <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Vẽ Hình Cơ Bản</h3>
+                    <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">thiết kế quảng bá</span>
+                    <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">design / follower facebook</h3>
                     <button class="self-start px-5 py-2 border border-white/30 text-white text-sm uppercase tracking-wider hover:bg-[#ccff00] hover:text-black hover:border-[#ccff00] transition-colors translate-y-4 group-hover:translate-y-0 duration-500 delay-100">Phóng to <i class="fa-solid fa-expand ml-2"></i></button>
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/2.jpg" loading="lazy" alt="Bai tap 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/2.jpg" loading="lazy" alt="Bai tap 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Thực Hành Vẽ Cơ Bản</h3>
@@ -527,7 +543,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/3.jpg" loading="lazy" alt="Bai tap 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/3.jpg" loading="lazy" alt="Bai tap 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Hiệu Chỉnh Hình Dạng</h3>
@@ -535,15 +551,15 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/4.jpg" loading="lazy" alt="Bai tap 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/face 2.jpg" loading="lazy" alt="Bai tap 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                    <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
-                    <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Thực Hành Combine & Clip</h3>
+                    <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">thiết kế quảng bá</span>
+                    <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">design / follower facebook</h3>
                     <button class="self-start px-5 py-2 border border-white/30 text-white text-sm uppercase tracking-wider hover:bg-[#ccff00] hover:text-black hover:border-[#ccff00] transition-colors translate-y-4 group-hover:translate-y-0 duration-500 delay-100">Phóng to <i class="fa-solid fa-expand ml-2"></i></button>
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/6.jpg" loading="lazy" alt="Bai tap 6" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/6.jpg" loading="lazy" alt="Bai tap 6" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Nâng Cao Hiệu Chỉnh</h3>
@@ -551,7 +567,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/7.jpg" loading="lazy" alt="Bai tap 7" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/7.jpg" loading="lazy" alt="Bai tap 7" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Thực Hành Layout</h3>
@@ -559,7 +575,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/8.jpg" loading="lazy" alt="Bai tap 8" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/8.jpg" loading="lazy" alt="Bai tap 8" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Hiệu Ứng Nâng Cao</h3>
@@ -567,7 +583,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/9.png" loading="lazy" alt="Bai tap 9" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/9.png" loading="lazy" alt="Bai tap 9" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Thực Hành Effects</h3>
@@ -575,7 +591,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/10.jpg" loading="lazy" alt="Bai tap 10" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/10.jpg" loading="lazy" alt="Bai tap 10" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Text & Style</h3>
@@ -583,7 +599,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/11.jpg" loading="lazy" alt="Bai tap 11" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/11.jpg" loading="lazy" alt="Bai tap 11" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Text & Style Thực Hành</h3>
@@ -591,7 +607,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/12.jpg" loading="lazy" alt="Bai tap 12" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/12.jpg" loading="lazy" alt="Bai tap 12" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">In Ấn File Corel</h3>
@@ -599,7 +615,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/xuất hình/13.png" loading="lazy" alt="Bai tap 13" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/xuất hình/13.png" loading="lazy" alt="Bai tap 13" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Bài Tập Corel</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Đồ Án Cuối Môn</h3>
@@ -609,7 +625,7 @@
 
             <!-- Poster chính 1-20 -->
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(1).jpg" loading="lazy" alt="Poster 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(1).jpg" loading="lazy" alt="Poster 1" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 1</h3>
@@ -617,7 +633,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(2).jpg" loading="lazy" alt="Poster 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(2).jpg" loading="lazy" alt="Poster 2" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 2</h3>
@@ -625,7 +641,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(3).jpg" loading="lazy" alt="Poster 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(3).jpg" loading="lazy" alt="Poster 3" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 3</h3>
@@ -633,7 +649,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(4).jpg" loading="lazy" alt="Poster 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(4).jpg" loading="lazy" alt="Poster 4" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 4</h3>
@@ -641,7 +657,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(5).jpg" loading="lazy" alt="Poster 5" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(5).jpg" loading="lazy" alt="Poster 5" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 5</h3>
@@ -649,7 +665,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(6).jpg" loading="lazy" alt="Poster 6" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(6).jpg" loading="lazy" alt="Poster 6" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 6</h3>
@@ -657,7 +673,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(7).jpg" loading="lazy" alt="Poster 7" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(7).jpg" loading="lazy" alt="Poster 7" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 7</h3>
@@ -665,7 +681,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(8).jpg" loading="lazy" alt="Poster 8" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(8).jpg" loading="lazy" alt="Poster 8" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 8</h3>
@@ -673,7 +689,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(9).jpg" loading="lazy" alt="Poster 9" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(9).jpg" loading="lazy" alt="Poster 9" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 9</h3>
@@ -681,7 +697,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(10).jpg" loading="lazy" alt="Poster 10" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(10).jpg" loading="lazy" alt="Poster 10" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 10</h3>
@@ -689,7 +705,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(11).jpg" loading="lazy" alt="Poster 11" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(11).jpg" loading="lazy" alt="Poster 11" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 11</h3>
@@ -697,7 +713,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(12).jpg" loading="lazy" alt="Poster 12" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(12).jpg" loading="lazy" alt="Poster 12" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 12</h3>
@@ -705,7 +721,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(13).jpg" loading="lazy" alt="Poster 13" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(13).jpg" loading="lazy" alt="Poster 13" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 13</h3>
@@ -713,7 +729,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(14).jpg" loading="lazy" alt="Poster 14" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(14).jpg" loading="lazy" alt="Poster 14" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 14</h3>
@@ -721,7 +737,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(15).jpg" loading="lazy" alt="Poster 15" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(15).jpg" loading="lazy" alt="Poster 15" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 15</h3>
@@ -729,7 +745,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(16).jpg" loading="lazy" alt="Poster 16" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(16).jpg" loading="lazy" alt="Poster 16" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 16</h3>
@@ -737,7 +753,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(17).jpg" loading="lazy" alt="Poster 17" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(17).jpg" loading="lazy" alt="Poster 17" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 17</h3>
@@ -745,7 +761,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(18).jpg" loading="lazy" alt="Poster 18" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(18).jpg" loading="lazy" alt="Poster 18" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 18</h3>
@@ -753,7 +769,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(19).jpg" loading="lazy" alt="Poster 19" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(19).jpg" loading="lazy" alt="Poster 19" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 19</h3>
@@ -761,7 +777,7 @@
                 </div>
             </div>
             <div class="gallery-item poster group relative rounded-sm overflow-hidden bg-gray-900 cursor-pointer">
-                <img src="../img/portfolio/poster/(20).jpg" loading="lazy" alt="Poster 20" class="w-full block transition-transform duration-700 group-hover:scale-110">
+                <img src="img/portfolio/poster/(20).jpg" loading="lazy" alt="Poster 20" class="w-full block transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span class="text-[#ccff00] text-xs font-bold uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Graphic Design</span>
                     <h3 class="font-syne text-white text-xl font-bold mt-2 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">Poster Thiết Kế 20</h3>
@@ -806,6 +822,54 @@
 
     <!-- TẤT CẢ JAVASCRIPT -->
     <script>
+        // 1. Hiệu ứng Chuột (Custom Cursor)
+const dot = document.querySelector('.cursor-dot');
+const outline = document.querySelector('.cursor-outline');
+
+window.addEventListener('mousemove', (e) => {
+    const posX = e.clientX;
+    const posY = e.clientY;
+
+    // Chấm nhỏ đi theo chuột ngay lập tức
+    dot.style.left = `${posX}px`;
+    dot.style.top = `${posY}px`;
+
+    // Vòng tròn lớn đi theo có độ trễ (mượt hơn)
+    outline.animate({
+        left: `${posX}px`,
+        top: `${posY}px`
+    }, { duration: 500, fill: "forwards" });
+});
+
+// 2. Bộ lọc Portfolio (Filter Logic)
+const filterButtons = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Xóa class active ở nút cũ, thêm vào nút vừa nhấn
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filterValue = button.getAttribute('data-filter');
+
+        portfolioItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                item.style.display = 'block';
+                // Thêm hiệu ứng xuất hiện
+                item.style.animation = 'fadeIn 0.5s ease forwards';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+// 3. Hiệu ứng cuộn trang (Sticky Header)
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    header.classList.toggle('sticky', window.scrollY > 0);
+});
         document.addEventListener('DOMContentLoaded', () => {
             
             // 1. CUSTOM CURSOR
@@ -943,8 +1007,15 @@
 
             document.querySelectorAll('.gallery-item').forEach(item => {
                 item.addEventListener('click', (e) => {
+                    // Cập nhật mảng ảnh hiện thị
                     visibleImages = Array.from(document.querySelectorAll('.gallery-item:not(.hide) img'));
+                    
+                    // Lấy thẻ img trong item vừa click
                     const clickedImg = item.querySelector('img');
+                    
+                    // NẾU KHÔNG CÓ IMG (VD: Iframe Cẩm Nang) -> Thoát, không mở modal
+                    if (!clickedImg) return; 
+
                     currentIndex = visibleImages.indexOf(clickedImg);
                     
                     modalImg.src = clickedImg.src;

@@ -304,6 +304,14 @@
             }
         }
 
+        /* Hiệu ứng phát sáng khi được nhắm tới */
+        .gallery-item:target {
+        border-color: #ff4757; /* Màu viền khi phát sáng */
+        box-shadow: 0 0 25px rgba(255, 71, 87, 0.7); /* Đổ bóng hào quang */
+        transform: scale(1.05); /* Phóng to nhẹ một chút cho nổi bật */
+        z-index: 10; /* Đảm bảo item này nằm trên các item khác khi phóng to */
+        }
+
         
     </style>
 </head>
@@ -449,50 +457,50 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
                 
                 <!-- Project 1 -->
-                <div class="gallery-item group cursor-pointer mt-0 md:mt-12">
-                    <div class="overflow-hidden rounded-sm relative aspect-[3/5] bg-gray-900">
-                        <img src="img/hình new final/file FINAL_trang bìa .jpg" 
-                             alt="Project 1" 
-                             class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
+                <div class="gallery-item group cursor-pointer mt-0 md:mt-12"><a href="designer.html?page=2#design-catalog" target="_blank">
+                    <div class="overflow-hidden rounded-sm relative aspect-[4/5] bg-gray-900">
+                            <img src="img/hình new final/file FINAL_trang bìa .jpg" alt="Project 1" class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                    </div>
+                    </div></a>
                     <div class="mt-6 flex justify-between items-start border-b border-gray-800 pb-4">
+                        <a href="designer.html?page=2#design-catalog" target="_blank">
                         <div>
                             <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Cuốn cẩm nang giới thiệu ngành thiết kế đồ họa tại trường BCtech</h3>
                             <p class="text-sm text-gray-500">Catalog / design</p>
-                        </div>
-                        <span class="text-xl group-hover:rotate-45 transition-transform duration-300"><a href="designer.html?page=2#design-catalog" target="_blank">↗</a> </span>
+                        </div></a> 
+                        <span class="text-xl group-hover:rotate-45 transition-transform duration-300">↗</span>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="gallery-item group cursor-pointer">
-                    <div class="overflow-hidden rounded-sm relative aspect-[3/5] bg-gray-900">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" 
+                <div class="gallery-item group cursor-pointer"><a href="Portfolio.html#face" target="_blank">
+
+                    <div class="overflow-hidden rounded-sm relative aspect-[4/5] bg-gray-900">
+                        <img src="img/face.jpg" 
                              alt="Project 2" 
                              class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
                     </div>
                     <div class="mt-6 flex justify-between items-start border-b border-gray-800 pb-4">
                         <div>
-                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Neon Future UI</h3>
-                            <p class="text-sm text-gray-500">Web Design / Interface</p>
-                        </div>
+                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Thiết kế quảng bá dịch vụ tăng follow facebook </h3>
+                            <p class="text-sm text-gray-500">follower / social media</p>
+                        </div></a>
                         <span class="text-xl group-hover:rotate-45 transition-transform duration-300">↗</span>
                     </div>
                 </div>
 
                  <!-- Project 3 -->
-                 <div class="gallery-item group cursor-pointer mt-0 md:mt-12">
+                 <div class="gallery-item group cursor-pointer mt-0 md:mt-12"><a href="Portfolio.html#face" target="_blank">
                     <div class="overflow-hidden rounded-sm relative aspect-[16/9] bg-gray-900">
-                        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2000&auto=format&fit=crop" 
+                        <img src="img/portfolio/QUOC KHANH/1.jpg" 
                              alt="Project 3" 
                              class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
                     </div>
                     <div class="mt-6 flex justify-between items-start border-b border-gray-800 pb-4">
                         <div>
-                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Liquid Motion</h3>
-                            <p class="text-sm text-gray-500">3D Abstract / Animation</p>
-                        </div>
+                            <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Banner quốc Khánh 2/9</h3>
+                            <p class="text-sm text-gray-500">social media / Banner</p>
+                        </div></a>
                         <span class="text-xl group-hover:rotate-45 transition-transform duration-300">↗</span>
                     </div>
                 </div>
@@ -502,7 +510,7 @@
                     <div class="p-8 border border-gray-800 hover:border-[#ccff00] transition-colors h-full flex flex-col justify-center items-center text-center rounded-sm">
                         <h3 class="text-3xl font-bold mb-4">Xem tất cả dự án</h3>
                         <p class="text-gray-500 mb-6">Khám phá kho tàng thiết kế đầy đủ của tôi.</p>
-                        <a href="#" class="px-8 py-3 bg-white text-black font-bold hover:bg-[#ccff00] transition-colors uppercase text-sm tracking-widest">
+                        <a href="Portfolio.html" class="px-8 py-3 bg-white text-black font-bold hover:bg-[#ccff00] transition-colors uppercase text-sm tracking-widest">
                             Portfolio Full
                         </a>
                     </div>
@@ -590,6 +598,7 @@
     });
   </script>
     <script>
+        
         // 1. MOBILE MENU LOGIC (INTEGRATED)
         document.addEventListener('DOMContentLoaded', function () {
             const dropdowns = document.querySelectorAll('.dropdown');
