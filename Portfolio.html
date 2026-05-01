@@ -202,8 +202,8 @@
     <header id="header" class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
         <!-- LOGO -->
         <div class="logo-container z-[1000002]">
-            <a href="../index.html">
-                <img src="../img/logo.png" alt="Logo" class="h-12 w-auto object-contain transition-transform hover:-translate-y-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'font-syne text-2xl font-bold tracking-tighter\'>PORTFOLIO.</span>'">
+            <a href="index.html">
+                <img src="img/logo.png" alt="Logo" class="h-12 w-auto object-contain transition-transform hover:-translate-y-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'font-syne text-2xl font-bold tracking-tighter\'>PORTFOLIO.</span>'">
             </a>
         </div>
 
@@ -214,32 +214,60 @@
 
         <!-- NAVIGATION -->
         <nav class="main-nav hidden md:block">
-            <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center md:items-center font-inter">
-                <li><a href="../index.html" class="hover:text-[#ccff00] transition-colors">Giới thiệu</a></li>
-                <li><a href="../profile.html" class="hover:text-[#ccff00] transition-colors">Profile</a></li>
-                <li><a href="../designer.html" class="hover:text-[#ccff00] transition-colors">Design</a></li>
-                <li><a href="../scores.html" class="hover:text-[#ccff00] transition-colors">Điểm Số</a></li>
-                <li><a href="../drawings.html" class="hover:text-[#ccff00] transition-colors">Ảnh Sưu Tầm</a></li>
-                <li><a href="Portfolio.html" class="active text-[#ccff00] hover:text-[#ccff00] transition-colors">Portfolio</a></li>
+            <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center md:items-center">
                 
+                <!-- Item 1: Giới thiệu (Active Page) -->
+                <li><a href="index.html" class="active hover:text-[#ccff00] transition-colors text-[#ccff00]">Giới thiệu</a></li>
+                
+                <li><a href="profile.html" class="hover:text-[#ccff00] transition-colors">Profile</a></li>
+                <li><a href="designer.html" class="hover:text-[#ccff00] transition-colors">Design</a></li>
+                <li><a href="scores.html" class="hover:text-[#ccff00] transition-colors">Điểm Số</a></li>
+                <li><a href="drawings.html" class="hover:text-[#ccff00] transition-colors">Ảnh Sưu Tầm</a></li>
+                <li><a href="Portfolio.html" class="hover:text-[#ccff00] transition-colors">Portfolio</a></li>
+                
+                <!-- Dropdown: Web học tiếng anh -->
                 <li class="relative dropdown group">
                     <div class="dropdown-toggle hover:text-[#ccff00] transition-colors py-2 flex justify-between md:justify-start w-full">
-                        <span>Web học tiếng anh</span> <span class="arrow ml-1 text-[10px]">&#9662;</span>
+                        <span>Web học tiếng anh</span> 
+                        <span class="arrow ml-1 text-[10px]">&#9662;</span>
                     </div>
+                    <!-- Dropdown Menu -->
                     <ul class="dropdown-menu">
-                        <li class="border-b border-gray-800 last:border-none"><a href="#" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Đề 1</a></li>
-                        <li class="border-b border-gray-800 last:border-none"><a href="#" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Đề 2</a></li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-tieng-anh/de1.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Đề 1</a>
+                        </li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-tieng-anh/de2.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Đề 2</a>
+                        </li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-tieng-anh/DE2tienganh/De2.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">TA Cao Đẳng Đề 2</a>
+                        </li>
+                        <li>
+                            <a href="web-tieng-anh/DE1tienganh/De1.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">TA Cao Đẳng Đề 1</a>
+                        </li>
                     </ul>
                 </li>
 
+                <!-- Dropdown: Code Website -->
                 <li class="relative dropdown group">
                     <div class="dropdown-toggle hover:text-[#ccff00] transition-colors py-2 flex justify-between md:justify-start w-full">
-                        <span>Code Website</span> <span class="arrow ml-1 text-[10px]">&#9662;</span>
+                        <span>Code Website</span> 
+                        <span class="arrow ml-1 text-[10px]">&#9662;</span>
                     </div>
+                    <!-- Dropdown Menu -->
                     <ul class="dropdown-menu md:right-0 md:left-auto">
-                        <li class="border-b border-gray-800 last:border-none"><a href="#" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">View</a></li>
-                        <li class="border-b border-gray-800 last:border-none"><a href="#" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web học tại lớp</a></li>
-                        <li class="border-b border-gray-800 last:border-none"><a href="#" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web kết thúc môn</a></li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="jalan/View.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">View</a>
+                        </li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web học tại lớp</a>
+                        </li>
+                        <li class="border-b border-gray-800 last:border-none">
+                            <a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web kết thúc môn</a>
+                        </li>
+                        <li>
+                            <a href="web-tieng-anh/trinhtri.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web làm bài Chính Trị</a>
+                        </li>
                     </ul>
                 </li> 
             </ul>
