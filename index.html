@@ -26,6 +26,7 @@
             --text-color: #ffffff;
             --accent-color: #ccff00; /* Neon Lime */
             --secondary-color: #888888;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         body {
@@ -128,19 +129,25 @@
         }
 
         /* =========================================
-           MOBILE NAVIGATION INTEGRATION (From your files)
+           MOBILE NAVIGATION INTEGRATION (Đã đồng bộ với Portfolio)
            ========================================= */
         
-        /* Menu Toggle Button Styles - Refined */
+        /* Menu Toggle Button Styles - Đã được làm chuẩn hóa giống Portfolio */
         .menu-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 1000001; /* Above everything */
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            display: none; /* Ẩn ở desktop, điều khiển bằng CSS thuần */
+            flex-direction: column; 
+            gap: 15px; 
+            z-index: 1000001; 
+            padding: 10px;
         }
 
         .menu-toggle i {
-            transition: color 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: #ffffff; 
+            font-size: 1.5rem; 
+            transition: var(--transition); 
             transform-origin: center center;
         }
 
@@ -204,6 +211,9 @@
 
         /* --- MOBILE SPECIFIC STYLES --- */
         @media (max-width: 767px) {
+            /* Hiện nút toggle */
+            .menu-toggle { display: block; }
+
             /* Main Nav Mobile Canvas */
             nav.main-nav {
                 display: block !important; /* Override Tailwind hidden */
@@ -295,8 +305,6 @@
             transform: scale(1.05); /* Phóng to nhẹ một chút cho nổi bật */
             z-index: 10; /* Đảm bảo item này nằm trên các item khác khi phóng to */
         }
-
-        
     </style>
 </head>
 <body>
@@ -318,9 +326,9 @@
             </a>
         </div>
 
-        <!-- MENU TOGGLE BUTTON (Tailwind driven for stability) -->
-        <button class="menu-toggle flex md:hidden p-2 items-center justify-center text-white focus:outline-none" aria-label="Toggle Menu">
-            <i class="fas fa-bars text-2xl"></i>
+        <!-- MENU TOGGLE BUTTON (Đã cập nhật để hoạt động chuẩn đa màn hình giống file Portfolio) -->
+        <button class="menu-toggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
         </button>
 
         <!-- NAVIGATION -->
@@ -444,13 +452,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
                 
                 <!-- Project 1 -->
-                <div class="gallery-item group cursor-pointer mt-0 md:mt-12"><a href="designer.html?page=2#design-catalog" target="_blank">
+                <div class="gallery-item group cursor-pointer mt-0 md:mt-12"><a href="Portfolio.html#camnang" target="_blank">
                     <div class="overflow-hidden rounded-sm relative aspect-[4/5] bg-gray-900">
                             <img src="img/hình new final/file FINAL_trang bìa .jpg" alt="Project 1" class="gallery-img w-full h-full object-cover transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                     </div></a>
                     <div class="mt-6 flex justify-between items-start border-b border-gray-800 pb-4">
-                        <a href="designer.html?page=2#design-catalog" target="_blank">
+                        <a href="Portfolio.html#camnang" target="_blank">
                         <div>
                             <h3 class="text-2xl font-bold group-hover:text-[#ccff00] transition-colors">Cuốn cẩm nang giới thiệu ngành thiết kế đồ họa tại trường BCtech</h3>
                             <p class="text-sm text-gray-500">Catalog / design</p>
