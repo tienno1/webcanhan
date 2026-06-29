@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Graphic Design Portfolio - Upgrade Version</title>
     
     <!-- Tailwind CSS -->
@@ -29,13 +29,17 @@
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        body {
+        /* KHẮC PHỤC LỖI TRÀN VIỀN NGANG (OVERFLOW-X) */
+        html, body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw; /* Khóa chặt chiều rộng, không cho vượt qua màn hình */
             margin: 0;
             padding: 0;
+            position: relative;
         }
 
         /* Typography Customization */
@@ -70,6 +74,11 @@
             z-index: 9999;
             pointer-events: none;
         }
+        /* Ẩn cursor tự tạo trên màn hình cảm ứng để tránh lag */
+        @media (max-width: 768px) {
+            .cursor-dot, .cursor-outline { display: none !important; }
+        }
+        
         .cursor-dot {
             width: 8px;
             height: 8px;
@@ -129,15 +138,14 @@
         }
 
         /* =========================================
-           MOBILE NAVIGATION INTEGRATION (Đã đồng bộ với Portfolio)
+           MOBILE NAVIGATION INTEGRATION (Đã sửa lỗi tràn màn hình)
            ========================================= */
         
-        /* Menu Toggle Button Styles - Đã được làm chuẩn hóa giống Portfolio */
         .menu-toggle {
             background: none; 
             border: none; 
             cursor: pointer; 
-            display: none; /* Ẩn ở desktop, điều khiển bằng CSS thuần */
+            display: none; 
             flex-direction: column; 
             gap: 15px; 
             z-index: 1000001; 
@@ -211,28 +219,28 @@
 
         /* --- MOBILE SPECIFIC STYLES --- */
         @media (max-width: 767px) {
-            /* Hiện nút toggle */
             .menu-toggle { display: block; }
 
-            /* Main Nav Mobile Canvas */
             nav.main-nav {
-                display: block !important; /* Override Tailwind hidden */
+                display: block !important; 
                 position: fixed;
                 top: 0;
-                right: -70%; /* Hide off-screen */
+                /* FIX LỖI TRAN VIỀN NGANG: Chuyển từ right: -70% sang dùng transform an toàn hơn */
+                right: 0; 
+                transform: translateX(100%); /* Giấu ra khỏi màn hình mà không làm giãn website */
                 width: 70%;
                 height: 100vh;
-                background-color: #000000; /* Solid Black Background */
-                border-left: 1px solid #222; /* Subtle border */
+                background-color: #000000; 
+                border-left: 1px solid #222; 
                 z-index: 1000000;
                 padding-top: 80px;
                 overflow-y: auto;
                 box-shadow: -10px 0 30px rgba(0,0,0,0.9);
-                transition: right 0.4s ease;
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Animate transform mượt hơn */
             }
 
             nav.main-nav.open {
-                right: 0; /* Slide in */
+                transform: translateX(0); /* Trượt vào màn hình */
             }
 
             nav.main-nav ul {
@@ -252,26 +260,25 @@
                 font-size: 1.1rem;
                 display: block;
                 width: 100%;
-                padding: 12px 15px; /* Tăng padding để dễ bấm */
+                padding: 12px 15px;
                 border-radius: 4px;
                 color: #fff;
                 transition: all 0.3s;
-                background-color: rgba(0, 0, 0, 0.03); /* Slight bg for items */
+                background-color: rgba(0, 0, 0, 0.03);
             }
             
-            /* Active State Styling */
             nav.main-nav ul li a.active {
-                background-color: rgba(204, 255, 0, 0.15); /* Subtle highlight */
+                background-color: rgba(204, 255, 0, 0.15); 
                 color: var(--accent-color);
                 border-left: 3px solid var(--accent-color);
             }
 
             nav.main-nav ul li .dropdown-menu {
                 position: static;
-                visibility: visible; /* Controlled by height/display in JS */
+                visibility: visible; 
                 opacity: 1;
                 transform: none;
-                background: rgba(30, 30, 30, 0.5); /* Distinct background for submenu */
+                background: rgba(30, 30, 30, 0.5); 
                 border: none;
                 max-height: 0;
                 overflow: hidden;
@@ -282,14 +289,14 @@
             }
 
             nav.main-nav ul li.dropdown.open .dropdown-menu {
-                max-height: 500px; /* Expand */
+                max-height: 500px; 
                 padding-bottom: 10px;
                 margin-top: 5px;
             }
             
             .arrow {
                 transition: transform 0.3s;
-                float: right; /* Đẩy mũi tên sang phải */
+                float: right;
             }
             
             nav.main-nav ul li.dropdown.open .arrow {
@@ -298,20 +305,19 @@
             }
         }
 
-        /* Hiệu ứng phát sáng khi được nhắm tới */
         .gallery-item:target {
-            border-color: #ff4757; /* Màu viền khi phát sáng */
-            box-shadow: 0 0 25px rgba(255, 71, 87, 0.7); /* Đổ bóng hào quang */
-            transform: scale(1.05); /* Phóng to nhẹ một chút cho nổi bật */
-            z-index: 10; /* Đảm bảo item này nằm trên các item khác khi phóng to */
+            border-color: #ff4757; 
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.7); 
+            transform: scale(1.05); 
+            z-index: 10; 
         }
     </style>
 </head>
 <body>
 
     <!-- Custom Cursor Elements -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
 
     <!-- Noise Texture -->
     <div class="noise-overlay"></div>
@@ -326,7 +332,7 @@
             </a>
         </div>
 
-        <!-- MENU TOGGLE BUTTON (Đã cập nhật để hoạt động chuẩn đa màn hình giống file Portfolio) -->
+        <!-- MENU TOGGLE BUTTON -->
         <button class="menu-toggle" aria-label="Toggle Menu">
             <i class="fas fa-bars"></i>
         </button>
@@ -335,9 +341,7 @@
         <nav class="main-nav hidden md:block">
             <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center md:items-center">
                 
-                <!-- Item 1: Giới thiệu (Active Page) -->
                 <li><a href="index.html" class="active hover:text-[#ccff00] transition-colors text-[#ccff00]">Giới thiệu</a></li>
-                
                 <li><a href="profile.html" class="hover:text-[#ccff00] transition-colors">Profile</a></li>
                 <li><a href="designer.html" class="hover:text-[#ccff00] transition-colors">Design</a></li>
                 <li><a href="scores.html" class="hover:text-[#ccff00] transition-colors">Điểm Số</a></li>
@@ -400,14 +404,13 @@
             <!-- 3D Canvas Container -->
             <div id="canvas-container" class="absolute inset-0 z-0"></div>
             
-            <div class="relative z-10 w-full text-center pointer-events-none px-2">
+            <div class="relative z-10 w-full text-center pointer-events-none px-2 max-w-[100vw] overflow-hidden">
                 
                 <p class="text-[#ccff00] text-[10px] sm:text-sm md:text-base uppercase tracking-[0.5em] mb-4 md:mb-6 animate-fade-in-up">Graphic Designer</p>
                 
-                <!-- Sử dụng text-[12.5vw] để đảm bảo tỷ lệ vừa khít màn hình Mobile không bị rớt dòng -->
-                <h1 class="font-bold uppercase tracking-tighter mix-blend-exclusion flex flex-col items-center justify-center">
-                    <span class="block whitespace-nowrap text-[12.5vw] leading-none sm:text-7xl md:text-8xl lg:text-9xl transform hover:skew-x-6 transition-transform duration-500">Sáng Tạo</span>
-                    <span class="block whitespace-nowrap text-[12.5vw] leading-none sm:text-7xl md:text-8xl lg:text-9xl text-outline transform hover:-skew-x-6 transition-transform duration-500">Vô Tận</span>
+                <h1 class="font-bold uppercase tracking-tighter mix-blend-exclusion flex flex-col items-center justify-center w-full">
+                    <span class="block whitespace-nowrap text-[12vw] leading-none sm:text-7xl md:text-8xl lg:text-9xl transform hover:skew-x-6 transition-transform duration-500">Sáng Tạo</span>
+                    <span class="block whitespace-nowrap text-[12vw] leading-none sm:text-7xl md:text-8xl lg:text-9xl text-outline transform hover:-skew-x-6 transition-transform duration-500">Vô Tận</span>
                 </h1>
                 
                 <p class="mt-6 md:mt-8 text-gray-400 max-w-[280px] md:max-w-md mx-auto text-xs md:text-lg font-light leading-relaxed">
@@ -423,8 +426,8 @@
         </section>
 
         <!-- SECTION 2: MARQUEE TEXT -->
-        <section class="py-12 border-t border-b border-gray-900 bg-[#0a0a0a] overflow-hidden">
-            <div class="whitespace-nowrap flex gap-8 animate-marquee">
+        <section class="py-12 border-t border-b border-gray-900 bg-[#0a0a0a] overflow-hidden w-full">
+            <div class="whitespace-nowrap flex gap-8 animate-marquee w-max">
                 <div class="flex gap-8 text-4xl md:text-6xl font-bold text-gray-800 uppercase italic font-syne select-none">
                     <span>Poster</span> <span>•</span> 
                     <span class="text-[#ccff00]">Branding</span> <span>•</span> 
@@ -441,7 +444,7 @@
         </section>
 
         <!-- SECTION 3: SELECTED WORKS -->
-        <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto w-full">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16">
                 <h2 class="text-5xl md:text-7xl font-bold uppercase">Dự án <br><span class="text-[#ccff00]">Tiêu biểu</span></h2>
                 <p class="text-gray-400 max-w-sm text-right mt-6 md:mt-0">
@@ -515,7 +518,7 @@
         </section>
 
         <!-- SECTION 4: SERVICES -->
-        <section class="py-24 relative overflow-hidden">
+        <section class="py-24 relative overflow-hidden w-full">
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#ccff00] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -553,7 +556,7 @@
         </section>
 
         <!-- SECTION 5: CTA -->
-        <section class="py-32 px-6 text-center bg-[#ccff00] text-black">
+        <section class="py-32 px-6 text-center bg-[#ccff00] text-black w-full overflow-hidden">
             <h2 class="text-4xl md:text-7xl font-bold uppercase mb-8 leading-none tracking-tight">
                 Sẵn sàng tạo ra <br>sự khác biệt?
             </h2>
@@ -568,10 +571,10 @@
     </main>
 
     <!-- FOOTER -->
-    <section id="contact" class="py-20 bg-black text-white px-8 border-t border-gray-800">
+    <section id="contact" class="py-20 bg-black text-white px-8 border-t border-gray-800 w-full">
         <div class="max-w-4xl mx-auto text-center">
             <p class="text-gray-500 uppercase tracking-widest mb-4">Thông tin liên hệ</p>
-            <h3 class="text-3xl font-bold">Tiendepzai0908@gmail.com  /  STĐ : 0329240391</h3>
+            <h3 class="text-2xl md:text-3xl font-bold break-words">Tiendepzai0908@gmail.com <br class="md:hidden"> / STĐ : 0329240391</h3>
         </div>
     </section>
 
@@ -582,9 +585,7 @@
 
       if (backToNormalButton) {
         backToNormalButton.addEventListener('click', () => {
-          console.log('Nút "Trở về chế độ bình thường" đã được click.');
           sessionStorage.removeItem('hasShownWelcomeModal_profile');
-          console.log('Đã xóa hasShownWelcomeModal_profile từ sessionStorage.');
           window.location.href = 'profile.html';
         });
       }
@@ -599,20 +600,17 @@
             const nav = document.querySelector('nav.main-nav');
             const menuIcon = menuToggle.querySelector('i');
 
-            // --- LOGIC DROPDOWN (Click for Mobile / Hover for Desktop via CSS) ---
+            // --- LOGIC DROPDOWN ---
             dropdowns.forEach(dropdown => {
                 const toggleBtn = dropdown.querySelector('.dropdown-toggle');
                 
-                // Only for mobile click interaction or fallback
                 if(toggleBtn) {
                     toggleBtn.addEventListener('click', function (e) {
-                        // Check if we are on mobile (using width or class check)
                         if (window.innerWidth < 768) {
                             e.preventDefault();
                             e.stopPropagation();
                             dropdown.classList.toggle('open');
                             
-                            // Close other dropdowns
                             dropdowns.forEach(other => {
                                 if (other !== dropdown && other.classList.contains('open')) {
                                     other.classList.remove('open');
@@ -661,33 +659,33 @@
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
 
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
+        // Chỉ kích hoạt hiệu ứng chuột nếu không phải là thiết bị cảm ứng
+        if(window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
 
-            // Dot follows instantly
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
 
-            // Outline follows with delay (using animate for smooth follow)
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
-
-        // Add hover effect to links and buttons
-        const hoverables = document.querySelectorAll('a, button, .gallery-item, .dropdown-toggle');
-        hoverables.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorOutline.style.transform = 'translate(-50%, -50%) scale(2)';
-                cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
             });
-            el.addEventListener('mouseleave', () => {
-                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursorOutline.style.backgroundColor = 'transparent';
+
+            const hoverables = document.querySelectorAll('a, button, .gallery-item, .dropdown-toggle');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(2)';
+                    cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.backgroundColor = 'transparent';
+                });
             });
-        });
+        }
 
         // 3. THREE.JS BACKGROUND ANIMATION
         const initThreeJS = () => {
@@ -701,11 +699,20 @@
             camera.position.z = 5;
 
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            
+            // Xóa scrollbar khi resize canvas
+            const resizeCanvas = () => {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            }
+            
+            resizeCanvas();
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Tối ưu hiệu suất mobile
             container.appendChild(renderer.domElement);
 
-            // Geometry - A morphing wireframe shape
             const geometry = new THREE.IcosahedronGeometry(2, 2);
             const material = new THREE.MeshBasicMaterial({ 
                 color: 0x888888, 
@@ -751,18 +758,17 @@
 
             animate();
 
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+            window.addEventListener('resize', resizeCanvas);
             
             let mouseX = 0;
             let mouseY = 0;
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX - window.innerWidth / 2) / 100;
-                mouseY = (event.clientY - window.innerHeight / 2) / 100;
-            });
+            
+            if(window.matchMedia("(pointer: fine)").matches) {
+                document.addEventListener('mousemove', (event) => {
+                    mouseX = (event.clientX - window.innerWidth / 2) / 100;
+                    mouseY = (event.clientY - window.innerHeight / 2) / 100;
+                });
+            }
             
             const updateCamera = () => {
                 camera.position.x += (mouseX - camera.position.x) * 0.05;

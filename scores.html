@@ -17,6 +17,17 @@
             background-color: yellow;
             font-weight: bold;
         }
+        
+        .bang-ket-qua td {
+            text-align: center;
+            border: 1px solid #1a4c8b;
+            padding: 4px;
+        }
+        .bang-ket-qua th {
+            border: 1px solid #1a4c8b;
+            padding: 6px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -169,7 +180,16 @@
                             <td style="border:1px solid #1a4c8b; text-align:center;">90</td>
                             <td style="border:1px solid #1a4c8b; text-align:center;">Xuất sắc</td>
                         </tr>
+                        <tr>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">4</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Năm học: 2024 - 2025</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Học kỳ: 2</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">87</td>
+                            <td style="border:1px solid #1a4c8b; text-align:center;">Tốt</td>
+                        </tr>
                     </table>
+                    <h2 style="color: red;">Tổng kết điểm rèn luyện toàn khóa học: 88</h2>
+                    <h2 style="color: red;">Xếp loại rèn luyện toàn khóa học: Tốt</h2>
                 </section>
 
                 <section id="bang-ket-qua-hoc-tap" class="fade-in-element score-section" data-page="1">
@@ -211,66 +231,79 @@
                         <div><strong>Chuyên ngành:</strong></div>
                         <div>Thiết kế đồ họa</div>
                     </div>
+                    
                     <div class="table-responsive">
-                        <table class="bang-ket-qua">
-                            <tr style="color: blue;">
-                                <th rowspan="2">STT</th>
-                                <th rowspan="2">Tên học phần</th>
-                                <th rowspan="2">TC</th>
+                        <table class="bang-ket-qua" style="width: 100%; border-collapse: collapse;">
+                            <tr style="color: #0033a0; background-color: #f8f9fa;">
+                                <th rowspan="3">STT</th>
+                                <th rowspan="3">Tên học phần</th>
+                                <th rowspan="3">TC</th>
                                 <th colspan="4">Điểm quá trình</th>
-                                <th rowspan="2">Thi1</th>
-                                <th rowspan="2">Thi2</th>
-                                <th rowspan="2">HP</th>
-                                <th rowspan="2">Điểm Chữ</th>
-                                <th rowspan="2">Điểm QĐ</th>
+                                <th rowspan="3">TBKT</th>
+                                <th rowspan="3">Thi1</th>
+                                <th rowspan="3">Thi2</th>
+                                <th rowspan="3">HP</th>
+                                <th rowspan="3">Điểm<br>Chữ</th>
+                                <th rowspan="3">Điểm<br>QĐ</th>
                             </tr>
-                            <tr>
-                                <th>KTTX 01</th>
-                                <th>KTTX 02</th>
-                                <th>KTĐK</th>
-                                <th>TBKT</th>
+                            <tr style="color: #0033a0; background-color: #f8f9fa;">
+                                <th colspan="2">KTTX</th>
+                                <th colspan="2">KTĐK</th>
+                            </tr>
+                            <tr style="color: #0033a0; background-color: #f8f9fa;">
+                                <th>01</th>
+                                <th>02</th>
+                                <th>01</th>
+                                <th>02</th>
                             </tr>
 
                             <tr>
-                                <td colspan="12" style="text-align:center;color: #ff2b2b;font-size: 1.1em;"><strong>Năm
-                                        học: 2023 - 2024 &nbsp;&nbsp;&nbsp; Học kỳ: 1 &nbsp;&nbsp;&nbsp; TBC Học kỳ:
-                                        3.67</strong></td>
+                                <td colspan="13" style="color: #d32f2f; padding: 6px 15px; font-size: 1.05em; background-color: #fff9f9;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="flex: 1; text-align: left;">Năm học: 2023 - 2024</span>
+                                        <span style="flex: 1; text-align: center;">Học kỳ: 1</span>
+                                        <span style="flex: 1; text-align: right;">TBC Học kỳ: 3.67</span>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>1</td>
-                                <td>Đồ họa ứng dụng Photoshop</td>
+                                <td style="text-align: left;">Đồ họa ứng dụng Photoshop</td>
                                 <td>4</td>
                                 <td>7.0</td>
                                 <td>7.5</td>
                                 <td>7.0</td>
+                                <td>7.0</td>
                                 <td>7.4</td>
                                 <td>8.5</td>
                                 <td></td>
-                                <td>8.0</td>
+                                <td>8.1</td>
                                 <td>B+</td>
                                 <td>3.5</td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Giáo dục Chính trị</td>
-                                <td>2</td>
-                                <td>6.0</td>
-                                <td>6.5</td>
-                                <td>7.0</td>
-                                <td>6.5</td>
+                                <td style="text-align: left;">Giáo dục Chính trị</td>
+                                <td>1</td>
+                                <td>8.0</td>
+                                <td></td>
+                                <td>8.0</td>
+                                <td>8.5</td>
+                                <td>8.2</td>
                                 <td>6.0</td>
                                 <td></td>
-                                <td>6.2</td>
+                                <td>6.9</td>
                                 <td>C+</td>
                                 <td>2.5</td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Giáo dục thể chất</td>
+                                <td style="text-align: left;">Giáo dục thể chất</td>
                                 <td>1</td>
                                 <td>7.0</td>
+                                <td></td>
                                 <td>7.0</td>
-                                <td>7.0</td>
+                                <td></td>
                                 <td>7.0</td>
                                 <td>7.0</td>
                                 <td></td>
@@ -280,74 +313,83 @@
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>Lắp ráp và cài đặt máy tính</td>
+                                <td style="text-align: left;">Lắp ráp và cài đặt máy tính</td>
                                 <td>3</td>
-                                <td>6.0</td>
+                                <td>8.0</td>
                                 <td>7.0</td>
                                 <td>7.0</td>
-                                <td>6.7</td>
-                                <td>7.5</td>
+                                <td>8.0</td>
+                                <td>7.9</td>
+                                <td>9.5</td>
                                 <td></td>
-                                <td>7.2</td>
-                                <td>B</td>
-                                <td>3.0</td>
+                                <td>8.9</td>
+                                <td>A</td>
+                                <td>4.0</td>
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td>Mỹ thuật căn bản</td>
+                                <td style="text-align: left;">Mỹ thuật căn bản</td>
                                 <td>4</td>
                                 <td>7.5</td>
-                                <td>8.0</td>
                                 <td>8.5</td>
                                 <td>8.0</td>
                                 <td>8.5</td>
+                                <td>8.1</td>
+                                <td>9.0</td>
                                 <td></td>
-                                <td>8.3</td>
+                                <td>8.6</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td>Pháp luật</td>
-                                <td>2</td>
-                                <td>8.0</td>
-                                <td>8.5</td>
-                                <td>9.0</td>
-                                <td>8.5</td>
-                                <td>8.5</td>
+                                <td style="text-align: left;">Pháp luật</td>
+                                <td>1</td>
+                                <td>7.5</td>
                                 <td></td>
-                                <td>8.5</td>
-                                <td>A</td>
-                                <td>4.0</td>
+                                <td>8.0</td>
+                                <td></td>
+                                <td>7.8</td>
+                                <td>6.0</td>
+                                <td></td>
+                                <td>6.7</td>
+                                <td>C+</td>
+                                <td>2.5</td>
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td>Tin học</td>
+                                <td style="text-align: left;">Tin học</td>
                                 <td>2</td>
+                                <td>8.0</td>
+                                <td></td>
                                 <td>8.5</td>
-                                <td>8.5</td>
-                                <td>9.0</td>
-                                <td>8.7</td>
+                                <td></td>
+                                <td>8.3</td>
                                 <td>9.0</td>
                                 <td></td>
-                                <td>8.8</td>
+                                <td>8.7</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
 
                             <tr>
-                                <td colspan="12" style="text-align:center;color: #ff2b2b;font-size: 1.1em;"><strong>Năm
-                                        học: 2024 - 2025&nbsp;&nbsp;&nbsp;Học kỳ: 2 &nbsp;&nbsp;&nbsp; TBC Học kỳ:
-                                        3.75</strong></td>
+                                <td colspan="13" style="color: #d32f2f; padding: 6px 15px; font-size: 1.05em; background-color: #fff9f9;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="flex: 1; text-align: left;">Năm học: 2023 - 2024</span>
+                                        <span style="flex: 1; text-align: center;">Học kỳ: 2</span>
+                                        <span style="flex: 1; text-align: right;">TBC Học kỳ: 3.75</span>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td>Đồ họa vector với Adobe Illustrator</td>
+                                <td style="text-align: left;">Đồ họa vector với Adobe Illustrator</td>
                                 <td>4</td>
                                 <td>7.0</td>
                                 <td>7.0</td>
                                 <td>7.0</td>
-                                <td>7.0</td>
+                                <td>8.0</td>
+                                <td>7.3</td>
                                 <td>8.0</td>
                                 <td></td>
                                 <td>7.7</td>
@@ -356,27 +398,29 @@
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td>Lập trình cơ bản</td>
+                                <td style="text-align: left;">Lập trình cơ bản</td>
                                 <td>4</td>
-                                <td>7.0</td>
-                                <td>7.0</td>
-                                <td>7.0</td>
-                                <td>7.0</td>
                                 <td>8.0</td>
+                                <td>7.5</td>
+                                <td>8.0</td>
+                                <td>9.0</td>
+                                <td>8.3</td>
+                                <td>9.5</td>
                                 <td></td>
-                                <td>7.7</td>
-                                <td>B</td>
-                                <td>3.0</td>
+                                <td>9.0</td>
+                                <td>A</td>
+                                <td>4.0</td>
                             </tr>
                             <tr>
                                 <td>10</td>
-                                <td>Thiết kế web</td>
+                                <td style="text-align: left;">Thiết kế web</td>
                                 <td>4</td>
-                                <td>8.0</td>
-                                <td>8.0</td>
-                                <td>8.5</td>
-                                <td>8.2</td>
                                 <td>9.0</td>
+                                <td>8.0</td>
+                                <td>8.0</td>
+                                <td>8.0</td>
+                                <td>8.4</td>
+                                <td>8.8</td>
                                 <td></td>
                                 <td>8.6</td>
                                 <td>A</td>
@@ -384,110 +428,236 @@
                             </tr>
                             <tr>
                                 <td>11</td>
-                                <td>Tiếng anh</td>
-                                <td>3</td>
-                                <td>8.0</td>
-                                <td>8.0</td>
+                                <td style="text-align: left;">Tiếng anh</td>
+                                <td>4</td>
+                                <td>9.5</td>
+                                <td>9.0</td>
                                 <td>8.5</td>
-                                <td>8.2</td>
                                 <td>8.5</td>
+                                <td>8.6</td>
+                                <td>8.6</td>
                                 <td></td>
-                                <td>8.4</td>
+                                <td>8.6</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
 
                             <tr>
-                                <td colspan="12" style="text-align:center;color: #ff2b2b; font-size: 1.1em;"><strong>Năm
-                                        học: 2024 - 2025 &nbsp;&nbsp;&nbsp; Học kỳ: 1 &nbsp;&nbsp;&nbsp; TBC Học kỳ:
-                                        3.92</strong></td>
+                                <td colspan="13" style="color: #d32f2f; padding: 6px 15px; font-size: 1.05em; background-color: #fff9f9;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="flex: 1; text-align: left;">Năm học: 2024 - 2025</span>
+                                        <span style="flex: 1; text-align: center;">Học kỳ: 1</span>
+                                        <span style="flex: 1; text-align: right;">TBC Học kỳ: 3.92</span>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>12</td>
-                                <td>Anh văn nâng cao</td>
+                                <td style="text-align: left;">Anh văn nâng cao</td>
                                 <td>3</td>
                                 <td>8.0</td>
                                 <td>8.5</td>
                                 <td>9.2</td>
-                                <td>8.6</td>
-                                <td>9.5</td>
-                                <td></td>
+                                <td>9.4</td>
+                                <td>8.8</td>
                                 <td>9.0</td>
+                                <td></td>
+                                <td>8.9</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
                             <tr>
                                 <td>13</td>
-                                <td>Hiệu ứng âm thanh với Adobe Audition</td>
+                                <td style="text-align: left;">Hiệu ứng âm thanh với Adobe Audition</td>
                                 <td>4</td>
+                                <td>9.0</td>
+                                <td>9.0</td>
                                 <td>8.0</td>
-                                <td>8.5</td>
-                                <td>9.0</td>
-                                <td>8.5</td>
-                                <td>9.0</td>
-                                <td></td>
+                                <td>9.5</td>
                                 <td>8.8</td>
+                                <td>9.3</td>
+                                <td></td>
+                                <td>9.1</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
                             <tr>
                                 <td>14</td>
-                                <td>Kỹ năng mềm</td>
+                                <td style="text-align: left;">Kỹ năng mềm</td>
                                 <td>1</td>
-                                <td>8.5</td>
                                 <td>9.0</td>
-                                <td>9.5</td>
-                                <td>9.0</td>
-                                <td>9.5</td>
                                 <td></td>
-                                <td>9.3</td>
+                                <td>9.0</td>
+                                <td></td>
+                                <td>9.0</td>
+                                <td>9.0</td>
+                                <td></td>
+                                <td>9.0</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
                             <tr>
                                 <td>15</td>
-                                <td>Thiết kế hoạt hình Adobe Animation</td>
+                                <td style="text-align: left;">Thiết kế hoạt hình Adobe Animation</td>
                                 <td>3</td>
-                                <td>9.0</td>
-                                <td>9.5</td>
-                                <td>9.5</td>
-                                <td>9.3</td>
-                                <td>9.5</td>
+                                <td>10.0</td>
                                 <td></td>
-                                <td>9.4</td>
+                                <td>9.5</td>
+                                <td>8.5</td>
+                                <td>9.2</td>
+                                <td>9.3</td>
+                                <td></td>
+                                <td>9.3</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
                             <tr>
                                 <td>16</td>
-                                <td>Thực tế tại trung tâm in ấn quảng cáo</td>
-                                <td>2</td>
+                                <td style="text-align: left;">Thực tế tại trung tâm in ấn quảng cáo</td>
+                                <td>1</td>
+                                <td>7.0</td>
+                                <td></td>
+                                <td>7.0</td>
+                                <td></td>
+                                <td>7.0</td>
+                                <td>8.0</td>
+                                <td></td>
+                                <td>7.6</td>
+                                <td>B</td>
+                                <td>3.0</td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td style="text-align: left;">Tiếng Anh chuyên ngành</td>
+                                <td>1</td>
                                 <td>9.2</td>
+                                <td></td>
                                 <td>10.0</td>
                                 <td>8.8</td>
-                                <td>9.3</td>
+                                <td>9.5</td>
+                                <td>10.0</td>
+                                <td></td>
+                                <td>9.8</td>
+                                <td>A</td>
+                                <td>4.0</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="13" style="color: #d32f2f; padding: 6px 15px; font-size: 1.05em; background-color: #fff9f9;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="flex: 1; text-align: left;">Năm học: 2024 - 2025</span>
+                                        <span style="flex: 1; text-align: center;">Học kỳ: 2</span>
+                                        <span style="flex: 1; text-align: right;">TBC Học kỳ: 3.82</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td style="text-align: left;">Chuyên đề tốt nghiệp</td>
+                                <td>2</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>7.6</td>
+                                <td></td>
+                                <td>7.6</td>
+                                <td>B</td>
+                                <td>3.0</td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td style="text-align: left;">Dựng phim với Adobe Premiere</td>
+                                <td>4</td>
+                                <td>8.0</td>
                                 <td>9.0</td>
+                                <td>8.5</td>
+                                <td>8.0</td>
+                                <td>8.5</td>
+                                <td>9.0</td>
+                                <td></td>
+                                <td>8.8</td>
+                                <td>A</td>
+                                <td>4.0</td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td style="text-align: left;">Giáo dục quốc phòng – An ninh</td>
+                                <td>1</td>
+                                <td>8.0</td>
+                                <td>7.0</td>
+                                <td>8.0</td>
+                                <td></td>
+                                <td>7.8</td>
+                                <td>8.0</td>
+                                <td></td>
+                                <td>7.9</td>
+                                <td>B+</td>
+                                <td>3.5</td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td style="text-align: left;">Hiệu ứng phim với Adobe After Effect (TC*)</td>
+                                <td>4</td>
+                                <td>9.0</td>
+                                <td>8.0</td>
+                                <td>8.5</td>
+                                <td>9.0</td>
+                                <td>8.8</td>
+                                <td>9.5</td>
                                 <td></td>
                                 <td>9.2</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
                             <tr>
-                                <td>17</td>
-                                <td>Tiếng Anh chuyên ngành</td>
-                                <td>1</td>
-                                <td>9.2</td>
-                                <td>10.0</td>
-                                <td>8.8</td>
-                                <td>9.3</td>
+                                <td>22</td>
+                                <td style="text-align: left;">Thực hành nâng cao</td>
+                                <td>2</td>
                                 <td>9.0</td>
                                 <td></td>
-                                <td>9.2</td>
+                                <td>8.0</td>
+                                <td>8.0</td>
+                                <td>8.1</td>
+                                <td>9.0</td>
+                                <td></td>
+                                <td>8.6</td>
                                 <td>A</td>
                                 <td>4.0</td>
                             </tr>
+                            <tr>
+                                <td>23</td>
+                                <td style="text-align: left;">Thực tập tốt nghiệp</td>
+                                <td>8</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>9.6</td>
+                                <td></td>
+                                <td>9.6</td>
+                                <td>A</td>
+                                <td>4.0</td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td style="text-align: left;">Tin học nâng cao</td>
+                                <td>5</td>
+                                <td>8.0</td>
+                                <td>9.0</td>
+                                <td>8.0</td>
+                                <td>7.5</td>
+                                <td>8.0</td>
+                                <td>8.5</td>
+                                <td></td>
+                                <td>8.3</td>
+                                <td>B+</td>
+                                <td>3.5</td>
+                            </tr>
                         </table>
-                        </table>
+                        
                         <p class="note">
                             <strong class="animated-text">Ghi chú:</strong> TC: Số tín chỉ, KTTX: Kiểm tra thường xuyên,
                             KTĐK: Kiểm tra định kỳ, TBKT: Trung bình kiểm tra, HP: Học phần, QĐ: Quy đổi
