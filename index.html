@@ -22,7 +22,7 @@
 
     <style>
         :root {
-            --bg-color: #050505;
+            --bg-color: transparent; /* Đã đổi sang transparent để hiện nền sao */
             --text-color: #ffffff;
             --accent-color: #ccff00; /* Neon Lime */
             --secondary-color: #888888;
@@ -61,6 +61,70 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-color);
+        }
+
+        /* =========================================
+           CẤU TRÚC BẦU TRỜI SAO CHUYỂN ĐỘNG (PARALLAX STARS)
+           ========================================= */
+        #starfield-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10; /* Đặt dưới tất cả nội dung */
+            overflow: hidden;
+            background: radial-gradient(circle at center, #0a1030 0%, #010411 100%); /* Hiệu ứng chiều sâu bầu trời */
+        }
+
+        /* Ba lớp sao với kích thước và độ mờ khác nhau để tạo chiều sâu */
+        .stars, .stars2, .stars3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-repeat: repeat;
+        }
+
+        /* Lớp 1: Sao nhỏ nhất, xa nhất (di chuyển chậm nhất) */
+        .stars {
+            z-index: 0;
+            background-image: 
+                radial-gradient(1px 1px at 25px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 75px 150px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 150px 250px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 220px 50px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 300px 350px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 450px 100px, #ddd, rgba(0,0,0,0));
+            background-size: 550px 550px; /* Kích thước lặp lại */
+            opacity: 0.5;
+        }
+
+        /* Lớp 2: Sao vừa (di chuyển trung bình) */
+        .stars2 {
+            z-index: 1;
+            background-image: 
+                radial-gradient(2px 2px at 100px 100px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 300px 200px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2.5px 2.5px at 500px 400px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 700px 150px, #ddd, rgba(0,0,0,0));
+            background-size: 800px 800px;
+            opacity: 0.7;
+        }
+
+        /* Lớp 3: Sao lớn nhất, gần nhất, sáng nhất (di chuyển nhanh nhất) */
+        .stars3 {
+            z-index: 2;
+            background-image: 
+                radial-gradient(3px 3px at 200px 300px, var(--accent-color), rgba(0,0,0,0)), /* Một vài sao màu xanh neon */
+                radial-gradient(3px 3px at 600px 600px, #fff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 800px 100px, #fff, rgba(0,0,0,0));
+            background-size: 1000px 1000px;
+            opacity: 0.9;
         }
 
         /* Custom Cursor */
@@ -141,6 +205,13 @@
            MOBILE NAVIGATION INTEGRATION (Đã sửa lỗi tràn màn hình)
            ========================================= */
         
+        /* Làm cho header và nav mờ đi đồng bộ với trang Portfolio */
+        header {
+            background-color: rgba(1, 4, 17, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
         .menu-toggle {
             background: none; 
             border: none; 
@@ -168,10 +239,6 @@
         }
 
         /* Navigation Styles */
-        nav.main-nav {
-            background-color: #000;
-        }
-        
         nav.main-nav ul {
             list-style: none;
             padding: 0;
@@ -190,19 +257,22 @@
             align-items: center;
         }
 
+        /* Cập nhật Dropdown menu giống hệt Portfolio */
         .dropdown-menu {
             opacity: 0;
             visibility: hidden;
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #000;
-            border: 1px solid #333;
+            background-color: rgba(15, 15, 15, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
             min-width: 200px;
             z-index: 1000;
             transform: translateY(10px);
             transition: all 0.3s ease;
-            border-radius: 4px;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         /* Desktop Dropdown Hover */
@@ -230,8 +300,8 @@
                 transform: translateX(100%); /* Giấu ra khỏi màn hình mà không làm giãn website */
                 width: 70%;
                 height: 100vh;
-                background-color: #000000; 
-                border-left: 1px solid #222; 
+                background-color: #010411; 
+                border-left: 1px solid rgba(255, 255, 255, 0.08); 
                 z-index: 1000000;
                 padding-top: 80px;
                 overflow-y: auto;
@@ -264,7 +334,7 @@
                 border-radius: 4px;
                 color: #fff;
                 transition: all 0.3s;
-                background-color: rgba(0, 0, 0, 0.03);
+                background-color: rgba(255, 255, 255, 0.03);
             }
             
             nav.main-nav ul li a.active {
@@ -315,6 +385,13 @@
 </head>
 <body>
 
+    <!-- LỚP CHỨA BẦU TRỜI SAO PARALLAX -->
+    <div id="starfield-container">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+
     <!-- Custom Cursor Elements -->
     <div class="cursor-dot hidden md:block"></div>
     <div class="cursor-outline hidden md:block"></div>
@@ -322,13 +399,13 @@
     <!-- Noise Texture -->
     <div class="noise-overlay"></div>
 
-    <!-- HEADER UPDATED -->
-    <header id="header" class="fixed top-0 left-0 w-full z-50 px-6 md:px-8 py-6 flex justify-between items-center mix-blend-difference text-white">
+    <!-- HEADER ĐÃ ĐƯỢC ĐỒNG BỘ TỪ PORTFOLIO.HTML -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center text-white">
         
         <!-- LOGO -->
         <div class="logo-container z-[1000002]">
             <a href="index.html">
-                <img src="img/logo.png" alt="Logo" class="lift-on-hover h-10 md:h-12 w-auto object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-2xl font-bold tracking-tighter\'>PORTFOLIO.</span>'">
+                <img src="img/logo.png" alt="Logo" class="h-12 w-auto object-contain hover:-translate-y-1 transition-transform" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'font-syne text-2xl font-bold tracking-tighter\'>PORTFOLIO.</span>'">
             </a>
         </div>
 
@@ -339,7 +416,7 @@
 
         <!-- NAVIGATION -->
         <nav class="main-nav hidden md:block">
-            <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center md:items-center">
+            <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center">
                 
                 <li><a href="index.html" class="active hover:text-[#ccff00] transition-colors text-[#ccff00]">Giới thiệu</a></li>
                 <li><a href="profile.html" class="hover:text-[#ccff00] transition-colors">Profile</a></li>
@@ -347,7 +424,7 @@
                 <li><a href="scores.html" class="hover:text-[#ccff00] transition-colors">Điểm Số</a></li>
                 <li><a href="drawings.html" class="hover:text-[#ccff00] transition-colors">Ảnh Sưu Tầm</a></li>
                 <li><a href="Portfolio.html" class="hover:text-[#ccff00] transition-colors">Portfolio</a></li>
-                
+                <li><a href="contact.html" class=" hover:text-[#ccff00] transition-colors">Liên hệ</a></li>
                 <!-- Dropdown: Web học tiếng anh -->
                 <li class="relative dropdown group">
                     <div class="dropdown-toggle hover:text-[#ccff00] transition-colors py-2 flex justify-between md:justify-start w-full">
@@ -563,20 +640,20 @@
             <p class="text-lg md:text-xl font-medium mb-10 max-w-2xl mx-auto opacity-80">
                 Hãy cùng nhau biến ý tưởng của bạn thành một tác phẩm nghệ thuật kỹ thuật số.
             </p>
-            <a href="profile.html#contact" class="inline-block border-2 border-black px-10 py-4 text-lg font-bold uppercase tracking-widest hover:bg-black hover:text-[#ccff00] transition-all">
+            <a href="contact.html" class="inline-block border-2 border-black px-10 py-4 text-lg font-bold uppercase tracking-widest hover:bg-black hover:text-[#ccff00] transition-all">
                 Liên hệ ngay
             </a>
         </section>
 
     </main>
 
-    <!-- FOOTER -->
-    <section id="contact" class="py-20 bg-black text-white px-8 border-t border-gray-800 w-full">
-        <div class="max-w-4xl mx-auto text-center">
-            <p class="text-gray-500 uppercase tracking-widest mb-4">Thông tin liên hệ</p>
-            <h3 class="text-2xl md:text-3xl font-bold break-words">Phamviettien0329@gmail.com <br class="md:hidden"> / STĐ : 0329240391</h3>
+    <footer class="py-20 text-white px-8">
+        <div class="max-w-4xl mx-auto text-center font-inter">
+            <p class="text-gray-500 uppercase tracking-widest mb-4 text-sm">Thông tin liên hệ</p>
+            <h3 class="font-syne text-2xl md:text-3xl font-bold text-white hover:text-[#ccff00] transition-colors cursor-pointer">Phamviettien0329@gmail.com / SĐT: 0329240391</h3>
+            <p class="mt-12 text-gray-600 text-xs tracking-widest uppercase">&copy; 2026 Phạm Viết Tiến. Sáng tạo không giới hạn giữa ngàn sao.</p>
         </div>
-    </section>
+    </footer>
 
     <!-- JAVASCRIPT LOGIC -->
      <script>
@@ -593,6 +670,26 @@
   </script>
     <script>
         
+        // ==========================================
+        // KHỞI TẠO HIỆU ỨNG PARALLAX CHO BẦU TRỜI SAO
+        // ==========================================
+        const starfield = document.getElementById('starfield-container');
+        if (starfield) {
+            const stars1 = starfield.querySelector('.stars');
+            const stars2 = starfield.querySelector('.stars2');
+            const stars3 = starfield.querySelector('.stars3');
+
+            window.addEventListener('scroll', () => {
+                const scrolly = window.scrollY;
+                
+                // Di chuyển mỗi lớp sao với tốc độ khác nhau dựa trên scrolly
+                // Tốc độ âm để tạo cảm giác sao bay lên khi lướt xuống
+                stars1.style.transform = `translateY(${scrolly * -0.05}px)`; // Chậm nhất (xa nhất)
+                stars2.style.transform = `translateY(${scrolly * -0.12}px)`; // Trung bình
+                stars3.style.transform = `translateY(${scrolly * -0.25}px)`; // Nhanh nhất (gần nhất)
+            });
+        }
+
         // 1. MOBILE MENU LOGIC (INTEGRATED)
         document.addEventListener('DOMContentLoaded', function () {
             const dropdowns = document.querySelectorAll('.dropdown');

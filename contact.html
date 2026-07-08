@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - Graphic Design Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-color: #ccff00;
+            --secondary-color: #888888;
+            --panel-bg: rgba(15, 15, 15, 0.9);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        h1, h2, h3, .display-text, .font-syne { font-family: 'Syne', sans-serif; }
+
+        /* Hiệu ứng chuyển trang */
+        #page-content {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        #page-content.fade-in { opacity: 1; transform: translateY(0); }
+        #page-content.fade-out { opacity: 0; transform: translateY(-10px); }
+
+        /* Custom Scrollbar, Cursor & Noise */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent-color); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.5); transition: width 0.2s, height 0.2s; }
+
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9000; opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Form Styling (Giữ nguyên style cũ, cập nhật góc bo xíu cho đẹp) */
+        .input-field {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        .input-field:focus {
+            border-color: var(--accent-color);
+            background: rgba(255,255,255,0.07);
+            outline: none;
+            box-shadow: 0 0 10px rgba(204, 255, 0, 0.2);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; position: fixed; z-index: 100002; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.95);
+            align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: #111; padding: 40px; border: 1px solid #333;
+            max-width: 500px; width: 90%; text-align: center; position: relative; border-radius: 12px;
+        }
+        .close-button {
+            position: absolute; right: 20px; top: 10px; color: #fff;
+            font-size: 30px; cursor: pointer; transition: color 0.3s;
+        }
+        .close-button:hover { color: var(--accent-color); }
+        /* Cập nhật dropdown menu */
+        .dropdown-menu { opacity: 0; visibility: hidden; position: absolute; top: 100%; left: 0; background-color: var(--panel-bg); border: 1px solid var(--border-color); backdrop-filter: blur(10px); min-width: 200px; z-index: 1000; transform: translateY(10px); transition: all 0.3s ease; border-radius: 8px; overflow: hidden; }
+        
+/* Utilities */
+        .menu-toggle { background: none; border: none; cursor: pointer; display: none; flex-direction: column; gap: 15px; z-index: 1000001; padding: 10px; }
+        .menu-toggle i { color: #ffffff; font-size: 1.5rem; transition: var(--transition); transform-origin: center center; }
+        .menu-toggle.nav-open i { color: var(--accent-color); }
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-toggle { cursor: pointer; display: flex; align-items: center; }
+
+        /* Cập nhật dropdown menu */
+        .dropdown-menu { opacity: 0; visibility: hidden; position: absolute; top: 100%; left: 0; background-color: var(--panel-bg); border: 1px solid var(--border-color); backdrop-filter: blur(10px); min-width: 200px; z-index: 1000; transform: translateY(10px); transition: all 0.3s ease; border-radius: 8px; overflow: hidden; }
+        /* Bỏ lề trái trên desktop vì padding đã đủ */
+        @media (min-width: 768px) {
+            #mainShowcaseBox,
+            #publication-section .grid,
+            #categorized-portfolio .flex-col {
+                margin-left: 0;
+            }
+        }
+        
+       @media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+            .dropdown:hover .dropdown-toggle { color: var(--accent-color); }
+        }
+        @media (max-width: 767px) {
+            .menu-toggle { display: block; }
+            nav.main-nav { display: block !important; position: fixed; top: 0; right: -70%; width: 70%; height: 100vh; background-color: var(--bg-color); border-left: 1px solid var(--border-color); z-index: 1000000; padding-top: 80px; overflow-y: auto; box-shadow: -10px 0 30px rgba(0,0,0,0.9); transition: right 0.4s ease; }
+            nav.main-nav.open { right: 0; }
+            nav.main-nav ul { flex-direction: column; align-items: flex-start; padding: 0 20px; width: 100%; }
+            nav.main-nav ul li { width: 100%; margin-bottom: 15px; }
+            nav.main-nav ul li a, nav.main-nav ul li .dropdown-toggle { font-size: 1.1rem; display: block; width: 100%; padding: 12px 15px; border-radius: 4px; color: #fff; transition: all 0.3s; background-color: rgba(255, 255, 255, 0.03); }
+            nav.main-nav ul li a.active { background-color: rgba(204, 255, 0, 0.15); color: var(--accent-color); border-left: 3px solid var(--accent-color); }
+            nav.main-nav ul li .dropdown-menu { position: static; visibility: visible; opacity: 1; transform: none; background: rgba(30, 30, 30, 0.5); border: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.3s ease; width: 100%; margin-top: 0; border-radius: 4px; }
+            nav.main-nav ul li.dropdown.open .dropdown-menu { max-height: 500px; padding-bottom: 10px; margin-top: 5px; }
+            .arrow { transition: transform 0.3s; float: right; }
+            nav.main-nav ul li.dropdown.open .arrow { transform: rotate(180deg); color: var(--accent-color); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="noise-overlay"></div>
+
+    <header id="header" class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center text-white">
+        <div class="logo-container z-[1000002]">
+            <a href="index.html"><img src="img/logo.png" alt="Logo" class="h-12 w-auto object-contain hover:-translate-y-1 transition-transform" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'font-syne text-2xl font-bold tracking-tighter\'>PORTFOLIO.</span>'"></a>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
+        <nav class="main-nav hidden md:block">
+            <ul class="flex md:flex-row flex-col gap-6 text-sm uppercase tracking-widest items-center">
+                <li><a href="index.html" class="hover:text-[#ccff00] transition-colors">Giới thiệu</a></li>
+                <li><a href="profile.html" class="hover:text-[#ccff00] transition-colors">Profile</a></li>
+                <li><a href="designer.html" class="hover:text-[#ccff00] transition-colors">Design</a></li>
+                <li><a href="scores.html" class="hover:text-[#ccff00] transition-colors">Điểm Số</a></li>
+                <li><a href="drawings.html" class="hover:text-[#ccff00] transition-colors">Ảnh Sưu Tầm</a></li>
+                <li><a href="Portfolio.html" class="hover:text-[#ccff00] transition-colors text-[#ccff00]">Portfolio</a></li>
+                <li><a href="contact.html" class="active hover:text-[#ccff00] transition-colors">Liên hệ</a></li>
+                <li class="relative dropdown group">
+                    <div class="dropdown-toggle hover:text-[#ccff00] transition-colors py-2 flex justify-between md:justify-start w-full"><span>Web học tiếng anh</span> <span class="arrow ml-1 text-[10px]">&#9662;</span></div>
+                    <ul class="dropdown-menu">
+                        <li class="border-b border-gray-800"><a href="web-tieng-anh/de1.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Đề 1</a></li>
+                        <li class="border-b border-gray-800"><a href="web-tieng-anh/de2.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Đề 2</a></li>
+                        <li class="border-b border-gray-800"><a href="web-tieng-anh/DE2tienganh/De2.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">TA Cao Đẳng Đề 2</a></li>
+                        <li><a href="web-tieng-anh/DE1tienganh/De1.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">TA Cao Đẳng Đề 1</a></li>
+                    </ul>
+                </li>
+                <li class="relative dropdown group">
+                    <div class="dropdown-toggle hover:text-[#ccff00] transition-colors py-2 flex justify-between md:justify-start w-full"><span>Code Website</span> <span class="arrow ml-1 text-[10px]">&#9662;</span></div>
+                    <ul class="dropdown-menu md:right-0 md:left-auto">
+                        <li class="border-b border-gray-800"><a href="jalan/View.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">View</a></li>
+                        <li class="border-b border-gray-800"><a href="web-old/Bai-tap-ket-thuc-mon/trang chu.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web học tại lớp</a></li>
+                        <li class="border-b border-gray-800"><a href="web-old/bai-tap-ket-thuc-mon-hoc/Home.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web kết thúc môn</a></li>
+                        <li><a href="web-tieng-anh/trinhtri.html" class="block px-4 py-3 hover:bg-[#ccff00] hover:text-black transition-colors">Web làm bài Chính Trị</a></li>
+                    </ul>
+                </li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main id="page-content" class="relative z-10 pt-32 pb-20 px-6">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- Tiêu đề được cập nhật dựa trên ảnh -->
+            <div class="mb-12 text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold uppercase mb-3 font-syne">Gửi lời nhắn <span class="text-outline" style="-webkit-text-stroke: 1px white; color: transparent;">đến tôi</span></h1>
+                <p class="text-gray-400 italic">Hãy để lại thông tin của bạn. Tôi sẽ phản hồi lại sớm nhất có thể.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-16">
+                <!-- Form Area -->
+                <div class="md:col-span-3">
+                    <form id="contactForm" class="flex flex-col gap-6">
+                        <!-- Trường 1: Họ và Tên -->
+                        <div class="flex flex-col gap-2">
+                            <label for="name" class="text-sm font-bold text-gray-200">Họ và Tên</label>
+                            <input type="text" id="name" name="from_name" required placeholder="Nhập họ và tên của bạn..."
+                                   class="input-field p-4 text-white placeholder:text-gray-600">
+                        </div>
+                        
+                        <!-- Trường 2: Email -->
+                        <div class="flex flex-col gap-2">
+                            <label for="email" class="text-sm font-bold text-gray-200">Email</label>
+                            <input type="email" id="email" name="from_email" required placeholder="Nhập email của bạn..."
+                                   class="input-field p-4 text-white placeholder:text-gray-600">
+                        </div>
+
+                        <!-- Trường 3 (MỚI): Số điện thoại -->
+                        <div class="flex flex-col gap-2">
+                            <label for="phone" class="text-sm font-bold text-gray-200">Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn..."
+                                   class="input-field p-4 text-white placeholder:text-gray-600">
+                        </div>
+                        
+                        <!-- Trường 4: Nội dung -->
+                        <div class="flex flex-col gap-2">
+                            <label for="message" class="text-sm font-bold text-gray-200">Nội dung</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Nội dung lời nhắn của bạn..."
+                                      class="input-field p-4 text-white placeholder:text-gray-600"></textarea>
+                        </div>
+                        
+                        <!-- Nút gửi & Chú thích -->
+                        <div class="mt-2">
+                            <button type="submit" class="w-full md:w-auto bg-[#ccff00] text-black font-bold py-4 px-10 uppercase tracking-widest hover:bg-white transition-all duration-300 rounded-lg shadow-[0_0_15px_rgba(204,255,0,0.3)]">
+                                Gửi ngay
+                            </button>
+                            <p class="text-gray-500 text-sm mt-4 italic flex items-center gap-2">
+                                <i class="fa-solid fa-circle-info text-[#ccff00]"></i> Khi bạn nhấn nút "Gửi ngay", form sẽ gửi email trực tiếp.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="md:col-span-2 flex flex-col justify-between border-t md:border-t-0 md:border-l border-gray-800 pt-8 md:pt-0 md:pl-12">
+                    <div>
+                        <h3 class="text-xl font-bold mb-6 uppercase text-[#ccff00] font-syne flex items-center gap-2">
+                            <i class="fa-solid fa-address-card"></i> Thông tin liên hệ
+                        </h3>
+                        
+                        <div class="mb-6 bg-white/5 p-5 rounded-lg border border-white/10">
+                            <p class="text-gray-400 text-xs uppercase tracking-widest mb-1">Email</p>
+                            <p class="text-white text-base md:text-lg font-bold">Phamviettien0329@gmail.com</p>
+                        </div>
+                        
+                        <div class="mb-6 bg-white/5 p-5 rounded-lg border border-white/10">
+                            <p class="text-gray-400 text-xs uppercase tracking-widest mb-1">Số điện thoại</p>
+                            <p class="text-white text-base md:text-lg font-bold">0329 240 391</p>
+                        </div>
+
+                        <div class="mb-6 bg-white/5 p-5 rounded-lg border border-white/10">
+                            <p class="text-gray-400 text-xs uppercase tracking-widest mb-1">Địa chỉ</p>
+                            <p class="text-white">Vũng Tàu, Việt Nam</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 md:mt-0">
+                        <h3 class="text-sm text-gray-400 mb-4 uppercase tracking-widest">Mạng xã hội</h3>
+                        <div class="flex gap-4">
+                            <a href="https://www.facebook.com/hai.trinhthi.3110" class="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-[#ccff00] hover:border-[#ccff00] hover:text-black transition-all shadow-lg text-xl"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-[#ccff00] hover:border-[#ccff00] hover:text-black transition-all shadow-lg text-xl"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:bg-[#ccff00] hover:border-[#ccff00] hover:text-black transition-all shadow-lg text-xl"><i class="fa-brands fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Form (Được gọi từ mail.js) -->
+    <div id="form-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="form-modal-close">&times;</span>
+            <div class="text-[#ccff00] text-4xl mb-4"><i class="fa-regular fa-circle-check"></i></div>
+            <p id="form-modal-message" class="text-lg font-bold uppercase text-white"></p>
+        </div>
+    </div>
+
+    <!-- Thư viện EmailJS (Đảm bảo Load) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/mail.js"></script>
+    
+    <script>
+        // 1. Hiệu ứng chuyển trang 
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Bỏ qua nếu là link ngoài, hoặc link nhảy trang (dropdown)
+                if (this.target === '_blank' || this.href.startsWith('http') || this.href.includes('#')) return;
+                
+                // Tránh lỗi click vào chính trang hiện tại
+                if (this.href === window.location.href) return;
+                
+                e.preventDefault();
+                const pageContent = document.getElementById('page-content');
+                if (pageContent) {
+                    pageContent.classList.add('fade-out');
+                    setTimeout(() => { window.location = this.href; }, 400);
+                } else {
+                    window.location = this.href;
+                }
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const pageContent = document.getElementById('page-content');
+            if (pageContent) pageContent.classList.add('fade-in');
+        });
+
+        // 2. Custom Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+
+        // 3. Logic xử lý Mobile Menu và Dropdown (Từ file Portfolio)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('open');
+                this.classList.toggle('nav-open');
+                
+                // Đổi icon Hamburger thành dấu X
+                const icon = this.querySelector('i');
+                if (mainNav.classList.contains('open')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+
+        // Logic xử lý sổ xuống cho các menu con (Dropdown) trên thiết bị di động
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function (event) {
+                if (window.innerWidth < 768) {
+                    event.preventDefault();
+                    const parent = this.closest('li');
+                    parent.classList.toggle('open');
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
